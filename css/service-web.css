@@ -128,10 +128,10 @@
 .webdiff_label { margin-top: 0; margin-bottom: 0; font-family: Inter, sans-serif; color: var(--color-primary); font-size: var(--font-size-lg); font-weight: 700; line-height: 1.5; letter-spacing: 0.8px; text-transform: uppercase; text-align: center; }
 .webdiff_title { margin-top: 0; margin-bottom: 0; color: var(--color-ink); font-size: var(--font-size-5xl); font-weight: 700; line-height: 1.5; letter-spacing: 1.6px; text-align: center; white-space: nowrap; }
 .webdiff_title-line { display: block; }
-.webdiff_table { display: flex; align-items: flex-start; justify-content: center; margin-top: var(--space-10); }
-.webdiff_col1 { width: 268px; flex-shrink: 0; padding-top: var(--space-30); }
-.webdiff_col2 { width: 386px; flex-shrink: 0; padding-top: var(--space-30); }
-.webdiff_col3 { width: 486px; height: 798px; flex-shrink: 0; overflow: hidden; background-color: var(--color-primary); }
+.webdiff_table { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; margin-top: var(--space-10); }
+.webdiff_col1 { width: min(268px, 100%); flex-shrink: 1; padding-top: var(--space-30); }
+.webdiff_col2 { width: min(386px, 100%); flex-shrink: 1; padding-top: var(--space-30); }
+.webdiff_col3 { width: min(486px, 100%); height: 798px; flex-shrink: 1; overflow: hidden; background-color: var(--color-primary); }
 .webdiff_head1 { display: flex; align-items: center; justify-content: center; height: 68px; background-color: #eaeef1; border-width: 1px; border-style: solid; border-color: var(--color-white); }
 .webdiff_head2 { display: flex; align-items: center; justify-content: center; height: 68px; background-color: #eaeef1; border-width: 1px; border-style: solid; border-color: var(--color-white); }
 .webdiff_headtext1 { margin-top: 0; margin-bottom: 0; color: var(--color-ink); font-size: var(--font-size-2xl); font-weight: 700; line-height: normal; letter-spacing: 1px; text-align: center; white-space: nowrap; }
