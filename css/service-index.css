@@ -172,7 +172,7 @@
 .requests_row-lower { display: flex; flex-wrap: wrap; justify-content: center; column-gap: var(--space-6); row-gap: var(--space-6); margin-top: var(--space-8); }
 .reqcard { display: flex; flex-direction: column; align-items: center; width: 212px; min-height: 150px; padding-top: var(--space-5); padding-bottom: 23px; padding-left: var(--space-2); padding-right: var(--space-2); background-color: var(--color-white); border-radius: 12px; }
 .reqcard_icon { width: 30.174px; height: 40px; }
-.reqcard_text { margin-top: 19px; margin-bottom: 0; color: #293852; font-size: var(--font-size-lg); font-weight: 700; line-height: 24px; letter-spacing: 0.8px; text-align: center; white-space: nowrap; }
+.reqcard_text { margin-top: 19px; margin-bottom: 0; color: #293852; font-size: var(--font-size-lg); font-weight: 700; line-height: 24px; letter-spacing: 0.8px; text-align: center; white-space: normal; }
 .reqcard_line { display: block; color: #293852; }
 .reqcard_accent-line { display: block; color: var(--color-primary); }
 .reqcard_accent { color: var(--color-primary); }
