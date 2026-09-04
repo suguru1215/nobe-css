@@ -79,7 +79,7 @@
 .byissue_grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; column-gap: var(--space-6); row-gap: var(--space-8); margin-top: var(--space-10); }
 .issuecard { display: flex; flex-direction: column; height: 357px; padding-bottom: var(--space-6); background-color: var(--color-white); border-radius: 12px; overflow: hidden; }
 .issuecard_image { width: 100%; height: 150px; object-fit: cover; }
-.issuecard_title { margin-top: var(--space-10); margin-bottom: 0; margin-left: var(--space-4); margin-right: var(--space-4); color: var(--color-primary); font-size: 15.5px; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+.issuecard_title { margin-top: var(--space-10); margin-bottom: 0; margin-left: var(--space-4); margin-right: var(--space-4); color: var(--color-primary); font-size: 15.5px; font-weight: 700; line-height: 1.5; white-space: normal; }
 .issuecard_rec { margin-top: var(--space-4); margin-left: var(--space-4); margin-right: var(--space-4); padding-top: var(--space-3); padding-bottom: var(--space-3); padding-left: var(--space-2); padding-right: var(--space-2); background-color: var(--color-bg-vlight); border-radius: 8px; }
 .issuecard_rec-label { margin-top: 0; margin-bottom: 0; color: var(--color-accent); font-size: var(--font-size-xs); font-weight: 700; line-height: 1.2; }
 .issuecard_rec-tags { display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 6px; row-gap: 6px; margin-top: var(--space-2); }
