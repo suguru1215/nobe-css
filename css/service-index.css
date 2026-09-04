@@ -76,7 +76,7 @@
 .byissue_head { display: flex; flex-direction: column; align-items: center; row-gap: var(--space-3); }
 .byissue_label { margin-top: 0; margin-bottom: 0; font-family: Inter, sans-serif; color: var(--color-primary); font-size: var(--font-size-lg); font-weight: 700; line-height: 1.5; letter-spacing: 0.8px; text-transform: uppercase; text-align: center; }
 .byissue_title { margin-top: 0; margin-bottom: 0; color: var(--color-ink); font-size: var(--font-size-5xl); font-weight: 700; line-height: 1.5; letter-spacing: 1.6px; text-align: center; }
-.byissue_grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; column-gap: var(--space-6); row-gap: var(--space-8); margin-top: var(--space-10); }
+.byissue_grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); column-gap: var(--space-6); row-gap: var(--space-8); margin-top: var(--space-10); }
 .issuecard { display: flex; flex-direction: column; height: 357px; padding-bottom: var(--space-6); background-color: var(--color-white); border-radius: 12px; overflow: hidden; }
 .issuecard_image { width: 100%; height: 150px; object-fit: cover; }
 .issuecard_title { margin-top: var(--space-10); margin-bottom: 0; margin-left: var(--space-4); margin-right: var(--space-4); color: var(--color-primary); font-size: 15.5px; font-weight: 700; line-height: 1.5; white-space: normal; }
@@ -142,7 +142,7 @@
 .industries_label { margin-top: 0; margin-bottom: 0; font-family: Inter, sans-serif; color: var(--color-primary); font-size: var(--font-size-lg); font-weight: 700; line-height: 1.5; letter-spacing: 0.8px; text-transform: uppercase; text-align: center; }
 .industries_title { margin-top: 0; margin-bottom: 0; color: var(--color-ink); font-size: var(--font-size-5xl); font-weight: 700; line-height: 1.469; letter-spacing: 1.6px; text-align: center; }
 .industries_title-line { display: block; }
-.industries_grid { display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: var(--space-6); row-gap: var(--space-6); margin-top: var(--space-10); }
+.industries_grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); column-gap: var(--space-6); row-gap: var(--space-6); margin-top: var(--space-10); }
 .indcard { position: relative; display: flex; align-items: center; justify-content: center; height: 205px; text-decoration-line: none; }
 .indcard_image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 .indcard_label { position: relative; color: var(--color-white); font-size: var(--font-size-2xl); font-weight: 700; line-height: normal; letter-spacing: 1px; text-align: center; }
@@ -198,7 +198,7 @@
 .resources_title-rest { color: var(--color-ink); }
 .resources_title-accent { color: var(--color-primary); }
 .resources_title-tail { color: var(--color-ink); }
-.resources_grid { display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: var(--space-38); row-gap: var(--space-38); }
+.resources_grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); column-gap: var(--space-38); row-gap: var(--space-38); }
 .resources_card { display: flex; flex-direction: column; min-height: 327px; padding-top: var(--space-4); padding-bottom: var(--space-6); padding-left: var(--space-4); padding-right: var(--space-4); background-color: var(--color-white); border-radius: 16px; }
 .resources_card-image { width: 100%; height: 182px; object-fit: cover; border-radius: 8px; }
 .resources_card-meta { margin-top: var(--space-4); margin-bottom: 0; color: var(--color-primary); font-size: var(--font-size-md); font-weight: 700; line-height: 21px; letter-spacing: 0.7px; }
