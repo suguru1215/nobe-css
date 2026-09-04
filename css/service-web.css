@@ -412,11 +412,11 @@
 .cta_content { padding-top: 75px; }
 .cta_title { margin-top: 0; margin-bottom: 0; color: var(--color-white); font-size: var(--font-size-5xl); font-weight: 700; line-height: 1.469; letter-spacing: 1.6px; }
 .cta_lead { margin-top: var(--space-8); margin-bottom: 0; color: var(--color-white); font-size: var(--font-size-lg); font-weight: 500; line-height: 1.5; letter-spacing: 0.8px; }
-.cta_actions { display: flex; column-gap: var(--space-6); margin-top: var(--space-8); }
-.cta_button-primary { position: relative; display: flex; align-items: center; justify-content: center; width: 320px; height: 64px; background-color: var(--color-cta-primary); border-radius: 100px; text-decoration-line: none; }
+.cta_actions { display: flex; flex-wrap: wrap; row-gap: var(--space-4); column-gap: var(--space-6); margin-top: var(--space-8); }
+.cta_button-primary { position: relative; display: flex; align-items: center; justify-content: center; width: min(320px, 100%); height: 64px; background-color: var(--color-cta-primary); border-radius: 100px; text-decoration-line: none; }
 .cta_button-primary-label { color: var(--color-white); font-size: var(--font-size-xl); font-weight: 700; line-height: 28px; letter-spacing: 0.9px; text-align: center; }
 .cta_button-primary-arrow { position: absolute; top: 20px; right: 20px; width: 24px; height: 24px; }
-.cta_button-secondary { position: relative; display: flex; align-items: center; justify-content: center; width: 320px; height: 64px; background-color: var(--color-white); border-radius: 100px; text-decoration-line: none; }
+.cta_button-secondary { position: relative; display: flex; align-items: center; justify-content: center; width: min(320px, 100%); height: 64px; background-color: var(--color-white); border-radius: 100px; text-decoration-line: none; }
 .cta_button-secondary-label { color: var(--color-primary); font-size: var(--font-size-xl); font-weight: 700; line-height: 28px; letter-spacing: 0.9px; text-align: center; }
 .cta_button-secondary-arrow { position: absolute; top: 20px; right: 20px; width: 24px; height: 24px; }
 @media (max-width: 991px) {
