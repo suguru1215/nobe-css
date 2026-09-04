@@ -72,7 +72,7 @@
 .svcissue_divider { width: 64px; height: 3px; margin-top: 21px; background-color: var(--color-primary); border-radius: 2px; }
 .webissue_lead { margin-top: var(--space-10); margin-bottom: 0; color: var(--color-ink); font-size: var(--font-size-lg); font-weight: 500; line-height: 1.85; letter-spacing: 0.8px; text-align: center; white-space: normal; }
 .svcissue_lead-line { display: block; }
-.svcissue_body { display: flex; align-items: flex-start; column-gap: 65px; margin-top: var(--space-8); }
+.svcissue_body { display: flex; flex-wrap: wrap; row-gap: var(--space-8); align-items: flex-start; column-gap: 65px; margin-top: var(--space-8); }
 .svcissue_image { flex-shrink: 0; width: 323px; height: 331px; }
 .svcissue_list { display: flex; flex-direction: column; align-items: flex-start; row-gap: 14px; max-width: 100%; }
 .svcissue_item { display: flex; align-items: center; column-gap: var(--space-2); max-width: 100%; }
@@ -199,7 +199,7 @@
 .webproc_label { margin-top: 0; margin-bottom: 0; font-family: Inter, sans-serif; color: var(--color-primary); font-size: var(--font-size-lg); font-weight: 700; line-height: 1.5; letter-spacing: 0.8px; text-transform: uppercase; text-align: center; }
 .webproc_title { margin-top: 0; margin-bottom: 0; color: var(--color-ink); font-size: var(--font-size-5xl); font-weight: 700; line-height: 1.5; letter-spacing: 1.6px; text-align: center; white-space: normal; }
 .webproc_title-line { display: block; }
-.webproc_row { position: relative; display: flex; justify-content: center; column-gap: 15px; width: 810px; margin-top: var(--space-10); margin-left: auto; margin-right: auto; padding-top: 60px; }
+.webproc_row { position: relative; display: flex; flex-wrap: wrap; row-gap: var(--space-6); justify-content: center; column-gap: 15px; width: min(810px, 100%); margin-top: var(--space-10); margin-left: auto; margin-right: auto; padding-top: 60px; }
 .webproc_row--bottom { margin-top: var(--space-8); }
 .webproc_connector { position: absolute; top: 19px; left: 75px; width: 660px; height: 2px; background-image: linear-gradient(90deg, var(--color-primary-deep) 0%, var(--color-gradient-end) 100%); }
 .webproc_step { position: relative; display: flex; flex-direction: column; align-items: center; width: 150px; flex-shrink: 0; padding-top: var(--space-6); padding-left: var(--space-2); padding-right: var(--space-2); padding-bottom: var(--space-6); background-color: var(--color-white); border-radius: 16px; }
