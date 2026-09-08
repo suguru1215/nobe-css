@@ -11,4 +11,7 @@
   .section_svcdetailhero { height: auto; }
 }
   .svcfaq_q { height: auto; }
+
+@media (min-width: 992px) {
   .section_svcwd { height: auto; min-height: 1208px; }
+}

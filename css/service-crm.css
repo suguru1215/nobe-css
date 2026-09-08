@@ -10,4 +10,7 @@
 }
   .crmfaq_q { height: auto; }
   .crmfaq_itemopen { height: auto; min-height: 160px; }
+
+@media (min-width: 992px) {
   .section_webwd { height: auto; min-height: 1623px; }
+}

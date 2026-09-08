@@ -9,4 +9,7 @@
   .section_svcdetailhero { height: auto; }
 }
   .adfaq_q { height: auto; }
+
+@media (min-width: 992px) {
   .section_webwd { height: auto; min-height: 1623px; }
+}
