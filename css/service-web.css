@@ -436,3 +436,10 @@
   .cta_button-secondary { width: 100%; }
 }
 
+
+/* fix: prevent fixed-height clipping */
+  .webdiff_body3 { height: auto; min-height: 694px; }
+@media (max-width: 991px) {
+  .section_svcdetailhero { height: auto; }
+}
+  .webfaq_q { height: auto; }

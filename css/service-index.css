@@ -247,3 +247,6 @@
   .cta_button-secondary { width: 100%; }
 }
 
+
+/* fix: prevent fixed-height clipping */
+  .issuecard { height: auto; min-height: 357px; }
