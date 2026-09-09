@@ -28,3 +28,7 @@
   .dxcovcard { min-width: 0; }
   .dxindcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .dxdiff_body3 { height: auto; min-height: 600px; }
+  .dxdiff_col3 { height: auto; min-height: 698px; }

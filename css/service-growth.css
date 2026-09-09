@@ -25,3 +25,6 @@
   .growthcovcard { min-width: 0; }
   .growthindcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .growthdiff_col3 { height: auto; min-height: 798px; }

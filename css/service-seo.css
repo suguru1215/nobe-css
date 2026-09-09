@@ -26,3 +26,8 @@
   .seoreq_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .seoreqcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .seocovcard { height: auto; min-height: 126px; }
+  .seowdcard { height: auto; min-height: 391px; }
+  .svcdiff_col3 { height: auto; min-height: 698px; }

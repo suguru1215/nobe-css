@@ -27,3 +27,6 @@
   .datacovcard { min-width: 0; }
   .dataindcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .datadiff_col3 { height: auto; min-height: 798px; }

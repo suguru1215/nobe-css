@@ -15,3 +15,7 @@
 @media (min-width: 992px) {
   .section_svcwd { height: auto; min-height: 1208px; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .svcdiff_col3 { height: auto; min-height: 698px; }
+  .svcplan_card { height: auto; min-height: 308px; }

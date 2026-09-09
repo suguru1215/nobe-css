@@ -455,3 +455,7 @@
   .webind_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .webindcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .webcovcard { height: auto; min-height: 126px; }
+  .webdiff_col3 { height: auto; min-height: 798px; }

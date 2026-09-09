@@ -29,3 +29,6 @@
   .crmcovcard { min-width: 0; }
   .crmindcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .crmdiff_col3 { height: auto; min-height: 798px; }

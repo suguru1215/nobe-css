@@ -28,3 +28,7 @@
   .adcovcard { min-width: 0; }
   .adindcard { min-width: 0; }
 }
+
+/* fix: remaining fixed-height clipping */
+  .addiff_col3 { height: auto; min-height: 798px; }
+  .adfaq_itemopen { height: auto; min-height: 164px; }
