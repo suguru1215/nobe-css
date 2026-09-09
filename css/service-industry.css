@@ -1407,3 +1407,8 @@
     height: 220px;
   }
 }
+
+/* fix: text containers must not have a fixed height */
+  .inddoccard { height: auto; min-height: 387px; }
+  .indreqcard { height: auto; min-height: 175px; }
+  .indreqcard-lower { height: auto; min-height: 172px; }

@@ -32,3 +32,12 @@
 
 /* fix: remaining fixed-height clipping */
   .crmdiff_col3 { height: auto; min-height: 798px; }
+
+/* fix: text containers must not have a fixed height */
+  .crmcase_box { height: auto; min-height: 271px; }
+  .crmcase_card { height: auto; min-height: 417px; }
+  .crmcovcard { height: auto; min-height: 126px; }
+  .crmdiff_cell1 { height: auto; min-height: 100px; }
+  .crmdiff_cell2 { height: auto; min-height: 100px; }
+  .crmdiff_cell3 { height: auto; min-height: 100px; }
+  .crmindcard { height: auto; min-height: 179px; }

@@ -32,3 +32,14 @@
 /* fix: remaining fixed-height clipping */
   .addiff_col3 { height: auto; min-height: 798px; }
   .adfaq_itemopen { height: auto; min-height: 164px; }
+
+/* fix: text containers must not have a fixed height */
+  .adapproachcard { height: auto; min-height: 149px; }
+  .adapproachcard--tall { height: auto; min-height: 176px; }
+  .adcase_box { height: auto; min-height: 271px; }
+  .adcase_card { height: auto; min-height: 417px; }
+  .adcovcard { height: auto; min-height: 126px; }
+  .addiff_cell1 { height: auto; min-height: 100px; }
+  .addiff_cell2 { height: auto; min-height: 100px; }
+  .addiff_cell3 { height: auto; min-height: 100px; }
+  .adindcard { height: auto; min-height: 155px; }

@@ -28,3 +28,14 @@
 
 /* fix: remaining fixed-height clipping */
   .growthdiff_col3 { height: auto; min-height: 798px; }
+
+/* fix: text containers must not have a fixed height */
+  .growthapproachcard { height: auto; min-height: 176px; }
+  .growthapproachcard--short { height: auto; min-height: 149px; }
+  .growthcase_card { height: auto; min-height: 366px; }
+  .growthcovcard { height: auto; min-height: 150px; }
+  .growthcovcard--short { height: auto; min-height: 132px; }
+  .growthdiff_cell1 { height: auto; min-height: 100px; }
+  .growthdiff_cell2 { height: auto; min-height: 100px; }
+  .growthdiff_cell3 { height: auto; min-height: 100px; }
+  .growthproc_step { height: auto; min-height: 166px; }

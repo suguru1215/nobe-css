@@ -19,3 +19,11 @@
 /* fix: remaining fixed-height clipping */
   .svcdiff_col3 { height: auto; min-height: 698px; }
   .svcplan_card { height: auto; min-height: 308px; }
+
+/* fix: text containers must not have a fixed height */
+  .svccase_box { height: auto; min-height: 250px; }
+  .svccase_card { height: auto; min-height: 422px; }
+  .svcdiff_cell1 { height: auto; min-height: 100px; }
+  .svcdiff_cell2 { height: auto; min-height: 100px; }
+  .svcdiff_cell3 { height: auto; min-height: 100px; }
+  .svcproc_step { height: auto; min-height: 160px; }

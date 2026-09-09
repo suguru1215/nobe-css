@@ -30,3 +30,14 @@
 
 /* fix: remaining fixed-height clipping */
   .datadiff_col3 { height: auto; min-height: 798px; }
+
+/* fix: text containers must not have a fixed height */
+  .dataapproachcard { height: auto; min-height: 176px; }
+  .dataapproachcard--short { height: auto; min-height: 149px; }
+  .datacase_card { height: auto; min-height: 366px; }
+  .datacase_textwrap { height: auto; min-height: 100px; }
+  .datacovcard { height: auto; min-height: 146px; }
+  .datadiff_cell1 { height: auto; min-height: 100px; }
+  .datadiff_cell2 { height: auto; min-height: 100px; }
+  .datadiff_cell3 { height: auto; min-height: 100px; }
+  .dataindcard { height: auto; min-height: 211px; }

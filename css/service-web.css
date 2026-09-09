@@ -459,3 +459,8 @@
 /* fix: remaining fixed-height clipping */
   .webcovcard { height: auto; min-height: 126px; }
   .webdiff_col3 { height: auto; min-height: 798px; }
+
+/* fix: text containers must not have a fixed height */
+  .webdiff_cell1 { height: auto; min-height: 100px; }
+  .webdiff_cell2 { height: auto; min-height: 100px; }
+  .webdiff_cell3 { height: auto; min-height: 100px; }

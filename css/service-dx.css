@@ -32,3 +32,14 @@
 /* fix: remaining fixed-height clipping */
   .dxdiff_body3 { height: auto; min-height: 600px; }
   .dxdiff_col3 { height: auto; min-height: 698px; }
+
+/* fix: text containers must not have a fixed height */
+  .dxapproachcard { height: auto; min-height: 176px; }
+  .dxapproachcard--short { height: auto; min-height: 149px; }
+  .dxcase_box { height: auto; min-height: 271px; }
+  .dxcase_card { height: auto; min-height: 443px; }
+  .dxcovcard { height: auto; min-height: 126px; }
+  .dxdiff_cell1 { height: auto; min-height: 100px; }
+  .dxdiff_cell2 { height: auto; min-height: 100px; }
+  .dxdiff_cell3 { height: auto; min-height: 100px; }
+  .dxindcard { height: auto; min-height: 261px; }

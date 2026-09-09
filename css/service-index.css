@@ -250,3 +250,6 @@
 
 /* fix: prevent fixed-height clipping */
   .issuecard { height: auto; min-height: 357px; }
+
+/* fix: text containers must not have a fixed height */
+  .indcard { height: auto; min-height: 205px; }
