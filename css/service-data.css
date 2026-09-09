@@ -13,3 +13,9 @@
 @media (min-width: 992px) {
   .section_datawd { height: auto; min-height: 1489px; }
 }
+
+/* fix: flexible card body below 992px */
+@media (max-width: 991px) {
+  .datacovcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
+  .dataindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
+}

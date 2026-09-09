@@ -10,3 +10,9 @@
   .section_svcdetailhero { height: auto; }
 }
   .growthfaq_q { height: auto; }
+
+/* fix: flexible card body below 992px */
+@media (max-width: 991px) {
+  .growthcovcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
+  .growthindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
+}

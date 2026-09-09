@@ -14,3 +14,8 @@
 @media (min-width: 992px) {
   .section_seowd { height: auto; min-height: 1623px; }
 }
+
+/* fix: flexible card body below 992px */
+@media (max-width: 991px) {
+  .seoreqcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
+}

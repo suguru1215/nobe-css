@@ -443,3 +443,8 @@
   .section_svcdetailhero { height: auto; }
 }
   .webfaq_q { height: auto; }
+
+/* fix: flexible card body below 992px */
+@media (max-width: 991px) {
+  .webindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
+}
