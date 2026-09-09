@@ -49,7 +49,3 @@
   .growthproc_steptitle--single { height: auto; min-height: 24px; }
 }
 
-/* fix: keep hero CTAs clear of the overlapping about section */
-@media (max-width: 991px) {
-  .section_svcdetailhero { padding-bottom: 153px; }
-}
