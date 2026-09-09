@@ -41,3 +41,10 @@
   .crmdiff_cell2 { height: auto; min-height: 100px; }
   .crmdiff_cell3 { height: auto; min-height: 100px; }
   .crmindcard { height: auto; min-height: 179px; }
+
+/* fix: text elements must not have a fixed height (desktop) */
+@media (min-width: 992px) {
+  .crmcase_cardtitle { height: auto; min-height: 68px; }
+  .crmcase_rowlabel { height: auto; min-height: 20px; }
+  .crmproc_steptitle { height: auto; min-height: 48px; }
+}

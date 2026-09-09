@@ -43,3 +43,10 @@
   .addiff_cell2 { height: auto; min-height: 100px; }
   .addiff_cell3 { height: auto; min-height: 100px; }
   .adindcard { height: auto; min-height: 155px; }
+
+/* fix: text elements must not have a fixed height (desktop) */
+@media (min-width: 992px) {
+  .adcase_cardtitle { height: auto; min-height: 68px; }
+  .adcase_rowlabel { height: auto; min-height: 20px; }
+  .adproc_steptitle { height: auto; min-height: 48px; }
+}

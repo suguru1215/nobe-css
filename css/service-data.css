@@ -41,3 +41,10 @@
   .datadiff_cell2 { height: auto; min-height: 100px; }
   .datadiff_cell3 { height: auto; min-height: 100px; }
   .dataindcard { height: auto; min-height: 211px; }
+
+/* fix: text elements must not have a fixed height (desktop) */
+@media (min-width: 992px) {
+  .datacase_cardtitle { height: auto; min-height: 68px; }
+  .datacase_resultlabel { height: auto; min-height: 20px; }
+  .dataproc_steptitle { height: auto; min-height: 48px; }
+}

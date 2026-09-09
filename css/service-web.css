@@ -464,3 +464,17 @@
   .webdiff_cell1 { height: auto; min-height: 100px; }
   .webdiff_cell2 { height: auto; min-height: 100px; }
   .webdiff_cell3 { height: auto; min-height: 100px; }
+
+/* fix: final sweep - fixed heights on text containers */
+  .webcase_box { height: auto; min-height: 271px; }
+  .webcase_card { height: auto; min-height: 417px; }
+  .webcovcard--tall { height: auto; min-height: 146px; }
+  .webfaq_itemopen { height: auto; min-height: 164px; }
+  .webindcard { height: auto; min-height: 179px; }
+
+/* fix: text elements must not have a fixed height (desktop) */
+@media (min-width: 992px) {
+  .webcase_cardtitle { height: auto; min-height: 68px; }
+  .webcase_rowlabel { height: auto; min-height: 20px; }
+  .webproc_steptitle { height: auto; min-height: 48px; }
+}

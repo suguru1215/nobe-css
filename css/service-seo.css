@@ -40,3 +40,8 @@
   .svcdiff_cell1 { height: auto; min-height: 100px; }
   .svcdiff_cell2 { height: auto; min-height: 100px; }
   .svcdiff_cell3 { height: auto; min-height: 100px; }
+
+/* fix: text elements must not have a fixed height (desktop) */
+@media (min-width: 992px) {
+  .seocase_rowlabel { height: auto; min-height: 20px; }
+}
