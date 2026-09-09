@@ -48,3 +48,8 @@
   .datacase_resultlabel { height: auto; min-height: 20px; }
   .dataproc_steptitle { height: auto; min-height: 48px; }
 }
+
+/* fix: keep hero CTAs clear of the overlapping about section */
+@media (max-width: 991px) {
+  .section_svcdetailhero { padding-bottom: 153px; }
+}

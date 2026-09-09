@@ -45,3 +45,8 @@
 @media (min-width: 992px) {
   .seocase_rowlabel { height: auto; min-height: 20px; }
 }
+
+/* fix: keep hero CTAs clear of the overlapping about section */
+@media (max-width: 991px) {
+  .section_svcdetailhero { padding-bottom: 153px; }
+}
