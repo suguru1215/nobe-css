@@ -19,3 +19,11 @@
   .datacovcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
   .dataindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
 }
+
+/* fix: allow grid tracks to shrink below 992px */
+@media (max-width: 991px) {
+  .datawd_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .resources_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .datacovcard { min-width: 0; }
+  .dataindcard { min-width: 0; }
+}

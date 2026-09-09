@@ -20,3 +20,12 @@
   .crmcovcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
   .crmindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
 }
+
+/* fix: allow grid tracks to shrink below 992px */
+@media (max-width: 991px) {
+  .crmind_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .resources_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .webwd_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .crmcovcard { min-width: 0; }
+  .crmindcard { min-width: 0; }
+}

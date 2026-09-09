@@ -19,3 +19,10 @@
 @media (max-width: 991px) {
   .seoreqcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
 }
+
+/* fix: allow grid tracks to shrink below 992px */
+@media (max-width: 991px) {
+  .resources_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .seoreq_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .seoreqcard { min-width: 0; }
+}

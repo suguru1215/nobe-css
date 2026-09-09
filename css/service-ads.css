@@ -19,3 +19,12 @@
   .adcovcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
   .adindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
 }
+
+/* fix: allow grid tracks to shrink below 992px */
+@media (max-width: 991px) {
+  .adind_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .resources_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .webwd_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .adcovcard { min-width: 0; }
+  .adindcard { min-width: 0; }
+}

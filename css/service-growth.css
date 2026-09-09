@@ -16,3 +16,12 @@
   .growthcovcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
   .growthindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
 }
+
+/* fix: allow grid tracks to shrink below 992px */
+@media (max-width: 991px) {
+  .growthind_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .growthwd_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .resources_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .growthcovcard { min-width: 0; }
+  .growthindcard { min-width: 0; }
+}

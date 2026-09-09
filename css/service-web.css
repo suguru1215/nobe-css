@@ -448,3 +448,10 @@
 @media (max-width: 991px) {
   .webindcard_body { width: auto; flex: 1 1 auto; min-width: 0; }
 }
+
+/* fix: allow grid tracks to shrink below 992px */
+@media (max-width: 991px) {
+  .resources_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .webind_grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .webindcard { min-width: 0; }
+}
