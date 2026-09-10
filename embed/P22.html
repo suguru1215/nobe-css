@@ -1,25 +1,3 @@
 <div class="nv2"><a class="nv2-skip" href="#main">本文へ移動</a><header class="nv2-header"><div class="nv2-wrap nv2-header-inner"><a class="nv2-logo" href="/" aria-label="NOVE トップページ"><img class="nv2-logo-img" src="https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@v20/img/nove-logo.png" alt="NOVE" width="180" height="32"></a><button class="nv2-menu-btn" type="button" id="nv2-menu-btn" aria-expanded="false" aria-controls="nv2-gnav" aria-label="メニューを開く"><span class="nv2-menu-bar" aria-hidden="true"></span><span class="nv2-menu-bar" aria-hidden="true"></span><span class="nv2-menu-bar" aria-hidden="true"></span></button><nav class="nv2-gnav" id="nv2-gnav" aria-label="メインメニュー"><a class="nv2-gnav-link" href="/service">サービス</a><a class="nv2-gnav-link" href="/industry">業界別支援</a><a class="nv2-gnav-link" href="/company">会社情報</a><a class="nv2-btn nv2-btn--fill" href="/contact">相談する</a></nav></div></header></div>
 <div class="nv2"><main id="main"><div class="nv2-wrap"><header class="nv2-hero"><h1 class="nv2-h1">ページが見つかりません。</h1><p class="nv2-lead">URLが変更されたか、ページが削除された可能性があります。以下のリンクからお探しください。</p></header></div><section class="nv2-section"><div class="nv2-wrap"><h2 class="nv2-h2">ページを探す</h2><ul class="nv2-index"><li class="nv2-index-item"><a class="nv2-index-link" href="/"><span class="nv2-index-name">トップページへ</span><span class="nv2-index-arrow" aria-hidden="true">&#8594;</span></a></li><li class="nv2-index-item"><a class="nv2-index-link" href="/service"><span class="nv2-index-name">サービス一覧へ</span><span class="nv2-index-arrow" aria-hidden="true">&#8594;</span></a></li><li class="nv2-index-item"><a class="nv2-index-link" href="/contact"><span class="nv2-index-name">お問い合わせへ</span><span class="nv2-index-arrow" aria-hidden="true">&#8594;</span></a></li></ul></div></section></main></div>
 <div class="nv2"><footer class="nv2-footer"><div class="nv2-wrap nv2-footer-inner"><img class="nv2-logo-img" src="https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@v20/img/nove-logo.png" alt="NOVE" width="180" height="32"><p class="nv2-footer-text">NOVEは、マーケティング戦略の立案から施策の実行、分析、改善までを支援します。</p><div class="nv2-footer-cols"><div class="nv2-footer-col"><p class="nv2-footer-title">サービス</p><ul class="nv2-footer-list"><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service">一覧</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/marketing-support">マーケティング支援</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/ads">広告運用</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/seo">SEO・AI検索対策</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/sns">SNS運用</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/web">Webサイト改善</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/cmo">CMO代行</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/global">海外進出・日本進出支援</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/dx">DX・AX支援</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/service/crm">CRM支援</a></li></ul></div><div class="nv2-footer-col"><p class="nv2-footer-title">業界</p><ul class="nv2-footer-list"><li class="nv2-footer-item"><a class="nv2-footer-link" href="/industry">一覧</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/industry/saas">IT・SaaS</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/industry/manufacturing">製造業</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/industry/ec">EC・D2C</a></li></ul></div><div class="nv2-footer-col"><p class="nv2-footer-title">会社・情報</p><ul class="nv2-footer-list"><li class="nv2-footer-item"><a class="nv2-footer-link" href="/company">会社情報</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/column">マーケティングの考え方</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/contact">お問い合わせ</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/privacy">プライバシーポリシー</a></li><li class="nv2-footer-item"><a class="nv2-footer-link" href="/sitemap">サイトマップ</a></li></ul></div></div><p class="nv2-footer-copy">&copy; 2026 株式会社ノーブ</p></div></footer></div>
-<script>
-(function () {
-  var btn = document.getElementById('nv2-menu-btn');
-  var nav = document.getElementById('nv2-gnav');
-  if (!btn || !nav) return;
-  function setOpen(open) {
-    btn.setAttribute('aria-expanded', String(open));
-    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
-    if (open) { nav.setAttribute('data-open', 'true'); }
-    else { nav.removeAttribute('data-open'); }
-  }
-  btn.addEventListener('click', function () {
-    setOpen(btn.getAttribute('aria-expanded') !== 'true');
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
-      setOpen(false); btn.focus();
-    }
-  });
-  setOpen(false);
-})();
-</script>
