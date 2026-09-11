@@ -429,3 +429,40 @@
 @media (prefers-reduced-motion: reduce) {
   .nv2 a.nv2-index-link:hover .nv2-index-arrow { transition: none; }
 }
+
+/* ------------------------------------------------------------------
+   ページ単位の調整（最終レビューでの指摘反映）
+   ------------------------------------------------------------------ */
+
+/* ホバーの変化を 150ms に揃える（背景・枠線が即時に変わっていた） */
+.nv2 a.nv2-index-link { transition: color 150ms linear, background-color 150ms linear; }
+.nv2-index-arrow { transition: color 150ms linear, background-color 150ms linear, border-color 150ms linear; }
+.nv2 a.nv2-panel-link { transition: color 150ms linear, border-color 150ms linear; }
+
+/* 情報量の少ないページは余白を締める（P12 業界一覧 / P19 コラム一覧 / P22 404） */
+.nv2-p12 .nv2-hero,
+.nv2-p19 .nv2-hero,
+.nv2-p22 .nv2-hero { padding-bottom: 40px; }
+.nv2-p12 .nv2-section,
+.nv2-p19 .nv2-section,
+.nv2-p22 .nv2-section { padding-top: 56px; padding-bottom: 56px; }
+
+/* 情報整理ページでは H2 のアクセントラインを出さない（装飾過多を避ける） */
+.nv2-p18 .nv2-h2::after,
+.nv2-p21 .nv2-h2::after { display: none; }
+.nv2-p18 .nv2-h2,
+.nv2-p21 .nv2-h2 { margin-bottom: 16px; }
+
+/* 404 はトップページへの導線を主にする（行レイアウトは維持） */
+.nv2-p22 .nv2-index-item:first-child .nv2-index-name { color: #0b63ce; }
+.nv2-p22 .nv2-index-item:first-child .nv2-index-arrow {
+  color: #ffffff;
+  background-color: #0b63ce;
+  border-color: #0b63ce;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nv2 a.nv2-index-link,
+  .nv2-index-arrow,
+  .nv2 a.nv2-panel-link { transition: none; }
+}
