@@ -347,3 +347,85 @@
 .nv2-index-name,
 .nv2-panel-name,
 .nv2-step-name { word-break: auto-phrase; }
+
+/* ------------------------------------------------------------------
+   装飾レイヤー（抽象図形と図解）
+   CSS の背景として配置するため支援技術からは読まれない。
+   意味は本文で伝え、図形は情報を持たない。動きは付けない。
+   ------------------------------------------------------------------ */
+
+/* Hero の抽象装飾（992px以上のみ。本文の折返し幅には影響しない） */
+@media (min-width: 992px) {
+  .nv2-hero {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300' fill='none'%3E %3Ccircle cx='300' cy='220' r='70' stroke='%230B63CE' stroke-opacity='.16' stroke-width='1.5'/%3E %3Ccircle cx='300' cy='220' r='130' stroke='%230B63CE' stroke-opacity='.12' stroke-width='1.5'/%3E %3Ccircle cx='300' cy='220' r='195' stroke='%230B63CE' stroke-opacity='.08' stroke-width='1.5'/%3E %3Crect x='72' y='96' width='42' height='42' rx='8' fill='%230B63CE' fill-opacity='.06'/%3E %3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right -30px top 10px;
+  }
+  .nv2-hero--top {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420' fill='none'%3E %3Ccircle cx='420' cy='300' r='90' stroke='%230B63CE' stroke-opacity='.20' stroke-width='1.5'/%3E %3Ccircle cx='420' cy='300' r='160' stroke='%230B63CE' stroke-opacity='.15' stroke-width='1.5'/%3E %3Ccircle cx='420' cy='300' r='235' stroke='%230B63CE' stroke-opacity='.11' stroke-width='1.5'/%3E %3Ccircle cx='420' cy='300' r='315' stroke='%230B63CE' stroke-opacity='.07' stroke-width='1.5'/%3E %3Cpath d='M196 150 L256 210 L196 270' stroke='%230B63CE' stroke-opacity='.30' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E %3Crect x='96' y='180' width='58' height='58' rx='10' fill='%230B63CE' fill-opacity='.07'/%3E %3Ccircle cx='300' cy='108' r='7' fill='%230B63CE' fill-opacity='.22'/%3E %3C/svg%3E");
+    background-position: right -40px top 20px;
+  }
+}
+
+/* 工程の図解：番号を結ぶ節点 */
+.nv2-step { position: relative; }
+.nv2-step::before {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  display: block;
+  width: 11px;
+  height: 11px;
+  content: "";
+  background-color: #ffffff;
+  border: 2px solid #0b63ce;
+  border-radius: 100px;
+}
+.nv2-step { padding-top: 24px; }
+
+/* 箇条書きの先頭マーク */
+.nv2-list-item {
+  position: relative;
+  padding-left: 26px;
+}
+.nv2-list-item::before {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  display: block;
+  width: 16px;
+  height: 16px;
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E %3Cpath d='M6 4 L10 8 L6 12' stroke='%230B63CE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E %3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.nv2-list--plain .nv2-list-item::before { top: 6px; }
+
+/* インデックス行の矢印を円形のあしらいに */
+.nv2-index-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  font-size: 15px;
+  border: 1px solid #d5dfeb;
+  border-radius: 100px;
+}
+.nv2 a.nv2-index-link:hover .nv2-index-arrow {
+  color: #ffffff;
+  background-color: #0b63ce;
+  border-color: #0b63ce;
+  transition: background-color 150ms linear, border-color 150ms linear, color 150ms linear;
+}
+
+@media (max-width: 767px) {
+  .nv2-list-item { padding-left: 24px; }
+  .nv2-list-item::before { top: 21px; }
+  .nv2-index-arrow { width: 30px; height: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nv2 a.nv2-index-link:hover .nv2-index-arrow { transition: none; }
+}
