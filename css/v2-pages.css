@@ -245,3 +245,105 @@
   .nv2 a.nv2-footer-link,
   .nv2 .nv2-submit { transition: none; }
 }
+
+/* ------------------------------------------------------------------
+   既存サイトのコンポーネント語彙を取り込んだ装飾レイヤー
+   角丸16px / ブランド影 rgba(2,73,145,.06) / 文字間 0.8px・1.6px / 150ms
+   指示書の「採用しない」事項（全セクションのカード化・動きのある演出・
+   大きな同一アイコン）には該当しない範囲に限定する。
+   ------------------------------------------------------------------ */
+
+/* 文字組み */
+.nv2 { letter-spacing: 0.8px; }
+.nv2-h1,
+.nv2-h2,
+.nv2-h3,
+.nv2-index-name,
+.nv2-panel-name { letter-spacing: 0.02em; }
+.nv2-eyebrow,
+.nv2-step-num,
+.nv2-footer-title,
+.nv2-req,
+.nv2-opt { letter-spacing: 1.6px; }
+
+/* eyebrow をラベル化（既存サイトのピル語彙） */
+.nv2-eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: #0b63ce;
+  background-color: #f3f7fc;
+  border-radius: 100px;
+}
+
+/* H2 の下にアクセントライン */
+.nv2-h2::after {
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: 16px;
+  content: "";
+  background-color: #0b63ce;
+  border-radius: 100px;
+}
+.nv2-split .nv2-h2::after { margin-bottom: 0; }
+
+/* インデックス行：整列を保ったままホバー面を作る */
+.nv2 a.nv2-index-link { border-radius: 8px; }
+.nv2 a.nv2-index-link:hover { background-color: #f3f7fc; }
+
+/* 業界の案内パネル（トップのみ・指示書で許容） */
+.nv2 a.nv2-panel-link {
+  padding: 32px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(2, 73, 145, 0.06);
+}
+
+/* 工程の番号をピルに */
+.nv2-step-num {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 3px 10px;
+  font-size: 13px;
+  background-color: #f3f7fc;
+  border-radius: 100px;
+}
+
+/* 補助背景セクションの境界を締める */
+.nv2-section--tint {
+  border-top: 1px solid #d5dfeb;
+  border-bottom: 1px solid #d5dfeb;
+}
+
+/* ヘッダーに控えめなブランド影 */
+.nv2-header { box-shadow: 0 4px 20px rgba(2, 73, 145, 0.06); }
+
+/* 入力欄を既存語彙の角丸へ。フォーカスは指示書どおり offset 3px */
+.nv2 .nv2-input,
+.nv2 .nv2-select,
+.nv2 .nv2-textarea { border-radius: 8px; }
+.nv2 .nv2-input:focus-visible,
+.nv2 .nv2-select:focus-visible,
+.nv2 .nv2-textarea:focus-visible { outline-offset: 3px; }
+
+/* 動きを減らす設定では装飾トランジションも停止 */
+@media (prefers-reduced-motion: reduce) {
+  .nv2 a.nv2-index-link,
+  .nv2 a.nv2-panel-link { transition: none; }
+}
+
+/* SP 調整 */
+@media (max-width: 767px) {
+  .nv2-h2::after { margin-top: 12px; }
+  .nv2 a.nv2-panel-link { padding: 24px 20px; }
+}
+
+/* 見出しの折り返しを文節単位にする（未対応ブラウザは通常の折り返し） */
+.nv2-h1,
+.nv2-h2,
+.nv2-h3,
+.nv2-lead,
+.nv2-index-name,
+.nv2-panel-name,
+.nv2-step-name { word-break: auto-phrase; }
