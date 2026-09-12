@@ -25,9 +25,6 @@
   if (!form) return;
   var ta = document.getElementById('consultation_details');
   var count = document.getElementById('count-details');
-  var okBox = document.getElementById('contact-ok');
-  var ngBox = document.getElementById('contact-ng');
-  var submit = document.getElementById('contact-submit');
 
   if (ta && count) {
     var render = function () { count.textContent = ta.value.length + ' / 3000文字'; };
@@ -83,20 +80,18 @@
     return first;
   }
 
+  // 送信完了・失敗の表示と送信中ラベルは Webflow Forms 側が制御する
   form.addEventListener('submit', function (e) {
-    okBox.hidden = true; ngBox.hidden = true;
     var first = validate();
     if (first) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       first.focus();
       if (window.dataLayer) {
         window.dataLayer.push({ event: 'contact_form_validation_error', form_id: 'contact-form' });
       }
-      return;
     }
-    submit.disabled = true;
-    submit.textContent = '送信中…';
-  });
+  }, true);
 
   var started = false;
   form.addEventListener('input', function () {
