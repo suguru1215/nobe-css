@@ -142,19 +142,30 @@
 .nv2-hint { margin-top: 0; margin-bottom: 8px; font-size: 14px; line-height: 1.6; color: #46566b; }
 .nv2 .nv2-input,
 .nv2 .nv2-select,
-.nv2 .nv2-textarea { width: 100%; min-height: 48px; padding: 10px 12px; font-family: inherit; font-size: 16px; line-height: 1.6; color: #182638; background-color: #ffffff; border: 1px solid #66758a; border-radius: 6px; }
-.nv2 .nv2-textarea { min-height: 180px; resize: vertical; }
+.nv2 .nv2-textarea,
+.nv2-formhost .nv2-input,
+.nv2-formhost .nv2-select,
+.nv2-formhost .nv2-textarea { width: 100%; min-height: 48px; padding: 10px 12px; font-family: inherit; font-size: 16px; line-height: 1.6; color: #182638; background-color: #ffffff; border: 1px solid #66758a; border-radius: 6px; }
+.nv2 .nv2-textarea,
+.nv2-formhost .nv2-textarea { min-height: 180px; resize: vertical; }
 .nv2 .nv2-input:focus-visible,
 .nv2 .nv2-select:focus-visible,
-.nv2 .nv2-textarea:focus-visible { outline: 2px solid #0b63ce; outline-offset: 2px; }
+.nv2 .nv2-textarea:focus-visible,
+.nv2-formhost .nv2-input:focus-visible,
+.nv2-formhost .nv2-select:focus-visible,
+.nv2-formhost .nv2-textarea:focus-visible { outline: 2px solid #0b63ce; outline-offset: 2px; }
 .nv2-count { margin-top: 8px; margin-bottom: 0; font-size: 14px; line-height: 1.6; color: #46566b; }
 .nv2-check { display: flex; align-items: flex-start; column-gap: 12px; }
-.nv2 .nv2-checkbox { flex-shrink: 0; width: 20px; height: 20px; margin-top: 4px; }
+.nv2 .nv2-checkbox,
+.nv2-formhost .nv2-checkbox { flex-shrink: 0; width: 20px; height: 20px; margin-top: 4px; }
 .nv2-check-text { font-size: 16px; line-height: 1.7; }
 .nv2-error { margin-top: 8px; margin-bottom: 0; font-size: 14px; line-height: 1.6; color: #b42318; }
-.nv2 .nv2-submit { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding-left: 24px; padding-right: 24px; font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1.5; color: #ffffff; background-color: #0b63ce; border: 0; border-radius: 6px; cursor: pointer; }
-.nv2 .nv2-submit:hover { background-color: #084eaa; transition: background-color 150ms linear; }
-.nv2 .nv2-submit:disabled { background-color: #66758a; cursor: default; }
+.nv2 .nv2-submit,
+.nv2-formhost .nv2-submit { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding-left: 24px; padding-right: 24px; font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1.5; color: #ffffff; background-color: #0b63ce; border: 0; border-radius: 6px; cursor: pointer; }
+.nv2 .nv2-submit:hover,
+.nv2-formhost .nv2-submit:hover { background-color: #084eaa; transition: background-color 150ms linear; }
+.nv2 .nv2-submit:disabled,
+.nv2-formhost .nv2-submit:disabled { background-color: #66758a; cursor: default; }
 .nv2 .nv2-formwrap { margin-top: 0; }
 .nv2-status { margin-top: 24px; padding: 16px; font-size: 16px; line-height: 1.7; border-radius: 6px; }
 .nv2-status--ok { color: #182638; background-color: #f3f7fc; border: 1px solid #0b63ce; }
@@ -244,7 +255,8 @@
   .nv2 a.nv2-index-link,
   .nv2 a.nv2-panel-link,
   .nv2 a.nv2-footer-link,
-  .nv2 .nv2-submit { transition: none; }
+  .nv2 .nv2-submit,
+  .nv2-formhost .nv2-submit { transition: none; }
 }
 
 /* ------------------------------------------------------------------
@@ -323,10 +335,16 @@
 /* 入力欄を既存語彙の角丸へ。フォーカスは指示書どおり offset 3px */
 .nv2 .nv2-input,
 .nv2 .nv2-select,
-.nv2 .nv2-textarea { border-radius: 8px; }
+.nv2 .nv2-textarea,
+.nv2-formhost .nv2-input,
+.nv2-formhost .nv2-select,
+.nv2-formhost .nv2-textarea { border-radius: 8px; }
 .nv2 .nv2-input:focus-visible,
 .nv2 .nv2-select:focus-visible,
-.nv2 .nv2-textarea:focus-visible { outline-offset: 3px; }
+.nv2 .nv2-textarea:focus-visible,
+.nv2-formhost .nv2-input:focus-visible,
+.nv2-formhost .nv2-select:focus-visible,
+.nv2-formhost .nv2-textarea:focus-visible { outline-offset: 3px; }
 
 /* 動きを減らす設定では装飾トランジションも停止 */
 @media (prefers-reduced-motion: reduce) {
@@ -466,4 +484,21 @@
   .nv2 a.nv2-index-link,
   .nv2-index-arrow,
   .nv2 a.nv2-panel-link { transition: none; }
+}
+
+.nv2-formhost { width: 100%; max-width: 1120px; margin-left: auto; margin-right: auto;
+  padding-left: 24px; padding-right: 24px; padding-bottom: 88px;
+  color: #182638; background-color: #ffffff;
+  font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  font-size: 17px; font-weight: 400; line-height: 1.85; letter-spacing: 0.8px; }
+.nv2-formhost .nv2-form { max-width: 680px; }
+.nv2-formhost a { color: #0b63ce; }
+.nv2-formhost a:focus-visible { outline: 2px solid #0b63ce; outline-offset: 3px; }
+.nv2-formhost .w-form-done,
+.nv2-formhost .w-form-fail { max-width: 680px; margin-top: 24px; padding: 16px;
+  font-size: 16px; line-height: 1.7; border-radius: 6px; }
+.nv2-formhost .w-form-done { color: #182638; background-color: #f3f7fc; border: 1px solid #0b63ce; }
+.nv2-formhost .w-form-fail { color: #b42318; background-color: #ffffff; border: 1px solid #b42318; }
+@media (max-width: 767px) {
+  .nv2-formhost { padding-left: 20px; padding-right: 20px; padding-bottom: 64px; font-size: 16px; }
 }
