@@ -37,6 +37,25 @@
     render();
   }
 
+  // 任意項目。未入力は許可し、入力時は http/https の絶対URLとホストを検証する
+  function isOptionalHttpUrl(raw) {
+    var value = String(raw == null ? '' : raw).trim();
+    if (!value) return true;
+    if (!/^https?:\/\//i.test(value)) return false;
+    if (/\s|\\/.test(value)) return false;
+    try {
+      var url = new URL(value);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+      if (!url.hostname) return false;
+      var probe = document.createElement('input');
+      probe.type = 'url';
+      probe.value = value;
+      return probe.validity.valid;
+    } catch (err) {
+      return false;
+    }
+  }
+
   var RULES = [
     { id: 'company_name', msg: '会社名を入力してください。' },
     { id: 'full_name', msg: 'お名前を入力してください。' },
@@ -46,7 +65,7 @@
     { id: 'consultation_details', msg: 'ご相談内容を入力してください。' },
     { id: 'website_url', optional: true,
       bad: 'URLを https:// または http:// から入力してください。',
-      re: /^https?:\/\/.+/ },
+      test: isOptionalHttpUrl },
     { id: 'privacy_consent', check: true,
       msg: '個人情報の取り扱いへの同意をご確認ください。' }
   ];
@@ -62,6 +81,11 @@
   function clearError(el, box) {
     box.hidden = true;
     el.removeAttribute('aria-invalid');
+    // ヘルプ・カウンターなど他の参照は保持し、エラーIDだけを取り除く
+    var ids = (el.getAttribute('aria-describedby') || '').split(' ')
+      .filter(function (x) { return x && x !== box.id; });
+    if (ids.length) { el.setAttribute('aria-describedby', ids.join(' ')); }
+    else { el.removeAttribute('aria-describedby'); }
   }
 
   function validate() {
@@ -80,7 +104,8 @@
         if (!r.optional) { showError(el, box, r.msg); first = first || el; }
         return;
       }
-      if (r.re && !r.re.test(v)) { showError(el, box, r.bad); first = first || el; }
+      var invalid = (r.test && !r.test(v)) || (r.re && !r.re.test(v));
+      if (invalid) { showError(el, box, r.bad); first = first || el; }
     });
     return first;
   }
