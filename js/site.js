@@ -21,7 +21,12 @@
 
 
 (function () {
+  // Native Form の ID 設定漏れでも動くよう、相談内容欄から親フォームを辿る
   var form = document.getElementById('contact-form');
+  if (!form) {
+    var probe = document.getElementById('consultation_details');
+    form = probe ? probe.closest('form') : null;
+  }
   if (!form) return;
   var ta = document.getElementById('consultation_details');
   var count = document.getElementById('count-details');
