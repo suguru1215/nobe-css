@@ -31,6 +31,30 @@
   var ta = document.getElementById('consultation_details');
   var count = document.getElementById('count-details');
 
+  // Webflow が生成する英語の region 名と role を、日本語の通知領域に置き換える
+  // webflow.js の初期化後に上書きされないよう、読み込み後にも一度適用する
+  function localizeFormRegions() {
+    form.setAttribute('aria-label', 'お問い合わせフォーム');
+    var host = form.parentNode;
+    if (!host) return;
+    var done = host.querySelector('.w-form-done');
+    var fail = host.querySelector('.w-form-fail');
+    if (done) {
+      done.setAttribute('role', 'status');
+      done.setAttribute('aria-live', 'polite');
+      done.setAttribute('aria-atomic', 'true');
+      done.setAttribute('aria-label', '送信完了のお知らせ');
+    }
+    if (fail) {
+      fail.setAttribute('role', 'alert');
+      fail.setAttribute('aria-live', 'assertive');
+      fail.setAttribute('aria-atomic', 'true');
+      fail.setAttribute('aria-label', '送信エラーのお知らせ');
+    }
+  }
+  localizeFormRegions();
+  window.addEventListener('load', localizeFormRegions);
+
   if (ta && count) {
     var render = function () { count.textContent = ta.value.length + ' / 3000文字'; };
     ta.addEventListener('input', render);
