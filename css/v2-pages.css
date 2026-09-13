@@ -82,6 +82,15 @@
 .nv2-index-copy { flex: 1 1 auto; min-width: 0; }
 .nv2 .nv2-index-copy .nv2-index-name { display: block; margin-top: 0; margin-bottom: 0; }
 .nv2-index-action { display: block; margin-top: 12px; color: #0b63ce; font-size: 16px; font-weight: 700; line-height: 1.7; text-decoration: underline; text-underline-offset: .2em; }
+/* 行リンクの文字側を縮小可能にする。word-break:auto-phrase は文節を割らないため、
+   幅が足りないときは overflow-wrap:anywhere で最小幅を1文字まで下げ、矢印を押し出さない。
+   通常サイズでは従来どおり auto-phrase の折り返し位置が使われる。 */
+.nv2 .nv2-index-link > .nv2-index-name,
+.nv2 .nv2-index-copy,
+.nv2 .nv2-index-copy > .nv2-index-name,
+.nv2 .nv2-index-copy > .nv2-index-desc,
+.nv2 .nv2-index-copy > .nv2-index-action { min-width: 0; overflow-wrap: anywhere; }
+.nv2 .nv2-index-link > .nv2-index-name { flex: 1 1 auto; }
 
 /* 4工程（ご相談から支援開始まで） */
 .nv2-steps { display: flex; column-gap: 24px; margin-top: 24px; padding-left: 0; list-style: none; }
