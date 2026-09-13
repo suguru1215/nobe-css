@@ -31,29 +31,61 @@
   var ta = document.getElementById('consultation_details');
   var count = document.getElementById('count-details');
 
-  // Webflow が生成する英語の region 名と role を、日本語の通知領域に置き換える
-  // webflow.js の初期化後に上書きされないよう、読み込み後にも一度適用する
-  function localizeFormRegions() {
-    form.setAttribute('aria-label', 'お問い合わせフォーム');
-    var host = form.parentNode;
-    if (!host) return;
-    var done = host.querySelector('.w-form-done');
-    var fail = host.querySelector('.w-form-fail');
-    if (done) {
-      done.setAttribute('role', 'status');
-      done.setAttribute('aria-live', 'polite');
-      done.setAttribute('aria-atomic', 'true');
-      done.setAttribute('aria-label', '送信完了のお知らせ');
-    }
-    if (fail) {
-      fail.setAttribute('role', 'alert');
-      fail.setAttribute('aria-live', 'assertive');
-      fail.setAttribute('aria-atomic', 'true');
-      fail.setAttribute('aria-label', '送信エラーのお知らせ');
+  // Webflow が生成する英語の region 名と role を日本語の通知領域へ置き換える。
+  // webflow.js のフォーム初期化が後から role="region" を書き戻すため、
+  // Webflow.push（初期化完了後）と、対象2要素の属性だけを見る MutationObserver で冪等に保つ。
+  var REGION_ATTRS = {
+    done: { role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true', 'aria-label': '送信完了のお知らせ' },
+    fail: { role: 'alert', 'aria-live': 'assertive', 'aria-atomic': 'true', 'aria-label': '送信エラーのお知らせ' }
+  };
+
+  function applyAttrs(el, attrs) {
+    if (!el) return;
+    for (var k in attrs) {
+      // 値が違うときだけ書く。自分の書き込みで observer が再発火するのを防ぐ
+      if (el.getAttribute(k) !== attrs[k]) el.setAttribute(k, attrs[k]);
     }
   }
+
+  function localizeFormRegions() {
+    if (form.getAttribute('aria-label') !== 'お問い合わせフォーム') {
+      form.setAttribute('aria-label', 'お問い合わせフォーム');
+    }
+    var host = form.parentNode;
+    if (!host) return;
+    applyAttrs(host.querySelector('.w-form-done'), REGION_ATTRS.done);
+    applyAttrs(host.querySelector('.w-form-fail'), REGION_ATTRS.fail);
+  }
+
   localizeFormRegions();
+
+  // Webflow のフォーム初期化が終わった直後に再適用する
+  window.Webflow = window.Webflow || [];
+  window.Webflow.push(localizeFormRegions);
   window.addEventListener('load', localizeFormRegions);
+
+  // 対象2要素の該当属性だけを監視し、書き戻されたら元に戻す
+  if (window.MutationObserver) {
+    var hostEl = form.parentNode;
+    var watched = hostEl
+      ? [[hostEl.querySelector('.w-form-done'), REGION_ATTRS.done],
+         [hostEl.querySelector('.w-form-fail'), REGION_ATTRS.fail]]
+      : [];
+    var filter = ['role', 'aria-live', 'aria-atomic', 'aria-label'];
+    watched.forEach(function (pair) {
+      var el = pair[0], attrs = pair[1];
+      if (!el) return;
+      new MutationObserver(function () { applyAttrs(el, attrs); })
+        .observe(el, { attributes: true, attributeFilter: filter });
+    });
+    if (form) {
+      new MutationObserver(function () {
+        if (form.getAttribute('aria-label') !== 'お問い合わせフォーム') {
+          form.setAttribute('aria-label', 'お問い合わせフォーム');
+        }
+      }).observe(form, { attributes: true, attributeFilter: ['aria-label'] });
+    }
+  }
 
   if (ta && count) {
     var render = function () { count.textContent = ta.value.length + ' / 3000文字'; };
