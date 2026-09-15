@@ -8,4 +8,4 @@
  const actions=document.createElement('div');actions.className='industry-hero-actions-reference';button.before(actions);actions.append(button);
  const secondary=document.createElement('a');secondary.className='industry-hero-secondary';secondary.href='#industry-research';secondary.textContent='支援内容を見る';
  secondary.addEventListener('click',e=>{const target=document.getElementById('industry-research');if(!target)return;e.preventDefault();e.stopPropagation();history.pushState(null,'',secondary.hash);target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:'instant'});});actions.append(secondary);
-}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
+}const css=document.createElement('link');css.rel='stylesheet';css.href='https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@b44be5a/css/industry-hero-reference-20260916.css';css.onload=function(){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();};document.head.append(css);})();
