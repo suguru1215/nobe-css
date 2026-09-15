@@ -1,0 +1,56 @@
+/* Shared corrections retain the established blue, rounded-card design. */
+.nove-final-faq{padding:88px 0!important;background:#f5f8ff!important}
+.nove-final-faq .nove-eyebrow{text-align:center;color:#194c91;font-size:16px;font-weight:600;margin:0 0 20px}
+.nove-final-faq h2{text-align:center;font-size:32px;line-height:1.5;margin:0 0 40px;color:#202d3e}
+.nove-final-faq-list{max-width:1000px;margin:auto;display:grid;gap:20px}
+.nove-final-faq-item{background:#fff;border-radius:16px;padding:28px 32px}
+.nove-final-faq-item h3{display:flex;align-items:flex-start;gap:14px;font-size:18px!important;line-height:1.7!important;color:#164b90!important;margin:0 0 18px!important;font-weight:700}
+.nove-final-q{flex:0 0 28px;height:28px;display:grid;place-items:center;background:#194c91;border-radius:50%;font:700 16px/1 sans-serif;color:#fff}
+.nove-final-faq-item p{font-size:16px!important;line-height:1.9!important;margin:0!important;padding:0!important;color:#42536a!important}
+.nove-final-catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1140px;margin:40px auto 0}
+.nove-final-catalog .nove-related-card{min-height:200px}
+.nove-final-catalog-section .nove-related-card h3{color:#194c91!important}
+.nove-final-catalog-section .nove-related-card p{color:#42536a!important}
+.nove-final-nonlink{cursor:default}
+.nove-final-reviewed .svcdetailhero_button-navy,.nove-final-reviewed .svcdetailhero_button-orange{padding:0 52px 0 24px!important}
+.nove-final-reviewed .svcdetailhero_button-label{max-width:100%;font-size:18px!important;line-height:1.5;text-align:center}
+.nove-final-reviewed main.nove-industry-detail .nove-industry-about{padding:56px 48px!important}
+.nove-final-reviewed .nove-industry-about>.container_large{width:100%;padding:0!important}
+.nove-final-articles{padding:88px 0;background:#fafafa}
+.nove-final-article-card{display:block;max-width:850px;padding:40px;border-radius:24px;background:white;box-shadow:0 8px 28px #162b4610;color:#202d3e;text-decoration:none;margin:auto}
+.nove-final-article-card h2{font-size:28px;line-height:1.6;margin:16px 0 24px}
+.nove-final-article-card p:not(.nove-eyebrow){font-size:16px;line-height:1.9;color:#42536a}
+.nove-final-read{display:block;color:#194c91;font-size:16px;font-weight:700;margin-top:24px}
+.nove-final-article .nove-final-prose{max-width:760px;margin:auto;color:#26364b;font-size:16px;line-height:1.9}
+.nove-final-article .nove-final-prose h2{font-size:28px;line-height:1.6;margin:48px 0 20px!important}
+.nove-final-article .nove-final-prose p{margin:0 0 20px!important}
+.nove-final-article h1{font-size:40px!important;line-height:1.5!important;max-width:900px;text-wrap:balance}
+.nove-final-article .hero-split-2:first-child{width:100%;max-width:900px}
+.nove-final-inline-link{display:inline-block;color:#194c91!important;text-decoration:underline!important;text-underline-offset:4px;font-weight:700}
+.nove-final-form{display:flex!important;flex-direction:column;gap:24px!important}
+.nove-final-field{width:100%;min-width:0}
+.nove-final-field>label{display:flex;align-items:center;gap:8px;color:#194c91;font-size:16px;font-weight:700;margin:0 0 8px}
+.nove-final-field input:not([type=checkbox]),.nove-final-field select,.nove-final-field textarea{display:block;width:100%;min-height:48px;border:1px solid #8999ad;border-radius:8px;background:#fff;color:#26364b;padding:12px 14px;font:400 16px/1.6 "Noto Sans JP",sans-serif}
+.nove-final-field textarea{min-height:180px;resize:vertical}
+.nove-final-hint{font-size:14px;line-height:1.7;color:#526279;margin:8px 0 0}
+.nove-final-consent{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px}
+.nove-final-consent input{width:20px;height:20px;margin:4px 0 0;accent-color:#194c91}
+.nove-final-consent>label{display:block;font-size:15px;line-height:1.8;color:#26364b;font-weight:400;margin:0}
+.nove-final-consent a{color:#194c91;text-decoration:underline;text-underline-offset:3px}
+.nove-final-consent .formfield_badge{display:inline-block;margin-left:8px}
+.nove-final-error{font-size:14px;line-height:1.6;color:#b42318;margin:8px 0 0;grid-column:1/-1}
+.nove-final-error[hidden]{display:none!important}
+.nove-final-field [aria-invalid=true]{border-color:#b42318!important}
+.nove-final-submit{width:100%;min-height:64px;border:0;border-radius:100px;background:#f7931d;color:white;font-size:18px;font-weight:700;cursor:pointer}
+.nove-final-submit:disabled{opacity:.65;cursor:wait}
+.nove-final-reviewed a:focus-visible,.nove-final-reviewed button:focus-visible,.nove-final-form input:focus-visible,.nove-final-form select:focus-visible,.nove-final-form textarea:focus-visible{outline:3px solid #287ada;outline-offset:4px}
+@media(max-width:767px){
+ .nove-final-faq{padding:56px 0!important}.nove-final-faq h2{font-size:26px;margin-bottom:28px}
+ .nove-final-faq-item{padding:24px 20px}.nove-final-faq-item h3{font-size:16px!important;gap:10px}
+ .nove-final-faq-item p{font-size:15px!important}.nove-final-catalog{grid-template-columns:1fr;gap:20px}
+ .nove-final-reviewed main.nove-industry-detail .nove-industry-about{padding:32px 20px!important}
+ .nove-final-articles{padding:56px 0}.nove-final-article-card{padding:28px 24px}.nove-final-article-card h2{font-size:23px}
+ .nove-final-article h1{font-size:28px!important}.nove-final-article .nove-final-prose h2{font-size:24px;margin-top:36px!important}
+ .nove-final-reviewed .svcdetailhero_button-label{font-size:16px!important}
+}
+
