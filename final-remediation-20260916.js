@@ -70,6 +70,8 @@ function form(){
 function init(){
  const path=location.pathname.replace(/\/$/,'')||'/';document.body.classList.add('nove-final-reviewed');
  replaceFAQ(path);catalog(path);
+ if(path==='/industry')document.querySelector('.section_indlist')?.remove();
+ if(path==='/service')document.querySelectorAll('p').forEach(p=>{if(/トップページの提供価値と連動|左から右へ流れる成長プロセスとして/.test(p.textContent))p.remove()});
  if(['/','/service','/industry','/contact'].includes(path)){
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
   nodes.forEach(n=>{if(n.parentElement.closest('script,style'))return;n.nodeValue=n.nodeValue.replace(/データ分析・ダッシュボード/g,'マーケティング支援').replace(/月額グロース支援/g,'マーケティング支援');});
