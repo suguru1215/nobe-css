@@ -21,3 +21,18 @@ main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference
 @media(max-width:767px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:56px 20px 112px!important}main.nove-industry-polished .nove-text-led-hero .industry-hero-kicker{font-size:18px!important;margin-bottom:20px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:32px!important;line-height:1.5!important}main.nove-industry-polished .nove-text-led-hero .hero-split-2>p:not(.industry-hero-kicker){font-size:16px!important;margin-top:28px!important}.industry-hero-actions-reference{grid-template-columns:1fr;gap:16px;margin-top:40px}.industry-hero-actions-reference:before{display:none}.industry-hero-actions-reference>.button-primary-4,.industry-hero-actions-reference>.industry-hero-secondary{grid-column:auto;grid-row:auto}main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{min-height:64px;font-size:18px}}
 @media(max-width:359px){main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:28px!important}}
 @media(max-width:767px){main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1>span{display:block!important}.nove-text-led-hero .industry-hero-lead-line{display:inline}}
+/* Match measured SEO/CRM detail typography, CTA dimensions and spacing. */
+main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:68px max(24px,calc((100% - 1140px)/2)) 132px!important}
+.nove-text-led-hero .hero-wrapper-2{max-width:1140px}
+.nove-text-led-hero .hero-split-2:first-child{margin:0!important}
+main.nove-industry-polished .nove-text-led-hero .industry-hero-kicker{font-size:16px!important;line-height:1.6!important;margin-bottom:21px!important}
+main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{line-height:1.4!important}
+main.nove-industry-polished .nove-text-led-hero .hero-split-2>p:not(.industry-hero-kicker){max-width:1140px;font-size:16px!important;line-height:1.8!important;margin-top:40px!important}
+.industry-hero-actions-reference{grid-template-columns:320px 1px 320px;justify-content:center;gap:24px;max-width:100%;margin:40px auto 0}
+.industry-hero-actions-reference:before{height:64px}
+main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{width:320px;height:64px!important;min-height:64px!important;padding:0 44px!important;border-radius:100px!important;font-size:18px!important;line-height:28px!important;letter-spacing:.9px}
+.nove-text-led-hero .industry-hero-actions-reference .industry-hero-arrow,.industry-hero-secondary:after{width:24px;height:24px}
+.industry-hero-secondary:after{font-size:16px}
+@media(max-width:991px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:64px 24px 136px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:36px!important}}
+@media(max-width:767px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:48px 16px 112px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:28px!important}main.nove-industry-polished .nove-text-led-hero .industry-hero-kicker{font-size:14px!important}.industry-hero-actions-reference{grid-template-columns:minmax(0,1fr);gap:16px;justify-items:center}main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{width:min(320px,100%)}}
+@media(max-width:479px){main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{width:100%}}
