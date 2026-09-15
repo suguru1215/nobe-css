@@ -1,0 +1,23 @@
+/* CINC-inspired text-led composition, using the existing NOVE palette. */
+main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:112px max(24px,calc((100% - 1100px)/2)) 168px!important;background-color:#e4f4fc;background-position:center;background-size:cover;min-height:0;box-sizing:border-box}
+.nove-text-led-hero .hero-wrapper-2{display:block!important;max-width:1100px;margin:0 auto;padding:0!important}
+.nove-text-led-hero .hero-split-2:first-child{display:block!important;width:100%!important;max-width:none!important;flex:none}
+.nove-text-led-hero .hero-split-2:first-child:before,.nove-text-led-hero h1:before,.nove-text-led-hero .hero-split-2:nth-child(2),.nove-text-led-hero .industry-section-nav{display:none!important}
+main.nove-industry-polished .nove-text-led-hero .industry-hero-kicker{margin:0 0 32px!important;color:#194c92!important;font-size:24px!important;line-height:1.5!important;font-weight:700!important;letter-spacing:.02em}
+main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:48px!important;line-height:1.45!important;font-weight:700!important;letter-spacing:.025em!important;text-align:left!important;text-wrap:balance;margin:0!important}
+main.nove-industry-polished .nove-text-led-hero h1>span{display:inline!important}
+main.nove-industry-polished .nove-text-led-hero .hero-split-2>p:not(.industry-hero-kicker){max-width:1000px;margin:40px 0 0!important;font-size:18px!important;line-height:1.9!important;color:#34445c!important;font-weight:400!important;text-align:left}
+.industry-hero-actions-reference{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);align-items:center;gap:60px;max-width:910px;margin:100px auto 0}
+.industry-hero-actions-reference:before{content:'';grid-column:2;grid-row:1;display:block;width:1px;height:64px;background:#194c9240}
+main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{position:relative;display:flex;align-items:center;justify-content:center;min-height:72px;width:100%;padding:20px 62px 20px 28px!important;border-radius:8px!important;font-size:20px;font-weight:700;line-height:1.5;text-decoration:none;margin:0!important;box-sizing:border-box}
+.industry-hero-actions-reference>.button-primary-4{grid-column:1;grid-row:1}
+.nove-text-led-hero .industry-hero-actions-reference .industry-hero-arrow{width:32px;height:32px}
+.nove-text-led-hero .industry-hero-lead-line{display:block}
+.industry-hero-actions-reference>.industry-hero-secondary{grid-column:3;grid-row:1;border:1px solid #194c92;background:#fff;color:#194c92}
+.industry-hero-secondary:after{content:'→';position:absolute;right:20px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:32px;height:32px;border:1px solid currentColor;border-radius:50%;font-size:20px;font-weight:400}
+.industry-hero-secondary:hover{background:#edf5ff}
+.industry-hero-secondary:focus-visible{outline:3px solid #2385df;outline-offset:4px}
+@media(max-width:991px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:80px 32px 136px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:40px!important}.industry-hero-actions-reference{gap:32px;margin-top:72px}}
+@media(max-width:767px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:56px 20px 112px!important}main.nove-industry-polished .nove-text-led-hero .industry-hero-kicker{font-size:18px!important;margin-bottom:20px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:32px!important;line-height:1.5!important}main.nove-industry-polished .nove-text-led-hero .hero-split-2>p:not(.industry-hero-kicker){font-size:16px!important;margin-top:28px!important}.industry-hero-actions-reference{grid-template-columns:1fr;gap:16px;margin-top:40px}.industry-hero-actions-reference:before{display:none}.industry-hero-actions-reference>.button-primary-4,.industry-hero-actions-reference>.industry-hero-secondary{grid-column:auto;grid-row:auto}main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{min-height:64px;font-size:18px}}
+@media(max-width:359px){main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:28px!important}}
+@media(max-width:767px){main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1>span{display:block!important}.nove-text-led-hero .industry-hero-lead-line{display:inline}}
