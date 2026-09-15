@@ -1,0 +1,53 @@
+/* Scope all refinements to the three requested industry detail pages. */
+main.nove-industry-polished .nove-industry-hero h1{font-size:40px!important;line-height:1.5!important;letter-spacing:.025em;text-wrap:balance}
+.nove-industry-polished .nove-industry-hero h1>span{display:block}
+.nove-industry-polished .nove-industry-hero .hero-split-2{min-width:0}
+.nove-industry-polished .nove-industry-hero .shadow-two-2{border-radius:24px;box-shadow:0 12px 32px #15416a14}
+.nove-industry-polished .nove-industry-hero .button-primary-4{position:relative;padding:18px 58px 18px 28px!important;min-height:64px}
+.nove-industry-polished .industry-hero-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:24px;height:24px}
+.nove-industry-polished .nove-industry-about li{padding:24px!important;background:#f5f9ff;border:1px solid #e3eefb;border-radius:16px}
+.nove-industry-polished .nove-industry-about li:before{display:none!important}
+.nove-industry-polished .industry-issue-icon{display:block;width:24px;height:24px;margin-bottom:16px}
+.nove-industry-polished .nove-industry-about li h3{font-size:18px;line-height:1.5;color:#004998;margin:0 0 12px;font-weight:700}
+.nove-industry-polished .nove-industry-about li p{font-size:14px;line-height:1.85;color:#42536a;margin:0}
+.industry-research-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:64px;margin-top:48px}
+.industry-research-image{display:block;width:100%;max-width:400px;height:auto;margin:0 auto;object-fit:contain}
+.industry-research-copy{display:grid;gap:28px}
+.industry-research-point{padding-bottom:28px;border-bottom:1px solid #e3eefb}
+.industry-research-point:last-child{padding-bottom:0;border-bottom:0}
+.nove-industry-polished .industry-research-point h3{font-size:20px;line-height:1.5;color:#004998;margin:0 0 16px}
+.nove-industry-polished .industry-research-point p{font-size:16px;line-height:1.95;margin:0;color:#42536a}
+main.nove-industry-polished .nove-industry-blue{background-image:radial-gradient(ellipse 340px 330px at -3% 12%,#42a3e72b 0 99%,transparent 100%),radial-gradient(ellipse 330px 340px at 102% 70%,#69bbef26 0 99%,transparent 100%),linear-gradient(125deg,#1c519a,#2d81d1)!important}
+.industry-improvement-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:48px}
+.industry-improvement-card{background:#fff;border-radius:16px;padding:24px;min-width:0}
+.industry-improvement-image{display:block;width:100%;height:210px;object-fit:contain;margin:0 0 24px;border-radius:8px}
+.industry-step-number{display:block;color:#2385df;font-family:Inter,sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;margin-bottom:12px}
+main.nove-industry-polished .industry-improvement-card h3{font-size:20px;line-height:1.5;color:#004998!important;margin:0 0 16px;font-weight:700}
+main.nove-industry-detail.nove-industry-polished .nove-industry-blue .industry-improvement-card p{font-size:15px;line-height:1.9;color:#42536a!important;margin:0}
+.industry-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:48px}
+.industry-support-card{padding:32px;background:#f6f9ff;border-radius:16px}
+.industry-support-card-head{display:flex;align-items:center;gap:20px;margin-bottom:24px}
+.industry-support-icon{width:64px;height:64px;flex:0 0 64px;object-fit:contain}
+.nove-industry-polished .industry-support-card h3{font-size:20px;color:#004998;line-height:1.5;margin:0}
+.nove-industry-polished .industry-support-card p{font-size:16px;line-height:1.9;margin:0;color:#42536a}
+.nove-industry-polished .nove-industry-question h3{position:relative;padding-left:52px;min-height:32px;display:flex;align-items:center;font-size:18px!important}
+.nove-industry-polished .nove-industry-question h3:before{position:absolute;left:0;top:0;width:32px;height:32px;display:grid;place-items:center;background:#edf5ff;border-radius:50%;font-size:18px;line-height:1;color:#004998;margin:0}
+.nove-industry-polished .nove-industry-question>p{padding-top:20px;border-top:1px solid #e3eefb}
+.nove-industry-polished .nove-industry-section:has(.nove-related-grid){padding-bottom:80px!important}
+/* Pass 2: body contrast, heading alignment and calmer reading widths. */
+.nove-industry-polished .industry-improvement-card h3{min-height:60px}
+.nove-industry-polished .industry-research-copy{max-width:640px}
+.nove-industry-polished .nove-industry-question{max-width:1000px;margin-left:auto;margin-right:auto}
+.nove-industry-polished .nove-industry-hero .button-primary-4{width:min(320px,100%);font-size:20px;font-weight:700}
+.nove-industry-polished .nove-industry-hero .hero-split-2>p{font-size:16px;line-height:1.9;font-weight:400;color:#42536a}
+/* Pass 3: accessible page navigation and small-screen refinements. */
+.industry-section-nav{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 28px}
+.industry-section-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;background:#fff;border:1px solid #e3eefb;border-radius:100px;color:#004998;font-size:14px;font-weight:500;line-height:1.5;text-decoration:none}
+.industry-section-nav a:hover{background:#edf5ff;border-color:#98bfe8}
+.industry-section-nav a:focus-visible,.nove-industry-polished .button-primary-4:focus-visible{outline:3px solid #2385df;outline-offset:4px}
+.nove-industry-polished .nove-industry-section[id]{scroll-margin-top:104px}
+@media(min-width:768px) and (max-width:991px){.industry-improvement-grid{grid-template-columns:1fr}.industry-improvement-card{display:grid;grid-template-columns:200px minmax(0,1fr);grid-template-rows:auto auto 1fr;gap:0 28px}.industry-improvement-image{grid-row:1/4;height:190px;margin:0}.nove-industry-polished .industry-improvement-card h3{min-height:0}}
+@media(max-width:767px){.nove-industry-polished .industry-improvement-card h3{min-height:0}.industry-section-nav{gap:8px}.industry-section-nav a{font-size:13px;padding:10px 14px}.nove-industry-polished .nove-industry-section[id]{scroll-margin-top:84px}.nove-industry-polished .nove-industry-question h3{padding-left:44px;font-size:17px!important}}
+@media(max-width:479px){main.nove-industry-polished .nove-industry-hero h1{font-size:clamp(24px,7.2vw,30px)!important}}
+@media(max-width:991px){main.nove-industry-polished .nove-industry-hero h1{font-size:34px!important}.industry-research-layout{gap:32px;grid-template-columns:1fr 1.2fr}.industry-improvement-card{padding:20px}.industry-improvement-image{height:160px}.industry-support-card{padding:24px}.industry-support-card-head{gap:16px}.industry-support-icon{width:48px;height:48px;flex-basis:48px}}
+@media(max-width:767px){main.nove-industry-polished .nove-industry-hero h1{font-size:30px!important}.industry-research-layout{grid-template-columns:1fr;gap:28px;margin-top:32px}.industry-research-image{max-width:260px}.industry-improvement-grid,.industry-support-grid{grid-template-columns:1fr;gap:20px;margin-top:32px}.industry-improvement-card{padding:24px}.industry-improvement-image{height:210px}.nove-industry-polished .industry-research-point p,.nove-industry-polished .industry-support-card p{font-size:15px}.nove-industry-polished .industry-support-card h3{font-size:18px}.nove-industry-polished .nove-industry-section:has(.nove-related-grid){padding-bottom:64px!important}}
