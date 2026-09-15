@@ -36,3 +36,11 @@ main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference
 @media(max-width:991px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:64px 24px 136px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:36px!important}}
 @media(max-width:767px){main.nove-industry-detail.nove-industry-polished .nove-industry-hero.nove-text-led-hero{padding:48px 16px 112px!important}main.nove-industry-detail.nove-industry-polished .nove-text-led-hero h1{font-size:28px!important}main.nove-industry-polished .nove-text-led-hero .industry-hero-kicker{font-size:14px!important}.industry-hero-actions-reference{grid-template-columns:minmax(0,1fr);gap:16px;justify-items:center}main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{width:min(320px,100%)}}
 @media(max-width:479px){main.nove-industry-polished .nove-text-led-hero .industry-hero-actions-reference>a{width:100%}}
+/* Shared service check treatment; left-aligned hero CTAs without a divider. */
+.nove-industry-polished .nove-industry-about li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-content:start;align-items:start}
+.nove-industry-polished .nove-industry-about .industry-issue-icon{width:28px;height:28px;margin:0;flex-shrink:0}
+.nove-industry-polished .nove-industry-about li h3{margin:0;align-self:center}
+.nove-industry-polished .nove-industry-about li>p{grid-column:2}
+.nove-text-led-hero .industry-hero-actions-reference{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:16px 24px;margin-left:0;margin-right:0}
+.nove-text-led-hero .industry-hero-actions-reference:before{display:none!important;content:none!important}
+@media(max-width:767px){.nove-text-led-hero .industry-hero-actions-reference{flex-direction:column;align-items:flex-start}}
