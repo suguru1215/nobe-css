@@ -60,3 +60,32 @@
 @media(max-width:991px){.nv3 .nv3-support-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:768px){.nv3 h1{font-size:30px}.nv3 h2{font-size:24px}.nv3 h3{font-size:18px}.nv3 .nv3-hero,.nv3 .nv3-section{padding:40px 0}.nv3 .nv3-header-inner{flex-wrap:wrap;gap:12px}.nv3 .nv3-menu{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px;background:#fff;border:1px solid #dce4ef;border-radius:6px;color:#194c91;font-size:14px}.nv3 .nv3-nav{display:none;width:100%;flex-direction:column;align-items:stretch;gap:12px}.nv3 .nv3-nav.is-open{display:flex}.nv3 .nv3-nav a{min-height:48px}.nv3 .nv3-actions{flex-direction:column;align-items:stretch;gap:12px}.nv3 .nv3-btn{width:100%}.nv3 .nv3-industry-row,.nv3 .nv3-footer-grid,.nv3 .nv3-industry-links,.nv3 .nv3-support-grid{grid-template-columns:1fr}.nv3 .nv3-footer{padding:40px 0 24px}.nv3 .nv3-industry-row{gap:12px}.nv3 .nv3-breadcrumb{padding:12px 0}}
 @media(prefers-reduced-motion:reduce){.nv3 *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+/* Native Webflow form: only its seven source-rendered fields are custom HTML. */
+body:has(#contact-form)>.header_component,body:has(#contact-form)>.footer_component{position:static;display:block;width:100%;height:auto;padding:0;margin:0;background:none;box-shadow:none}
+body:has(#contact-form) .section_contactform{padding:0 20px 64px;background:#fff;color:#1e293b}
+body:has(#contact-form) .contactform_container{display:block;width:100%;max-width:680px;margin:0 auto;padding:0}
+body:has(#contact-form) .contactform_intro{width:100%;max-width:none;margin:0;padding:0}
+body:has(#contact-form) .contactform_card{display:block;width:100%;max-width:none;margin:0;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
+.nv3 .nv3-contact-intro{padding:40px 0}
+.nv3 .nv3-contact-intro h1{font-size:36px}
+.nv3 .nv3-contact-intro p{margin-top:24px}
+.nv3-form .nv3-field{margin:0 0 24px}
+.nv3-form label{display:block;font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
+.nv3-form input:not([type=checkbox]):not([type=submit]),.nv3-form select,.nv3-form textarea{display:block;width:100%;min-height:48px;padding:11px 12px;border:1px solid #718096;border-radius:4px;background:#fff;color:#1e293b;font:400 16px/1.5 "Noto Sans JP",sans-serif;margin:0;box-shadow:none}
+.nv3-form textarea{min-height:180px;resize:vertical}
+.nv3-form .nv3-required,.nv3-form .nv3-optional{display:inline-block;margin-left:10px;font-size:12px;font-weight:500;color:#42536a}
+.nv3-form .nv3-required{color:#aa1625}
+.nv3-form .nv3-help{font-size:14px;line-height:1.8;margin-top:8px;color:#42536a}
+.nv3-form .nv3-consent{display:flex;align-items:flex-start;gap:12px}
+.nv3-form .nv3-consent input{flex:0 0 22px;width:22px;height:22px;min-height:22px;margin:4px 0 0;accent-color:#0b63ce}
+.nv3-form .nv3-consent label{font-weight:400;min-height:44px;cursor:pointer}
+.nv3-form [type=submit]{margin:24px 0 16px;cursor:pointer;white-space:normal;width:100%}
+.nv3-form [type=submit]:disabled{opacity:.65;cursor:wait}
+.nv3-form .nv3-error{color:#aa1625;font-size:14px;margin-top:8px}
+.nv3-form [aria-invalid=true]{border-color:#aa1625!important}
+.nv3-form [hidden]{display:none!important}
+body:has(#contact-form) .w-form-done,body:has(#contact-form) .w-form-fail{padding:24px;font:400 16px/1.8 "Noto Sans JP",sans-serif;text-align:left;border-radius:4px}
+body:has(#contact-form) .w-form-done{background:#edf5ff;color:#1e293b}
+body:has(#contact-form) .w-form-fail{background:#fff0f1;color:#aa1625}
+.nv3 .nv3-article-meta{font-size:14px;color:#42536a;margin-top:20px}
+@media(max-width:768px){.nv3 .nv3-contact-intro{padding:28px 0 40px}.nv3 .nv3-contact-intro h1{font-size:30px}body:has(#contact-form) .section_contactform{padding-bottom:40px}}
