@@ -34,8 +34,14 @@
 .nove-final-field textarea{min-height:180px;resize:vertical}
 /* Industry detail entry cards: decorative vector icons; preserve existing text and links. */
 .nove-industry-links h2{text-wrap:balance}
-.nove-industry-link>.nove-industry-detail-icon{display:block;width:160px;height:112px;max-width:100%;object-fit:contain;flex:none;margin:0 0 20px}
-@media(max-width:767px){.nove-industry-link>.nove-industry-detail-icon{width:128px;height:90px;margin-bottom:16px}}
+.nove-industry-links .nove-industry-link{display:grid;grid-template-columns:96px minmax(0,1fr);grid-template-rows:auto 1fr auto;column-gap:16px;padding:28px 24px}
+.nove-industry-link>.nove-industry-detail-icon{display:block;grid-column:1;grid-row:1 / 4;align-self:center;width:96px;height:auto;max-width:100%;object-fit:contain;margin:0}
+.nove-industry-links .nove-industry-link>h3{grid-column:2;grid-row:1;margin:0 0 12px}
+.nove-industry-links .nove-industry-link>p{grid-column:2;grid-row:2;margin:0 0 20px}
+.nove-industry-links .nove-industry-link>span{grid-column:2;grid-row:3;justify-self:end;align-self:end}
+@media(min-width:768px) and (max-width:991px){.nove-industry-links .nove-industry-link-grid{grid-template-columns:1fr;max-width:720px;margin-left:auto;margin-right:auto}.nove-industry-links .nove-industry-link{grid-template-columns:112px minmax(0,1fr);column-gap:24px}.nove-industry-link>.nove-industry-detail-icon{width:112px}}
+@media(max-width:767px){.nove-industry-links .nove-industry-link{grid-template-columns:80px minmax(0,1fr);column-gap:16px;padding:24px 20px}.nove-industry-link>.nove-industry-detail-icon{width:80px}}
+@media(max-width:359px){.nove-industry-links .nove-industry-link{grid-template-columns:64px minmax(0,1fr);column-gap:12px}.nove-industry-link>.nove-industry-detail-icon{width:64px}}
 .nove-final-hint{font-size:14px;line-height:1.7;color:#526279;margin:8px 0 0}
 .nove-final-consent{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px}
 .nove-final-consent input{width:20px;height:20px;margin:4px 0 0;accent-color:#194c91}
