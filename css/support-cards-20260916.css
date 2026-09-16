@@ -2,7 +2,7 @@
 .nove-support-section{height:auto!important;min-height:0!important;padding-bottom:88px!important}
 @media(max-width:767px){.nove-support-section{padding-bottom:56px!important}}
 .nove-support-card.is-icon .nove-support-card-image{width:96px!important;height:96px!important}
-.nove-support-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important;width:100%!important;max-width:1200px!important;margin-left:auto!important;margin-right:auto!important}
+.nove-support-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important;width:100%!important;max-width:1200px!important;margin-left:auto!important;margin-right:auto!important}
 .nove-support-grid>.nove-support-card{grid-column:auto}
 .nove-support-card{display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;padding:28px!important;border:1px solid #e5edf8!important;border-radius:20px!important;background:#fff!important;box-shadow:0 8px 24px #123d7710!important;color:#42536a!important;text-align:left!important;overflow:visible!important}
 .nove-support-card .nove-support-card-head{display:grid!important;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start;width:100%;min-height:0;margin:0 0 20px;padding:0}
