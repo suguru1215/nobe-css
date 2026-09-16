@@ -17,7 +17,7 @@
 .nv3 .nv3-nav a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:600;text-decoration:none}
 .nv3 .nv3-menu{display:none}
 .nv3 .nv3-hero{padding:64px 0;background:#fff}
-.nv3 h1{max-width:900px;font-size:44px;line-height:1.45;font-weight:700;letter-spacing:.01em;text-align:left}
+.nv3 h1{max-width:1120px;font-size:44px;line-height:1.45;font-weight:700;letter-spacing:.01em;text-align:left;text-wrap:balance}
 .nv3 h2{font-size:30px;line-height:1.6;font-weight:700;letter-spacing:.01em;margin-bottom:28px;text-align:left}
 .nv3 h3{font-size:20px;line-height:1.6;font-weight:700;margin-bottom:16px;color:#194c91;text-align:left}
 .nv3 .nv3-hero .nv3-prose{margin-top:24px}
@@ -27,6 +27,9 @@
 .nv3 .nv3-link{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
 .nv3 .nv3-btn{display:inline-flex;justify-content:center;align-items:center;min-height:52px;height:auto;padding:12px 24px;border:0;border-radius:6px;background:#0b63ce;color:#fff;text-decoration:none;font-weight:700;font-size:16px;line-height:1.7;text-align:center}
 .nv3 .nv3-btn:hover{background:#084c9e;color:#fff}
+.nv3 .nv3-nav .nv3-btn{min-height:52px}
+.nv3 p,.nv3 li{font-weight:400}
+.nv3 .nv3-prose+.nv3-prose{margin-top:20px}
 .nv3 .nv3-list{display:grid;gap:16px;padding-left:1.3em;max-width:680px;margin:20px 0}
 .nv3 .nv3-steps{list-style:none;padding:0;counter-reset:nv-step;max-width:680px}
 .nv3 .nv3-steps li{position:relative;padding:24px 0 24px 56px;border-bottom:1px solid #dce4ef;counter-increment:nv-step}
