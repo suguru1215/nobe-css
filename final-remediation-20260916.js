@@ -68,6 +68,21 @@ function form(){
  const lead=document.querySelector('.pagehero_lead');if(lead)lead.textContent='マーケティング全体の見直しから、広告・SEO・SNS・Webサイト改善、CMO代行、海外支援、DX・AX、CRMまで。現在の課題をお聞かせください。';
  const checklist=document.querySelector('.contactform_checklist');if(checklist){checklist.replaceChildren();services.forEach(s=>{const row=el('div','checkitem');const icon=el('img','checkitem_icon');icon.src=base+'check-icon.svg';icon.alt='';row.append(icon,el('span','checkitem_text',s[1]+'について相談したい'));checklist.append(row)})}
 }
+function polishSupportCards(){
+ const selector='.section_seowd .seowdcard,.section_svcwd .svcwdcard,.section_webwd .webwdcard,.industry-improvement-card,.industry-support-card,.section_adapproach .adapproachcard,.section_dxapproach .dxapproachcard,.section_webcov .webcovcard';
+ const grids=new Set();
+ document.querySelectorAll(selector).forEach(card=>{
+  if(card.classList.contains('nove-support-card'))return;
+  const image=card.querySelector('img'),heading=card.querySelector('h3');if(!image||!heading)return;
+  const number=card.querySelector('.seowdcard_number,.svcwdcard_num,.webwdcard_num,.industry-step-number');
+  const head=el('div','nove-support-card-head'),title=el('div','nove-support-card-heading'),body=el('div','nove-support-card-body');
+  image.classList.add('nove-support-card-image');head.append(image);
+  if(number){number.classList.add('nove-support-card-number');title.append(number)}title.append(heading);head.append(title);
+  [...card.childNodes].forEach(node=>{if(node.nodeType===1&&!node.textContent.trim()&&!node.querySelector('img,a'))node.remove();else body.append(node)});
+  card.append(head,body);card.classList.add('nove-support-card');if(!number)card.classList.add('is-icon');grids.add(card.parentElement);card.closest('section')?.classList.add('nove-support-section');
+ });
+ grids.forEach(grid=>{const cards=[...grid.children].filter(e=>e.classList.contains('nove-support-card'));grid.classList.add('nove-support-grid');if(cards.some(c=>c.querySelector('.nove-support-card-body').textContent.length>160||c.querySelector('ul')))grid.classList.add('is-long');if(cards.length===2)grid.classList.add('is-pair');if(cards.length===1)grid.classList.add('is-single');if(cards.length%2)grid.classList.add('is-odd')});
+}
 function init(){
  const path=location.pathname.replace(/\/$/,'')||'/';document.body.classList.add('nove-final-reviewed');
  replaceFAQ(path);catalog(path);
@@ -114,6 +129,7 @@ function init(){
   }
  }
  if(path==='/contact')form();
+ polishSupportCards();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
