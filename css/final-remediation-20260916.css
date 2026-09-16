@@ -32,6 +32,9 @@
 .nove-final-field>label{display:flex;align-items:center;gap:8px;color:#194c91;font-size:16px;font-weight:700;margin:0 0 8px}
 .nove-final-field input:not([type=checkbox]),.nove-final-field select,.nove-final-field textarea{display:block;width:100%;min-height:48px;border:1px solid #8999ad;border-radius:8px;background:#fff;color:#26364b;padding:12px 14px;font:400 16px/1.6 "Noto Sans JP",sans-serif}
 .nove-final-field textarea{min-height:180px;resize:vertical}
+/* Industry detail entry cards: decorative vector icons; preserve existing text and links. */
+.nove-industry-link>.nove-industry-detail-icon{display:block;width:160px;height:112px;max-width:100%;object-fit:contain;flex:none;margin:0 0 20px}
+@media(max-width:767px){.nove-industry-link>.nove-industry-detail-icon{width:128px;height:90px;margin-bottom:16px}}
 .nove-final-hint{font-size:14px;line-height:1.7;color:#526279;margin:8px 0 0}
 .nove-final-consent{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px}
 .nove-final-consent input{width:20px;height:20px;margin:4px 0 0;accent-color:#194c91}
