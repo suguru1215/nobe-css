@@ -1,0 +1,116 @@
+.nove-seo-service .seowd_grid:has(>.seowdcard:last-child:nth-child(2)){grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;margin-left:auto;margin-right:auto}.nove-seo-service .seowdcard_image{object-fit:contain}.nove-seo-service .seocov_grid:has(>:only-child){grid-template-columns:minmax(0,1fr);max-width:740px;margin-left:auto;margin-right:auto}.nove-seo-service .seocovcard{justify-content:center}@media(max-width:767px){.nove-seo-service .seowd_grid:has(>.seowdcard:last-child:nth-child(2)){grid-template-columns:1fr}}
+.nove-seo-service .seowd_grid{align-items:stretch}.nove-seo-service .seocovcard{width:100%;max-width:740px;min-height:100px}.nove-seo-service .seocovcard_title{width:auto}.nove-seo-service .seocovcard:after{content:'→';margin-left:20px;color:var(--color-primary);font-size:24px}
+.nove-seo-service .seocov_grid.service-link-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px 16px;max-width:none;width:100%;margin:40px auto 0}
+.nove-seo-service .seocov_grid .seocovcard.service-link-card{display:flex;flex:0 1 calc((100% - 48px)/4);align-items:center;justify-content:flex-start;gap:14px;width:auto;max-width:none;min-height:126px;height:auto;padding:22px 16px;border-radius:14px;background:#fff;color:#004998;text-decoration:none;box-sizing:border-box;transition:box-shadow .18s,transform .18s}
+.nove-seo-service .service-link-card:after{content:none}
+.nove-seo-service .service-link-icon{display:block;flex:0 0 48px;width:48px;height:48px;color:#004998}
+.nove-seo-service .service-link-body{flex:1;min-width:0}
+.nove-seo-service .service-link-card .seocovcard_title{width:auto;margin:0 0 8px;font-size:18px;font-weight:700;line-height:1.5;letter-spacing:.02em;color:#004998}
+.nove-seo-service .service-link-card .seocovcard_text{width:auto;margin:0;font-size:13px;font-weight:400;line-height:1.7;letter-spacing:0;color:#34445c}
+.nove-seo-service .service-link-card:hover{box-shadow:0 6px 20px rgb(0 73 152 / 12%);transform:translateY(-2px)}
+.nove-seo-service .service-link-card:focus-visible{outline:3px solid #258ee9;outline-offset:4px}
+@media(max-width:991px){.nove-seo-service .seocov_grid .seocovcard.service-link-card{flex-basis:calc((100% - 16px)/2)}}
+@media(max-width:599px){.nove-seo-service .seocov_grid .seocovcard.service-link-card{flex-basis:100%;padding:22px;min-height:126px}.nove-seo-service .service-link-card .seocovcard_title{font-size:18px}.nove-seo-service .service-link-card .seocovcard_text{font-size:14px}}
+
+/* Shared ABOUT presentation; existing hero overlap remains in its page stylesheet. */
+div.nove-about-refined{box-sizing:border-box;width:100%;height:auto!important;padding:56px 48px!important;border:1px solid #e6eef7;border-radius:24px;background:#fff;box-shadow:0 12px 36px rgba(21,65,106,.08);gap:0}
+.nove-about-refined [class$="about_head"]{width:100%;gap:16px}
+.nove-about-refined [class$="about_label"]{display:table;margin:0 auto 16px!important;padding:6px 18px;border-radius:100px;background:#edf5ff;color:#004998;font-size:14px;line-height:1.5;font-weight:700;letter-spacing:.1em}
+.nove-about-refined [class$="about_head"] [class$="about_label"]{margin-bottom:0!important}
+.nove-about-refined [class$="about_title"]{height:auto!important;max-width:100%;margin:0!important;font-size:clamp(26px,2.6vw,36px);line-height:1.55;letter-spacing:.025em;text-align:center;white-space:normal;text-wrap:pretty}
+.nove-about-refined [class$="about_lead"]{width:100%;max-width:880px!important;height:auto!important;margin:28px auto 0!important;font-size:16px;font-weight:400;line-height:1.95;letter-spacing:.025em;color:#34445c;text-align:left;white-space:normal}
+.nove-about-refined [class$="about_lead"]+[class$="about_lead"]{margin-top:16px!important}
+.nove-about-refined [class$="about_lead-line"]{display:inline}
+.nove-about-refined .seoabout_grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;width:100%;max-width:1000px;margin:36px auto 0}
+.nove-about-refined .seoabout_grid:has(>:nth-child(4)){grid-template-columns:repeat(4,minmax(0,1fr))}
+.nove-about-refined .seoabout_item{width:auto!important;height:auto!important;min-height:0!important;box-sizing:border-box;padding:24px;border-radius:16px;border:1px solid #e3eefb;background:#f5f9ff;gap:12px;overflow:visible}
+.nove-about-refined .about-item-heading{display:flex;align-items:center;gap:12px;width:100%}
+.nove-about-refined .about-item-number{display:grid;place-items:center;flex:0 0 32px;height:32px;border-radius:9px;background:#e4efff;color:#0754a6;font:700 13px/1 Inter,sans-serif;letter-spacing:.02em}
+.nove-about-refined .seoabout_itemtitle{margin:0;font-size:18px;font-weight:700;line-height:1.5;color:#004998;letter-spacing:.025em;white-space:normal}
+.nove-about-refined .seoabout_itemtext{margin:0;font-size:14px;line-height:1.85;color:#42536a}
+.nove-about-refined [class$="about_scope"]{width:100%;height:auto!important;margin-top:36px!important;border:1px solid #e3eefb;border-radius:16px;overflow:hidden}
+.nove-about-refined [class$="about_scopetags"]{height:auto!important;flex-wrap:wrap;gap:10px;padding:20px!important}
+.nove-about-refined .adabouttag{white-space:normal;line-height:1.8}
+.nove-about-refined .crmabout_note{max-width:100%;height:auto!important;border-radius:14px}
+.nove-about-refined .svcabout_diagram{max-width:100%;height:auto}
+@media(max-width:991px){div.nove-about-refined{padding:40px 28px!important}.nove-about-refined .seoabout_grid:has(>:nth-child(4)){grid-template-columns:repeat(2,minmax(0,1fr))}.nove-about-refined .seoabout_item{padding:20px}}
+@media(max-width:767px){div.nove-about-refined{padding:32px 20px!important;border-radius:20px}.nove-about-refined [class$="about_title"]{font-size:25px;line-height:1.6}.nove-about-refined [class$="about_lead"]{font-size:15px;margin-top:24px!important;line-height:1.9}.nove-about-refined .seoabout_grid,.nove-about-refined .seoabout_grid:has(>:nth-child(4)){grid-template-columns:minmax(0,1fr);gap:14px;margin-top:28px}.nove-about-refined [class$="about_scope"]{margin-top:28px!important}.nove-about-refined .seoabout_item{padding:20px}.nove-about-refined .seoabout_itemtext{font-size:14px}}
+
+html[data-wf-page="6aa2a8b1f2145364c37fc566"] .nove-seo-service > .section_seocov{background-color:#fafafa;}
+/* Shared service cards, navigation and CTA repair. */
+main.nove-industry-detail .nove-industry-section h2,main.nove-industry-detail .cta_title{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;color:#1e293b!important;font-size:32px!important;line-height:1.5!important;margin:0 0 40px!important;box-shadow:none!important}
+main.nove-industry-detail .nove-industry-section h2:before,main.nove-industry-detail .nove-industry-section h2:after,main.nove-industry-detail .cta_title:before,main.nove-industry-detail .cta_title:after{display:none!important}
+main.nove-industry-detail .nove-industry-blue h2,main.nove-industry-detail .nove-industry-blue p,main.nove-industry-detail .cta_title{color:#fff!important}
+main.nove-industry-detail .nove-industry-faq{background:#f6f9ff!important}main.nove-industry-detail .nove-industry-question{background:#fff!important;border-radius:16px!important;padding:24px 32px!important}main.nove-industry-detail .nove-eyebrow{color:#194c92;font-size:18px;letter-spacing:.6px}main.nove-industry-detail .nove-industry-blue .nove-eyebrow{color:#fff!important}
+@media(max-width:767px){main.nove-industry-detail .nove-industry-section h2,main.nove-industry-detail .cta_title{font-size:26px!important}}
+.nove-industry-links{padding:80px 0;background:#fafafa}.nove-eyebrow{margin:0 0 16px!important;color:#194c92;font-family:Inter,sans-serif;font-size:18px;font-weight:700;text-align:center;letter-spacing:.6px}.nove-industry-links h2{text-align:center;font-size:32px;line-height:1.5;color:#1e293b;margin:0 0 40px}.nove-industry-link-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.nove-industry-link{display:flex;flex-direction:column;padding:32px;background:#fff;border-radius:16px;box-shadow:0 0 20px #0000000d;text-decoration:none;color:#194c92}.nove-industry-link h3{font-size:24px;margin:0 0 16px}.nove-industry-link p{font-size:15px;line-height:1.8;color:#43516b;margin-bottom:28px}.nove-industry-link>span{margin-top:auto;text-align:right;font-weight:700}.nove-industry-link:hover{box-shadow:0 5px 24px #184b9125}
+main.nove-industry-detail{padding:0!important;border:0!important;background:#fff!important}.nove-industry-detail .nove-industry-hero{width:100%;max-width:none;padding:72px max(24px,calc((100% - 1140px)/2)) 140px;background:#e4f4fc url('https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@8dfa16dc6ac40eeb0d0eeed0e5f882a7979bb0b4/img/svcseo-hero-bg.jpg') center/cover}.nove-industry-hero .hero-wrapper-2{gap:48px;align-items:center}.nove-industry-hero h1{font-size:40px;line-height:1.5;color:#1e293b;font-weight:700;margin:0 0 28px}.nove-industry-hero p{font-size:16px;line-height:1.9;color:#43516b}.nove-industry-hero .shadow-two-2{width:100%;border-radius:20px;box-shadow:none;aspect-ratio:4/3;object-fit:cover}.nove-industry-hero .button-primary-4{display:inline-flex;justify-content:center;align-items:center;background:#f7931e!important;color:#fff;border-radius:100px;padding:18px 24px;line-height:1.6;white-space:normal;text-align:center;font-weight:700;font-size:16px}
+.nove-industry-section{padding:80px 0;background:#fff}.nove-industry-section .container_large{max-width:1188px;margin:auto;padding:0 24px}.nove-industry-section h2{font-size:32px;line-height:1.5;color:#1e293b;text-align:center;font-weight:700;margin:0 0 40px}.nove-industry-section p,.nove-industry-section li{font-size:16px;line-height:1.9;color:#43516b}.nove-industry-section p{margin-bottom:24px}.nove-industry-about{position:relative;margin:-72px auto 0;width:calc(100% - 48px);max-width:1140px;padding:56px 24px;border-radius:24px;box-shadow:0 8px 32px #1e293b14}.nove-industry-about ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.nove-industry-about li{background:#f6f9ff;border-radius:16px;padding:24px}.nove-industry-about li:before{content:'✓';display:block;color:#2380ce;font-weight:700;font-size:24px;margin-bottom:12px}.nove-industry-blue{background:radial-gradient(ellipse at 0 0,#398fce66,transparent 60%),radial-gradient(ellipse at 100% 100%,#59a8e844,transparent 55%),linear-gradient(120deg,#1c519a,#2d81d1)}.nove-industry-blue h2,.nove-industry-blue p{color:#fff}.nove-industry-faq{background:#f6f9ff}.nove-industry-question{padding:24px 32px;background:#fff;border-radius:16px;margin-bottom:20px}.nove-industry-question h3{margin:0 0 16px;color:#194c92;font-size:20px;line-height:1.6}.nove-industry-question h3:before{content:'Q';font-family:Inter,sans-serif;font-weight:700;margin-right:16px}.nove-industry-question p{margin:0}.nove-industry-section:has(.nove-related-grid){background:#fafafa}
+@media(max-width:767px){.nove-industry-link-grid{grid-template-columns:1fr}.nove-industry-links{padding:56px 0}.nove-industry-links h2{font-size:26px}.nove-industry-detail .nove-industry-hero{padding:48px 20px 100px}.nove-industry-hero .hero-wrapper-2{flex-direction:column;gap:32px}.nove-industry-hero .hero-split-2{width:100%;max-width:none}.nove-industry-hero h1{font-size:30px}.nove-industry-hero .shadow-two-2{max-height:220px}.nove-industry-about{width:calc(100% - 32px);padding:40px 0;margin-top:-48px}.nove-industry-about ul{grid-template-columns:1fr}.nove-industry-section{padding-top:56px;padding-bottom:56px}.nove-industry-section h2{font-size:26px}.nove-industry-question{padding:24px 20px}}
+.nove-related-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;width:100%;max-width:1200px;margin:40px auto 0!important}
+.nove-related-grid .nove-related-card{display:flex!important;flex-direction:row!important;align-items:stretch!important;gap:12px!important;min-width:0;width:auto!important;max-width:none!important;min-height:200px;padding:16px!important;border:0!important;border-radius:16px!important;background:#fff!important;box-shadow:0 0 20px #00000012;text-decoration:none!important;transition:box-shadow .2s,transform .2s}
+.nove-related-card:hover{box-shadow:0 6px 24px #184b9125;transform:translateY(-2px)}
+.nove-related-card>img{display:block;width:42%!important;max-width:224px;height:168px!important;flex-shrink:0;object-fit:contain!important;border-radius:0!important;margin:0!important}
+.nove-related-body{display:flex;flex:1;min-width:0;flex-direction:column;text-align:left}
+.nove-related-card h3{margin:0!important;color:#194c92!important;font-size:20px!important;line-height:1.45!important;font-weight:700!important}
+.nove-related-card p{margin:16px 0 20px!important;color:#43516b!important;font-size:14px!important;font-weight:400!important;line-height:1.8!important}
+.nove-related-action{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:auto;color:#194c92;font-size:14px;font-weight:700}
+.nove-related-action img{width:24px!important;height:24px!important;margin:0!important}
+.nove-service-dropdown{position:relative;align-self:center}
+.nove-service-toggle{display:flex;align-items:center;gap:9px;padding:12px 0;border:0;background:transparent;color:inherit;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+.nove-service-toggle:after{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+.nove-service-menu{position:absolute;top:100%;left:-24px;z-index:10000;width:340px;max-height:75vh;overflow:auto;padding:12px;background:#fff;border:1px solid #e5edf6;border-radius:12px;box-shadow:0 8px 30px #183b6826}
+.nove-service-menu[hidden]{display:none!important}
+.nove-service-menu a{display:block;padding:10px 12px;border-radius:6px;color:#194c92!important;text-decoration:none;font-size:14px;line-height:1.5}
+.nove-service-menu a:hover,.nove-service-menu a:focus-visible{background:#f1f6fd}
+.nove-service-menu a:first-child{font-weight:700;border-bottom:1px solid #e5edf6}
+.header_component,.header_container,.header_right{overflow:visible}
+.section_cta.nove-cta-fixed{position:relative!important;isolation:isolate;overflow:visible!important;background:#287aca!important;margin-top:32px;padding:0!important;height:auto!important;min-height:350px}
+.nove-cta-fixed .cta_background{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;z-index:-1}
+.nove-cta-fixed .cta_body{position:relative;display:flex!important;align-items:flex-end!important;gap:20px;width:100%;max-width:1188px;min-height:350px;margin:0 auto;padding:0 24px}
+.nove-cta-fixed .cta_person{display:block;width:293px!important;height:382px!important;object-fit:contain!important;object-position:bottom;margin:-32px 0 0!important;align-self:flex-end;flex-shrink:0}
+.nove-cta-fixed .cta_content{flex:1;min-width:0;padding:48px 0!important;align-self:center}
+.nove-cta-fixed .cta_title{margin:0;color:#fff;font-size:32px;line-height:1.5;font-weight:700;letter-spacing:1.2px}
+.nove-cta-fixed .cta_lead{margin:28px 0 0;color:#fff;font-size:16px;line-height:1.8;font-weight:500}
+.nove-cta-fixed .cta_actions{display:flex;flex-wrap:wrap;gap:16px 24px;margin-top:28px}
+.nove-cta-fixed .cta_button-primary,.nove-cta-fixed .cta_button-secondary{position:relative;display:flex;align-items:center;justify-content:center;width:min(320px,100%);height:64px;border:0;border-radius:100px;text-decoration:none;background:#f7931e}
+.nove-cta-fixed .cta_button-secondary{background:#fff}
+.nove-cta-fixed .cta_button-primary-label,.nove-cta-fixed .cta_button-secondary-label{font-size:20px;font-weight:700;color:#fff;line-height:1.4}
+.nove-cta-fixed .cta_button-secondary-label{color:#194c92}
+.nove-cta-fixed .cta_button-primary-arrow,.nove-cta-fixed .cta_button-secondary-arrow{position:absolute;right:20px;top:20px;width:24px;height:24px}
+.section_indcards .industrycard_more{display:none!important}
+.section_indcards .industrycard{cursor:default!important;transform:none!important}
+.nove-accent-section{position:relative!important;isolation:isolate;background-color:#246abd!important;background-image:radial-gradient(ellipse 340px 330px at -3% 12%,#42a3e72b 0 99%,transparent 100%),radial-gradient(ellipse 330px 340px at 102% 55%,#69bbef26 0 99%,transparent 100%),radial-gradient(ellipse 470px 270px at 15% 100%,#12569c38 0 99%,transparent 100%),linear-gradient(125deg,#1c519a,#2d81d1)!important;background-size:auto!important;background-repeat:no-repeat!important}
+.nove-accent-section>img:first-child{display:none!important}
+.nove-accent-section:before{content:'';position:absolute;top:0;left:0;right:0;height:98px;background:#f6f9ff;clip-path:polygon(0 0,100% 0,50% 100%);pointer-events:none;z-index:0}
+.nove-accent-section>.container_large{position:relative;z-index:1}
+.nove-industry-prose{max-width:1188px!important;padding:64px 24px!important;margin:auto;color:#1e293b;font-size:16px;line-height:1.9}
+.nove-industry-prose h2{font-size:30px;line-height:1.5;margin:64px 0 24px;color:#1e293b;font-weight:700}
+.nove-industry-prose h3{font-size:20px;color:#194c92;margin:32px 0 12px}
+.nove-industry-prose p{line-height:1.9;margin-bottom:20px}
+.nove-industry-prose>h2:first-child{margin-top:0}
+@media(max-width:991px){.nove-related-grid{grid-template-columns:1fr!important}.nove-service-dropdown{width:100%;align-self:stretch}.nove-service-toggle{width:100%;justify-content:space-between;padding:14px 0}.nove-service-menu{position:static;width:100%;max-height:48vh;box-shadow:none;margin:0 0 12px}.nove-cta-fixed .cta_person{display:none!important}.nove-cta-fixed .cta_body{min-height:0}.nove-cta-fixed .cta_content{padding:48px 0!important}.nove-cta-fixed .cta_title{font-size:28px}.section_cta.nove-cta-fixed{min-height:0;margin-top:0}}
+@media(max-width:767px){.nove-related-grid .nove-related-card{flex-direction:column!important}.nove-related-card>img{width:100%!important;max-width:none;height:180px!important}.nove-related-card h3{font-size:19px!important}.nove-related-card p{margin-top:12px!important}.nove-cta-fixed .cta_body{padding:0 20px}.nove-cta-fixed .cta_title{font-size:24px}.nove-cta-fixed .cta_actions{flex-direction:column}.nove-cta-fixed .cta_button-primary,.nove-cta-fixed .cta_button-secondary{width:100%}.nove-accent-section:before{height:56px}.nove-industry-prose{padding:48px 20px!important}.nove-industry-prose h2{font-size:24px}}
+
+/* SEO-reference overlap: only the card overlaps, never the section background. */
+body.nove-service-design .nove-about-section{position:relative!important;top:auto!important;transform:none!important;margin-top:0!important;padding-top:0!important;overflow:visible!important;background:#fff!important}
+body.nove-service-design .nove-about-section .nove-about-refined{position:relative!important;top:0!important;transform:translateY(-133px)!important;margin-top:0!important;margin-bottom:-133px!important;z-index:2}
+body.nove-service-design .section_svcdetailhero{height:auto!important;min-height:720px!important;padding-bottom:193px!important;box-sizing:border-box}
+/* Match the reference section rhythm without modifying the service copy. */
+body.nove-service-design .section_seocov:has(.nove-related-grid){background:#fafafa!important}
+main.nove-industry-detail .nove-industry-section:not(.nove-industry-about){padding-top:100px;padding-bottom:100px}
+main.nove-industry-detail .nove-eyebrow,.nove-industry-links .nove-eyebrow{font-size:16px!important;font-weight:700;line-height:1.5;letter-spacing:.8px}
+main.nove-industry-detail .nove-industry-about .nove-eyebrow{display:table;margin:0 auto 24px!important;padding:6px 18px;border-radius:100px;background:#edf5ff;color:#004998!important;font-size:14px!important;letter-spacing:.1em}
+main.nove-industry-detail .nove-industry-about{border:1px solid #e6eef7;box-shadow:0 12px 36px #15416a14;border-radius:24px}
+main.nove-industry-detail .nove-industry-about h2{font-size:36px!important;line-height:1.55!important;letter-spacing:.025em}
+.nove-related-card:focus-visible,.nove-industry-link:focus-visible,.nove-service-toggle:focus-visible{outline:3px solid #3c93df;outline-offset:4px}
+@media(max-width:991px){body.nove-service-design .section_svcdetailhero{min-height:0!important;padding-bottom:104px!important}body.nove-service-design .nove-about-section .nove-about-refined{transform:translateY(-40px)!important;margin-bottom:-40px!important}}
+@media(max-width:767px){main.nove-industry-detail .nove-industry-section:not(.nove-industry-about){padding-top:64px;padding-bottom:64px}main.nove-industry-detail .nove-industry-about h2{font-size:25px!important;line-height:1.6!important}main.nove-industry-detail .nove-industry-about{border-radius:20px}}
+
+/* Use the same text class and typography as the existing navigation links. */
+.header_nav .nove-service-toggle{font-family:inherit;font-size:14px;font-weight:500;line-height:normal;letter-spacing:.7px;color:#1e293b}
+.header_nav .nove-service-toggle .header_nav-text{pointer-events:none}
+.header_nav .nove-industry-menu{width:280px}
+@media(max-width:991px){.header_nav .nove-industry-menu{width:100%}}
+
+
