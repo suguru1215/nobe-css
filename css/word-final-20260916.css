@@ -67,7 +67,7 @@ body:has(#contact-form) .contactform_container{display:block;width:100%;max-widt
 body:has(#contact-form) .contactform_intro{width:100%;max-width:none;margin:0;padding:0}
 body:has(#contact-form) .contactform_card{display:block;width:100%;max-width:none;margin:0;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
 .nv3 .nv3-contact-intro{padding:40px 0}
-.nv3 .nv3-contact-intro h1{font-size:36px}
+.nv3 .nv3-contact-intro h1{font-size:44px}
 .nv3 .nv3-contact-intro p{margin-top:24px}
 .nv3-form .nv3-field{margin:0 0 24px}
 .nv3-form label{display:block;font-size:16px;font-weight:600;line-height:1.8;margin:0 0 8px}
@@ -88,4 +88,5 @@ body:has(#contact-form) .w-form-done,body:has(#contact-form) .w-form-fail{paddin
 body:has(#contact-form) .w-form-done{background:#edf5ff;color:#1e293b}
 body:has(#contact-form) .w-form-fail{background:#fff0f1;color:#aa1625}
 .nv3 .nv3-article-meta{font-size:14px;color:#42536a;margin-top:20px}
+.nv3 .nv3-steps li strong{display:block;font-weight:600;margin-bottom:8px}
 @media(max-width:768px){.nv3 .nv3-contact-intro{padding:28px 0 40px}.nv3 .nv3-contact-intro h1{font-size:30px}body:has(#contact-form) .section_contactform{padding-bottom:40px}}

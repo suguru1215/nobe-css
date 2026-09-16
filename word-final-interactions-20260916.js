@@ -41,7 +41,7 @@
     },true);
     fields.forEach(id=>{const el=document.getElementById(id);el.addEventListener('input',()=>{if(el.hasAttribute('aria-invalid'))show(el,message(el));});el.addEventListener('change',()=>{if(el.hasAttribute('aria-invalid'))show(el,message(el));});});
     const visible=e=>getComputedStyle(e).display!=='none';
-    new MutationObserver(()=>{if(!inFlight)return;if(visible(success)){inFlight=false;if(!converted){converted=true;track('generate_lead',{});}}else if(visible(failure)){inFlight=false;}}).observe(wrapper,{subtree:true,attributes:true,attributeFilter:['style','class']});
+    new MutationObserver(()=>{if(!inFlight||form.querySelector('[type=submit]').disabled)return;if(visible(success)){inFlight=false;if(!converted){converted=true;track('generate_lead',{});}}else if(visible(failure)){inFlight=false;}}).observe(wrapper,{subtree:true,attributes:true,attributeFilter:['style','class','disabled']});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
