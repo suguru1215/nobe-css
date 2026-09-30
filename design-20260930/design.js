@@ -12,7 +12,7 @@
     if(isHome){
       const hero=root.querySelector('.nv-hero');
       if(hero&&!hero.querySelector('.nv30-hero-art')){
-        hero.querySelector('h1').innerHTML='<span>マーケティングの</span><br>戦略づくりから、<br>施策の実行まで。';
+        hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから、</span><span class="nv30-hero-line">施策の実行まで。</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
         const video=document.createElement('video');video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-mark.png';art.append(video);hero.append(art);
         const reduce=matchMedia('(prefers-reduced-motion: reduce)');const motion=()=>{if(reduce.matches)video.pause();else video.play().catch(()=>{});};motion();reduce.addEventListener('change',motion);
