@@ -200,7 +200,8 @@ body.nv30 .nv30-contact .section_contactform{padding:80px 20px;background:#fff}
 body.nv30 .nv30-contact .contactform_container{width:100%;max-width:820px;margin:auto}
 @media(max-width:767px){body.nv30 .nv30-main .nv-split,body.nv30 .nv30-research-grid,body.nv30 .nv30-main .nv-lower-related{grid-template-columns:1fr;gap:28px}body.nv30 .nv30-support-copy{padding:24px}body.nv30 .nv30-research-photo,body.nv30 .nv30-execution-photo{height:260px}body.nv30 .nv30-main .nv-cta>.nv-lower-action{width:100%}body.nv30 .nv30-main .nv-cta .nv-button{width:100%;font-size:16px}body.nv30 .nv30-contact .container_large{width:calc(100% - 40px)}body.nv30 .nv30-contact h1{font-size:30px}body.nv30 .nv30-contact .section_pagehero{padding:48px 0}}
 /* Final alignment and quiet continuous geometry — fixed hero composition retained. */
-body.nv30 main.nv23>section[data-nv30-word]:after{bottom:0}
+/* Align visible glyphs, compensating for each word's side bearing and descenders. */
+body.nv30 main.nv23>section[data-nv30-word]:after{left:var(--nv30-word-left,0px);bottom:var(--nv30-word-bottom,-.18em)}
 body.nv30 main.nv23.nv23-home .nv-hero{background-image:none;isolation:isolate;overflow:hidden}
 body.nv30 .nv30-geometry-motion{position:absolute;inset:0;z-index:0;pointer-events:none;background:url('./assets/geometry-net.png') center/cover no-repeat;animation:none;transform:none}
 body.nv30 .nv30-geometry-motion:has(canvas){background-image:none}
