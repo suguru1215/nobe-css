@@ -202,7 +202,8 @@ html body.nv30:is(#nv30-design,body) .nv30-contact .contactform_container{width:
 /* Final alignment and quiet continuous geometry — fixed hero composition retained. */
 html body.nv30:is(#nv30-design,body) main.nv23>section[data-nv30-word]:after{bottom:0 !important}
 html body.nv30:is(#nv30-design,body) main.nv23.nv23-home .nv-hero{background-image:none !important;isolation:isolate !important;overflow:hidden !important}
-html body.nv30:is(#nv30-design,body) .nv30-geometry-motion{position:absolute !important;inset:-4% !important;z-index:0 !important;pointer-events:none !important;background:url('./assets/geometry.png') center/cover no-repeat !important;animation:nv30-geometry-drift 24s ease-in-out infinite alternate !important;transform-origin:center !important}
-@keyframes nv30-geometry-drift{from{transform:translate(-1%,-.5%) rotate(-.3deg) scale(1.02)}to{transform:translate(1%,.5%) rotate(.3deg) scale(1.04)}}
+html body.nv30:is(#nv30-design,body) .nv30-geometry-motion{position:absolute !important;inset:0 !important;z-index:0 !important;pointer-events:none !important;background:url('./assets/geometry-net.png') center/cover no-repeat !important;animation:none !important;transform:none !important}
+html body.nv30:is(#nv30-design,body) .nv30-geometry-motion:has(canvas){background-image:none !important}
+html body.nv30:is(#nv30-design,body) .nv30-geometry-motion .vanta-canvas{display:block !important;position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;pointer-events:none !important}
 html body.nv30:is(#nv30-design,body) main.nv23.nv23-home .nv-cta{background:linear-gradient(110deg,#024991ed,#024991cc),url('./assets/top-process.jpg') center/cover !important}
 @media(prefers-reduced-motion:reduce){html body.nv30:is(#nv30-design,body) .nv30-geometry-motion{animation:none !important;transform:none !important}}

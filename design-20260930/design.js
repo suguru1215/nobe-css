@@ -4,6 +4,27 @@
   const base=script ? new URL('./assets/',script.src).href : './assets/';
   function photoFile(file){return /^(advertising-v1|analytics-v1|social-v1|website-v1|process)\.png$/.test(file)?file.replace('.png','.jpg'):file;}
   function img(file,cls){const n=document.createElement('img');n.src=base+photoFile(file);n.alt='';n.className=cls||'';n.loading='lazy';n.decoding='async';return n;}
+  const geometryScripts=new Map();
+  function loadGeometryScript(file){
+    if(!geometryScripts.has(file))geometryScripts.set(file,new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=base+file;s.onload=resolve;s.onerror=reject;document.head.append(s);}));
+    return geometryScripts.get(file);
+  }
+  async function netGeometry(layer){
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    try{
+      await loadGeometryScript('three-r121.min.js');
+      await loadGeometryScript('vanta-net-0.5.22.min.js');
+      if(!layer.isConnected)return;
+      const effect=window.VANTA.NET({el:layer,THREE:window.THREE,mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0xc6d4e2,backgroundColor:0xffffff,backgroundAlpha:0,points:11,maxDistance:27,spacing:20});
+      if(!effect.renderer){effect.destroy();layer.dataset.geometryState='fallback';return;}
+      const canvas=layer.querySelector('canvas');if(canvas){canvas.setAttribute('aria-hidden','true');canvas.setAttribute('role','presentation');}
+      let paused=false;
+      const sync=()=>{const stop=reduced.matches||document.hidden;if(stop&&!paused){cancelAnimationFrame(effect.req);paused=true;}else if(!stop&&paused){paused=false;effect.animationLoop();}layer.dataset.geometryState=stop?'paused':'running';};
+      reduced.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync();
+      window.addEventListener('pagehide',()=>{cancelAnimationFrame(effect.req);paused=true;});
+      window.addEventListener('pageshow',sync);
+    }catch(_){layer.dataset.geometryState='fallback';}
+  }
   function heading(h,english){if(!h||h.previousElementSibling?.classList.contains('nv30-en'))return;const en=document.createElement('span');en.className='nv30-en';en.setAttribute('aria-hidden','true');en.textContent=english;h.before(en);}
   function apply(root,isHome){
     root.classList.add('nv30-main');
@@ -12,7 +33,7 @@
     root.querySelectorAll('.nv-cta').forEach(n=>heading(n.querySelector('h2'),'CONTACT'));
     if(isHome){
       const hero=root.querySelector('.nv-hero');
-      if(hero&&!hero.querySelector('.nv30-geometry-motion')){const geometry=document.createElement('div');geometry.className='nv30-geometry-motion';geometry.setAttribute('aria-hidden','true');hero.prepend(geometry);}
+      if(hero&&!hero.querySelector('.nv30-geometry-motion')){const geometry=document.createElement('div');geometry.className='nv30-geometry-motion';geometry.setAttribute('aria-hidden','true');hero.prepend(geometry);netGeometry(geometry);}
       if(hero&&!hero.querySelector('.nv30-hero-art')){
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから、</span><span class="nv30-hero-line">施策の実行まで。</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
