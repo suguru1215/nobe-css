@@ -209,6 +209,81 @@ body.nv30 .nv30-geometry-motion .vanta-canvas{display:block;position:absolute;in
 body.nv30 main.nv23.nv23-home .nv-cta{background:linear-gradient(110deg,#024991ed,#024991cc),url('./assets/top-process.jpg') center/cover}
 @media(prefers-reduced-motion:reduce){body.nv30 .nv30-geometry-motion{animation:none;transform:none}}
 /* Editorial hierarchy, company signature, and black information footer. */
+/* Craft pass 20261001: quiet editorial structure, deliberate visual hierarchy. */
+body.nv30{--nv-ink:#152737;--nv-hairline:#cbdde9;--nv-ease:cubic-bezier(.22,.61,.36,1)}
+body.nv30 main.nv23:not(.nv23-home) .nv-cmo-title,body.nv30 main.nv23:not(.nv23-home) .nv-lower-title{position:relative;padding-bottom:24px;border-bottom:1px solid #cbdde9}
+body.nv30 .nv-crumb{font-size:12px;letter-spacing:.03em;margin-bottom:40px;color:#4f6376}
+body.nv30 .nv-crumb a{text-decoration:none;text-underline-offset:4px}
+body.nv30 .nv-crumb a:hover{text-decoration:underline}
+body.nv30 main.nv23:not(.nv23-home) .nv30-mast-photo{height:400px;border-radius:4px;object-position:center 48%;margin-top:48px}
+body.nv30 main.nv23 .nv30-heading{position:relative}
+body.nv30 .nv30-heading .nv30-en{margin-bottom:14px!important}
+body.nv30 main.nv23 .nv30-heading:has(.nv30-en){padding-top:24px;border-top:1px solid #cbdde9}
+body.nv30 main.nv23 .nv30-heading:has(.nv30-en):before{content:'';position:absolute;width:64px;height:2px;background:#024991;left:0;top:-1px}
+body.nv30 .nv-business .nv30-heading:has(.nv30-en),body.nv30 .nv30-support .nv30-heading:has(.nv30-en){border-color:#ffffff38}
+body.nv30 .nv-business .nv30-heading:has(.nv30-en):before,body.nv30 .nv30-support .nv30-heading:has(.nv30-en):before{background:#fff}
+body.nv30 main.nv23 .nv-copy p{line-height:1.8;text-wrap:pretty}
+body.nv30 main.nv23 .nv30-research-grid .nv-copy,body.nv30 main.nv23 .nv-execution .nv-copy{display:block}
+body.nv30 main.nv23 .nv30-research-grid .nv-copy>.nv30-en,body.nv30 main.nv23 .nv-execution .nv-copy>.nv30-en{margin-bottom:16px!important}
+body.nv30 main.nv23 .nv30-research-grid .nv-copy>h2,body.nv30 main.nv23 .nv-execution .nv-copy>h2{margin:0 0 28px}
+body.nv30 main.nv23 .nv30-research-grid .nv-copy>p,body.nv30 main.nv23 .nv-execution .nv-copy>p{margin:0 0 20px}
+body.nv30 main.nv23 .nv30-research-grid .nv-copy>p:last-child,body.nv30 main.nv23 .nv-execution .nv-copy>p:last-child{margin-bottom:0}
+body.nv30 main.nv23 h2,body.nv30 main.nv23 h3{text-wrap:balance;line-break:strict}
+body.nv30 main.nv23 .nv-issue-list.nv30-cards>li{padding:24px 28px 28px!important;gap:20px;border-radius:4px;border-top:2px solid #024991;box-shadow:0 6px 28px #02499105}
+body.nv30 main.nv23 .nv-issue-list.nv30-cards>li>b{align-self:flex-start}
+body.nv30 main.nv23 .nv30-issue-image{height:180px}
+body.nv30 main.nv23 .nv-issue-list.nv30-cards>li:after{align-self:flex-start;width:32px;background:#024991;opacity:.25}
+body.nv30 main.nv23 .nv30-overview-photo,body.nv30 main.nv23 .nv30-research-photo,body.nv30 main.nv23 .nv30-execution-photo{border-radius:4px;box-shadow:18px 18px 0 #eef5fb}
+body.nv30 main.nv23 .nv30-research-grid,body.nv30 main.nv23 .nv-execution .nv-split{gap:80px;align-items:center}
+body.nv30 .nv30-process-grid .nv-steps{position:relative;gap:0}
+body.nv30 .nv30-process-grid .nv-step{position:relative;padding:0 0 32px;margin-bottom:24px;min-height:0}
+body.nv30 .nv30-process-grid .nv-step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+body.nv30 .nv30-process-grid .nv-step>b{position:relative;z-index:1;background:#024991;color:#fff}
+body.nv30 .nv30-process-grid .nv-step:not(:last-child):before{content:'';position:absolute;left:19px;top:40px;bottom:-24px;width:1px;background:#bdd3e7}
+body.nv30 main.nv23 .nv-cmo-intro .nv-copy{padding:0 0 0 40px;background:none;border:0;border-left:1px solid #cbdde9;border-radius:0}
+body.nv30 main.nv23 .nv-cmo-intro h2{font-size:36px;line-height:1.6;max-width:480px}
+body.nv30 main.nv23 .nv-cmo-intro .nv-copy .nv-button{margin-top:24px}
+body.nv30 main.nv23 .nv-cmo-scope-copy{padding:40px 48px;background:#fff;border-radius:4px;box-shadow:none;line-height:1.8}
+body.nv30 main.nv23 .nv-cmo-scope-copy p+p{margin-top:24px;padding-top:24px;border-top:1px solid #d5e6f6}
+body.nv30 main.nv23 .nv-scope-card{border-radius:4px;box-shadow:none;padding:32px;border-top:2px solid #024991}
+body.nv30 main.nv23 .nv-channel-band>*{border-radius:0;background:transparent;border:0;border-bottom:1px solid #cbdde9;padding:20px 12px;letter-spacing:.03em}
+body.nv30 main.nv23 .nv-faq-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:64px;align-items:start}
+body.nv30 main.nv23 .nv-faq-item{border:0!important;border-bottom:1px solid #cbdde9!important;border-radius:0;background:transparent;box-shadow:none;padding:24px 0!important;margin:0}
+body.nv30 main.nv23 .nv-faq-item:first-child{border-top:1px solid #cbdde9!important}
+body.nv30 main.nv23 .nv-faq-item summary{font-size:17px;line-height:1.8;padding-right:44px;position:relative;cursor:pointer;list-style:none}
+body.nv30 main.nv23 .nv-faq-item summary::-webkit-details-marker{display:none}
+body.nv30 main.nv23 .nv-faq-item summary:after{content:'+';position:absolute;right:0;top:0;font:400 26px/1.2 Montserrat,sans-serif;color:#024991}
+body.nv30 main.nv23 .nv-faq-item[open] summary:after{content:'−'}
+body.nv30 main.nv23 .nv-faq-item p{padding-right:36px;margin-top:20px;font-size:16px;line-height:1.8}
+body.nv30 main.nv23 .nv30-related-visual{border-radius:4px;border:0;background:#fff;box-shadow:none;grid-template-columns:34% minmax(0,1fr);gap:16px 40px;padding:0 40px 0 0;margin-top:40px}
+body.nv30 main.nv23 .nv30-related-photo{width:100%;height:300px;grid-row:1/4;object-fit:cover}
+body.nv30 main.nv23 .nv30-related-visual .nv-link{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid #cbdde9;margin-top:24px}
+body.nv30 main.nv23 .nv-lower-related>a,body.nv30 .nv-industry-grid>a{border-radius:4px}
+body.nv30 .nv30-main .nv-photo-link img,body.nv30 .nv30-main .nv30-service-card>img{border-radius:4px}
+body.nv30 .nv23 .nv-button{transition:background-color .25s ease,box-shadow .25s ease,translate .25s var(--nv-ease)}
+body.nv30 .nv23 .nv-button:active{translate:0 1px}
+body.nv30 .nv23 .nv-link{text-underline-offset:6px;text-decoration-thickness:1px}
+body.nv30 .nv23-footer .nv-footer-grid{border-bottom:0}
+body.nv30 main.nv23 .nv-catalog{display:block}
+body.nv30 main.nv23 .nv-catalog>.nv30-en{padding-bottom:32px;border-bottom:1px solid #cbdde9;margin-bottom:0!important}
+body.nv30 main.nv23 .nv-catalog-row{display:grid;grid-template-columns:40px 280px minmax(0,1fr);gap:32px;padding:40px 0;border:0;border-bottom:1px solid #cbdde9;background:transparent;align-items:start}
+body.nv30 main.nv23 .nv-catalog-row>b{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#eaf3ff;color:#024991;font:700 14px/1 Montserrat,sans-serif}
+body.nv30 main.nv23 .nv-catalog-row h2{font-size:26px;line-height:1.6;margin:0}
+body.nv30 main.nv23 .nv-catalog-row .nv-link{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;min-height:44px}
+body.nv30 main.nv23 .nv-company-facts{margin:0;padding:0;background:none;border:0}
+body.nv30 main.nv23 .nv-company-facts>div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:32px;padding:28px 0;border-bottom:1px solid #cbdde9;background:none}
+body.nv30 main.nv23 .nv-company-facts>div:first-child{border-top:1px solid #cbdde9}
+body.nv30 main.nv23 .nv-company-facts dt{font-weight:700;color:#024991}
+body.nv30 main.nv23 .nv-company-facts dd{margin:0;line-height:1.8}
+body.nv30 .nv30-contact .contactform_card{border:1px solid #cbdde9;border-top:3px solid #024991;box-shadow:0 12px 40px #02499108;border-radius:4px;padding:48px}
+body.nv30 .nv30-contact :is(input:not([type=checkbox]):not([type=submit]),textarea,select){background:#fbfdff;border-color:#a7bbc9;border-radius:4px;min-height:52px;font-size:16px;color:#152737}
+body.nv30 .nv30-contact :is(input,textarea,select):focus-visible{outline:2px solid #024991;outline-offset:3px;background:#fff}
+body.nv30 .nv30-contact :is(input,textarea,select)[aria-invalid=true]{border-color:#b42318}
+@media(max-width:1100px){body.nv30 main.nv23 .nv-catalog-row{grid-template-columns:40px 240px minmax(0,1fr);gap:24px}}
+@media(max-width:767px){body.nv30 main.nv23 .nv-catalog-row{grid-template-columns:40px minmax(0,1fr);gap:16px 20px;padding:28px 0}body.nv30 main.nv23 .nv-catalog-row>div{grid-column:2}body.nv30 main.nv23 .nv-catalog-row h2{font-size:22px}body.nv30 main.nv23 .nv-company-facts>div{grid-template-columns:1fr;gap:8px;padding:24px 0}body.nv30 .nv30-contact .contactform_card{padding:24px}}
+@media(hover:hover) and (pointer:fine){body.nv30 .nv23 .nv-button:hover{box-shadow:0 8px 24px #02499122}body.nv30 .nv30-main .nv-photo-link:hover img{transform:scale(1.018)}body.nv30 .nv-industry-grid>a:hover{background:#f8fbfe;box-shadow:none}body.nv30 .nv-business .nv-directory>a:hover{box-shadow:0 8px 24px #00182f20}body.nv30 .nv-faq-item summary:hover{color:#024991}}
+@media(max-width:1100px){body.nv30 main.nv23 .nv-faq-layout{grid-template-columns:220px minmax(0,1fr);gap:40px}body.nv30 main.nv23 .nv30-research-grid,body.nv30 main.nv23 .nv-execution .nv-split{gap:40px}}
+@media(max-width:767px){body.nv30 .nv-crumb{margin-bottom:28px}body.nv30 main.nv23:not(.nv23-home) .nv30-mast-photo{height:230px;margin-top:28px}body.nv30 main.nv23 .nv30-heading:has(.nv30-en){padding-top:20px}body.nv30 main.nv23 .nv30-research-grid,body.nv30 main.nv23 .nv-execution .nv-split,body.nv30 main.nv23 .nv-faq-layout{grid-template-columns:1fr;gap:28px}body.nv30 main.nv23 .nv-cmo-intro h2{font-size:28px}body.nv30 main.nv23 .nv-cmo-intro .nv-copy{padding:24px 0 0;border-left:0;border-top:1px solid #cbdde9}body.nv30 main.nv23 .nv-cmo-scope-copy{padding:28px}body.nv30 main.nv23 .nv30-related-visual{grid-template-columns:1fr;padding:0 24px 24px;gap:20px}body.nv30 main.nv23 .nv30-related-photo{grid-row:auto;width:calc(100% + 48px);height:220px;margin-left:-24px}body.nv30 main.nv23 .nv30-overview-photo,body.nv30 main.nv23 .nv30-research-photo,body.nv30 main.nv23 .nv30-execution-photo{box-shadow:8px 8px 0 #eef5fb}body.nv30 main.nv23 .nv-faq-item summary{font-size:16px}body.nv30 main.nv23 .nv30-issue-image{height:172px}}
 body.nv30 main.nv23 .nv30-en+h2,body.nv30 main.nv23 .nv30-heading:has(.nv30-en) h2{font-size:24px;line-height:1.6}
 body.nv30 .nv-company-panel{position:relative;border:1px solid #d5e6f6;border-top:3px solid #024991;border-radius:12px;background:#f8fbfe}
 body.nv30 .nv-company-copy{width:100%;max-width:none;display:grid;grid-template-columns:43% minmax(0,1fr);gap:48px;padding:56px!important;align-items:center;position:relative;z-index:1}

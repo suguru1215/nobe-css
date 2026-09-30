@@ -73,12 +73,13 @@
       root.querySelectorAll('.r24-service-card').forEach((card,i)=>{card.classList.add('nv30-service-card');if(!card.querySelector('img'))card.prepend(img(['advertising-v1.png','analytics-v1.png','social-v1.png','website-v1.png','process.png'][i%5]));});
       const mast=root.querySelector('.nv-cmo-title');
       const titles={'cmo':'CMO','marketing-support':'MARKETING','ads':'ADVERTISING','seo':'SEO / AI SEARCH','sns':'SOCIAL MEDIA','web':'WEB DESIGN','dx':'DX / AX','crm':'CRM','global':'GLOBAL','manufacturing':'MANUFACTURING','healthcare':'HEALTHCARE','company':'COMPANY','service':'SERVICES','industry':'INDUSTRIES','contact':'CONTACT','column':'INSIGHTS'};
-      const title=titles[location.pathname.split('/').filter(Boolean).pop()];
+      const pageKey=location.pathname.split('/').filter(Boolean).pop();
+      const title=titles[pageKey];
       if(mast&&title&&!mast.querySelector('.nv-en')){const en=document.createElement('p');en.className='nv-en';en.textContent=title;en.setAttribute('aria-hidden','true');mast.append(en);}
       const mastEnglish=mast?.querySelector('.nv-en');if(mastEnglish&&mastEnglish.textContent.length>12)mastEnglish.classList.add('nv30-long-title');
       if(mast&&!utility&&!root.querySelector('.nv30-mast-photo')){
         const key=location.pathname.split('/').pop();
-        const photo=img(({ads:'advertising-v1.png',sns:'social-v1.png',web:'website-v1.png',cmo:'process.png',global:'advertising-v1.png'})[key]||'analytics-v1.png','nv30-mast-photo');
+        const photo=img(({ads:'top-ads.jpg',sns:'top-sns.jpg',web:'top-web.jpg',seo:'top-seo.jpg',cmo:'top-process.jpg',global:'advertising-v1.jpg',dx:'top-web.jpg',crm:'top-seo.jpg','marketing-support':'top-research.jpg'})[key]||'analytics-v1.jpg','nv30-mast-photo');
         mast.parentElement.append(photo);
       }
       root.querySelectorAll('section').forEach(s=>{
@@ -93,9 +94,10 @@
         if(split&&h.parentElement===split){const group=document.createElement('div');group.className='nv30-heading';const enNode=h.previousElementSibling?.classList.contains('nv30-en')?h.previousElementSibling:null;split.prepend(group);if(enNode)group.append(enNode);group.append(h);}
         if(en==='SUPPORT')s.querySelectorAll('.nv-wrap>.nv-copy').forEach(n=>n.classList.add('nv30-support-copy'));
       });
-      root.querySelectorAll('.nv-cmo-challenges .nv-issue-list').forEach(list=>{list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b')?.after(img('concern-'+([3,2,1][i%3])+'.png','nv30-issue-image'));});});
+      root.querySelectorAll('.nv-cmo-challenges .nv-issue-list').forEach(list=>{list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b')?.after(img('top-concern'+(i%3+1)+'-v2.png','nv30-issue-image'));});});
+      const catalog=root.querySelector('.nv-catalog');const catalogEnglish=catalog?.querySelector('.nv30-en');if(catalogEnglish)catalog.prepend(catalogEnglish);
       if(!utility){
-        const research=root.querySelector('.nv30-research .nv-wrap');if(research){research.classList.add('nv30-research-grid');const old=research.querySelector('img');if(old){old.removeAttribute('srcset');old.removeAttribute('sizes');old.src=base+'process.jpg';old.className='nv30-research-photo';}else research.append(img('process.png','nv30-research-photo'));}
+        const research=root.querySelector('.nv30-research .nv-wrap');if(research){research.classList.add('nv30-research-grid');const file=pageKey==='seo'?'analytics-v1.jpg':'top-research.jpg';const old=research.querySelector('img');if(old){old.removeAttribute('srcset');old.removeAttribute('sizes');old.src=base+file;old.className='nv30-research-photo';}else research.append(img(file,'nv30-research-photo'));}
         const execution=root.querySelector('.nv-execution .nv-split');if(execution){const old=execution.querySelector('img');if(old){old.removeAttribute('srcset');old.removeAttribute('sizes');old.src=base+'website-v1.jpg';old.className='nv30-execution-photo';}else execution.append(img('website-v1.png','nv30-execution-photo'));}
         const related=root.querySelector('.nv-related-panel');if(related&&!related.querySelector('img')){related.classList.add('nv30-related-visual');related.prepend(img('analytics-v1.png','nv30-related-photo'));}
       }
