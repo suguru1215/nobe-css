@@ -12,6 +12,7 @@
     root.querySelectorAll('.nv-cta').forEach(n=>heading(n.querySelector('h2'),'CONTACT'));
     if(isHome){
       const hero=root.querySelector('.nv-hero');
+      if(hero&&!hero.querySelector('.nv30-geometry-motion')){const geometry=document.createElement('div');geometry.className='nv30-geometry-motion';geometry.setAttribute('aria-hidden','true');hero.prepend(geometry);}
       if(hero&&!hero.querySelector('.nv30-hero-art')){
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから、</span><span class="nv30-hero-line">施策の実行まで。</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
@@ -19,14 +20,14 @@
         const reduce=matchMedia('(prefers-reduced-motion: reduce)');const motion=()=>{if(reduce.matches)video.pause();else video.play().catch(()=>{});};motion();reduce.addEventListener('change',motion);
       }
       const list=root.querySelector('.nv-challenges .nv-issue-list');
-      if(list){list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b').after(img('concern-'+(i+1)+'.png','nv30-issue-image'));});}
+      if(list){list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b').after(img('top-concern'+(i+1)+'.png','nv30-issue-image'));});}
       const overview=root.querySelector('.nv-overview .nv-split');
-      if(overview&&!overview.querySelector('.nv30-overview-copy')){const col=document.createElement('div');col.className='nv30-overview-copy';const h=overview.querySelector('h2'),copy=overview.querySelector('.nv-copy');col.append(h,copy);overview.append(col,img('advertising-v1.png','nv30-overview-photo'));}
+      if(overview&&!overview.querySelector('.nv30-overview-copy')){const col=document.createElement('div');col.className='nv30-overview-copy';const h=overview.querySelector('h2'),copy=overview.querySelector('.nv-copy');col.append(h,copy);overview.append(col,img('top-research.jpg','nv30-overview-photo'));}
       const process=root.querySelector('.nv-process');
-      if(process){heading(process.querySelector('h2'),'PROCESS');process.dataset.nv30Word='PROCESS';const steps=process.querySelector('.nv-steps');if(steps&&!steps.closest('.nv30-process-grid')){const row=document.createElement('div');row.className='nv30-process-grid';steps.before(row);row.append(img('process.png'),steps);}}
+      if(process){heading(process.querySelector('h2'),'PROCESS');process.dataset.nv30Word='PROCESS';const steps=process.querySelector('.nv-steps');if(steps&&!steps.closest('.nv30-process-grid')){const row=document.createElement('div');row.className='nv30-process-grid';steps.before(row);row.append(img('top-process.jpg'),steps);}}
       const map=[['.nv-services','SERVICES'],['.nv-business','SUPPORT'],['.nv-industries','INDUSTRIES'],['.nv-company','COMPANY']];
       map.forEach(([sel,en])=>{const s=root.querySelector(sel);if(s){heading(s.querySelector('h2'),en);if(en==='SERVICES'||en==='INDUSTRIES')s.dataset.nv30Word=en;}});
-      root.querySelectorAll('.nv-services .nv-photo-link').forEach((a,i)=>{if(!a.querySelector('img'))a.prepend(img(['advertising-v1.png','analytics-v1.png','social-v1.png','website-v1.png'][i]));const arrow=a.querySelector('.nv-arrow');if(arrow)a.append(arrow);});
+      root.querySelectorAll('.nv-services .nv-photo-link').forEach((a,i)=>{const file=['top-ads.jpg','top-seo.jpg','top-sns.jpg','top-web.jpg'][i];if(file){const old=a.querySelector('img');if(old){old.removeAttribute('srcset');old.removeAttribute('sizes');old.src=base+file;}else a.prepend(img(file));}const arrow=a.querySelector('.nv-arrow');if(arrow)a.append(arrow);});
       const company=root.querySelector('.nv-company-copy');if(company&&!company.querySelector('p')){const p=document.createElement('p');p.textContent='マーケティング戦略の立案から施策の実行、分析、改善までを支援しています。';company.querySelector('h2').after(p);}
     }else{
       const utility=root.classList.contains('nv23-utility');
