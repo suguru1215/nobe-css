@@ -581,10 +581,10 @@ html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) .nv3
 html body:is(#nv30-design,body).nv30-motion-ready .nv30-reveal{opacity:1 !important;translate:none !important;transition:none !important}
 html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) .nv32-index a:after{translate:none !important;transition:none !important}
 }
-html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro{display:block !important;max-width:840px !important;width:calc(100% - 80px) !important;margin-inline:auto !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro:has(>p:only-child){display:block !important;max-width:840px !important;width:calc(100% - 80px) !important;margin-inline:auto !important}
 html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .r24-copy-section:has(>.nv-copy:only-child){display:block !important}
 html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-policy .nv-copy{max-width:840px !important}
-@media(max-width:767px){html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro{width:calc(100% - 40px) !important}}
+@media(max-width:767px){html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro:has(>p:only-child){width:calc(100% - 40px) !important}}
 /* The native Webflow article uses its own main wrapper. */
 html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose{max-width:850px !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;padding:48px !important;background:#fff !important}
 html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose p{font-size:17px !important;line-height:2 !important;color:#17364e !important}

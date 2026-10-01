@@ -581,10 +581,10 @@ body.nv30:not(#nv32-editorial):not(#nv32-composition) .nv32-index a:hover{text-d
 body.nv30.nv30-motion-ready .nv30-reveal{opacity:1;translate:none;transition:none}
 body.nv30:not(#nv32-editorial):not(#nv32-composition) .nv32-index a:after{translate:none;transition:none}
 }
-body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro{display:block;max-width:840px;width:calc(100% - 80px);margin-inline:auto}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro:has(>p:only-child){display:block;max-width:840px;width:calc(100% - 80px);margin-inline:auto}
 body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .r24-copy-section:has(>.nv-copy:only-child){display:block}
 body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-policy .nv-copy{max-width:840px}
-@media(max-width:767px){body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro{width:calc(100% - 40px)}}
+@media(max-width:767px){body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro:has(>p:only-child){width:calc(100% - 40px)}}
 /* The native Webflow article uses its own main wrapper. */
 body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose{max-width:850px;border:0;border-radius:0;box-shadow:none;padding:48px;background:#fff}
 body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose p{font-size:17px;line-height:2;color:#17364e}
