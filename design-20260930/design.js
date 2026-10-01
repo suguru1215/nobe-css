@@ -8,13 +8,20 @@
   function distinctPageArt(root){const key=location.pathname.split('/').filter(Boolean).pop(),set=serviceArt[key];if(set){let i=0;root.querySelectorAll('.nv30-issue-image,.nv30-research-photo,.nv30-execution-photo,.nv30-related-photo').forEach(n=>{i++;n.src=legacyBase+set[0]+'-'+(set[1]+i)+'.'+set[2];n.removeAttribute('srcset');n.style.setProperty('object-fit','contain','important');});}else{const keys=['saas','manufacturing','ec','construction','realestate','hr-recruiting','finance','medical','professional'],i=keys.indexOf(key);if(i>=0){root.querySelectorAll('.nv30-issue-image').forEach((n,j)=>{n.src=legacyBase+industryConcernArt[i*3+j];n.style.setProperty('object-fit','contain','important');});const research=root.querySelector('.nv30-research-photo'),related=root.querySelector('.nv30-related-photo');if(research)research.src=legacyBase+(i<8?'indsvc-'+(i+1)+'.jpg':'inddoc-9.jpg');if(related)related.src=legacyBase+(i<8?'inddoc-'+(i+1)+'.jpg':'indov-3.jpg');}}root.querySelectorAll('.nv30-service-card>img').forEach((n,i)=>{n.src=legacyBase+(i<8?'svcidx-'+(i+1)+'.jpg':'svc-8.jpg');n.removeAttribute('srcset');n.style.setProperty('object-fit','contain','important');});}
   function photoFile(file){return /^(advertising-v1|analytics-v1|social-v1|website-v1|process)\.png$/.test(file)?file.replace('.png','.jpg'):file;}
   function img(file,cls){const n=document.createElement('img');n.src=base+photoFile(file);n.alt='';n.className=cls||'';n.loading='lazy';n.decoding='async';return n;}
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  let motionStopped=false;
+  const motionSubscribers=new Set();
+  const motionDisabled=()=>reduceMotion.matches||motionStopped;
+  const notifyMotion=()=>motionSubscribers.forEach(fn=>fn());
+  reduceMotion.addEventListener('change',notifyMotion);
   const geometryScripts=new Map();
   function loadGeometryScript(file){
     if(!geometryScripts.has(file))geometryScripts.set(file,new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=base+file;s.onload=resolve;s.onerror=reject;document.head.append(s);}));
     return geometryScripts.get(file);
   }
   async function netGeometry(layer){
-    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const reduced=reduceMotion;
+    if(motionDisabled()){layer.dataset.geometryState='static';return;}
     try{
       await loadGeometryScript('three-r121.min.js');
       await loadGeometryScript('vanta-net-0.5.22.min.js');
@@ -23,9 +30,9 @@
       if(!effect.renderer){effect.destroy();layer.dataset.geometryState='fallback';return;}
       const canvas=layer.querySelector('canvas');if(canvas){canvas.setAttribute('aria-hidden','true');canvas.setAttribute('role','presentation');}
       let paused=false,inView=true;
-      const sync=()=>{const stop=reduced.matches||document.hidden||!inView;if(stop&&!paused){cancelAnimationFrame(effect.req);paused=true;}else if(!stop&&paused){paused=false;effect.animationLoop();}layer.dataset.geometryState=stop?'paused':'running';};
+      const sync=()=>{const stop=motionDisabled()||document.hidden||!inView;if(stop&&!paused){cancelAnimationFrame(effect.req);paused=true;}else if(!stop&&paused){paused=false;effect.animationLoop();}layer.dataset.geometryState=stop?'paused':'running';};
       if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;sync();});visibility.observe(layer);window.addEventListener('pagehide',()=>visibility.disconnect(),{once:true});}
-      reduced.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync();
+      motionSubscribers.add(sync);document.addEventListener('visibilitychange',sync);sync();
       window.addEventListener('pagehide',()=>{cancelAnimationFrame(effect.req);paused=true;});
       window.addEventListener('pageshow',sync);
     }catch(_){layer.dataset.geometryState='fallback';}
@@ -66,8 +73,12 @@
       if(hero&&!hero.querySelector('.nv30-hero-art')){
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから</span><span class="nv30-hero-line">施策の実行まで</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
-        const video=document.createElement('video');video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-mark.png';art.append(video);hero.append(art);
-        const reduce=matchMedia('(prefers-reduced-motion: reduce)');let visible=true;const motion=()=>{if(reduce.matches||document.hidden||!visible)video.pause();else video.play().catch(()=>{});};motion();reduce.addEventListener('change',motion);document.addEventListener('visibilitychange',motion);
+        const video=document.createElement('video');if(!motionDisabled())video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-mark.png';art.append(video);hero.append(art);
+        let visible=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-video.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
+        const control=document.createElement('button');control.type='button';control.className='nv30-motion-control';control.textContent='動きを止める';control.setAttribute('aria-pressed','false');hero.append(control);
+        const updateControl=()=>{control.hidden=reduceMotion.matches;control.textContent=motionStopped?'動きを再生':'動きを止める';control.setAttribute('aria-pressed',String(motionStopped));hero.classList.toggle('nv30-motion-stopped',motionDisabled());};
+        motionSubscribers.add(updateControl);updateControl();
+        control.addEventListener('click',()=>{motionStopped=!motionStopped;notifyMotion();});
         if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(hero);window.addEventListener('pagehide',()=>{visibility.disconnect();video.pause();},{once:true});}
       }
       const list=root.querySelector('.nv-challenges .nv-issue-list');
@@ -145,6 +156,7 @@
       targets.forEach(n=>{n.classList.add('nv30-reveal');const i=[...n.parentElement.children].indexOf(n);n.style.setProperty('--nv30-delay',Math.min(i%3,2)*70+'ms');if(n.getBoundingClientRect().top<innerHeight)reveal(n);else observer.observe(n);});
       const stop=()=>{if(reduced.matches){observer.disconnect();targets.forEach(reveal);document.body.classList.remove('nv30-motion-ready');}};
       reduced.addEventListener('change',stop);
+      motionSubscribers.add(()=>{if(motionStopped){observer.disconnect();targets.forEach(reveal);document.body.classList.remove('nv30-motion-ready');}});
       document.addEventListener('focusin',e=>{const n=e.target.closest('.nv30-reveal');if(n)reveal(n);});
       window.addEventListener('beforeprint',()=>targets.forEach(reveal));
     }
