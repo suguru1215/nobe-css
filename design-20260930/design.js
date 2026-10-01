@@ -2,6 +2,10 @@
   'use strict';
   const script=document.currentScript;
   const base=script ? new URL('./assets/',script.src).href : './assets/';
+  const legacyBase=script?new URL('../img/',script.src).href:'../img/';
+  const serviceArt={cmo:['cmowd',0,'jpg'],ads:['adwd',0,'jpg'],seo:['seowd',0,'jpg'],web:['webwd',0,'png'],dx:['dxwd',0,'jpg'],crm:['crmwd',0,'jpg'],sns:['datawd',0,'jpg'],global:['growthwd',0,'jpg'],'marketing-support':['growthwd',6,'jpg']};
+  const industryConcernArt=[...Array.from({length:6},(_,i)=>'adwd-'+(i+7)+'.jpg'),...Array.from({length:6},(_,i)=>'crmwd-'+(i+7)+'.jpg'),...Array.from({length:6},(_,i)=>'datawd-'+(i+7)+'.jpg'),...Array.from({length:6},(_,i)=>'webwd-'+(i+7)+'.png'),'cmowd-7.jpg','cmowd-8.jpg','seowd-7.jpg'];
+  function distinctPageArt(root){const key=location.pathname.split('/').filter(Boolean).pop(),set=serviceArt[key];if(set){let i=0;root.querySelectorAll('.nv30-issue-image,.nv30-research-photo,.nv30-execution-photo,.nv30-related-photo').forEach(n=>{i++;n.src=legacyBase+set[0]+'-'+(set[1]+i)+'.'+set[2];n.removeAttribute('srcset');n.style.setProperty('object-fit','contain','important');});}else{const keys=['saas','manufacturing','ec','construction','realestate','hr-recruiting','finance','medical','professional'],i=keys.indexOf(key);if(i>=0){root.querySelectorAll('.nv30-issue-image').forEach((n,j)=>{n.src=legacyBase+industryConcernArt[i*3+j];n.style.setProperty('object-fit','contain','important');});const research=root.querySelector('.nv30-research-photo'),related=root.querySelector('.nv30-related-photo');if(research)research.src=legacyBase+(i<8?'indsvc-'+(i+1)+'.jpg':'inddoc-9.jpg');if(related)related.src=legacyBase+(i<8?'inddoc-'+(i+1)+'.jpg':'indov-3.jpg');}}root.querySelectorAll('.nv30-service-card>img').forEach((n,i)=>{n.src=legacyBase+(i<8?'svcidx-'+(i+1)+'.jpg':'svc-8.jpg');n.removeAttribute('srcset');n.style.setProperty('object-fit','contain','important');});}
   function photoFile(file){return /^(advertising-v1|analytics-v1|social-v1|website-v1|process)\.png$/.test(file)?file.replace('.png','.jpg'):file;}
   function img(file,cls){const n=document.createElement('img');n.src=base+photoFile(file);n.alt='';n.className=cls||'';n.loading='lazy';n.decoding='async';return n;}
   const geometryScripts=new Map();
@@ -18,8 +22,9 @@
       const effect=window.VANTA.NET({el:layer,THREE:window.THREE,mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0xc6d4e2,backgroundColor:0xffffff,backgroundAlpha:0,points:11,maxDistance:27,spacing:20});
       if(!effect.renderer){effect.destroy();layer.dataset.geometryState='fallback';return;}
       const canvas=layer.querySelector('canvas');if(canvas){canvas.setAttribute('aria-hidden','true');canvas.setAttribute('role','presentation');}
-      let paused=false;
-      const sync=()=>{const stop=reduced.matches||document.hidden;if(stop&&!paused){cancelAnimationFrame(effect.req);paused=true;}else if(!stop&&paused){paused=false;effect.animationLoop();}layer.dataset.geometryState=stop?'paused':'running';};
+      let paused=false,inView=true;
+      const sync=()=>{const stop=reduced.matches||document.hidden||!inView;if(stop&&!paused){cancelAnimationFrame(effect.req);paused=true;}else if(!stop&&paused){paused=false;effect.animationLoop();}layer.dataset.geometryState=stop?'paused':'running';};
+      if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;sync();});visibility.observe(layer);window.addEventListener('pagehide',()=>visibility.disconnect(),{once:true});}
       reduced.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync();
       window.addEventListener('pagehide',()=>{cancelAnimationFrame(effect.req);paused=true;});
       window.addEventListener('pageshow',sync);
@@ -29,7 +34,13 @@
   function alignDecorativeWords(root){
     const canvas=document.createElement('canvas');const context=canvas.getContext('2d');if(!context)return;
     const align=()=>root.querySelectorAll('section[data-nv30-word]').forEach(section=>{
-      const style=getComputedStyle(section,'::after');
+      section.style.removeProperty('--nv30-word-size');
+      let style=getComputedStyle(section,'::after');
+      context.font=[style.fontStyle,style.fontWeight,style.fontSize,style.fontFamily].join(' ');
+      const word=section.dataset.nv30Word,spacing=parseFloat(style.letterSpacing)||0;
+      const natural=context.measureText(word).width+spacing*Math.max(0,word.length-1);
+      const available=section.clientWidth-2;
+      if(natural>available){section.style.setProperty('--nv30-word-size',(parseFloat(style.fontSize)*available/natural)+'px');style=getComputedStyle(section,'::after');}
       context.font=[style.fontStyle,style.fontWeight,style.fontSize,style.fontFamily].join(' ');
       const ink=context.measureText(section.dataset.nv30Word);
       const sample=document.createElement('span');sample.setAttribute('aria-hidden','true');sample.textContent=section.dataset.nv30Word;
@@ -45,6 +56,7 @@
   }
   function apply(root,isHome){
     root.classList.add('nv30-main');
+    [...root.children].filter(n=>n.tagName==='SECTION').forEach((section,i)=>{if(section.classList.contains('nv-hero'))return;section.dataset.nv30Tone=i%2?'mist':'white';section.style.setProperty('background',i%2?'#f2f8ff':'#ffffff','important');});
     root.querySelectorAll('.nv-watermark').forEach(n=>n.hidden=true);
     root.querySelectorAll('.nv-heading').forEach(n=>n.classList.add('nv30-heading'));
     root.querySelectorAll('.nv-cta').forEach(n=>heading(n.querySelector('h2'),'CONTACT'));
@@ -55,7 +67,8 @@
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから、</span><span class="nv30-hero-line">施策の実行まで。</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
         const video=document.createElement('video');video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-mark.png';art.append(video);hero.append(art);
-        const reduce=matchMedia('(prefers-reduced-motion: reduce)');const motion=()=>{if(reduce.matches)video.pause();else video.play().catch(()=>{});};motion();reduce.addEventListener('change',motion);
+        const reduce=matchMedia('(prefers-reduced-motion: reduce)');let visible=true;const motion=()=>{if(reduce.matches||document.hidden||!visible)video.pause();else video.play().catch(()=>{});};motion();reduce.addEventListener('change',motion);document.addEventListener('visibilitychange',motion);
+        if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(hero);window.addEventListener('pagehide',()=>{visibility.disconnect();video.pause();},{once:true});}
       }
       const list=root.querySelector('.nv-challenges .nv-issue-list');
       if(list){list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b').after(img('top-concern'+(i+1)+'-v2.png','nv30-issue-image'));});}
@@ -79,7 +92,7 @@
       const mastEnglish=mast?.querySelector('.nv-en');if(mastEnglish&&mastEnglish.textContent.length>12)mastEnglish.classList.add('nv30-long-title');
       if(mast&&!utility&&!root.querySelector('.nv30-mast-photo')){
         const key=location.pathname.split('/').pop();
-        const photo=img(({ads:'top-ads.jpg',sns:'top-sns.jpg',web:'top-web.jpg',seo:'top-seo.jpg',cmo:'top-process.jpg',global:'advertising-v1.jpg',dx:'top-web.jpg',crm:'top-seo.jpg','marketing-support':'top-research.jpg'})[key]||'analytics-v1.jpg','nv30-mast-photo');
+        const photo=img(serviceArt[key]?'service-'+key+'-v2.jpg':'industry-'+key+'-v2.jpg','nv30-mast-photo');
         mast.parentElement.append(photo);
       }
       root.querySelectorAll('section').forEach(s=>{
@@ -101,6 +114,11 @@
         const execution=root.querySelector('.nv-execution .nv-split');if(execution){const old=execution.querySelector('img');if(old){old.removeAttribute('srcset');old.removeAttribute('sizes');old.src=base+'website-v1.jpg';old.className='nv30-execution-photo';}else execution.append(img('website-v1.png','nv30-execution-photo'));}
         const related=root.querySelector('.nv-related-panel');if(related&&!related.querySelector('img')){related.classList.add('nv30-related-visual');related.prepend(img('analytics-v1.png','nv30-related-photo'));}
       }
+    }
+    if(!isHome)distinctPageArt(root);
+    if(location.pathname==='/service'){
+      const feature=root.querySelector('.r24-copy-section:has(>.nv-copy:only-child)');
+      if(feature){feature.classList.add('nv30-service-feature');const copy=feature.querySelector('.nv-copy'),header=document.createElement('div');header.className='nv30-heading nv30-service-feature-heading';const en=copy.querySelector('.nv30-en'),h=copy.querySelector('h2');if(en)header.append(en);if(h)header.append(h);feature.before(header);feature.prepend(img('advertising-v1.jpg','nv30-service-feature-photo'));}
     }
   }
   function init(){document.body.classList.add('nv30');const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
