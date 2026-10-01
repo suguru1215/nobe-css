@@ -143,17 +143,45 @@
       previous=tone;
     });
   }
+
+  // Purpose follows the existing content; no copy or destinations are replaced.
+  function composeEditorial(root){
+    root.dataset.nv32Family=root.classList.contains('nv23-home')?'home':location.pathname.startsWith('/industry/')?'industry':root.classList.contains('nv23-utility')?'utility':'service';
+    if(root.classList.contains('nv23-home'))return;
+    let n=0;
+    [...root.children].filter(s=>s.tagName==='SECTION').forEach(s=>{
+      const h=s.querySelector('h2');if(!h||s.matches('.nv-cmo-intro,.nv-cmo-challenges,.nv-cta,.nv30-faq,.nv30-related')||root.classList.contains('nv23-utility'))return;
+      const t=h.textContent;
+      const role=/報告|記録|改善を続け/.test(t)?'review':/手法・媒体|対応する広告/.test(t)?'channels':s.matches('.nv-process,.nv30-process')||/進め方|運用開始/.test(t)?'process':s.matches('.nv-execution,.nv30-execution')||/制作と計測/.test(t)?'execution':s.matches('.nv30-research')||/確認|調べ|見直すか|課題を整理/.test(t)?'research':'support';
+      s.dataset.nv32Role=role;s.classList.remove('nv30-support');
+      const en=s.querySelector('.nv30-en');if(en)en.textContent=String(++n).padStart(2,'0')+' / '+role.toUpperCase();
+      const tone=role==='support'?'brand':role==='research'||role==='review'?'mist':'white';
+      s.dataset.nv30Tone=tone;s.style.setProperty('background',{brand:'#024991',mist:'#f2f8ff',white:'#fff'}[tone],'important');
+    });
+    const intro=root.querySelector('.nv-cmo-intro');
+    if(intro&&!root.classList.contains('nv23-utility')){
+      const items=[...root.children].filter(s=>s.dataset.nv32Role||s.classList.contains('nv30-faq'));
+      if(items.length){const details=document.createElement('details');details.className='nv32-index';
+        const summary=document.createElement('summary');summary.textContent='このページの支援内容';
+        const nav=document.createElement('nav');nav.setAttribute('aria-label','ページ内の支援内容');
+        items.forEach((section,i)=>{const h=section.querySelector('h2');if(!section.id)section.id='nv32-section-'+(i+1);const a=document.createElement('a');a.href='#'+section.id;a.textContent=h.textContent;nav.append(a);});
+        details.append(summary,nav);intro.append(details);
+      }
+    }
+    // The small English caption occupies a reserved line from the initial HTML paint.
+    root.querySelectorAll('.nv30-mast-photo').forEach(i=>{i.loading='eager';i.decoding='async';i.width=640;i.height=400;});
+  }
   function init(){document.body.classList.add('nv30');const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
-    if(main)alignDecorativeWords(main);
+    if(main)composeEditorial(main);
     if(location.pathname==='/contact')document.querySelector('main')?.classList.add('nv30-contact');
     document.querySelectorAll('.nv-mobile-nav').forEach(d=>{d.addEventListener('keydown',e=>{if(e.key==='Escape'){d.open=false;d.querySelector('summary')?.focus();}});});
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     if(main&&'IntersectionObserver' in window&&!reduced.matches){
-      const targets=[...main.querySelectorAll('.nv30-heading,.nv30-overview-copy,.nv30-overview-photo,.nv30-process-grid>img,.nv30-research-photo,.nv30-execution-photo,.nv30-cards>li,.nv-photo-link,.nv30-service-card,.nv-directory>a,.nv-industry-grid>a,.nv-scope-card,.nv-faq-item,.nv-related-panel')];
+      const targets=[...main.querySelectorAll('.nv30-heading,.nv30-overview-copy,.nv30-overview-photo,.nv30-process-grid>img,.nv30-research-photo,.nv30-execution-photo,.nv30-cards>li,.nv-photo-link,.nv30-service-card,.nv-directory>a,.nv-industry-grid>a,.nv-scope-card,.nv-faq-item,.nv-related-panel,.nv-step')];
       const reveal=n=>n.classList.add('nv30-visible');
       const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){reveal(e.target);observer.unobserve(e.target);}}),{threshold:0.06,rootMargin:'0px 0px -20px 0px'});
       document.body.classList.add('nv30-motion-ready');
-      targets.forEach(n=>{n.classList.add('nv30-reveal');const i=[...n.parentElement.children].indexOf(n);n.style.setProperty('--nv30-delay',Math.min(i%3,2)*70+'ms');if(n.getBoundingClientRect().top<innerHeight)reveal(n);else observer.observe(n);});
+      targets.forEach(n=>{n.classList.add('nv30-reveal');const i=[...n.parentElement.children].indexOf(n);n.style.setProperty('--nv30-delay',Math.min(i%4,3)*40+'ms');if(n.getBoundingClientRect().top<innerHeight)reveal(n);else observer.observe(n);});
       const stop=()=>{if(reduced.matches){observer.disconnect();targets.forEach(reveal);document.body.classList.remove('nv30-motion-ready');}};
       reduced.addEventListener('change',stop);
       motionSubscribers.add(()=>{if(motionStopped){observer.disconnect();targets.forEach(reveal);document.body.classList.remove('nv30-motion-ready');}});

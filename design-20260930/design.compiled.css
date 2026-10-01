@@ -460,3 +460,133 @@ html body:is(#nv30-design,body).nv30-motion-ready .nv30-reveal.nv30-visible{tran
 html body:is(#nv30-design,body) .nv23-footer .nv-footer-grid a{margin-block:0 !important}
 @media(max-width:767px){html body:is(#nv30-design,body) main.nv23.nv23-home .nv-hero:not(:has(.nv30-hero-art)):before{content:'' !important;display:block !important;position:relative !important;inset:auto !important;order:-1 !important;flex-shrink:0 !important;align-self:center !important;width:min(100%,280px) !important;height:auto !important;aspect-ratio:390/326 !important;background:url('./assets/hero-mark.png') center/contain no-repeat !important;mask:url('./assets/hero-mask.svg') center/contain no-repeat !important;-webkit-mask:url('./assets/hero-mask.svg') center/contain no-repeat !important}}
 @media(max-width:479px){html body:is(#nv30-design,body) main.nv23.nv23-home .nv-hero:not(:has(.nv30-hero-art)):before{width:min(100%,240px) !important}}
+
+/* NOVE editorial system: Japanese meaning first, the MV's diagonal used sparingly. */
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23>section[data-nv30-word]{padding-block:88px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23>section[data-nv30-word]:after{display:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-en{font:700 15px/1.5 Montserrat,sans-serif !important;letter-spacing:.08em !important;margin:0 0 20px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-en:before{content:'' !important;display:inline-block !important;width:28px !important;height:8px !important;background:currentColor !important;clip-path:polygon(0 0,100% 0,75% 100%,0 100%) !important;margin-right:14px !important;vertical-align:middle !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 h2{font-size:32px !important;line-height:1.65 !important;letter-spacing:.025em !important;max-width:940px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 h3{font-size:22px !important;line-height:1.6 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-heading{margin-bottom:40px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-mast,.nv-lower-mast){padding:48px max(40px,calc((100% - 1140px)/2)) !important;min-height:290px !important;display:flex !important;align-items:center !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title){position:relative !important;width:100% !important;max-width:none !important;margin:0 !important;min-width:0 !important;padding-top:94px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title) .nv-crumb{position:absolute !important;top:0 !important;left:0 !important;font-size:12px !important;margin:0 !important;line-height:1.7 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title) .nv-en{position:absolute !important;top:52px !important;left:0 !important;font:700 14px/1.5 Montserrat,sans-serif !important;letter-spacing:.08em !important;margin:0 !important;white-space:normal !important;overflow-wrap:anywhere !important;color:#024991 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title) h1{font-size:40px !important;line-height:1.55 !important;margin:0 !important;color:#17364e !important;max-width:840px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast{min-height:432px !important;padding-block:48px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast>.nv-cmo-title{width:45% !important;padding-right:24px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast>.nv30-mast-photo{position:absolute !important;right:max(40px,calc((100% - 1140px)/2)) !important;top:48px !important;width:calc((min(100% - 80px,1140px)) * .50) !important;height:336px !important;max-width:none !important;margin:0 !important;border-radius:0 !important;object-fit:cover !important;clip-path:polygon(8% 0,100% 0,100% 92%,92% 100%,0 100%,0 8%) !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-mast,.nv-lower-mast):after{display:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro{padding-block:64px !important;background:#fff !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro .nv-copy{background:transparent !important;border:0 !important;border-radius:0 !important;padding:0 !important;max-width:800px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro h2{font-size:30px !important;max-width:800px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro .nv-copy>p{font-size:17px !important;line-height:2 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li{border:0 !important;border-top:2px solid #024991 !important;border-radius:0 !important;box-shadow:none !important;padding:24px !important;gap:16px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>b{align-self:flex-start !important;background:transparent !important;color:#024991 !important;justify-content:flex-start !important;font-size:15px !important;height:24px !important;min-height:24px !important;flex-basis:24px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li:after{display:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-issue-image{height:190px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role] .nv-copy>p{line-height:2 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv30-tone]:not([data-nv30-tone=brand]) :is(h2,h3,p,td,.nv-copy){color:#17364e !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv30-tone=brand] :is(.nv-scope-card,.nv-cmo-scope-copy) :is(h3,p){color:#17364e !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 table{background:#fff !important;border:0 !important;border-collapse:collapse !important;font-size:16px !important;line-height:1.9 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 table :is(th,td){padding:24px !important;border:0 !important;border-bottom:1px solid #c8d9e5 !important;text-align:left !important;vertical-align:top !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 table td{color:#17364e !important;background:#fff !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 table th{color:#024991 !important;background:#eaf2f8 !important;font-weight:700 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 table thead th{background:#024991 !important;color:#fff !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=review]>.nv-wrap{display:grid !important;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) !important;gap:64px !important;align-items:start !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=review] .nv-copy{padding:0 0 0 32px !important;border-left:2px solid #024991 !important;background:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=process] .nv-steps{display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:28px !important;border-top:2px solid #024991 !important;padding-top:32px !important;max-width:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=process] .nv-step{display:flex !important;flex-direction:column !important;align-items:start !important;padding:0 !important;border:0 !important;background:transparent !important;gap:14px !important;min-width:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-research-photo{height:340px !important;object-fit:contain !important;border-radius:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-process-grid>img,html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-overview-photo{border-radius:0 !important;box-shadow:none !important;clip-path:polygon(8% 0,100% 0,100% 92%,92% 100%,0 100%,0 8%) !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-services .nv-photo-grid{gap:56px 48px !important;padding-top:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-services .nv-photo-link:nth-child(even){transform:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-services .nv-photo-link img{height:280px !important;border-radius:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-business .nv-directory>a{border-bottom:1px solid #ffffff55 !important;border-radius:0 !important;padding:28px 0 !important;background:transparent !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-industry-grid>a{border:0 !important;border-bottom:1px solid #b5ccdd !important;border-radius:0 !important;padding:24px 12px !important;background:transparent !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-service-card{border-radius:0 !important;box-shadow:none !important;border:0 !important;border-top:2px solid #024991 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-service-card>img{height:220px !important;object-fit:contain !important;border-radius:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-policy .nv-copy{max-width:840px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-policy .nv-copy>p:first-of-type{font-size:24px !important;line-height:1.9 !important;border-left:3px solid #024991 !important;padding-left:32px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-prose{max-width:760px !important;line-height:2 !important;font-size:17px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-prose h2{font-size:26px !important;margin-top:56px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta{padding-block:72px !important;background:#024991 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta>.nv30-en{font-size:15px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta[data-nv30-tone=brand] .nv-button{background:#fff !important;color:#024991 !important;border:0 !important;min-height:72px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta[data-nv30-tone=brand] .nv-button span{color:#024991 !important}
+@media(max-width:1000px){
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=process] .nv-steps{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title) h1{font-size:32px !important}
+}
+@media(max-width:767px){
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23>section[data-nv30-word]{padding-block:56px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 h2{font-size:25px !important;line-height:1.7 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 h3{font-size:20px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-en{font-size:12px !important;margin-bottom:16px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-heading{margin-bottom:28px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-mast,.nv-lower-mast){padding:32px 20px !important;min-height:238px !important;align-items:start !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title){padding-top:84px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title) h1{font-size:28px !important;line-height:1.55 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home) :is(.nv-cmo-title,.nv-lower-title) .nv-en{top:52px !important;font-size:12px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast{min-height:460px !important;padding:28px 20px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast>.nv-cmo-title{width:100% !important;padding-right:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast>.nv30-mast-photo{top:auto !important;bottom:28px !important;right:20px !important;width:calc(100% - 40px) !important;height:184px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro{padding-block:40px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro h2{font-size:25px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro .nv-copy>p{font-size:16px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li{display:grid !important;grid-template-columns:64px minmax(0,1fr) !important;gap:12px 20px !important;padding:20px 0 !important;background:transparent !important;border-top:1px solid #b5ccdd !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>b{grid-column:2 !important;grid-row:1 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>img{grid-column:1 !important;grid-row:1/3 !important;width:64px !important;height:88px !important;align-self:center !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>span{grid-column:2 !important;font-size:16px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=review]>.nv-wrap{grid-template-columns:1fr !important;gap:24px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=review] .nv-copy{padding-left:20px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=process] .nv-steps{grid-template-columns:1fr !important;gap:32px !important;border-top:0 !important;border-left:2px solid #024991 !important;padding:0 0 0 24px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 table :is(th,td){padding:18px !important;font-size:15px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-services .nv-photo-link img{height:220px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-policy .nv-copy>p:first-of-type{font-size:20px !important;padding-left:20px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-prose{font-size:16px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-prose h2{font-size:22px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta{padding-block:56px !important}
+}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv32-role=review] .nv-copy{border-radius:0 !important}
+@media(max-width:767px){
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-home):not(.nv23-utility)>.nv-cmo-mast{min-height:0 !important;padding:28px 20px 240px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cmo-intro .nv-split{gap:28px !important}
+}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta[data-nv30-tone=brand] .nv-link{color:#fff !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-cta[data-nv30-tone=brand] .nv-link .nv-arrow{color:#fff !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 [data-nv30-tone=brand] .nv30-support-copy>p{color:#17364e !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-business .nv-directory>a{color:#fff !important}
+/* An optional in-page index lets readers choose their own depth. */
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index{width:calc(100% - 80px) !important;max-width:1140px !important;margin:40px auto 0 !important;border-top:1px solid #b5ccdd !important;border-bottom:1px solid #b5ccdd !important;color:#17364e !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index>summary{display:flex !important;align-items:center !important;justify-content:space-between !important;min-height:56px !important;padding:16px 0 !important;font-size:14px !important;font-weight:700 !important;cursor:pointer !important;list-style:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index>summary::-webkit-details-marker{display:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index>summary:after{content:'＋' !important;font-size:20px !important;color:#024991 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index[open]>summary:after{content:'−' !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index nav{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:0 32px !important;padding-bottom:24px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index a{display:flex !important;align-items:center !important;justify-content:space-between !important;gap:16px !important;min-height:56px !important;border-top:1px solid #d5e6f6 !important;padding-block:14px !important;color:#024991 !important;font-size:14px !important;line-height:1.7 !important;text-decoration:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index a:after{content:'↘' !important;flex-shrink:0 !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-utility):not(.nv23-home)>.nv-cmo-intro:not(:has(.nv32-index)):after{content:'' !important;display:block !important;width:calc(100% - 80px) !important;height:58px !important;margin:40px auto 0 !important}
+@media(max-width:767px){html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index{width:calc(100% - 40px) !important;margin-top:32px !important}html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv32-index nav{grid-template-columns:1fr !important;gap:0 !important}html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23:not(.nv23-utility):not(.nv23-home)>.nv-cmo-intro:not(:has(.nv32-index)):after{margin-top:32px !important}}
+/* Motion follows reading order; it never changes layout or scroll position. */
+html body:is(#nv30-design,body).nv30-motion-ready .nv30-reveal{translate:0 10px !important;transition:opacity .36s ease,translate .48s cubic-bezier(.2,.65,.25,1) !important;transition-delay:var(--nv30-delay,0ms) !important}
+html body:is(#nv30-design,body).nv30-motion-ready .nv30-reveal.nv30-visible{translate:0 0 !important}
+@media(hover:hover) and (pointer:fine){
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) .nv32-index a:after{transition:translate .2s ease !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) .nv32-index a:is(:hover,:focus-visible):after{translate:2px 2px !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) .nv32-index a:hover{text-decoration:underline !important;text-underline-offset:5px !important}
+}
+@media(prefers-reduced-motion:reduce){
+html body:is(#nv30-design,body).nv30-motion-ready .nv30-reveal{opacity:1 !important;translate:none !important;transition:none !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) .nv32-index a:after{translate:none !important;transition:none !important}
+}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro{display:block !important;max-width:840px !important;width:calc(100% - 80px) !important;margin-inline:auto !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .r24-copy-section:has(>.nv-copy:only-child){display:block !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv30-policy .nv-copy{max-width:840px !important}
+@media(max-width:767px){html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-utility-intro.nv-copy.r24-intro{width:calc(100% - 40px) !important}}
+/* The native Webflow article uses its own main wrapper. */
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose{max-width:850px !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;padding:48px !important;background:#fff !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose p{font-size:17px !important;line-height:2 !important;color:#17364e !important}
+html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose h2{font-size:26px !important;line-height:1.65 !important;margin-top:48px !important;margin-bottom:24px !important;color:#17364e !important}
+@media(max-width:767px){html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose{padding:24px 20px !important}html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose p{font-size:16px !important}html body:is(#nv30-design,body):not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose h2{font-size:22px !important}}
