@@ -64,7 +64,7 @@
       const hero=root.querySelector('.nv-hero');
       if(hero&&!hero.querySelector('.nv30-geometry-motion')){const geometry=document.createElement('div');geometry.className='nv30-geometry-motion';geometry.setAttribute('aria-hidden','true');hero.prepend(geometry);netGeometry(geometry);}
       if(hero&&!hero.querySelector('.nv30-hero-art')){
-        hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから、</span><span class="nv30-hero-line">施策の実行まで。</span>';
+        hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから</span><span class="nv30-hero-line">施策の実行まで</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
         const video=document.createElement('video');video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-mark.png';art.append(video);hero.append(art);
         const reduce=matchMedia('(prefers-reduced-motion: reduce)');let visible=true;const motion=()=>{if(reduce.matches||document.hidden||!visible)video.pause();else video.play().catch(()=>{});};motion();reduce.addEventListener('change',motion);document.addEventListener('visibilitychange',motion);
@@ -85,11 +85,12 @@
       const utility=root.classList.contains('nv23-utility');
       root.querySelectorAll('.r24-service-card').forEach((card,i)=>{card.classList.add('nv30-service-card');if(!card.querySelector('img'))card.prepend(img(['advertising-v1.png','analytics-v1.png','social-v1.png','website-v1.png','process.png'][i%5]));});
       const mast=root.querySelector('.nv-cmo-title');
-      const titles={'cmo':'CMO','marketing-support':'MARKETING','ads':'ADVERTISING','seo':'SEO / AI SEARCH','sns':'SOCIAL MEDIA','web':'WEB DESIGN','dx':'DX / AX','crm':'CRM','global':'GLOBAL','manufacturing':'MANUFACTURING','healthcare':'HEALTHCARE','company':'COMPANY','service':'SERVICES','industry':'INDUSTRIES','contact':'CONTACT','column':'INSIGHTS'};
+      const titles={'cmo':'CMO','marketing-support':'MARKETING','ads':'ADVERTISING','seo':'SEO / AI SEARCH','sns':'SOCIAL MEDIA','web':'WEB DESIGN','dx':'DX / AX','crm':'CRM','global':'GLOBAL','saas':'IT / SaaS','manufacturing':'MANUFACTURING','ec':'EC / D2C','construction':'CONSTRUCTION','realestate':'REAL ESTATE','hr-recruiting':'HUMAN RESOURCES','finance':'FINANCE','medical':'HEALTHCARE','professional':'PROFESSIONAL','company':'COMPANY','service':'SERVICES','industry':'INDUSTRIES','contact':'CONTACT','column':'INSIGHTS'};
       const pageKey=location.pathname.split('/').filter(Boolean).pop();
       const title=titles[pageKey];
       if(mast&&title&&!mast.querySelector('.nv-en')){const en=document.createElement('p');en.className='nv-en';en.textContent=title;en.setAttribute('aria-hidden','true');mast.append(en);}
       const mastEnglish=mast?.querySelector('.nv-en');if(mastEnglish&&mastEnglish.textContent.length>12)mastEnglish.classList.add('nv30-long-title');
+      root.querySelectorAll('.nv-cmo-title,.nv-lower-title').forEach(title=>{const en=title.querySelector('.nv-en'),jp=title.querySelector('h1');if(en&&jp)jp.before(en);});
       if(mast&&!utility&&!root.querySelector('.nv30-mast-photo')){
         const key=location.pathname.split('/').pop();
         const photo=img(serviceArt[key]?'service-'+key+'-v2.jpg':'industry-'+key+'-v2.jpg','nv30-mast-photo');
@@ -120,6 +121,16 @@
       const feature=root.querySelector('.r24-copy-section:has(>.nv-copy:only-child)');
       if(feature){feature.classList.add('nv30-service-feature');const copy=feature.querySelector('.nv-copy'),header=document.createElement('div');header.className='nv30-heading nv30-service-feature-heading';const en=copy.querySelector('.nv30-en'),h=copy.querySelector('h2');if(en)header.append(en);if(h)header.append(h);feature.before(header);feature.prepend(img('advertising-v1.jpg','nv30-service-feature-photo'));}
     }
+    // Assign tones after section roles exist, retaining clear section boundaries.
+    let previous='';
+    [...root.children].filter(n=>n.tagName==='SECTION').forEach((section,i)=>{
+      let tone=section.matches('.nv30-support,.nv-business,.nv-cta')?'brand':i%2?'mist':'white';
+      if(section.classList.contains('nv-hero'))tone='white';
+      if(tone===previous)tone=tone==='white'?'mist':'white';
+      section.dataset.nv30Tone=tone;
+      if(!section.classList.contains('nv-hero'))section.style.setProperty('background',{white:'#ffffff',mist:'#f2f8ff',brand:'#024991'}[tone],'important');
+      previous=tone;
+    });
   }
   function init(){document.body.classList.add('nv30');const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
     if(main)alignDecorativeWords(main);
