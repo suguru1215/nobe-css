@@ -590,3 +590,15 @@ body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose{max
 body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose p{font-size:17px;line-height:2;color:#17364e}
 body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose h2{font-size:26px;line-height:1.65;margin-top:48px;margin-bottom:24px;color:#17364e}
 @media(max-width:767px){body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose{padding:24px 20px}body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose p{font-size:16px}body.nv30:not(#nv32-editorial):not(#nv32-composition) main .nove-final-prose h2{font-size:22px}}
+/* Explicit rows prevent inherited illustration tracks from inflating compact cards. */
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:24px 190px auto;align-content:start}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li:before{display:none}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>b{grid-column:1;grid-row:1}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>img{grid-column:1;grid-row:2;height:190px;width:100%}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>span{grid-column:1;grid-row:3}
+@media(max-width:767px){
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li{grid-template-columns:64px minmax(0,1fr);grid-template-rows:24px auto}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>b{grid-column:2;grid-row:1}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>img{grid-column:1;grid-row:1/3;width:64px;height:88px}
+body.nv30:not(#nv32-editorial):not(#nv32-composition) main.nv23 .nv-issue-list.nv30-cards>li>span{grid-column:2;grid-row:2}
+}
