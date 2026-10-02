@@ -180,6 +180,33 @@
     const related=root.querySelector('.nv-related-panel');if(related){const pic=related.querySelector('img');const copy=document.createElement('div');copy.className='nv33-related-copy';[...related.children].filter(n=>n!==pic).forEach(n=>copy.append(n));related.append(copy);}
   }
 
+  // Top-only alignment: Figma 3358:26. Do not apply the CMO layout to this page.
+  function composeTopFigma(root){
+    if(!root.classList.contains('nv23-home'))return;
+    document.body.classList.add('nv34-home');
+    const topBase=base+'figma-3358-26/';
+    const asset=(file,cls,w,h)=>{const n=img('figma-3358-26/'+file,cls);if(w)n.width=w;if(h)n.height=h;return n;};
+    const swap=(sel,file,w,h)=>root.querySelectorAll(sel).forEach(n=>{n.src=topBase+file;n.removeAttribute('srcset');n.removeAttribute('sizes');if(w)n.width=w;if(h)n.height=h;});
+    document.querySelectorAll('.nv23-header img.nv-logo').forEach(n=>{n.src=topBase+'01779.png';n.loading='eager';});
+    document.querySelectorAll('.nv-footer-logo').forEach(n=>{n.src=topBase+'62ef5.svg';});
+    const headerArrow=document.querySelector('.nv-desktop-nav .nv-arrow');
+    if(headerArrow){headerArrow.replaceChildren(asset('574c7.svg','nv34-header-arrow',18,18));}
+    const art=root.querySelector('.nv30-hero-art');
+    if(art){art.append(asset('55444.svg','nv34-logo-overlay',850,709.294));}
+    ['19a08.png','8378d.png','844f8.png'].forEach((f,i)=>swap('.nv30-cards>li:nth-child('+(i+1)+') img',f,300,252));
+    swap('.nv30-overview-photo','0667e.png',520,416);
+    swap('.nv30-process-grid>img','20c23.png',430,440);
+    ['3d81b.png','7f9fd.png','d817c.png','cf26b.png'].forEach((f,i)=>swap('.nv-photo-link:nth-child('+(i+1)+')>img',f,540,300));
+    root.querySelectorAll('.nv-step>b').forEach(n=>{n.prepend(asset('6adbe.svg','nv34-step-medallion',48,48));});
+    root.querySelectorAll('.nv-industry-grid .nv-arrow').forEach(n=>{n.replaceChildren(asset('059cf.svg','nv34-industry-arrow',36,36));});
+    swap('.nv33-contact-arrow','f94a8.svg',72,72);
+    const breaks=[['.nv-challenges h2','現在のマーケティングで、<br>見直したいことはありませんか。'],['.nv-overview h2','市場・競合と<br>現在の施策を調べ、<br>改善の優先順位を決める。']];
+    breaks.forEach(([sel,html])=>{const h=root.querySelector(sel);if(!h)return;const expected=html.replace(/<br>/g,'');const sync=()=>{if(h.textContent===expected&&h.innerHTML!==html)h.innerHTML=html;};sync();const watcher=new MutationObserver(sync);watcher.observe(h,{childList:true,subtree:true});window.addEventListener('pagehide',()=>watcher.disconnect(),{once:true});});
+    root.querySelector('.nv-challenge-wrap')?.style.setProperty('background','#f2f8ff','important');
+    const industry=root.querySelector('.nv-industries');if(industry)industry.dataset.nv30Word='INDUSTRY';
+    // Existing descriptions and link text remain present, even where the reference uses shorter copy.
+  }
+
   function syncFigmaFooter(){
     const footer=document.querySelector('.nv-footer-grid');
     if(footer&&footer.querySelectorAll(':scope>.r24-footer-group').length===5){
@@ -190,7 +217,7 @@
     }
   }
   function init(){pagePath=resolvePagePath();document.body.classList.add('nv30');const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
-    if(main)composeFigma(main);
+    if(main){composeFigma(main);composeTopFigma(main);}
     syncFigmaFooter();const footer=document.querySelector('.nv23-footer');if(footer){const watchFooter=new MutationObserver(syncFigmaFooter);watchFooter.observe(footer,{childList:true,subtree:true});window.addEventListener('pagehide',()=>watchFooter.disconnect(),{once:true});}
     if(pagePath==='/contact')document.querySelector('main')?.classList.add('nv30-contact');
     if(!main){const nativeMain=document.querySelector('main');if(nativeMain){nativeMain.dataset.nv33Page=pagePath;const h=nativeMain.querySelector('h1');if(h&&pagePath==='/contact'){const label=document.createElement('span');label.className='nv33-native-label';label.textContent='CONTACT';label.setAttribute('aria-hidden','true');h.before(label);}}}
