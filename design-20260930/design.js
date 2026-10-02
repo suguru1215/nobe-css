@@ -71,11 +71,11 @@
     root.querySelectorAll('.nv-cta').forEach(n=>heading(n.querySelector('h2'),'CONTACT'));
     if(isHome){
       const hero=root.querySelector('.nv-hero');
-      if(hero&&!hero.querySelector('.nv30-geometry-motion')){const geometry=document.createElement('div');geometry.className='nv30-geometry-motion';geometry.setAttribute('aria-hidden','true');hero.prepend(geometry);netGeometry(geometry);}
+
       if(hero&&!hero.querySelector('.nv30-hero-art')){
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから</span><span class="nv30-hero-line">施策の実行まで</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
-        const video=document.createElement('video');if(!motionDisabled())video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-mark.png';art.append(video);hero.append(art);
+        const video=document.createElement('video');if(!motionDisabled())video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload='metadata';video.poster=base+'hero-poster.jpg';art.append(video);hero.append(art);
         let visible=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-video.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
         const control=document.createElement('button');control.type='button';control.className='nv30-motion-control';control.textContent='動きを止める';control.setAttribute('aria-pressed','false');hero.append(control);
         const updateControl=()=>{control.hidden=reduceMotion.matches;control.textContent=motionStopped?'動きを再生':'動きを止める';control.setAttribute('aria-pressed',String(motionStopped));hero.classList.toggle('nv30-motion-stopped',motionDisabled());};
@@ -146,36 +146,55 @@
     });
   }
 
-  // Purpose follows the existing content; no copy or destinations are replaced.
-  function composeEditorial(root){
-    root.dataset.nv32Family=root.classList.contains('nv23-home')?'home':pagePath.startsWith('/industry/')?'industry':root.classList.contains('nv23-utility')?'utility':'service';
-    if(root.classList.contains('nv23-home'))return;
-    let n=0;
+  // Current Figma 3358:28, acquired 2026-10-01. Preserve existing copy and links.
+  function composeFigma(root){
+    root.dataset.nv33Page=pagePath;const isCmo=pagePath==='/service/cmo';
+    const asset=(file,cls,w,h)=>{const n=img('figma-3358-28/'+file,cls);if(w)n.width=w;if(h)n.height=h;return n;};
+    const replace=(selector,file,w,h,fit)=>{const n=root.querySelector(selector);if(!n)return;n.src=base+'figma-3358-28/'+file;n.removeAttribute('srcset');n.removeAttribute('sizes');if(w)n.width=w;if(h)n.height=h;n.style.removeProperty('object-fit');n.dataset.nv33Fit=fit||'cover';};
+    document.querySelectorAll('.nv23-header img.nv-logo,.nv23-header .nv-logo img').forEach(n=>{n.src=base+'figma-3358-28/01779.png';n.removeAttribute('srcset');n.width=181;n.height=32;});
+    document.querySelectorAll('.nv-footer-logo').forEach(n=>{n.src=base+'figma-3358-28/62ef5.svg';n.width=225.469;n.height=40.0004;});
+    root.querySelectorAll('.nv30-mast-photo').forEach(n=>{n.loading='eager';n.fetchPriority='high';n.width=1344;n.height=440;});
+    const intro=root.querySelector('.nv-cmo-intro .nv-split');
+    if(intro){const h=intro.querySelector('h2'),copy=intro.querySelector(':scope > .nv-copy'),button=copy?.querySelector('.nv-button');if(h){const left=document.createElement('div');left.className='nv33-intro-message';const old=h.parentElement;if(old===intro)h.before(left);else old.before(left);left.append(h);if(old!==intro&&!old.children.length)old.remove();if(button)left.append(button);}}
     [...root.children].filter(s=>s.tagName==='SECTION').forEach(s=>{
-      const h=s.querySelector('h2');if(!h||s.matches('.nv-cmo-intro,.nv-cmo-challenges,.nv-cta,.nv30-faq,.nv30-related')||root.classList.contains('nv23-utility'))return;
-      const t=h.textContent;
-      const role=/報告|記録|改善を続け/.test(t)?'review':/手法・媒体|対応する広告/.test(t)?'channels':s.matches('.nv-process,.nv30-process')||/進め方|運用開始/.test(t)?'process':s.matches('.nv-execution,.nv30-execution')||/制作と計測/.test(t)?'execution':s.matches('.nv30-research')||/確認|調べ|見直すか|課題を整理/.test(t)?'research':'support';
-      s.dataset.nv32Role=role;s.classList.remove('nv30-support');
-      const en=s.querySelector('.nv30-en');if(en)en.textContent=String(++n).padStart(2,'0')+' / '+role.toUpperCase();
-      const tone=role==='support'?'brand':role==='research'||role==='review'?'mist':'white';
-      s.dataset.nv30Tone=tone;s.style.setProperty('background',{brand:'#024991',mist:'#f2f8ff',white:'#fff'}[tone],'important');
+      const tone=s.matches('.nv-cmo-mast,.nv-lower-mast,.nv-cmo-challenges,.nv30-faq')?'mist':s.matches('.nv30-support,.nv-business,.nv-cta')?'brand':s.matches('.nv-process,.nv-industries')?'mist':'white';
+      s.dataset.nv30Tone=tone;s.style.setProperty('background',{white:'#fff',mist:'#f2f8ff',brand:'#024991'}[tone],'important');
     });
-    const intro=root.querySelector('.nv-cmo-intro');
-    if(intro&&!root.classList.contains('nv23-utility')){
-      const items=[...root.children].filter(s=>s.dataset.nv32Role||s.classList.contains('nv30-faq'));
-      if(items.length){const details=document.createElement('details');details.className='nv32-index';
-        const summary=document.createElement('summary');summary.textContent='このページの支援内容';
-        const nav=document.createElement('nav');nav.setAttribute('aria-label','ページ内の支援内容');
-        items.forEach((section,i)=>{const h=section.querySelector('h2');if(!section.id)section.id='nv32-section-'+(i+1);const a=document.createElement('a');a.href='#'+section.id;a.textContent=h.textContent;nav.append(a);});
-        details.append(summary,nav);intro.append(details);
-      }
+    // Semantic headings stay in place. Large English labels and pale words follow the target.
+    root.querySelectorAll('.nv30-research-grid,.nv-execution .nv-split').forEach(row=>{const copy=row.querySelector('.nv-copy');if(copy)row.prepend(copy);});
+    root.querySelectorAll('.nv-cta').forEach(cta=>{
+      cta.dataset.nv30Word='CONTACT';cta.style.removeProperty('background');const arrow=cta.querySelector('.nv-button .nv-arrow');if(arrow){arrow.textContent='';arrow.append(asset('f94a8.svg','nv33-contact-arrow',72,72));}
+    });
+    if(!isCmo)return;
+    root.classList.add('nv33-cmo');
+    const en=root.querySelector('.nv-cmo-title .nv-en');if(en)en.textContent='CMO Services';
+    replace('.nv30-mast-photo','61a27.png',1344,440);
+    ['b8170.png','e8eb5.png','55dfb.png'].forEach((file,i)=>replace('.nv30-cards>li:nth-child('+(i+1)+') .nv30-issue-image',file,300,252,'contain'));
+    replace('.nv30-research-photo','3404e.png',564,540);
+    replace('.nv30-execution-photo','62e36.png',588,540,'contain');
+    replace('.nv30-related-photo','ac444.png',430,312);
+    // Four exact existing sentences, retaining all original wording, arranged as the target matrix.
+    const scope=root.querySelector('.nv-cmo-scope-copy');
+    if(scope){const paragraphs=[...scope.querySelectorAll('p')];const sentences=paragraphs.flatMap(p=>p.textContent.match(/[^。]+。?/g)||[]);if(sentences.length===4){const titles=['優先して改善する施策','方針の検討、施策の計画、実行・改善','ご発注前に対応範囲を確認','既存パートナーとの分担'];scope.replaceChildren();scope.className='nv33-support-grid';sentences.forEach((text,i)=>{const card=document.createElement('div');card.className='nv33-support-card';const num=document.createElement('span');num.className='nv33-medallion';num.append(asset('6adbe.svg','nv33-number-art',48,48));const label=document.createElement('span');label.textContent=String(i+1).padStart(2,'0');num.append(label);const h=document.createElement('h3');h.textContent=titles[i];h.dataset.nv33Added='true';const p=document.createElement('p');p.textContent=text;card.append(num,h,p);scope.append(card);});}}
+    const band=root.querySelector('.nv-channel-band');if(band)[...band.children].forEach((n,i)=>{const file=['ed934.svg','8a4dc.svg','8a6d6.svg','808d6.svg'][i];if(file)n.prepend(asset(file,'nv33-channel-icon',64,64));});
+    const related=root.querySelector('.nv-related-panel');if(related){const pic=related.querySelector('img');const copy=document.createElement('div');copy.className='nv33-related-copy';[...related.children].filter(n=>n!==pic).forEach(n=>copy.append(n));related.append(copy);}
+  }
+
+  function syncFigmaFooter(){
+    const footer=document.querySelector('.nv-footer-grid');
+    if(footer&&footer.querySelectorAll(':scope>.r24-footer-group').length===5){
+      const groups=[...footer.children],services=document.createElement('div');services.className='nv33-footer-services';
+      const title=document.createElement('h2');title.textContent='サービス';services.append(title);
+      const links=document.createElement('div');links.className='nv-footer-links';
+      groups.slice(0,3).forEach(g=>{g.querySelectorAll('a').forEach(a=>links.append(a));g.remove();});services.append(links);footer.prepend(services);
     }
-    // The small English caption occupies a reserved line from the initial HTML paint.
-    root.querySelectorAll('.nv30-mast-photo').forEach(i=>{i.loading='eager';i.decoding='async';i.width=640;i.height=400;});
   }
   function init(){pagePath=resolvePagePath();document.body.classList.add('nv30');const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
-    if(main)composeEditorial(main);
+    if(main)composeFigma(main);
+    syncFigmaFooter();const footer=document.querySelector('.nv23-footer');if(footer){const watchFooter=new MutationObserver(syncFigmaFooter);watchFooter.observe(footer,{childList:true,subtree:true});window.addEventListener('pagehide',()=>watchFooter.disconnect(),{once:true});}
     if(pagePath==='/contact')document.querySelector('main')?.classList.add('nv30-contact');
+    if(!main){const nativeMain=document.querySelector('main');if(nativeMain){nativeMain.dataset.nv33Page=pagePath;const h=nativeMain.querySelector('h1');if(h&&pagePath==='/contact'){const label=document.createElement('span');label.className='nv33-native-label';label.textContent='CONTACT';label.setAttribute('aria-hidden','true');h.before(label);}}}
+
     document.querySelectorAll('.nv-mobile-nav').forEach(d=>{d.addEventListener('keydown',e=>{if(e.key==='Escape'){d.open=false;d.querySelector('summary')?.focus();}});});
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     if(main&&'IntersectionObserver' in window&&!reduced.matches){
