@@ -1,0 +1,10 @@
+Illustrative background footage
+Source: https://www.pexels.com/video/teammates-analyzing-a-chart-7659846/
+Creator: Alena Darmel https://www.pexels.com/@a-darmel/
+License: https://www.pexels.com/license/ (checked 2026-10-03)
+Free commercial use and modification permitted; attribution not required.
+No implied endorsement; no stock redistribution; footage is not a trademark.
+This background does not depict NOVE staff, clients, case studies or reported KPIs.
+Derivative: silent H264 1280x720, saturation .78, contrast 1.02, CRF27, faststart.
+Files: hero-marketing.mp4 and hero-marketing-poster.webp.
+Original NOVE logo remains a separate asset.

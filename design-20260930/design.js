@@ -52,14 +52,14 @@
     const ctx=canvas.getContext('2d');if(!ctx)return;
     hero.prepend(layer);hero.classList.add('nv34-geometry-ready');
     let width=0,height=0,points=[],edges=[],phase=0,last=0,request=0,inView=true,pageActive=true,lastDiagnostic=0;
-    const period=32000,frameInterval=1000/60-.5;
+    const period=18000,frameInterval=1000/60-.5;
     const random=(n)=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
     const draw=()=>{
       const t=phase/period*Math.PI*2;
       const positions=points.map((p,i)=>({x:p.x+Math.sin(t+p.phase)*p.dx,y:p.y+Math.cos(t+p.phase)*p.dy}));
-      ctx.clearRect(0,0,width,height);ctx.lineWidth=.65;ctx.strokeStyle='rgba(111,139,162,.19)';ctx.beginPath();
+      ctx.clearRect(0,0,width,height);ctx.lineWidth=.8;ctx.strokeStyle='rgba(90,132,166,.28)';ctx.beginPath();
       edges.forEach(([a,b])=>{ctx.moveTo(positions[a].x,positions[a].y);ctx.lineTo(positions[b].x,positions[b].y);});ctx.stroke();
-      ctx.fillStyle='rgba(94,125,149,.32)';positions.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,1.35,0,Math.PI*2);ctx.fill();});
+      ctx.fillStyle='rgba(72,118,155,.44)';positions.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,Math.PI*2);ctx.fill();});
       // DOM state supports accessibility/debugging without retaining frame logs.
       if(Math.abs(phase-lastDiagnostic)>250||!request){layer.dataset.geometryPhase=phase.toFixed(1);lastDiagnostic=phase;}
     };
@@ -69,7 +69,7 @@
       const cols=width<768?5:10,rows=5;points=[];edges=[];
       for(let y=0;y<=rows;y++)for(let x=0;x<=cols;x++){
         const i=y*(cols+1)+x;
-        points.push({x:(x+(random(i+1)-.5)*.65)*width/cols,y:(y+(random(i+83)-.5)*.65)*height/rows,phase:random(i+167)*Math.PI*2,dx:width/cols*.15,dy:height/rows*.13});
+        points.push({x:(x+(random(i+1)-.5)*.65)*width/cols,y:(y+(random(i+83)-.5)*.65)*height/rows,phase:random(i+167)*Math.PI*2,dx:width/cols*.26,dy:height/rows*.23});
         if(x)edges.push([i,i-1]);if(y)edges.push([i,i-cols-1]);if(x&&y&&random(i+223)>.18)edges.push([i,i-cols-2]);
       }
       draw();
@@ -128,13 +128,13 @@
       if(hero&&!hero.querySelector('.nv30-hero-art')){
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから</span><span class="nv30-hero-line">施策の実行まで</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
-        const video=document.createElement('video');if(!reduceMotion.matches)video.src=base+'hero-video.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload=reduceMotion.matches?'none':'auto';video.poster=base+'hero-poster.webp';art.append(video);hero.append(art);
-        let visible=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-video.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
-        const control=document.createElement('button');control.type='button';control.className='nv30-motion-control';control.textContent='動きを止める';control.setAttribute('aria-pressed','false');hero.append(control);
+        const video=document.createElement('video');if(!reduceMotion.matches)video.src=base+'hero-marketing.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload=reduceMotion.matches?'none':'auto';video.poster=base+'hero-marketing-poster.webp';const still=document.createElement('img');still.className='nv40-video-still';still.src=video.poster;still.alt='';still.width=850;still.height=709;art.append(still,video);hero.insertBefore(art,hero.querySelector('h1'));
+        let visible=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-marketing.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
+        const control=document.createElement('button');control.type='button';control.className='nv30-motion-control';control.textContent='動きを止める';control.setAttribute('aria-pressed','false');art.after(control);
         const updateControl=()=>{control.hidden=reduceMotion.matches;control.textContent=motionStopped?'動きを再生':'動きを止める';control.setAttribute('aria-pressed',String(motionStopped));hero.classList.toggle('nv30-motion-stopped',motionDisabled());};
         motionSubscribers.add(updateControl);updateControl();
         control.addEventListener('click',()=>{motionStopped=!motionStopped;notifyMotion();});
-        if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(hero);window.addEventListener('pagehide',()=>{visibility.disconnect();video.pause();},{once:true});}
+        if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(art);window.addEventListener('pagehide',()=>{visibility.disconnect();video.pause();},{once:true});}
       }
       const list=root.querySelector('.nv-challenges .nv-issue-list');
       if(list){list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b').after(img('top-concern'+(i+1)+'-v2.png','nv30-issue-image'));});}
@@ -336,23 +336,31 @@ window.NoveMotionTokens=Object.freeze({
   function finish(){for(const a of running){try{a.finish()}catch{a.cancel()}}running.clear();}
   function state(){if(media.matches){finish();rails.forEach(r=>r.style.transform='none');main.dataset.nvMotionState='reduced';}else if(!window.NoveMotionReady){main.dataset.nvMotionState='waiting';}else if(stopped()){for(const a of running)a.pause();main.dataset.nvMotionState='paused';}else{for(const a of running)if(a.playState==='paused')a.play();main.dataset.nvMotionState='active';}}
   const hero=main.querySelector('.nv-hero,.nv-cmo-mast,.nv-lower-mast,.section_pagehero');
-  const entered=performance.now();
+  let heroPlayed=false,photoPlayed=false;
   function heroIntro(){
-   if(!window.NoveMotionReady||!hero||scrollY>=100||media.matches||!alive||performance.now()-entered>1500)return;
+   if(heroPlayed||!window.NoveMotionReady||!hero||stopped()||!alive)return;
+   const headingRect=hero.querySelector('h1')?.getBoundingClientRect();if(!headingRect||headingRect.top>=innerHeight||headingRect.bottom<=0)return;
+   heroPlayed=true;main.dataset.nvHeroIntro='played';
    const en=hero.querySelector('.nv-en,.nv30-en,.nv33-native-label');
-   animate(en,[{scale:'.985',transformOrigin:'left center'},{scale:'1',transformOrigin:'left center'}],T.duration.element);
+   animate(en,[{scale:'.96',opacity:.55,transformOrigin:'left center'},{scale:'1',opacity:1,transformOrigin:'left center'}],T.duration.element);
    const title=hero.querySelector('h1'),lines=title?.querySelectorAll('.nv30-hero-line');
-   if(lines?.length)lines.forEach((line,i)=>animate(line,[{scale:'.985',transformOrigin:'left center'},{scale:'1',transformOrigin:'left center'}],T.duration.element,i*T.stagger));
-   else animate(title,[{scale:'.985',transformOrigin:'left center'},{scale:'1',transformOrigin:'left center'}],T.duration.element,en?T.stagger:0);
+   if(lines?.length)lines.forEach((line,i)=>animate(line,[{scale:'.96',opacity:.55,transformOrigin:'left center'},{scale:'1',opacity:1,transformOrigin:'left center'}],T.duration.element,i*T.stagger));
+   else animate(title,[{scale:'.96',opacity:.55,transformOrigin:'left center'},{scale:'1',opacity:1,transformOrigin:'left center'}],T.duration.element,en?T.stagger:0);
+   const actions=hero.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions');
+
   }
   if(document.fonts.status==='loaded')heroIntro();else document.fonts.ready.then(heroIntro);
   const mastPhoto=hero?.querySelector('.nv30-mast-photo');
   const photoIntro=()=>{if(mastPhoto)mastPhoto.decode().then(()=>{
-   if(window.NoveMotionReady&&scrollY<100&&performance.now()-entered<2500)animate(mastPhoto,[{scale:'1.018'},{scale:'1'}],T.duration.scene,T.stagger*2);
+   if(!photoPlayed&&window.NoveMotionReady&&scrollY<100&&!stopped()){photoPlayed=true;animate(mastPhoto,[{clipPath:'inset(0 12% 0 0)',filter:'brightness(1.12)'},{clipPath:'inset(0 0 0 0)',filter:'brightness(1)'}],1400,160);}
   }).catch(()=>{});};photoIntro();
   listen(window,'nove:motion-ready',()=>{heroIntro();photoIntro();state();});
+  const heroHeading=hero?.querySelector('h1'),heroActions=hero?.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions');
+  if(heroHeading)pending.set(heroHeading,heroIntro);
+  if(heroActions)pending.set(heroActions,()=>animate(heroActions,[{opacity:.45,translate:'0 10px'},{opacity:1,translate:'0 0'}],900));
   // Only selected editorial images move; the supporting copy is immediately readable.
-  main.querySelectorAll('.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo').forEach(el=>pending.set(el,()=>animate(el,[{translate:`${T.distance}px 0`,scale:'1.01'},{translate:'0 0',scale:'1'}],T.duration.scene)));
+  main.querySelectorAll('.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo').forEach(el=>pending.set(el,()=>animate(el,[{clipPath:'inset(0 9% 0 0)',filter:'brightness(1.12)'},{clipPath:'inset(0 0 0 0)',filter:'brightness(1)'}],T.duration.scene)));
+  main.querySelectorAll('.nv-cta .nv-button').forEach(el=>pending.set(el,()=>animate(el,[{scale:'.97',opacity:.65},{scale:'1',opacity:1}],900)));
   // A single connecting rail gives the process its order; no card-by-card fade-up.
   const rails=[];
   main.querySelectorAll('.nv-steps').forEach(steps=>{
@@ -362,7 +370,7 @@ window.NoveMotionTokens=Object.freeze({
    rail.style.transform=vertical?'scaleY(0)':'scaleX(0)';
    items.forEach((step,index)=>pending.set(step,()=>{
     queuedProgress=Math.max(queuedProgress,(index+1)/items.length);
-    animate(step.querySelector('b'),[{scale:'.97'},{scale:'1'}],T.duration.element,innerWidth>=768?index*T.stagger:0);
+    animate(step.querySelector('b'),[{scale:'.82',opacity:.5},{scale:'1',opacity:1}],T.duration.element,innerWidth>=768?index*T.stagger:0);
     if(!queued){queued=true;queueMicrotask(()=>{
      queued=false;if(!alive)return;const next=queuedProgress,axis=rail.dataset.axis==='y'?'Y':'X';
      railAnimation?.cancel();rail.style.transform=`scale${axis}(${next})`;
@@ -373,10 +381,17 @@ window.NoveMotionTokens=Object.freeze({
    }));
 
   });
-  observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting||seen.has(entry.target))continue;seen.add(entry.target);observer.unobserve(entry.target);pending.get(entry.target)?.();pending.delete(entry.target);}},{threshold:.18});
+  const visible=new Set();
+  function flushVisible(){if(!alive||stopped())return;for(const el of visible){if(seen.has(el))continue;seen.add(el);observer.unobserve(el);pending.get(el)?.();pending.delete(el);} }
+  observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting)visible.add(entry.target);else visible.delete(entry.target);}flushVisible();},{threshold:.18});
+  const resume=()=>{heroIntro();photoIntro();state();flushVisible();};
+  listen(window,'nove:motion-ready',resume);
+  listen(document,'visibilitychange',resume);
+  listen(media,'change',resume);
+
   pending.forEach((_,el)=>observer.observe(el));
   listen(media,'change',state);listen(document,'visibilitychange',state);
-  const control=document.querySelector('.nv30-motion-control');if(control)listen(control,'click',()=>queueMicrotask(state));
+  const control=document.querySelector('.nv30-motion-control');if(control)listen(control,'click',()=>queueMicrotask(resume));
   listen(window,'resize',()=>{finish();rails.forEach(rail=>{rail.dataset.axis=main.classList.contains('nv23-home')||innerWidth<768?'y':'x';rail.style.transform='none'});});
   listen(main,'focusin',finish);
   teardown=()=>{alive=false;observer?.disconnect();finish();listeners.forEach(off=>off());rails.forEach(r=>r.remove());main.querySelectorAll('.nv-motion-process').forEach(e=>e.classList.remove('nv-motion-process'));delete main.dataset.nvMotionState;};
@@ -430,3 +445,30 @@ function init(){
  schedule();document.fonts?.ready.then(schedule);document.fonts?.addEventListener('loadingdone',schedule);window.addEventListener('pageshow',schedule);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
+/* Preserve content and native controls; reset legacy per-section inline surfaces. */
+(()=>{'use strict';function init(){const main=document.querySelector('main');if(!main)return;main.querySelectorAll(':scope>section:not(.nv-hero):not(.nv-cta)').forEach(section=>{section.style.removeProperty('background');section.dataset.nv30Tone='white';});
+ const mast=main.querySelector('.nv-cmo-mast,.section_pagehero');if(mast&&!mast.querySelector('.nv40-mast-net')){const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 600 300');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.classList.add('nv40-mast-net');const pts=[[10,42],[156,14],[302,80],[476,26],[586,110],[52,234],[204,174],[362,246],[506,198],[616,288]];const edges=[[0,1],[1,2],[2,3],[3,4],[0,5],[1,6],[2,6],[2,7],[3,8],[4,8],[5,6],[6,7],[7,8],[8,9]];edges.forEach(([a,b])=>{const l=document.createElementNS(ns,'line');['x1','y1','x2','y2'].forEach((k,i)=>l.setAttribute(k,[...pts[a],...pts[b]][i]));svg.append(l)});pts.forEach(([x,y])=>{const c=document.createElementNS(ns,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r','2');svg.append(c)});mast.prepend(svg);}
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
+
+/* Exact duplicate-word corrections only; source copy, links and forms otherwise stay intact. */
+(() => {
+  'use strict';
+  const fixes = {
+    '/service/ads': ['クリックした先のページページ', 'クリックした先のページ'],
+    '/industry/construction': ['対応エリアで、対応エリアで、', '対応エリアで、']
+  };
+  function correctDuplicate() {
+    const fix = fixes[location.pathname.replace(/\/$/, '')];
+    const main = document.querySelector('main');
+    if (!fix || !main) return;
+    for (const paragraph of main.querySelectorAll('p')) {
+      const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (node.nodeValue.includes(fix[0])) node.nodeValue = node.nodeValue.replace(fix[0], fix[1]);
+      }
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', correctDuplicate);
+  else correctDuplicate();
+})();
