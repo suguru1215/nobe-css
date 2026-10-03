@@ -6,7 +6,7 @@
   function prepare(){
     const main=document.querySelector('main.nv23');
     if(!main)return false;
-    document.body.classList.add('nv30');
+    document.body.classList.add('nv30','nv36-polish');
     if(main.classList.contains('nv23-home')){
       document.body.classList.add('nv34-home');
       if(!posterPreloaded){const link=document.createElement('link');link.rel='preload';link.as='image';link.href=new URL('hero-poster.webp',assetBase).href;link.fetchPriority='high';document.head.append(link);posterPreloaded=true;}
