@@ -388,7 +388,7 @@ window.NoveMotionTokens=Object.freeze({
 
 /* Local parity correction. Wording changes are explicit, content-matched English labels only. */
 (()=>{'use strict';
-const script=document.currentScript,asset=new URL('./assets/parity/',script.src).href,top=new URL('./assets/figma-3358-26/',script.src).href;
+const script=document.currentScript,asset=new URL('./assets/alpha/',script.src).href,top=new URL('./assets/figma-3358-26/',script.src).href;
 const labels={
  '/service':['STRATEGY','EXECUTION','BUSINESS'],
  '/service/ads':['ANALYSIS','MEDIA','PRODUCTION','REPORTING'],
@@ -403,9 +403,30 @@ function init(){const main=document.querySelector('main');if(!main||document.bod
  if(words)nodes.forEach((n,i)=>{if(words[i]&&n.textContent.trim()!==words[i]){map.push({old:n.textContent.trim(),new:words[i],heading:n.parentElement.querySelector('h2')?.textContent.trim()});n.textContent=words[i];const section=n.closest('section');if(section?.hasAttribute('data-nv30-word'))section.dataset.nv30Word=words[i];}});
  main.dataset.nv38HeadingChanges=JSON.stringify(map);
  main.querySelectorAll(':scope>section').forEach(s=>{s.dataset.nv38Role=s.matches('.nv-hero,.nv-cmo-mast,.section_pagehero')?'mast':s.matches('.nv-cta')?'cta':s.matches('.nv-cmo-intro')?'intro':s.matches('.nv-cmo-challenges,.nv-challenge-wrap')?'challenge':s.matches('.nv30-faq')?'faq':s.matches('.nv30-related')?'related':'content';});
- if(route==='/service')main.querySelectorAll('.nv30-service-card>img').forEach((im,i)=>{const t=['advertising','information','target','journey','decision','target','team','information'][i];if(!t)return;im.src=originals[t]?top+originals[t]:asset+t+'-v2.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=t;});
+ if(route==='/service')main.querySelectorAll('.nv30-service-card>img').forEach((im,i)=>{const t=['advertising','information','target','journey','decision','target','team','information'][i];if(!t)return;im.src=originals[t]?top+originals[t]:asset+t+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=t;});
  const researchTheme={'marketing-support':'report',seo:'information',sns:'journey',web:'journey',global:'target',dx:'information',crm:'information',saas:'target',manufacturing:'information',ec:'journey',construction:'target',realestate:'target','hr-recruiting':'journey',finance:'journey',medical:'information',professional:'target'}[key];
- if(researchTheme)main.querySelectorAll('.nv30-research-photo').forEach(im=>{im.src=originals[researchTheme]?top+originals[researchTheme]:asset+researchTheme+'-v2.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=researchTheme;im.width=600;im.height=400;});
- const set=themes[key];if(set)main.querySelectorAll('.nv-cmo-challenges .nv30-issue-image').forEach((im,i)=>{const theme=set[i];if(!theme)return;im.src=originals[theme]?top+originals[theme]:asset+theme+'-v2.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=theme;im.width=600;im.height=400;});
+ if(researchTheme)main.querySelectorAll('.nv30-research-photo').forEach(im=>{im.src=originals[researchTheme]?top+originals[researchTheme]:asset+researchTheme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=researchTheme;im.width=600;im.height=400;});
+ const set=themes[key];if(set)main.querySelectorAll('.nv-cmo-challenges .nv30-issue-image').forEach((im,i)=>{const theme=set[i];if(!theme)return;im.src=originals[theme]?top+originals[theme]:asset+theme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=theme;im.width=600;im.height=400;});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
+/* Equalize only headings within a visual row; text remains intrinsic and untruncated. */
+(()=>{'use strict';
+function init(){
+ const main=document.querySelector('main');if(!main||main.dataset.nv39Aligned)return;main.dataset.nv39Aligned='true';
+ const selector='.nv-photo-grid,.nv33-support-grid,.nv-scope-grid,.nv-issue-list.nv30-cards,.nv-lower-related,.nv-industry-grid,.nv-channel-band,.nv-steps';
+ const groups=[...main.querySelectorAll(selector)];let pending=false;
+ function sync(){pending=false;
+  const items=groups.map(g=>({g,cards:[...g.children].filter(e=>!e.classList.contains('nv-motion-rail')&&e.getClientRects().length)}));
+  items.forEach(({cards})=>cards.forEach(c=>{for(const h of c.querySelectorAll('h3,:scope>dl>dd,:scope>.nv-link')){h.dataset.nv39Size='';if(h.tagName==='H3')h.dataset.nv39Heading='';else if(h.tagName==='DD')h.dataset.nv39BodyRow='';h.style.removeProperty('--nv39-heading-height');}}));
+  const measurements=[];
+  for(const {cards} of items){const rows=[];for(const c of cards){const y=c.offsetTop;let row=rows.find(r=>Math.abs(r.y-y)<2);if(!row){row={y,cards:[]};rows.push(row)}row.cards.push(c)}
+   for(const row of rows){if(row.cards.length<2)continue;for(const selector of ['h3',':scope>dl>dd:nth-of-type(1)',':scope>dl>dd:nth-of-type(2)',':scope>.nv-link']){const hs=row.cards.map(c=>c.querySelector(selector)).filter(Boolean);if(hs.length<2)continue;const height=Math.max(...hs.map(h=>h.getBoundingClientRect().height));measurements.push({hs,height});}}
+  }
+  measurements.forEach(({hs,height})=>hs.forEach(h=>h.style.setProperty('--nv39-heading-height',height+'px')));
+ }
+ function schedule(){if(!pending){pending=true;requestAnimationFrame(sync)}}
+ const widths=new WeakMap();const observer=new ResizeObserver(entries=>{let changed=false;for(const e of entries){const w=e.contentRect.width;if(widths.get(e.target)!==w){widths.set(e.target,w);changed=true}}if(changed)schedule()});groups.forEach(g=>observer.observe(g));
+ schedule();document.fonts?.ready.then(schedule);document.fonts?.addEventListener('loadingdone',schedule);window.addEventListener('pageshow',schedule);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
