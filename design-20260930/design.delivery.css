@@ -1383,3 +1383,111 @@ body.nv38-parity #main#main[data-nv35-kind=industry-detail] .nv30-support .nv-co
     }
   }
 }
+
+/* The three easing roles share the existing 180 / 650 / 1200 ms vocabulary. */
+:root{--nv-motion-exit:cubic-bezier(.4,0,1,1)}
+html body:is(#nv30-design,body) .nv30-process-grid .nv-motion-process .nv-step:before{display:none!important}
+body.nv30 #main .nv-button{transition:background-color var(--nv-motion-micro) var(--nv-motion-state),border-color var(--nv-motion-micro) var(--nv-motion-state),box-shadow var(--nv-motion-micro) var(--nv-motion-state)!important}
+body.nv30 #main .nv-button:focus-visible{outline:3px solid #428ad2;outline-offset:5px}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ body.nv30 #main .nv-button:hover .nv-arrow{translate:4px 0}
+ body.nv30 #main .nv-button:active .nv-arrow{translate:1px 0;transition-timing-function:var(--nv-motion-exit)!important}
+}
+body.nv30 #main[data-nv-motion-state=paused] *,body.nv30 #main[data-nv-motion-state=reduced] *{transition-duration:0s!important}
+@media(prefers-reduced-motion:reduce){body.nv30 #main .nv-button .nv-arrow{translate:none!important}}
+/* Gather -> hand-off -> choice. Small native SVG strokes; no perpetual timeline. */
+.nv-story-overview{position:relative}
+html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) main.nv23-home .nv-story-overview h2:before{visibility:hidden!important;height:44px!important}
+.nv-story-gather{position:absolute;left:0;top:0;width:280px;height:44px;overflow:visible;pointer-events:none}
+.nv-story-gather .nv-story-branches,.nv-story-result{fill:none;stroke:#84a7c7;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:0}
+.nv-story-sources{fill:#78a7ce}.nv-story-fold{fill:#214d89;stroke:none}.nv-story-result{stroke:#214d89}
+.nv-story-handoff{max-width:none!important;position:absolute;left:-25px;top:0;width:16px;height:18px;overflow:visible;pointer-events:none}
+.nv-story-handoff-holder{position:absolute;left:0;top:0;width:0;height:0;list-style:none;margin:0;padding:0;pointer-events:none}
+body.nv30 #main .nv-step.nv-story-current h3{color:#214d89!important}
+body.nv30 #main .nv-step.nv-story-current b{box-shadow:0 0 0 5px #dbe9f4;border-radius:50%}
+.nv-story-grid{position:relative;isolation:isolate}
+.nv-story-options{max-width:none!important;position:absolute;left:-20px;top:-40px;width:calc(100% + 20px);height:calc(100% + 40px);pointer-events:none;overflow:visible;z-index:-1}
+.nv-story-choice{fill:none;stroke:#afc4d8;stroke-width:1;stroke-dasharray:1;stroke-dashoffset:0;vector-effect:non-scaling-stroke;transition:stroke var(--nv-motion-micro) var(--nv-motion-state),stroke-width var(--nv-motion-micro) var(--nv-motion-state)}
+.nv-story-choice.nv-story-selected{stroke:#214d89;stroke-width:2}
+@media(max-width:767px){.nv-story-handoff{left:-16px;width:11px}.nv-story-gather{width:240px}}
+
+/* A quiet resting map keeps the selected route legible without framing every card. */
+.nv-story-choice{opacity:.4;transition:opacity var(--nv-motion-micro) var(--nv-motion-state),stroke var(--nv-motion-micro) var(--nv-motion-state)}
+.nv-story-choice.nv-story-selected{opacity:1}
+
+/* Native footer disclosure and checkbox keep keyboard semantics and a saved preference. */
+body.nv30 .nv-motion-settings{max-width:420px;margin:20px 0 0;color:#edf3f9;font-size:14px;line-height:1.6}
+body.nv30 .nv-motion-settings summary{width:fit-content;min-height:44px;padding:10px 0;cursor:pointer;text-underline-offset:4px}
+body.nv30 .nv-motion-settings summary:hover{text-decoration:underline}
+body.nv30 .nv-motion-settings summary:focus-visible,body.nv30 .nv-motion-toggle:focus-visible{outline:3px solid #428ad2;outline-offset:4px}
+body.nv30 .nv-motion-setting-label{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer}
+body.nv30 .nv-motion-toggle{appearance:auto!important;-webkit-appearance:checkbox!important;width:20px;height:20px;flex:none;accent-color:#214d89;margin:0}
+body.nv30 .nv-motion-setting-note{margin:4px 0 0!important;font-size:13px!important;line-height:1.7!important;color:#bccbd9!important}
+
+body.nv30 .nv-motion-settings :is(summary,label,span){color:#edf3f9!important}
+
+/* Same paint as the original mast lines/circles, without JS computed-style reads. */
+body.nv38-parity #main .nv40-mast-net .nv-mast-edges{fill:none;stroke:#8ba5bb;stroke-width:1;vector-effect:non-scaling-stroke}
+body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
+/* Reference screenshots: consultation cards use the same composition as the home page. */
+@layer noveAlignment {
+ body.nv38-parity #main#main#main .nv-cmo-challenges>.nv-wrap{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:40px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-heading{margin:0!important;max-width:none!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges h2{font-size:var(--nv36-statement)!important;line-height:1.55!important;color:#17232e!important;margin:0!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;width:100%!important;margin:0!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li{position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:12px!important;min-width:0!important;height:auto!important;min-height:520px!important;padding:24px 32px 64px!important;background:#fff!important;border:1px solid #d5e6f6!important;border-radius:8px!important;box-shadow:none!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>b{position:static!important;display:grid!important;place-items:center!important;flex:none!important;width:48px!important;min-width:48px!important;height:48px!important;min-height:48px!important;background:#024991!important;border-radius:50%!important;color:#fff!important;font:700 20px/1 'Noto Sans JP',sans-serif!important;margin:0!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>img{display:block!important;width:300px!important;max-width:100%!important;height:252px!important;aspect-ratio:auto!important;object-fit:contain!important;flex:none!important;margin:0!important;padding:0!important;border-radius:0!important;background:transparent!important;mix-blend-mode:normal!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>span{display:block!important;width:252px!important;max-width:100%!important;font:700 19px/1.8 'Noto Sans JP',sans-serif!important;color:#024991!important;text-align:left!important;padding:0!important;margin:0!important;min-block-size:0!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li:before{display:none!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li:after{content:''!important;display:block!important;position:absolute!important;bottom:28px!important;left:calc(50% - 22px)!important;width:44px!important;height:3px!important;background:#024991!important;opacity:.35!important;margin:0!important}
+ /* Screenshot 2: calm support panel, then a two-stage process with a shared reading grid. */
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-support>.nv-wrap{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:64px!important;align-items:start!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] :is(.nv30-support,.nv30-process) .nv30-en{font:700 clamp(28px,3.05vw,44px)/1.15 Montserrat,sans-serif!important;letter-spacing:-.03em!important;margin:0 0 20px!important;color:#024991!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] :is(.nv30-support,.nv30-process) h2{font-size:clamp(28px,2.5vw,36px)!important;line-height:1.55!important;margin:0!important;max-width:24em!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-support .nv-copy{padding:32px 36px!important;border:1px solid #d5e6f6!important;border-radius:8px!important;background:#fff!important;max-width:none!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-support .nv-copy p{font-size:17px!important;line-height:1.9!important;margin:0!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv30-heading{max-width:900px!important;margin-bottom:40px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;max-width:none!important;counter-reset:nove-stage}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p{position:relative!important;margin:0!important;padding:36px!important;border:1px solid #d5e6f6!important;border-top:3px solid #024991!important;border-radius:0 0 8px 8px!important;background:#f5f9fd!important;font-size:17px!important;line-height:1.9!important}
+ @media(min-width:768px) and (max-width:1099px){
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li{padding-inline:20px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>span{font-size:18px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-support>.nv-wrap{grid-template-columns:1fr!important;gap:32px!important}
+ }
+ @media(max-width:767px){
+ body.nv38-parity #main#main#main .nv-cmo-challenges>.nv-wrap{gap:32px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges h2{font-size:28px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards{grid-template-columns:1fr!important;gap:20px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li{min-height:0!important;padding:24px 24px 56px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>img{height:224px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>span{width:100%!important;max-width:300px!important;font-size:18px!important}
+ body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li:after{bottom:24px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-support>.nv-wrap{grid-template-columns:1fr!important;gap:28px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] :is(.nv30-support,.nv30-process) .nv30-en{font-size:28px!important;margin-bottom:16px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] :is(.nv30-support,.nv30-process) h2{font-size:26px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-support .nv-copy{padding:24px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy{grid-template-columns:1fr!important;gap:20px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p{padding:24px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] :is(.nv30-support,.nv30-process) .nv-copy p{font-size:16px!important}
+ }
+}
+
+/* The process reads as two connected ideas, with open space instead of another card row. */
+@layer noveAlignment {
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy{gap:48px!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p{padding:0 0 12px 28px!important;border:0!important;border-left:1px solid #bfd4e6!important;border-radius:0!important;background:transparent!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p:after{content:'';position:absolute;left:-3px;top:49px;width:5px;height:5px;background:#024991;border-radius:50%}
+ .nv-process-visual{display:block;width:100%;height:auto;max-width:460px;margin:0 0 24px;overflow:hidden;pointer-events:none}
+ .nv-process-visual text{font:500 64px/1 Montserrat,sans-serif;letter-spacing:-4px;fill:#bfd4e6}
+ .nv-process-lines{fill:none;stroke:#8baac4;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+ .nv-process-lines path{stroke-dasharray:1;stroke-dashoffset:0}
+ .nv-process-target{fill:#f4f8fc;stroke:#7c9fbd;stroke-width:1.2}
+ .nv-process-points{fill:#a5c4dc}.nv-process-core{fill:#024991}
+ @media(max-width:767px){
+  body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy{gap:36px!important}
+  body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p{padding:0 0 0 20px!important}
+  body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p:after{top:32px}
+  .nv-process-visual{margin-bottom:20px}
+ }
+}
