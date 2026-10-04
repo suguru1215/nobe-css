@@ -140,7 +140,6 @@ window.NoveMotionTokens=Object.freeze({
   }
 
   function apply(root,isHome){
-    setupMotionSettings();
     root.classList.add('nv30-main');
     [...root.children].filter(n=>n.tagName==='SECTION').forEach((section,i)=>{if(section.classList.contains('nv-hero'))return;section.dataset.nv30Tone=i%2?'mist':'white';section.style.setProperty('background',i%2?'#f2f8ff':'#ffffff','important');});
     root.querySelectorAll('.nv-watermark').forEach(n=>n.hidden=true);
@@ -291,7 +290,7 @@ window.NoveMotionTokens=Object.freeze({
       groups.slice(0,3).forEach(g=>{g.querySelectorAll('a').forEach(a=>links.append(a));g.remove();});services.append(links);footer.prepend(services);
     }
   }
-  function init(){pagePath=resolvePagePath();document.body.classList.add('nv30');const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
+  function init(){pagePath=resolvePagePath();document.body.classList.add('nv30');setupMotionSettings();const main=document.querySelector('main.nv23');if(main)apply(main,main.classList.contains('nv23-home'));
     if(main){composeFigma(main);composeTopFigma(main);}
     syncFigmaFooter();const footer=document.querySelector('.nv23-footer');if(footer){const watchFooter=new MutationObserver(syncFigmaFooter);watchFooter.observe(footer,{childList:true,subtree:true});window.addEventListener('pagehide',()=>watchFooter.disconnect(),{once:true});}
     if(pagePath==='/contact')document.querySelector('main')?.classList.add('nv30-contact');
