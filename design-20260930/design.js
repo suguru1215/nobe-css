@@ -524,7 +524,7 @@ function init(){const main=document.querySelector('main');if(!main||main.dataset
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
 
-/* Equalize only headings within a visual row; text remains intrinsic and untruncated. */
+/* Equalize reading rows only within a visual card row; stacked cards remain intrinsic. */
 (()=>{'use strict';
 function init(){
  const main=document.querySelector('main');if(!main||main.dataset.nv39Aligned)return;main.dataset.nv39Aligned='true';
@@ -532,10 +532,10 @@ function init(){
  const groups=[...main.querySelectorAll(selector)];let pending=false;
  function sync(){pending=false;
   const items=groups.map(g=>({g,cards:[...g.children].filter(e=>e.getAttribute('aria-hidden')!=='true'&&!e.classList.contains('nv-motion-rail')&&e.getClientRects().length)}));
-  items.forEach(({cards})=>cards.forEach(c=>{for(const h of c.querySelectorAll('h3,:scope>dl>dd,:scope>.nv-link')){h.dataset.nv39Size='';if(h.tagName==='H3')h.dataset.nv39Heading='';else if(h.tagName==='DD')h.dataset.nv39BodyRow='';h.style.removeProperty('--nv39-heading-height');}}));
+  items.forEach(({cards})=>cards.forEach(c=>{for(const h of c.querySelectorAll('h3,:scope>dl>dd,:scope>.nv-link,.nv-issue-list.nv30-cards>li>span')){h.dataset.nv39Size='';if(h.tagName==='H3')h.dataset.nv39Heading='';else if(h.tagName==='DD'||h.tagName==='SPAN')h.dataset.nv39BodyRow='';h.style.removeProperty('--nv39-heading-height');}}));
   const measurements=[];
   for(const {cards} of items){const rows=[];for(const c of cards){const y=c.offsetTop;let row=rows.find(r=>Math.abs(r.y-y)<2);if(!row){row={y,cards:[]};rows.push(row)}row.cards.push(c)}
-   for(const row of rows){if(row.cards.length<2)continue;for(const selector of ['h3',':scope>dl>dd:nth-of-type(1)',':scope>dl>dd:nth-of-type(2)',':scope>.nv-link']){const hs=row.cards.map(c=>c.querySelector(selector)).filter(Boolean);if(hs.length<2)continue;const height=Math.max(...hs.map(h=>h.getBoundingClientRect().height));measurements.push({hs,height});}}
+   for(const row of rows){if(row.cards.length<2)continue;for(const selector of ['h3',':scope>dl>dd:nth-of-type(1)',':scope>dl>dd:nth-of-type(2)',':scope>.nv-link','.nv-issue-list.nv30-cards>li>span']){const hs=row.cards.map(c=>c.querySelector(selector)).filter(Boolean);if(hs.length<2)continue;const height=Math.max(...hs.map(h=>h.getBoundingClientRect().height));measurements.push({hs,height});}}
   }
   measurements.forEach(({hs,height})=>hs.forEach(h=>h.style.setProperty('--nv39-heading-height',height+'px')));
  }
