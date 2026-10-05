@@ -24,6 +24,7 @@
       if(!kind)return true;
       document.body.classList.add('nv35-lower','nv38-parity');main.dataset.nv35Kind=kind;
       main.classList.add('nv30-main');
+      if(['cmo','service-detail','industry-detail'].includes(kind))main.querySelector('.nv-cmo-intro .r24-intro>.nv-copy')?.classList.add('nv42-intro-copy');
       main.querySelectorAll(':scope>section').forEach(s=>{s.dataset.nv38Role=s.matches('.nv-hero,.nv-cmo-mast,.section_pagehero')?'mast':s.matches('.nv-cta')?'cta':s.matches('.nv-cmo-intro')?'intro':s.matches('.nv-cmo-challenges,.nv-challenge-wrap')?'challenge':s.matches('.nv30-faq')?'faq':s.matches('.nv30-related')?'related':'content';});
       const titles={cmo:'CMO Services','marketing-support':'MARKETING',ads:'ADVERTISING',seo:'SEO / AI SEARCH',sns:'SOCIAL MEDIA',web:'WEB DESIGN',dx:'DX / AX',crm:'CRM',global:'GLOBAL',saas:'IT / SaaS',manufacturing:'MANUFACTURING',ec:'EC / D2C',construction:'CONSTRUCTION',realestate:'REAL ESTATE','hr-recruiting':'HUMAN RESOURCES',finance:'FINANCE',medical:'HEALTHCARE',professional:'PROFESSIONAL',company:'COMPANY',service:'SERVICES',industry:'INDUSTRIES',contact:'CONTACT',column:'INSIGHTS'};
       const mast=main.querySelector('.nv-cmo-title'),heading=mast?.querySelector('h1');

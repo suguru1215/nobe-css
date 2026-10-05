@@ -1,7 +1,8 @@
 window.NoveMotionTokens=Object.freeze({
-  duration:Object.freeze({micro:180,element:650,scene:1200}),
+  duration:Object.freeze({micro:180,copy:420,choice:520,heading:650,media:900,element:650,scene:1200}),
   ease:Object.freeze({enter:'cubic-bezier(.22,1,.36,1)',state:'cubic-bezier(.2,0,.2,1)',exit:'cubic-bezier(.4,0,1,1)'}),
   ambient:Object.freeze({period:18000,stepMs:1000/30,distance:12}),
+  sequence:Object.freeze({title:80,line:100,chapter:80,media:120,cta:240}),
   stagger:80,distance:12
 });
 (function(){
@@ -146,7 +147,7 @@ window.NoveMotionTokens=Object.freeze({
     const text=document.createElement('span');text.textContent='動画と装飾の動きを停止';
     const note=document.createElement('p');note.className='nv-motion-setting-note';note.id='nv-motion-setting-note';toggle.setAttribute('aria-describedby',note.id);
     label.append(toggle,text);settings.append(summary,label,note);footer.append(settings);
-    const update=()=>{toggle.checked=reduceMotion.matches||motionStopped;toggle.disabled=reduceMotion.matches;note.textContent=reduceMotion.matches?'端末の設定に合わせて動きを抑えています':'この設定は次のページでも引き継がれます';};
+    const update=()=>{document.body.dataset.nvMotionPaused=String(motionStopped);toggle.checked=reduceMotion.matches||motionStopped;toggle.disabled=reduceMotion.matches;note.textContent=reduceMotion.matches?'端末の設定に合わせて動きを抑えています':'この設定は次のページでも引き継がれます';};
     toggle.addEventListener('change',()=>{motionStopped=toggle.checked;window.NoveMotionPaused=motionStopped;try{localStorage.setItem('nove:motion-paused',String(motionStopped));}catch{}notifyMotion();window.dispatchEvent(new Event('nove:motion-setting'));});
     motionSubscribers.add(update);update();
   }
@@ -164,8 +165,8 @@ window.NoveMotionTokens=Object.freeze({
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから</span><span class="nv30-hero-line">施策の実行まで</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
         const video=document.createElement('video');if(!reduceMotion.matches)video.src=base+'hero-marketing-analytics.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload=reduceMotion.matches?'none':'auto';video.poster=base+'hero-marketing-analytics-poster.webp';const still=document.createElement('img');still.className='nv40-video-still';still.src=video.poster;still.alt='';still.width=850;still.height=709;art.append(still,video);hero.insertBefore(art,hero.querySelector('h1'));
-        let visible=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-marketing-analytics.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
-        if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(art);window.addEventListener('pagehide',()=>{visibility.disconnect();video.pause();},{once:true});}
+        let visible=true,pageActive=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible||!pageActive)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-marketing-analytics.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
+        if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(art);window.addEventListener('pagehide',()=>{pageActive=false;visible=false;visibility.disconnect();video.pause();});window.addEventListener('pageshow',()=>{pageActive=true;visibility.observe(art);motion();});}
       }
       const list=root.querySelector('.nv-challenges .nv-issue-list');
       if(list){list.classList.add('nv30-cards');[...list.children].forEach((li,i)=>{if(!li.querySelector('img'))li.querySelector('b').after(img('top-concern'+(i+1)+'-v2.png','nv30-issue-image'));});}
@@ -188,7 +189,7 @@ window.NoveMotionTokens=Object.freeze({
       if(mast&&title&&!mast.querySelector('.nv-en')){const en=document.createElement('p');en.className='nv-en';en.textContent=title;en.setAttribute('aria-hidden','true');mast.append(en);}
       const mastEnglish=mast?.querySelector('.nv-en');if(mastEnglish&&mastEnglish.textContent.length>12)mastEnglish.classList.add('nv30-long-title');
       root.querySelectorAll('.nv-cmo-title,.nv-lower-title').forEach(title=>{const en=title.querySelector('.nv-en'),jp=title.querySelector('h1');if(en&&jp)jp.before(en);});
-      if(mast&&!utility&&!root.querySelector('.nv30-mast-photo')){
+      if(mast&&!utility&&!/^\/(service|industry)\//.test(pagePath)&&!root.querySelector('.nv30-mast-photo')){
         const key=pagePath.split('/').pop();
         const photo=img(serviceArt[key]?'service-'+key+'-v2.jpg':'industry-'+key+'-v2.jpg','nv30-mast-photo');
         mast.parentElement.append(photo);
@@ -346,6 +347,19 @@ window.NoveMotionTokens=Object.freeze({
 /* Trust: deliberate deceleration. Partnership: ordered handoff. Growth: connection. */
 
 
+/* D01: retain authored statements and CTA nodes, expose them in reading order. */
+(()=>{'use strict';function init(){
+ const main=document.querySelector('main');
+ if(!main||!['service-detail','industry-detail','cmo'].includes(main.dataset.nv35Kind))return;
+ const intro=main.querySelector(':scope>.nv-cmo-intro'),grid=intro?.querySelector(':scope>.nv-split,:scope>.r24-intro'),copy=grid?.querySelector(':scope>.nv-copy');
+ if(!copy)return;
+ copy.classList.add('nv42-intro-copy');
+ const statement=grid.querySelector('h2'),action=grid.querySelector('.nv-button');
+ if(statement&&!copy.contains(statement))copy.prepend(statement);
+ if(action&&!copy.contains(action))copy.append(action);
+ grid.querySelectorAll('.nv33-intro-message').forEach(n=>{if(!n.children.length)n.remove();});
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
 /* NOVE editorial motion. Text stays available; visual cues explain the next step. */
 (()=>{'use strict';
  const T=window.NoveMotionTokens;if(!T)return;
@@ -365,6 +379,7 @@ window.NoveMotionTokens=Object.freeze({
   function finish(el){for(const [a,target] of [...active])if(!el||target===el||el.contains(target)){try{a.finish();}catch{a.cancel();}release(a,target);}}
   function animate(el,frames,role='element',delay=0,ease='enter'){
    if(!el||!alive||stopped()||!inView(el)||typeof el.animate!=='function')return;
+   el.dataset.nvMotionRole=role;el.dataset.nvMotionDuration=String(T.duration[role]);el.dataset.nvMotionDelay=String(delay);
    const a=el.animate(frames,{duration:T.duration[role],delay,easing:T.ease[ease],fill:'backwards'});active.set(a,el);activeObserver.observe(el);startedCount++;
    a.finished.then(()=>release(a,el),()=>release(a,el));return a;
   }
@@ -382,7 +397,7 @@ window.NoveMotionTokens=Object.freeze({
   function state(){
    const why=reason();main.dataset.nvMotionReason=why||'active';
    if(media.matches){finish();rails.forEach(({rail})=>rail.style.transform='none');main.dataset.nvMotionState='reduced';}
-   else if(why){for(const a of active.keys())a.pause();main.dataset.nvMotionState=why==='loading'?'waiting':'paused';}
+   else if(why){if(why==='user')finish();else for(const a of active.keys())a.pause();main.dataset.nvMotionState=why==='loading'?'waiting':'paused';}
    else{for(const [a,el] of [...active]){if(!inView(el))finish(el);else if(a.playState==='paused')a.play();}rails.forEach(({rail,progress})=>{rail.style.transform=`scale${rail.dataset.axis==='y'?'Y':'X'}(${progress})`;});main.dataset.nvMotionState='active';flush();}
   }
   activeObserver=new IntersectionObserver(entries=>{for(const e of entries)if(!e.isIntersecting)finish(e.target);},{threshold:0,rootMargin:'-64px 0px 0px'});
@@ -409,28 +424,43 @@ window.NoveMotionTokens=Object.freeze({
   const title=hero?.querySelector('h1');
   register(title,'hero',()=>{
    main.dataset.nvHeroIntro='played';const lines=title.querySelectorAll('.nv30-hero-line');
-   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 28px',opacity:.32},{translate:'0 0',opacity:1}],'scene',160+i*120));
+   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 8px',opacity:.72},{translate:'0 0',opacity:1}],'heading',T.sequence.title+i*T.sequence.line));
    const en=title.previousElementSibling;if(en?.matches('.nv-en,.nv30-en'))animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element');
   });
   const heroArt=hero?.querySelector('.nv30-hero-art');
-  register(heroArt,'hero-art',()=>animate(heroArt,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'scene'));
+  register(heroArt,'hero-art',()=>animate(heroArt,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'media'));
+  const promise=main.querySelector('.nv42-intro-copy>p');
+  register(promise,'detail-promise',()=>animate(promise,[{opacity:.82},{opacity:1}],'copy',T.sequence.chapter));
   // The CTA remains fully readable and clickable during the title sequence.
   register(hero?.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions'),'hero-actions',()=>{
    const actions=hero.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions');
-   actions.querySelectorAll('.nv-arrow').forEach(arrow=>animate(arrow,[{translate:'-16px 0'},{translate:'0 0'}],'element',480));
+   actions.querySelectorAll('.nv-arrow').forEach(arrow=>animate(arrow,[{translate:'-8px 0'},{translate:'0 0'}],'micro',T.sequence.cta));
   });
   // Scene 2: one chapter transition per editorial block, followed by its photograph.
   // Select key sections; do not stagger every paragraph or every element on the page.
-  const headings=main.querySelectorAll('.nv-overview h2,.nv-process h2,.nv-services h2,.nv30-research h2,.nv30-execution h2,.nv30-process h2');
+  const headings=[...main.querySelectorAll('h2')].filter(h=>!h.closest('.nv-cmo-intro,.nv-cta,.nv-prose,.nv-catalog,.word-article-body')&&!['privacy','insights'].includes(main.dataset.nv35Kind));
   headings.forEach((h,i)=>register(h,'chapter-'+i,()=>{
    const en=h.previousElementSibling;
    if(en?.matches('.nv-en,.nv30-en'))animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element');
-   animate(h,[{translate:'20px 0',opacity:.48},{translate:'0 0',opacity:1}],'element',T.stagger*2);
+   animate(h,[{translate:'6px 0',opacity:.78},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
   }));
   main.querySelectorAll('.nv-business .nv-en,.nv-industries .nv-en,.nv-company .nv-en').forEach((en,i)=>register(en,'chapter-link-'+i,()=>animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element')));
   main.querySelectorAll('.nv30-mast-photo,.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo').forEach((photo,i)=>{
-   register(photo,'photo-'+i,()=>animate(photo,[{clipPath:'polygon(0 0, 0 0, 0 100%, 0 100%)'},{clipPath:'polygon(0 0, 100% 0, 100% 100%, 0 100%)'}],'scene',T.stagger*2));
+   register(photo,'photo-'+i,()=>animate(photo,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'media',T.sequence.media));
    listen(photo,'load',flush);
+  });
+  // Give a row of service choices a short left-to-right rhythm. Japanese copy
+  // remains static; each existing illustration enters only once, after loading.
+  main.querySelectorAll('.nv30-services,.nv-cmo-challenges,.nv-challenges').forEach((group,g)=>{
+   group.querySelectorAll('.nv30-service-card>img,.nv30-cards>li>img').forEach((art,i)=>{
+    register(art,'choice-'+g+'-'+i,()=>{
+     const top=art.parentElement.getBoundingClientRect().top;
+     const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
+     const delay=innerWidth>=768?Math.min(row.indexOf(art),2)*T.stagger:0;
+     animate(art,[{clipPath:'inset(0 15% 0 0)',opacity:.94},{clipPath:'inset(0 0 0 0)',opacity:1}],'choice',delay);
+    });
+    listen(art,'load',flush);
+   });
   });
   main.querySelectorAll('.nv-steps').forEach((steps,group)=>{
    const items=[...steps.querySelectorAll(':scope>.nv-step')];if(!items.length)return;
@@ -454,9 +484,9 @@ window.NoveMotionTokens=Object.freeze({
    const rule=document.createElement('span');rule.className='nv-cta-motion-rule';rule.setAttribute('aria-hidden','true');section.prepend(rule);decorations.push(rule);
    register(section.querySelector('h2'),'cta-'+i,()=>{
     animate(rule,[{scale:'0 1'},{scale:'1 1'}],'scene');
-    animate(section.querySelector('h2'),[{translate:'0 18px',opacity:.55},{translate:'0 0',opacity:1}],'element',T.stagger*2);
+    animate(section.querySelector('h2'),[{translate:'0 6px',opacity:.8},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
    });
-   const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:'-18px 0'},{translate:'0 0'}],'element',T.stagger));
+   const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:'-8px 0'},{translate:'0 0'}],'micro',T.sequence.cta));
   });
   listen(window,'nove:motion-ready',state);listen(document,'visibilitychange',state);listen(media,'change',state);
   listen(window,'nove:motion-setting',state);
@@ -597,3 +627,31 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+/* F01: observe native Webflow authentication, never alter its token or submit lock. */
+(()=>{'use strict';function init(){
+ const form=document.querySelector('#contact-form[data-turnstile-sitekey]');
+ if(!form||form.querySelector('#nove-auth-status'))return;
+ const wrapper=form.closest('.w-form'),button=form.querySelector('[type=submit]');if(!wrapper||!button)return;
+ const status=document.createElement('p');status.id='nove-auth-status';status.className='nv-auth-status';
+ status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');button.before(status);
+ button.setAttribute('aria-describedby',[button.getAttribute('aria-describedby'),status.id].filter(Boolean).join(' '));
+ let state='';
+ function sync(){
+  const response=form.querySelector('[name="cf-turnstile-response"]');
+  const waiting=wrapper.classList.contains('w-form-loading')||button.classList.contains('w-form-loading');
+  const sending=button.disabled&&Boolean(response?.value);
+  const next=waiting?'waiting':sending?'sending':button.disabled&&response?'failed':response?'ready':'waiting';
+  if(next===state)return;state=next;status.dataset.authState=next;
+  status.style.visibility=['ready','sending'].includes(next)?'hidden':'visible';
+  status.replaceChildren();
+  if(next==='waiting')status.textContent='認証を確認しています。完了までお待ちください。';
+  if(next==='failed'){
+   status.append('認証を完了できませんでした。ページを再読み込みしてお試しください。解決しない場合は ');
+   const mail=document.createElement('a');mail.href='mailto:info@no-ve.co.jp';mail.textContent='info@no-ve.co.jp';status.append(mail,' へご連絡ください。');
+  }
+ }
+ const observer=new MutationObserver(sync);observer.observe(wrapper,{subtree:true,childList:true,attributes:true,attributeFilter:['class','disabled','value']});sync();
+ window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
+ window.addEventListener('pageshow',()=>{observer.observe(wrapper,{subtree:true,childList:true,attributes:true,attributeFilter:['class','disabled','value']});sync();});
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();

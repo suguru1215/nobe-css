@@ -1,4 +1,4 @@
-@layer noveAlignment,noveParity,novePolish,noveMotion;
+@layer noveComponents,noveAlignment,noveParity,novePolish,noveMotion;
 html body:is(#nv30-design,body){--nv-blue:#024991 !important;--nv-cyan:#024991 !important;--nv-mist:#f2f8ff !important;--nv-line:#d5e6f6 !important;--nv-muted:#394b5d !important;color:#172531 !important;background:#fff !important}
 html body:is(#nv30-design,body) .nv23{font-family:'Noto Sans JP',sans-serif !important;color:#172531 !important;line-height:1.8 !important}
 html body:is(#nv30-design,body) .nv23 :is(p,li){line-height:1.8 !important}
@@ -1476,5 +1476,141 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
   body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p{padding:0 0 0 20px!important}
   body.nv38-parity #main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p:after{top:32px}
   .nv-process-visual{margin-bottom:20px}
+ }
+}
+
+/* Reading hierarchy: keep authored text and images, give the promise the first view. */
+@layer noveAlignment {
+ /* Directional feedback is shared by hover and keyboard, with no moving text. */
+ body.nv38-parity #main#main#main a .nv-arrow {transform:none!important;transition:translate var(--nv-motion-micro) var(--nv-motion-state)!important}
+ body.nv38-parity[data-nv-motion-paused=true] #main#main#main a .nv-arrow {transition:none!important;transform:none!important;translate:none!important}
+ body.nv38-parity #main#main#main .nv-cmo-title>.nv-en {
+  font-size:clamp(28px,3.4vw,48px)!important;line-height:1.15!important;
+  font-weight:700!important;letter-spacing:-.025em!important;margin-block:16px!important;
+ }
+ body.nv38-parity #main#main#main[data-nv35-kind=cmo] .nv33-medallion>span {line-height:1.3!important}
+ body.nv38-parity #main#main#main[data-nv35-kind=contact] .formfield_badge {line-height:1.6!important}
+ @media(min-width:768px) {
+  body.nv38-parity #main#main#main.nv23-home .nv-industry-grid>a {height:auto!important;min-height:88px!important}
+ }
+ body.nv38-parity #main#main#main.nv41-detail>.nv41-mast {
+  padding-block:40px 20px!important;min-height:0!important;
+ }
+ body.nv38-parity #main#main#main.nv41-detail>.nv41-mast:before {content:none!important;display:none!important}
+ body.nv38-parity #main#main#main.nv41-detail .nv41-mast .nv-cmo-title {margin-bottom:0!important}
+ body.nv38-parity #main#main#main.nv41-detail>.nv41-intro {padding-block:12px 64px!important;min-height:0!important}
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid {
+  display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;
+  gap:48px!important;align-items:center!important;
+ }
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid:not(:has(>.nv30-mast-photo)):after {content:'';display:block;height:300px;grid-column:2;pointer-events:none}
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-copy {
+  display:block!important;padding:0!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+ }
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-copy>p {
+  font-weight:400!important;font-size:17px!important;line-height:1.9!important;max-width:38em!important;
+ }
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-copy>.nv-lower-action {margin-top:24px!important}
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-copy .nv-button {width:fit-content!important;max-width:440px!important;min-width:320px!important}
+ body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid>.nv30-mast-photo {
+  width:100%!important;max-width:100%!important;height:300px!important;margin:0!important;object-fit:cover!important;
+ }
+ @media(min-width:768px) and (max-width:1099px) {
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid {gap:32px!important;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)!important}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid>.nv30-mast-photo {height:240px!important}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid:not(:has(>.nv30-mast-photo)):after {height:240px}
+ }
+ @media(max-width:767px) {
+  body.nv38-parity #main#main#main .nv-cmo-title>.nv-en {font-size:28px!important;white-space:normal!important;overflow-wrap:normal!important}
+  body.nv38-parity #main#main#main.nv41-detail>.nv41-mast {padding-block:28px 16px!important}
+  body.nv38-parity #main#main#main.nv41-detail>.nv41-intro {padding-block:8px 48px!important}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid {grid-template-columns:minmax(0,1fr)!important;gap:28px!important}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid:not(:has(>.nv30-mast-photo)):after {height:200px;grid-column:1}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-copy>p {font-size:16px!important}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-copy .nv-button {width:100%!important;max-width:100%!important;min-width:0!important}
+  body.nv38-parity #main#main#main.nv41-detail .nv41-intro-grid>.nv30-mast-photo {height:200px!important}
+  /* Each consultation is read before the illustration; all original nodes remain. */
+  body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li {gap:16px!important;padding:24px 24px 44px!important}
+  body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>b {order:0!important;width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important;font-size:17px!important}
+  body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>span {order:1!important}
+  body.nv38-parity #main#main#main .nv-cmo-challenges .nv30-cards>li>img {order:2!important;height:160px!important}
+ }
+}
+
+/* Shared components: the same reading role uses one responsive token. */
+@layer noveComponents {
+ :root {--nv-component-blue:#024991;--nv-component-ink:#172531;--nv-component-copy:#293c4b;--nv-component-line:#d5e6f6;--nv-component-en:44px;--nv-component-heading:32px;--nv-component-page:36px;--nv-component-body:17px;--nv-component-gap:24px;--nv-component-section:72px;--nv-component-card-title:22px}
+ body.nv30 #main>section:not(.nv-hero):not(.nv-cta):not(.nv-cmo-mast):not(.section_pagehero):not(.nv-cmo-intro) {padding-block:var(--nv-component-section)!important}
+ body.nv30 #main .nv30-en:not(.nv-cta .nv30-en) {font:700 var(--nv-component-en)/1.15 Montserrat,sans-serif!important;letter-spacing:-.025em!important;color:var(--nv-component-blue)!important;margin:0 0 16px!important;padding:0!important;white-space:normal!important;overflow-wrap:normal!important}
+ body.nv30 #main h2:not(.nv-cmo-intro h2,.nv-cta h2,.nv-prose h2,.nv-catalog h2,[data-nv35-kind=privacy] h2,[data-nv35-kind=insights] h2,.word-article-body h2) {font-size:var(--nv-component-heading)!important;font-weight:700!important;line-height:1.6!important;letter-spacing:0!important;color:var(--nv-component-ink)!important;margin:0 0 var(--nv-component-gap)!important;padding:0!important}
+ body.nv30 #main :is(.nv30-heading,.nv35-policy-heading,.nv30-company-heading) {margin-bottom:8px!important}
+ body.nv30 #main :is(.nv-cmo-title,.nv-lower-title) .nv-en,
+ body.nv30 #main .nv33-native-label {font:700 18px/1.2 Montserrat,sans-serif!important;letter-spacing:.04em!important;color:var(--nv-component-blue)!important;margin:0 0 12px!important;white-space:normal!important;overflow-wrap:normal!important}
+ body.nv30 #main :is(.nv-cmo-title h1,.nv-lower-title h1,.pagehero_title) {font-size:var(--nv-component-page)!important;font-weight:700!important;line-height:1.55!important;letter-spacing:0!important;color:var(--nv-component-ink)!important;margin:0!important}
+ body.nv30 #main p:not(.nv-en,.nv30-en,.nv33-native-label,.nv-note,.word-article-meta,.nove-final-error,.nove-final-hint,.nv-auth-status) {font-size:var(--nv-component-body)!important;line-height:1.9!important;letter-spacing:.03em!important;font-weight:400!important;color:var(--nv-component-copy)!important;margin-bottom:20px!important}
+ body.nv30 #main p:not(.nv-en,.nv30-en,.nv33-native-label):last-child {margin-bottom:0!important}
+ body.nv30 #main :is(.nv-photo-link,.nv-scope-card,.nv33-support-card,.nv-related-panel,.nv-faq-item,.nv-step) p {font-size:16px!important;line-height:1.9!important;margin:0!important}
+ body.nv30 #main .nv-copy>p:has(+.nv-lower-action) {margin-bottom:0!important}
+ body.nv30 #main .nv-button:not(.nv-cta .nv-button) {font-size:16px!important;font-weight:700!important;line-height:1.5!important;padding:16px 24px!important;gap:16px!important;min-height:56px!important;height:auto!important;border-radius:999px!important;white-space:normal!important;max-width:100%!important}
+ body.nv30 #main .nv-button:not(.nv-cta .nv-button)>span:not(.nv-arrow) {font-size:inherit!important;line-height:inherit!important}
+ body.nv30 #main .nv-link:not(.nv-hero-secondary,.nv-lower-related .nv-link) {font-size:16px!important;font-weight:700!important;line-height:1.8!important}
+ body.nv30 #main :is(.nv-photo-link,.nv-scope-card,.nv33-support-card,.nv-step) h3 {font-size:var(--nv-component-card-title)!important;font-weight:700!important;line-height:1.6!important;letter-spacing:0!important;color:var(--nv-component-ink)!important}
+ body.nv30 #main :is(.nv-photo-link,.nv-scope-card,.nv33-support-card) h3 {margin-bottom:16px!important;padding-block:0!important}
+ body.nv30 #main .nv-issue-list.nv30-cards>li {min-height:0!important;height:auto!important;padding:24px 24px 44px!important;border:1px solid var(--nv-component-line)!important;border-radius:8px!important;gap:16px!important;box-shadow:none!important}
+ body.nv30 #main .nv-issue-list.nv30-cards>li>b {font:700 20px/1.3 Montserrat,sans-serif!important;width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;order:0!important}
+ body.nv30 #main .nv-issue-list.nv30-cards>li>span {font-size:18px!important;font-weight:700!important;line-height:1.8!important;color:var(--nv-component-blue)!important;width:100%!important;max-width:300px!important;order:1!important}
+ body.nv30 #main .nv-issue-list.nv30-cards>li>img {height:200px!important;width:300px!important;max-width:100%!important;object-fit:contain!important;order:2!important}
+ body.nv30 #main .nv-issue-list.nv30-cards>li:after {position:static!important;margin:8px auto 0!important;width:44px!important;height:3px!important;flex-shrink:0!important;align-self:center!important}
+ body.nv30 #main .nv-step {min-height:0!important;padding-block:24px!important;border-top:1px solid var(--nv-component-line)!important;border-bottom:0!important;background:transparent!important;border-radius:0!important}
+ body.nv30 #main .nv-step>b {font:700 20px/1.3 Montserrat,sans-serif!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;color:#fff!important;background:var(--nv-component-blue)!important}
+ body.nv30 #main .nv-step h3 {margin:0 0 8px!important}
+ body.nv30 #main .nv-faq-item {padding:24px!important;border:1px solid var(--nv-component-line)!important;border-radius:12px!important;margin:0 0 16px!important}
+ body.nv30 #main .nv-faq-item:last-child {margin-bottom:0!important}
+ body.nv30 #main .nv-faq-item summary {font-size:18px!important;font-weight:700!important;line-height:1.8!important}
+ body.nv30 #main .nv-faq-item[open] summary {margin-bottom:16px!important}
+ body.nv30 #main .nv-cta>.nv30-en {font:700 var(--nv-component-en)/1.15 Montserrat,sans-serif!important;letter-spacing:-.025em!important;margin:0 0 16px!important;color:#fff!important}
+ body.nv30 #main .nv-cta h2 {font-size:var(--nv-component-heading)!important;font-weight:700!important;line-height:1.6!important;letter-spacing:0!important;color:#fff!important;margin:0!important}
+ body.nv30 #main .nv-cta p {color:#fff!important;font-size:16px!important;line-height:1.9!important}
+ body.nv30 #main .nv-cta .nv-button {font-size:24px!important;font-weight:700!important;line-height:1.5!important;gap:16px!important}
+ /* Numbered scope cards share a shell; the original medallion artwork stays. */
+ body.nv30 #main :is(.nv-scope-card,.nv33-support-card) {position:relative!important;padding:24px 24px 24px 88px!important;background:#fff!important;border:1px solid var(--nv-component-line)!important;border-radius:8px!important;box-shadow:none!important}
+ body.nv30 #main :is(.nv-scope-card>b,.nv33-medallion) {position:absolute!important;top:24px!important;left:24px!important;right:auto!important;width:48px!important;height:48px!important;margin:0!important}
+ body.nv30 #main :is(.nv-scope-card>b,.nv33-medallion>span) {font:700 20px/1.3 Montserrat,sans-serif!important}
+ body.nv30 #main .nv-button {transition:background-color var(--nv-motion-micro) var(--nv-motion-state),border-color var(--nv-motion-micro) var(--nv-motion-state),box-shadow var(--nv-motion-micro) var(--nv-motion-state)!important;transform:none!important;translate:none!important}
+ body.nv30 #main :is(.nv-button,.nv-link,.nv-photo-link):focus-visible {outline:3px solid #428ad2!important;outline-offset:5px!important}
+ body.nv30 #main .nv-cta {padding-block:64px!important}
+ body.nv30 #main .nv-cta p {margin-block:12px 0!important}
+ body.nv30 #main .nv-related-panel h3 {font-size:var(--nv-component-card-title)!important;font-weight:700!important;line-height:1.6!important;margin:0 0 16px!important}
+ /* D01: the title and promise form one compact text-led introduction. */
+ body.nv30 #main:is([data-nv35-kind=service-detail],[data-nv35-kind=industry-detail],[data-nv35-kind=cmo])>.nv-cmo-mast {padding-block:32px 20px!important;min-height:0!important}
+ body.nv30 #main .nv-cmo-mast:has(+.nv-cmo-intro):before {content:none!important;display:none!important}
+ body.nv30 #main .nv-cmo-title {margin-bottom:0!important}
+ body.nv30 #main .nv30-mast-photo {display:none!important}
+ body.nv30 #main:is([data-nv35-kind=service-detail],[data-nv35-kind=industry-detail],[data-nv35-kind=cmo])>.nv-cmo-intro {padding-block:0 48px!important;min-height:0!important}
+ body.nv30 #main:is([data-nv35-kind=service-detail],[data-nv35-kind=industry-detail],[data-nv35-kind=cmo]) .nv-cmo-intro>:is(.nv-split,.r24-intro) {display:block!important;max-width:1140px!important}
+ body.nv30 #main .nv42-intro-copy {display:block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;max-width:48em!important}
+ body.nv30 #main .nv42-intro-copy h2 {font-size:24px!important;font-weight:700!important;line-height:1.6!important;letter-spacing:0!important;margin:0 0 16px!important;color:var(--nv-component-ink)!important}
+ body.nv30 #main .nv42-intro-copy>.nv-lower-action {margin-top:24px!important}
+ body.nv30 #main .nv42-intro-copy>.nv-button {margin-top:24px!important}
+ body.nv30 #main .nv42-intro-copy>p:has(+.nv-button) {margin-bottom:0!important}
+ body.nv30 #main .nv42-intro-copy .nv-button {width:fit-content!important;min-width:320px!important;max-width:440px!important}
+ .nv-auth-status {margin:16px 0 0!important;padding:12px 0;font-size:14px!important;line-height:1.8!important;color:var(--nv-component-copy)!important;min-height:50px}
+ .nv-auth-status a {color:var(--nv-component-blue);text-decoration:underline;text-underline-offset:3px}
+ .nv-auth-status[data-auth-state=failed] {color:#b42318!important}
+ @media(min-width:768px) and (max-width:1099px) {:root {--nv-component-en:32px;--nv-component-heading:28px;--nv-component-page:32px;--nv-component-section:64px}}
+ @media(max-width:767px) {
+  :root {--nv-component-en:28px;--nv-component-heading:26px;--nv-component-page:28px;--nv-component-body:16px;--nv-component-gap:20px;--nv-component-section:48px;--nv-component-card-title:20px}
+  body.nv30 #main :is(.nv-cmo-title,.nv-lower-title) .nv-en,body.nv30 #main .nv33-native-label {font-size:16px!important;margin-bottom:12px!important}
+  body.nv30 #main .nv30-en:not(.nv-cta .nv30-en) {margin-bottom:12px!important}
+  body.nv30 #main .nv-issue-list.nv30-cards>li>b {font-size:18px!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+  body.nv30 #main .nv-issue-list.nv30-cards>li>img {height:160px!important}
+  body.nv30 #main .nv-issue-list.nv30-cards>li>span {font-size:17px!important}
+  body.nv30 #main .nv-faq-item summary {font-size:16px!important}
+  body.nv30 #main :is(.nv-scope-card,.nv33-support-card) {padding:24px!important}
+  body.nv30 #main :is(.nv-scope-card>b,.nv33-medallion) {position:relative!important;top:auto!important;left:auto!important;margin:0 0 16px!important}
+  body.nv30 #main .nv-cta {padding-block:48px!important}
+  body.nv30 #main .nv-cta .nv-button {font-size:22px!important}
+  body.nv30 #main .nv42-intro-copy .nv-button {width:100%!important;min-width:0!important;max-width:100%!important}
  }
 }
