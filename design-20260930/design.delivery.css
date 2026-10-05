@@ -1395,26 +1395,6 @@ body.nv30 #main .nv-button:focus-visible{outline:3px solid #428ad2;outline-offse
 }
 body.nv30 #main[data-nv-motion-state=paused] *,body.nv30 #main[data-nv-motion-state=reduced] *{transition-duration:0s!important}
 @media(prefers-reduced-motion:reduce){body.nv30 #main .nv-button .nv-arrow{translate:none!important}}
-/* Gather -> hand-off -> choice. Small native SVG strokes; no perpetual timeline. */
-.nv-story-overview{position:relative}
-html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) main.nv23-home .nv-story-overview h2:before{visibility:hidden!important;height:44px!important}
-.nv-story-gather{position:absolute;left:0;top:0;width:280px;height:44px;overflow:visible;pointer-events:none}
-.nv-story-gather .nv-story-branches,.nv-story-result{fill:none;stroke:#84a7c7;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:0}
-.nv-story-sources{fill:#78a7ce}.nv-story-fold{fill:#214d89;stroke:none}.nv-story-result{stroke:#214d89}
-.nv-story-handoff{max-width:none!important;position:absolute;left:-25px;top:0;width:16px;height:18px;overflow:visible;pointer-events:none}
-.nv-story-handoff-holder{position:absolute;left:0;top:0;width:0;height:0;list-style:none;margin:0;padding:0;pointer-events:none}
-body.nv30 #main .nv-step.nv-story-current h3{color:#214d89!important}
-body.nv30 #main .nv-step.nv-story-current b{box-shadow:0 0 0 5px #dbe9f4;border-radius:50%}
-.nv-story-grid{position:relative;isolation:isolate}
-.nv-story-options{max-width:none!important;position:absolute;left:-20px;top:-40px;width:calc(100% + 20px);height:calc(100% + 40px);pointer-events:none;overflow:visible;z-index:-1}
-.nv-story-choice{fill:none;stroke:#afc4d8;stroke-width:1;stroke-dasharray:1;stroke-dashoffset:0;vector-effect:non-scaling-stroke;transition:stroke var(--nv-motion-micro) var(--nv-motion-state),stroke-width var(--nv-motion-micro) var(--nv-motion-state)}
-.nv-story-choice.nv-story-selected{stroke:#214d89;stroke-width:2}
-@media(max-width:767px){.nv-story-handoff{left:-16px;width:11px}.nv-story-gather{width:240px}}
-
-/* A quiet resting map keeps the selected route legible without framing every card. */
-.nv-story-choice{opacity:.4;transition:opacity var(--nv-motion-micro) var(--nv-motion-state),stroke var(--nv-motion-micro) var(--nv-motion-state)}
-.nv-story-choice.nv-story-selected{opacity:1}
-
 /* Native footer disclosure and checkbox keep keyboard semantics and a saved preference. */
 body.nv30 .nv-motion-settings{max-width:420px;margin:20px 0 0;color:#edf3f9;font-size:14px;line-height:1.6}
 body.nv30 .nv-motion-settings summary{width:fit-content;min-height:44px;padding:10px 0;cursor:pointer;text-underline-offset:4px}
@@ -1429,9 +1409,8 @@ body.nv30 .nv-motion-settings :is(summary,label,span){color:#edf3f9!important}
 /* Motion 9: emphasis is limited to five meaningful scenes; resting layout is unchanged. */
 body.nv30 #main .nv-cta{position:relative}
 body.nv30 #main .nv-cta-motion-rule{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,#214d89 0%,#84b7df 64%,transparent);transform-origin:left center;pointer-events:none;opacity:.65}
-body.nv30 #main :is(.nv-process-target,.nv-process-core,.nv-story-sources circle){transform-box:fill-box;transform-origin:center}
+body.nv30 #main :is(.nv-process-target,.nv-process-core){transform-box:fill-box;transform-origin:center}
 body.nv30 #main .nv-step>b{transform-origin:center}
-body.nv30 #main .nv-story-result{stroke-dasharray:1;stroke-dashoffset:0}
 @media(prefers-reduced-motion:reduce){body.nv30 #main .nv-cta-motion-rule{transform:none!important}}
 
 /* Same paint as the original mast lines/circles, without JS computed-style reads. */

@@ -352,7 +352,7 @@ window.NoveMotionTokens=Object.freeze({
  let teardown=()=>{};
  function init(){
   teardown();const main=document.querySelector('main');if(!main)return;
-  const media=matchMedia('(prefers-reduced-motion: reduce)'),active=new Map(),pending=new Map(),visible=new Set(),listeners=[],rails=[],decorations=[],layouts=[];
+  const media=matchMedia('(prefers-reduced-motion: reduce)'),active=new Map(),pending=new Map(),visible=new Set(),listeners=[],rails=[],decorations=[];
   // Entrances belong to this visit. Persist only the user's explicit stop preference.
   // A previous tab visit must not consume the next page visit's visual sequence.
   let alive=true,observer,activeObserver,resizeFrame=0,startedCount=0;
@@ -458,46 +458,11 @@ window.NoveMotionTokens=Object.freeze({
    });
    const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:'-18px 0'},{translate:'0 0'}],'element',T.stagger));
   });
-  // Three visual verbs, grounded in the existing content: gather, hand off, choose.
-  // These small SVGs contain no added copy, controls, metrics or claimed results.
-  if(main.classList.contains('nv23-home')){
-   const svg=(cls,view,markup)=>{const el=document.createElementNS('http://www.w3.org/2000/svg','svg');el.setAttribute('viewBox',view);el.setAttribute('aria-hidden','true');el.setAttribute('focusable','false');el.classList.add(cls);el.innerHTML=markup;decorations.push(el);return el;};
-   const fold='<path class="nv-story-fold" d="M0 0 18 4 7 8ZM8 10 20 6 13 18Z"/>';
-   const overview=main.querySelector('.nv30-overview-copy');
-   if(overview){
-    overview.classList.add('nv-story-overview');
-    const motif=svg('nv-story-gather','0 0 280 44','<g class="nv-story-branches"><path pathLength="1" d="M6 7 64 8 112 22 211 22"/><path pathLength="1" d="M6 22 74 22 112 22"/><path pathLength="1" d="M6 37 64 36 112 22"/></g><g class="nv-story-sources"><circle cx="6" cy="7" r="3"/><circle cx="6" cy="22" r="3"/><circle cx="6" cy="37" r="3"/></g><g transform="translate(217 13)">'+fold+'</g><path class="nv-story-result" pathLength="1" d="M244 22H276"/>');overview.prepend(motif);
-    register(motif,'gather',()=>{
-     motif.querySelectorAll('.nv-story-branches path').forEach((p,i)=>animate(p,[{strokeDashoffset:1},{strokeDashoffset:0}],'scene',i*120,'state'));
-     motif.querySelectorAll('.nv-story-sources circle').forEach((p,i)=>animate(p,[{scale:'.45',opacity:.2},{scale:'1',opacity:1}],'element',i*120));
-     motif.querySelectorAll('.nv-story-fold').forEach(p=>animate(p,[{translate:'-14px 0',opacity:.15},{translate:'0 0',opacity:1}],'element',480));
-     animate(motif.querySelector('.nv-story-result'),[{strokeDashoffset:1},{strokeDashoffset:0}],'element',640,'state');
-    });
-   }
-   // The same folded mark travels beside the currently read step, not over its copy.
-   rails.forEach(({steps,items})=>{
-    const marker=svg('nv-story-handoff','0 0 20 18',fold),holder=document.createElement('li');holder.className='nv-story-handoff-holder';holder.setAttribute('role','presentation');holder.setAttribute('aria-hidden','true');holder.append(marker);steps.append(holder);decorations.push(holder);let current=-1,lastY=null;
-    const move=index=>{const b=items[index].querySelector('b');if(!b)return;const br=b.getBoundingClientRect(),sr=steps.getBoundingClientRect(),y=br.top-sr.top+br.height/2-9;if(index===current&&y===lastY)return;const previous=marker.style.transform||`translateY(${y}px)`;finish(marker);marker.style.transform=`translateY(${y}px)`;if(index!==current)items.forEach((item,i)=>item.classList.toggle('nv-story-current',i===index));if(current>=0&&index!==current&&!stopped())animate(marker,[{transform:previous},{transform:`translateY(${y}px)`}],'element',0,'state');current=index;lastY=y;};
-    const reading=new Set();const stepObserver=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting)reading.add(entry.target);else reading.delete(entry.target);}if(stopped()||!reading.size)return;const closest=[...reading].sort((a,b)=>Math.abs(a.getBoundingClientRect().top+a.offsetHeight/2-innerHeight*.5)-Math.abs(b.getBoundingClientRect().top+b.offsetHeight/2-innerHeight*.5))[0];move(items.indexOf(closest));},{rootMargin:'-25% 0px -25% 0px',threshold:[0,.5,1]});items.forEach(e=>stepObserver.observe(e));move(0);document.fonts.ready.then(()=>{if(alive)move(current);});layouts.push(()=>move(current));listeners.push(()=>{stepObserver.disconnect();items.forEach(e=>e.classList.remove('nv-story-current'));});
-   });
-   // A visible branch links the existing service heading to the option under pointer/focus.
-   const grid=main.querySelector('.nv-services .nv-photo-grid');
-   if(grid){
-    const cards=[...grid.querySelectorAll(':scope>a')];const paths=cards.map(()=>'<path class="nv-story-choice" pathLength="1"/>').join('');
-    const branches=svg('nv-story-options','0 0 100 100',paths+'<g class="nv-story-origin" transform="translate(0 1)">'+fold+'</g>');grid.prepend(branches);grid.classList.add('nv-story-grid');
-    const map=()=>{const box=grid.getBoundingClientRect();branches.setAttribute('viewBox',`0 0 ${box.width+20} ${box.height+40}`);branches.querySelectorAll('.nv-story-choice').forEach((p,i)=>{const r=cards[i].getBoundingClientRect(),x=r.left-box.left+r.width/2+20,y=r.top-box.top+40;p.setAttribute('d',`M10 19V${Math.max(20,y-20)}H${x}V${y}`);});};map();document.fonts.ready.then(()=>{if(alive)map();});layouts.push(map);
-    const choices=[...branches.querySelectorAll('.nv-story-choice')];let pointer=-1,selected=-1;
-    const select=()=>{const focused=cards.findIndex(card=>card.contains(document.activeElement));const index=focused>=0?focused:pointer;if(index===selected)return;choices.forEach((p,i)=>p.classList.toggle('nv-story-selected',i===index));selected=index;};
-    cards.forEach((card,i)=>{listen(card,'pointerenter',()=>{pointer=i;select();});listen(card,'pointerleave',()=>{pointer=-1;select();});listen(card,'focusin',select);listen(card,'focusout',()=>queueMicrotask(select));});
-    register(branches,'choose',()=>branches.querySelectorAll('.nv-story-choice').forEach((p,i)=>animate(p,[{strokeDashoffset:1},{strokeDashoffset:0}],'scene',i*T.stagger,'state')));
-    listeners.push(()=>grid.classList.remove('nv-story-grid'));
-   }
-  }
   listen(window,'nove:motion-ready',state);listen(document,'visibilitychange',state);listen(media,'change',state);
   listen(window,'nove:motion-setting',state);
-  listen(window,'resize',()=>{if(resizeFrame)return;resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;finish();rails.forEach(r=>r.layout());layouts.forEach(layout=>layout());state();});});
+  listen(window,'resize',()=>{if(resizeFrame)return;resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;finish();rails.forEach(r=>r.layout());state();});});
   listen(main,'focusin',()=>finish());
-  teardown=()=>{alive=false;cancelAnimationFrame(resizeFrame);observer.disconnect();finish();activeObserver.disconnect();listeners.forEach(off=>off());decorations.forEach(e=>e.remove());main.querySelector('.nv-story-overview')?.classList.remove('nv-story-overview');rails.forEach(({rail,steps})=>{rail.remove();steps.classList.remove('nv-motion-process');});};
+  teardown=()=>{alive=false;cancelAnimationFrame(resizeFrame);observer.disconnect();finish();activeObserver.disconnect();listeners.forEach(off=>off());decorations.forEach(e=>e.remove());rails.forEach(({rail,steps})=>{rail.remove();steps.classList.remove('nv-motion-process');});};
   state();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
