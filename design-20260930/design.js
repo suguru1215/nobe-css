@@ -307,7 +307,7 @@ window.NoveMotionTokens=Object.freeze({
     if(main){composeFigma(main);composeTopFigma(main);}
     syncFigmaFooter();const footer=document.querySelector('.nv23-footer');if(footer){const watchFooter=new MutationObserver(syncFigmaFooter);watchFooter.observe(footer,{childList:true,subtree:true});window.addEventListener('pagehide',()=>watchFooter.disconnect(),{once:true});}
     if(pagePath==='/contact')document.querySelector('main')?.classList.add('nv30-contact');
-    if(!main){const nativeMain=document.querySelector('main');if(nativeMain){nativeMain.dataset.nv33Page=pagePath;const h=nativeMain.querySelector('h1');if(h&&pagePath==='/contact'){const label=document.createElement('span');label.className='nv33-native-label';label.textContent='CONTACT';label.setAttribute('aria-hidden','true');h.before(label);}}}
+    if(!main){const nativeMain=document.querySelector('main');if(nativeMain){nativeMain.dataset.nv33Page=pagePath;const h=nativeMain.querySelector('h1');if(h&&pagePath==='/contact'&&!nativeMain.querySelector('.nv33-native-label')){const label=document.createElement('span');label.className='nv33-native-label';label.textContent='CONTACT';label.setAttribute('aria-hidden','true');h.before(label);}}}
 
     document.querySelectorAll('.nv-mobile-nav').forEach(d=>{d.addEventListener('keydown',e=>{if(e.key==='Escape'){d.open=false;d.querySelector('summary')?.focus();}});});
     // Keep content visible immediately; motion is reserved for the hero.

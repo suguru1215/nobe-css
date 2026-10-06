@@ -3,7 +3,27 @@
   'use strict';
   const assetBase=new URL('./assets/',document.currentScript.src);
   let posterPreloaded=false;
+  let contactPrepared=false;
   function prepare(){
+    // Contact uses native Webflow markup rather than main.nv23. Apply its existing
+    // final layout while parsing, before the deferred design pass can move it.
+    if(location.pathname.replace(/\/$/,'')==='/contact'){
+      const contact=document.querySelector('main');
+      if(!contact)return false;
+      document.body.classList.add('nv30','nv35-lower','nv36-polish','nv38-parity');
+      contact.classList.add('nv30-contact');contact.dataset.nv33Page='/contact';contact.dataset.nv35Kind='contact';
+      const heading=contact.querySelector('h1');
+      if(heading?.textContent.trim()&&!contact.querySelector('.nv33-native-label')){
+        const label=document.createElement('span');label.className='nv33-native-label';label.textContent='CONTACT';label.setAttribute('aria-hidden','true');heading.before(label);
+      }
+      // Reuse the site's already approved native presentation pass. It preserves
+      // field nodes and leaves validation, Turnstile and submission to Webflow.
+      const form=contact.querySelector('#contact-form');
+      if(!contactPrepared&&form?.querySelector('[type="submit"]')&&typeof reviseNoveContact==='function'){
+        contactPrepared=true;reviseNoveContact(document);
+      }
+      return contactPrepared;
+    }
     const main=document.querySelector('main.nv23');
     if(!main)return false;
     document.body.classList.add('nv30','nv36-polish');
