@@ -333,7 +333,7 @@ window.NoveMotionTokens=Object.freeze({
   if(kind==='company'){
    const profile=main.querySelector('.nv30-profile');if(profile){profile.dataset.nv30Tone='mist';profile.style.removeProperty('background');}
    const copy=main.querySelector('.nv30-policy .nv-copy');
-   if(copy){const group=document.createElement('div');group.className='nv35-policy-heading';[...copy.children].filter(n=>n.matches('.nv30-en,h2')).forEach(n=>group.append(n));copy.before(group);}
+   if(copy&&!copy.previousElementSibling?.classList.contains('nv35-policy-heading')){const group=document.createElement('div');group.className='nv35-policy-heading';[...copy.children].filter(n=>n.matches('.nv30-en,h2')).forEach(n=>group.append(n));copy.before(group);}
   }
   // All CTA children remain in their original order; wrappers receive layout roles.
   main.querySelectorAll('.nv-cta>.nv-lower-action').forEach(n=>n.classList.add(n.querySelector('.nv-button')?'nv35-cta-primary':'nv35-cta-secondary'));
@@ -429,8 +429,18 @@ window.NoveMotionTokens=Object.freeze({
   });
   const heroArt=hero?.querySelector('.nv30-hero-art');
   register(heroArt,'hero-art',()=>animate(heroArt,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'media'));
-  const promise=main.querySelector('.nv42-intro-copy>p');
-  register(promise,'detail-promise',()=>animate(promise,[{opacity:.82},{opacity:1}],'copy',T.sequence.chapter));
+  // A lower-page introduction is one reading sequence, using the shared tokens.
+  // Animate emphasis only: every paragraph and CTA stays readable and clickable.
+  const lower=!main.classList.contains('nv23-home');
+  const intro=lower?main.querySelector(':scope>.nv-cmo-intro,:scope>.section_pagehero'):null;
+  const introCopy=intro?.querySelector('.nv42-intro-copy,.nv-utility-intro,.container_large')||intro;
+  const promise=lower?introCopy:main.querySelector('.nv42-intro-copy>p');
+  register(promise,'detail-promise',()=>{
+   if(!lower){animate(promise,[{opacity:.82},{opacity:1}],'copy',T.sequence.chapter);return;}
+   animate(introCopy.querySelector('h2'),[{opacity:.84},{opacity:1}],'copy',T.sequence.title+T.stagger);
+   introCopy.querySelectorAll(':scope>p:not(.nv33-native-label)').forEach(p=>animate(p,[{opacity:.86},{opacity:1}],'copy',T.sequence.cta));
+   introCopy.querySelectorAll('.nv43-actions .nv-arrow').forEach(arrow=>animate(arrow,[{translate:`-${T.distance/2}px 0`},{translate:'0 0'}],'micro',T.sequence.cta+T.stagger*2));
+  });
   // The CTA remains fully readable and clickable during the title sequence.
   register(hero?.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions'),'hero-actions',()=>{
    const actions=hero.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions');
@@ -442,7 +452,17 @@ window.NoveMotionTokens=Object.freeze({
   headings.forEach((h,i)=>register(h,'chapter-'+i,()=>{
    const en=h.previousElementSibling;
    if(en?.matches('.nv-en,.nv30-en'))animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element');
-   animate(h,[{translate:'6px 0',opacity:.78},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+   animate(h,[{translate:`${T.distance/2}px 0`,opacity:.78},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+   // Pair only the immediate editorial explanation with its chapter heading.
+   // Tables, cards and long prose retain their own existing visual behavior.
+   if(lower){
+    const copy=h.closest('.nv-copy')?.querySelector(':scope>p')||
+      (h.nextElementSibling?.matches('p')?h.nextElementSibling:null)||
+      (h.parentElement.nextElementSibling?.matches('p')?h.parentElement.nextElementSibling:null)||
+      (h.parentElement.nextElementSibling?.matches('.nv-copy,.nv-lower-copy')?h.parentElement.nextElementSibling.querySelector(':scope>p'):null);
+    if(copy&&copy.getBoundingClientRect().top-h.getBoundingClientRect().bottom<120)
+     animate(copy,[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
+   }
   }));
   main.querySelectorAll('.nv-business .nv-en,.nv-industries .nv-en,.nv-company .nv-en').forEach((en,i)=>register(en,'chapter-link-'+i,()=>animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element')));
   main.querySelectorAll('.nv30-mast-photo,.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo').forEach((photo,i)=>{
@@ -485,8 +505,9 @@ window.NoveMotionTokens=Object.freeze({
    register(section.querySelector('h2'),'cta-'+i,()=>{
     animate(rule,[{scale:'0 1'},{scale:'1 1'}],'scene');
     animate(section.querySelector('h2'),[{translate:'0 6px',opacity:.8},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+    if(lower)animate(section.querySelector('p'),[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
    });
-   const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:'-8px 0'},{translate:'0 0'}],'micro',T.sequence.cta));
+   const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:`-${lower?T.distance/2:8}px 0`},{translate:'0 0'}],'micro',T.sequence.cta+(lower?T.stagger*2:0)));
   });
   listen(window,'nove:motion-ready',state);listen(document,'visibilitychange',state);listen(media,'change',state);
   listen(window,'nove:motion-setting',state);
@@ -495,8 +516,10 @@ window.NoveMotionTokens=Object.freeze({
   teardown=()=>{alive=false;cancelAnimationFrame(resizeFrame);observer.disconnect();finish();activeObserver.disconnect();listeners.forEach(off=>off());decorations.forEach(e=>e.remove());rails.forEach(({rail,steps})=>{rail.remove();steps.classList.remove('nv-motion-process');});};
   state();
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
- window.addEventListener('pagehide',()=>teardown());window.addEventListener('pageshow',e=>{if(e.persisted)init();});
+ // Register after the existing lower-page link grouping has settled in this task.
+ const start=()=>queueMicrotask(init);
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+ window.addEventListener('pagehide',()=>teardown());window.addEventListener('pageshow',e=>{if(e.persisted)start();});
 })();
 
 
@@ -655,3 +678,44 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
  window.addEventListener('pageshow',()=>{observer.observe(wrapper,{subtree:true,childList:true,attributes:true,attributeFilter:['class','disabled','value']});sync();});
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
+/* NOVE 2026-10-06: preserve the original main-visual link nodes and copy. */
+(() => {
+ 'use strict';
+ function init() {
+  const main=document.querySelector('main');
+  if(!main||main.classList.contains('nv23-home'))return;
+  const title=main.querySelector(':scope>.nv-cmo-mast h1');
+  if(title&&!title.querySelector('.nv43-phrase')) {
+   const pieces=title.textContent.split(/(マーケティング支援|マーケティング|IT・SaaS|EC・D2C|SEO・AI検索対策|Webサイト改善)/).filter(Boolean);
+   if(pieces.length>1)title.replaceChildren(...pieces.map(piece=>{
+    if(!/^(マーケティング支援|マーケティング|IT・SaaS|EC・D2C|SEO・AI検索対策|Webサイト改善)$/.test(piece))return document.createTextNode(piece);
+    const span=document.createElement('span');span.className='nv43-phrase';span.textContent=piece;return span;
+   }));
+  }
+  const intro=main.querySelector(':scope>.nv-cmo-mast+.nv-cmo-intro');
+  const copy=intro?.querySelector('.nv42-intro-copy,.nv-utility-intro');
+  if(!copy||copy.querySelector('.nv43-actions'))return;
+  const primary=copy.querySelector('a.nv-button[data-cta-position="hero"]');
+  if(!primary)return;
+  const secondary=[...copy.querySelectorAll('.nv-lower-action>a.nv-link')];
+  const actions=document.createElement('div');actions.className='nv43-actions';
+  // Reading and keyboard order agree: the consultation comes before optional detail links.
+  primary.parentElement.classList.contains('nv-lower-action')?primary.parentElement.before(actions):primary.before(actions);
+  actions.append(primary,...secondary);
+  copy.querySelectorAll('.nv-lower-action:empty').forEach(n=>n.remove());
+  // Keep useful Japanese phrases intact without changing the accessible label.
+  const label=primary.querySelector(':scope>span:not(.nv-arrow)');
+  if(label&&label.textContent.length>20) {
+   const text=label.textContent;
+   const pieces=text.split(/(マーケティング|について相談する)/).filter(Boolean);
+   if(pieces.length>1) {
+    label.replaceChildren(...pieces.map(piece=>{
+     if(piece.length>16)return document.createTextNode(piece);
+     const span=document.createElement('span');span.className='nv43-phrase';span.textContent=piece;return span;
+    }));
+   }
+  }
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

@@ -1617,3 +1617,58 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
   body.nv30 #main .nv42-intro-copy .nv-button {width:100%!important;min-width:0!important;max-width:100%!important}
  }
 }
+
+/* NOVE 2026-10-06: lower-page main visual only. Existing component tokens stay authoritative. */
+@layer noveComponents {
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast {padding-block:32px 20px!important;min-height:0!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-cmo-title {gap:0!important;padding:0!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-crumb {margin:0 0 24px!important;line-height:1.8!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-cmo-title>.nv-en,
+ body.nv30 #main[data-nv35-kind=contact]>.section_pagehero .nv33-native-label {
+  display:flex!important;align-items:center!important;gap:10px!important;
+  font:700 16px/1.4 Montserrat,sans-serif!important;letter-spacing:.04em!important;
+  margin:0 0 12px!important;max-width:100%!important
+ }
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-cmo-title>.nv-en:before,
+ body.nv30 #main[data-nv35-kind=contact]>.section_pagehero .nv33-native-label:before {
+  content:'';width:24px;height:1px;flex:0 0 24px;background:var(--nv-component-blue)
+ }
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-cmo-title>h1 {max-width:26em!important;white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-mast+.nv-cmo-intro {padding-block:0 48px!important;min-height:0!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv-utility-intro {
+  display:block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important
+ }
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro :is(.nv42-intro-copy,.nv-utility-intro)>p {max-width:42em!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv42-intro-copy {max-width:48em!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions {
+  display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:16px 28px!important;margin:24px 0 0!important
+ }
+ /* Reserve the same CTA space in the native markup, before link grouping runs. */
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv-utility-intro>.nv-lower-action:has(>.nv-button) {margin:24px 0 0!important;width:auto!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv-utility-intro>.nv-lower-action>.nv-button {width:fit-content!important;min-width:320px!important;max-width:440px!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions>.nv-button {
+  width:fit-content!important;min-width:320px!important;max-width:440px!important;margin:0!important;flex:0 1 auto!important
+ }
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions>.nv-link {margin:0!important;min-height:44px!important;display:inline-flex!important;align-items:center!important;gap:16px!important}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions>.nv-button>span:not(.nv-arrow) {min-width:0!important;text-align:left!important}
+ body.nv30 #main:not(.nv23-home)>:is(.nv-cmo-mast,.nv-cmo-intro) .nv43-phrase {display:inline-block;max-width:100%;vertical-align:baseline}
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv-lower-action:empty {display:none!important}
+ body.nv30 #main[data-nv35-kind=contact]>.section_pagehero h1 {margin-bottom:20px!important}
+ @media(max-width:767px) {
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-mast {padding-block:28px 20px!important}
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-crumb {margin-bottom:20px!important}
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-mast .nv-cmo-title>.nv-en,
+  body.nv30 #main[data-nv35-kind=contact]>.section_pagehero .nv33-native-label {font-size:14px!important}
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions {align-items:stretch!important;flex-direction:column!important;gap:12px!important}
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions>.nv-button {width:100%!important;min-width:0!important;max-width:100%!important}
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv-utility-intro>.nv-lower-action>.nv-button {width:100%!important;min-width:0!important;max-width:100%!important}
+  body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv43-actions>.nv-link {align-self:flex-start!important}
+ }
+}
+
+/* NOVE 2026-10-06 review: lower-page title hierarchy. */
+@layer noveComponents {
+ body.nv30 #main:not(.nv23-home)>.nv-cmo-intro .nv42-intro-copy h2 {
+  font-size:var(--nv-component-card-title)!important;
+ }
+}
