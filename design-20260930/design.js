@@ -719,3 +719,24 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+/* Keep existing Webflow copy, headings, CTA nodes and artwork. CMO only. */
+(() => {
+ 'use strict';
+ function init() {
+  if(location.pathname.replace(/\/$/,'')!=='/service/cmo')return;
+  const main=document.querySelector('main.nv33-cmo');
+  if(!main||main.querySelector('.nv44-cmo-hero'))return;
+  const mast=main.querySelector(':scope>.nv-cmo-mast');
+  const intro=mast?.nextElementSibling;
+  if(!mast||!intro?.classList.contains('nv-cmo-intro'))return;
+  const hero=document.createElement('div');hero.className='nv44-cmo-hero';
+  mast.before(hero);hero.append(mast,intro);
+  const band=main.querySelector('.nv-channel-band');
+  if(band) {
+   band.setAttribute('role','list');
+   Array.from(band.children).forEach(item=>item.setAttribute('role','listitem'));
+  }
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

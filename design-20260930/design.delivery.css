@@ -1672,3 +1672,120 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
   font-size:var(--nv-component-card-title)!important;
  }
 }
+
+/* Attachment-scoped review: CMO introduction and its execution categories only. */
+@layer noveComponents {
+ body.nv30 #main.nv33-cmo>.nv44-cmo-hero {
+  position:relative!important;isolation:isolate!important;overflow:hidden!important;
+  width:calc(100% - 80px)!important;max-width:1140px!important;margin:0 auto!important;
+  padding:40px 0 64px!important;background:#fff!important;
+ }
+ body.nv30 #main.nv33-cmo>.nv44-cmo-hero:before {
+  content:'';position:absolute;z-index:-1;right:-110px;top:20px;width:560px;height:200px;
+  background:#edf5fc;clip-path:polygon(13% 0,100% 12%,86% 100%,0 72%);pointer-events:none;
+ }
+ body.nv30 #main.nv33-cmo>.nv44-cmo-hero:after {
+  content:'';position:absolute;z-index:-1;right:-50px;top:132px;width:350px;height:66px;
+  background:var(--nv-component-blue);clip-path:polygon(100% 0,0 65%,100% 100%);pointer-events:none;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-mast {
+  position:static!important;overflow:visible!important;isolation:auto!important;background:transparent!important;
+  padding:0 0 38px!important;min-height:0!important;border:0!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-mast:before,
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-mast:after {content:none!important;display:none!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv40-mast-net {
+  position:absolute!important;z-index:0!important;right:-94px!important;left:auto!important;top:18px!important;
+  width:620px!important;height:230px!important;opacity:.6!important;pointer-events:none!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-cmo-title {
+  position:relative!important;z-index:1!important;display:block!important;width:100%!important;max-width:none!important;
+  padding:0!important;margin:0!important;background:transparent!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-crumb {margin:0 0 28px!important;font-size:14px!important;line-height:1.8!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en {
+  display:flex!important;align-items:center!important;gap:12px!important;
+  font:700 16px/1.4 Montserrat,sans-serif!important;letter-spacing:.035em!important;
+  color:var(--nv-component-blue)!important;margin:0 0 14px!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en:before {content:''!important;display:block!important;width:24px!important;height:1px!important;background:var(--nv-component-blue)!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero h1 {
+  font-size:76px!important;line-height:1.15!important;letter-spacing:-.025em!important;font-weight:700!important;
+  color:var(--nv-component-blue)!important;margin:0!important;max-width:8em!important;text-wrap:balance!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-intro {
+  padding:0!important;margin:0!important;background:transparent!important;border:0!important;min-height:0!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-intro:after {content:none!important;display:none!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .r24-intro {
+  display:block!important;width:100%!important;max-width:none!important;padding:0!important;margin:0!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy {
+  display:grid!important;grid-template-columns:1.1fr 1fr!important;column-gap:76px!important;row-gap:14px!important;
+  width:100%!important;max-width:none!important;padding:0!important;background:transparent!important;border:0!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {
+  grid-column:1!important;grid-row:1 / span 2!important;align-self:start!important;
+  font-size:34px!important;line-height:1.55!important;letter-spacing:-.015em!important;
+  margin:0!important;max-width:16em!important;color:var(--nv-component-ink)!important;text-wrap:balance!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy>p {
+  grid-column:2!important;margin:0!important;max-width:none!important;
+  font-size:var(--nv-component-body)!important;line-height:1.9!important;color:var(--nv-component-copy)!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy>p:nth-of-type(1) {grid-row:1!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy>p:nth-of-type(2) {grid-row:2!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy>p:nth-of-type(3) {grid-row:3!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv43-actions {
+  grid-column:1!important;grid-row:3 / span 2!important;align-self:end!important;
+  margin:24px 0 0!important;display:flex!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv43-actions>.nv-button {
+  width:fit-content!important;min-width:320px!important;max-width:100%!important;margin:0!important;
+ }
+ /* These are examples of execution areas, rather than four service cards. */
+ body.nv30 #main.nv33-cmo .nv-channel-band {
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;
+  margin:32px 0 0!important;padding:0!important;background:transparent!important;
+  border-top:2px solid var(--nv-component-blue)!important;border-bottom:1px solid var(--nv-component-line)!important;
+  border-radius:0!important;box-shadow:none!important;
+ }
+ body.nv30 #main.nv33-cmo .nv-channel-band>span {
+  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+  gap:14px!important;min-height:106px!important;padding:24px!important;margin:0!important;
+  background:transparent!important;border:0!important;border-right:1px solid var(--nv-component-line)!important;
+  border-radius:0!important;box-shadow:none!important;
+  font-size:22px!important;line-height:1.4!important;font-weight:700!important;color:var(--nv-component-blue)!important;
+ }
+ body.nv30 #main.nv33-cmo .nv-channel-band>span:last-child {border-right:0!important}
+ body.nv30 #main.nv33-cmo .nv-channel-band .nv33-channel-icon {
+  width:36px!important;height:36px!important;flex:0 0 36px!important;margin:0!important;object-fit:contain!important;
+ }
+ @media (min-width:768px) and (max-width:1099px) {
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy {column-gap:40px!important;grid-template-columns:1fr 1fr!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero h1 {font-size:64px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {font-size:28px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv43-actions>.nv-button {min-width:0!important;width:100%!important}
+  body.nv30 #main.nv33-cmo .nv-channel-band>span {font-size:18px!important;padding:20px 12px!important;gap:10px!important}
+  body.nv30 #main.nv33-cmo .nv-channel-band .nv33-channel-icon {width:28px!important;height:28px!important;flex-basis:28px!important}
+ }
+ @media (max-width:767px) {
+  body.nv30 #main.nv33-cmo>.nv44-cmo-hero {width:calc(100% - 40px)!important;padding:28px 0 48px!important}
+  body.nv30 #main.nv33-cmo>.nv44-cmo-hero:before {right:-125px;top:38px;width:300px;height:162px;opacity:.65}
+  body.nv30 #main.nv33-cmo>.nv44-cmo-hero:after {right:-70px;top:145px;width:144px;height:38px;opacity:.8}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv40-mast-net {width:320px!important;height:190px!important;right:-138px!important;top:24px!important;opacity:.5!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-mast {padding-bottom:28px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-crumb {font-size:12px!important;margin-bottom:24px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en {font-size:14px!important;margin-bottom:12px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero h1 {font-size:52px!important;line-height:1.2!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy {display:block!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {font-size:28px!important;line-height:1.55!important;margin:0 0 24px!important;max-width:12em!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy>p {font-size:16px!important;line-height:1.9!important;margin:0 0 12px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv43-actions {margin:28px 0 0!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv43-actions>.nv-button {min-width:0!important;width:100%!important;max-width:100%!important}
+  body.nv30 #main.nv33-cmo .nv-channel-band {grid-template-columns:minmax(0,1fr)!important;margin-top:24px!important}
+  body.nv30 #main.nv33-cmo .nv-channel-band>span {min-height:72px!important;padding:18px 0!important;font-size:21px!important;gap:18px!important;border-right:0!important;border-bottom:1px solid var(--nv-component-line)!important}
+  body.nv30 #main.nv33-cmo .nv-channel-band>span:last-child {border-bottom:0!important}
+  body.nv30 #main.nv33-cmo .nv-channel-band .nv33-channel-icon {width:32px!important;height:32px!important;flex-basis:32px!important}
+ }
+}
