@@ -1789,3 +1789,55 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
   body.nv30 #main.nv33-cmo .nv-channel-band .nv33-channel-icon {width:32px!important;height:32px!important;flex-basis:32px!important}
  }
 }
+
+/* CMO-only local reference study: Figma 3543:263, photo omitted by request. */
+@layer noveComponents {
+ body.nv30 #main.nv33-cmo>.nv44-cmo-hero {
+  width:100%!important;max-width:none!important;margin:0!important;
+  padding:48px max(40px,calc((100vw - 1140px)/2)) 64px!important;
+  background:var(--nv-mist,#f2f8ff)!important;
+ }
+ body.nv30 #main.nv33-cmo>.nv44-cmo-hero:before {
+  content:'NOVE';clip-path:none;right:-12px;top:34px;width:auto;height:auto;
+  font:700 300px/1.1 Montserrat,sans-serif;letter-spacing:-.05em;
+  color:#fff;background:none;opacity:.6;
+ }
+ body.nv30 #main.nv33-cmo>.nv44-cmo-hero:after {
+  content:'';clip-path:none;right:-130px;top:330px;width:590px;height:590px;
+  border:1px solid #bbd3e8;border-radius:50%;background:none;opacity:.55;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv40-mast-net {display:none!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-mast {padding:0 0 48px!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-crumb {font-size:13px!important;margin:0 0 16px!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en {
+  display:block!important;font:700 88px/1.1 Montserrat,sans-serif!important;
+  letter-spacing:-.025em!important;margin:0 0 16px!important;color:var(--nv-blue,#024991)!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en:before {display:none!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero h1 {
+  font:500 30px/1.5 'Noto Sans JP',sans-serif!important;letter-spacing:0!important;
+  max-width:none!important;color:var(--nv-component-ink)!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-intro {
+  position:relative!important;z-index:1!important;padding:40px 0 0!important;
+  border-top:1px solid #bbd3e8!important;
+ }
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy {column-gap:88px!important;grid-template-columns:1.1fr 1fr!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {font-size:36px!important;line-height:1.65!important;max-width:15em!important}
+ body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv43-actions {margin-top:32px!important}
+ @media(max-width:1099px){
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en {font-size:64px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy {column-gap:40px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {font-size:28px!important}
+ }
+ @media(max-width:767px){
+  body.nv30 #main.nv33-cmo>.nv44-cmo-hero {padding:28px 20px 48px!important}
+  body.nv30 #main.nv33-cmo>.nv44-cmo-hero:before {top:56px;right:-10px;font-size:116px;opacity:.8}
+  body.nv30 #main.nv33-cmo>.nv44-cmo-hero:after {top:380px;right:-270px;width:420px;height:420px;opacity:.4}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-mast {padding-bottom:32px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv-en {font-size:clamp(34px,9.9vw,56px)!important;line-height:1.15!important;letter-spacing:-.025em!important;margin-bottom:12px!important;white-space:nowrap!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero h1 {font-size:22px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero>.nv-cmo-intro {padding-top:28px!important}
+  body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {font-size:26px!important;line-height:1.65!important;max-width:13em!important}
+ }
+}
