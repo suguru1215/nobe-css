@@ -1841,3 +1841,22 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
   body.nv30 #main.nv33-cmo .nv44-cmo-hero .nv42-intro-copy h2 {font-size:26px!important;line-height:1.65!important;max-width:13em!important}
  }
 }
+
+@layer noveComponents {
+ html body.nv30 #main:not(.nv23-home) [data-nv46-nove-side="before"]:before,
+ html body.nv30 #main:not(.nv23-home) [data-nv46-nove-side="after"]:after {
+  content:none!important;display:none!important;
+ }
+ html body.nv30 #main:not(.nv23-home) [data-nv46-nove-side] {position:relative!important}
+ html body.nv30 #main:not(.nv23-home) .nv46-logo-watermark {
+  position:absolute!important;right:max(40px,calc((100% - 1140px)/2))!important;
+  top:88px!important;width:420px!important;height:auto!important;max-width:42%!important;
+  object-fit:contain!important;opacity:.055!important;pointer-events:none!important;
+  z-index:0!important;margin:0!important;padding:0!important;filter:none!important;
+ }
+ @media(max-width:767px){
+  html body.nv30 #main:not(.nv23-home) .nv46-logo-watermark {
+   right:20px!important;top:78px!important;width:200px!important;max-width:54%!important;opacity:.055!important;
+  }
+ }
+}

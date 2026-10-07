@@ -740,3 +740,21 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+/* Replace only displayed lower-page NOVE watermarks with the official header logo. */
+(()=>{'use strict';function init(){
+ const main=document.querySelector('main');
+ if(!main||main.classList.contains('nv23-home'))return;
+ const source=document.querySelector('header img.nv-logo,header .nv-logo img');
+ if(!source?.src)return;
+ main.querySelectorAll('.nv44-cmo-hero,.nv-cmo-mast,.nv-lower-mast').forEach(mast=>{
+  if(mast.querySelector(':scope>.nv46-logo-watermark'))return;
+  const side=['before','after'].find(side=>{const s=getComputedStyle(mast,'::'+side);return s.display!=='none'&&s.content.replace(/["']/g,'')==='NOVE'});
+  if(!side)return;
+  mast.dataset.nv46NoveSide=side;
+  const logo=source.cloneNode(false);logo.removeAttribute('srcset');logo.removeAttribute('id');
+  logo.className='nv46-logo-watermark';logo.alt='';logo.setAttribute('aria-hidden','true');
+  logo.setAttribute('role','presentation');logo.loading='eager';logo.width=181;logo.height=32;
+  mast.append(logo);
+ });
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
