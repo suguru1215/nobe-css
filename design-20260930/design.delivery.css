@@ -1850,13 +1850,13 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
  html body.nv30 #main:not(.nv23-home) [data-nv46-nove-side] {position:relative!important}
  html body.nv30 #main:not(.nv23-home) .nv46-logo-watermark {
   position:absolute!important;right:max(40px,calc((100% - 1140px)/2))!important;
-  top:88px!important;width:420px!important;height:auto!important;max-width:42%!important;
-  object-fit:contain!important;opacity:.055!important;pointer-events:none!important;
+  top:88px!important;width:225px!important;height:180px!important;max-width:42%!important;
+  object-fit:cover!important;object-position:left center!important;opacity:.055!important;pointer-events:none!important;
   z-index:0!important;margin:0!important;padding:0!important;filter:none!important;
  }
  @media(max-width:767px){
   html body.nv30 #main:not(.nv23-home) .nv46-logo-watermark {
-   right:20px!important;top:78px!important;width:200px!important;max-width:54%!important;opacity:.055!important;
+   right:20px!important;top:78px!important;width:125px!important;height:100px!important;max-width:54%!important;opacity:.055!important;
   }
  }
 }
