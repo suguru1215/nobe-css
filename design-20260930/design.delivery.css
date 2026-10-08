@@ -2093,3 +2093,15 @@ html body.nv30 #main#main#main#main#main .nv-button:active .nv-arrow {translate:
 }
 html body.nv30[data-nv-motion-paused=true] #main#main#main#main#main :is(a,button,img,.nv-arrow){transition:none!important;transform:none!important;translate:none!important}
 }
+
+/* The picture frame clips zoom; the interactive card retains its visible overflow. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main .nv-card-image-frame {display:block!important;overflow:hidden!important;border-radius:8px!important;flex-shrink:0!important;min-width:0!important;transform:none!important}
+html body.nv30 #main#main#main#main#main .nv-photo-link>.nv-card-image-frame {width:100%!important;height:300px!important;margin:0!important}
+html body.nv30 #main#main#main#main#main .nv-card-image-frame>img {display:block!important;width:100%!important;height:100%!important;max-width:none!important;margin:0!important;border-radius:0!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>.nv-card-image-frame {border-radius:12px!important;grid-column:1!important;grid-row:1/4!important;width:140px!important;height:140px!important;align-self:start!important}
+@media(max-width:767px){
+ html body.nv30 #main#main#main#main#main .nv-photo-link>.nv-card-image-frame {height:auto!important;aspect-ratio:1.8!important}
+ html body.nv30 #main#main#main#main#main .nv30-service-card>.nv-card-image-frame {grid-row:1!important;width:88px!important;height:88px!important}
+}
+}

@@ -474,10 +474,10 @@ window.NoveMotionTokens=Object.freeze({
   // Give a row of service choices a short left-to-right rhythm. Japanese copy
   // remains static; each existing illustration enters only once, after loading.
   main.querySelectorAll('.nv30-services,.nv-cmo-challenges,.nv-challenges').forEach((group,g)=>{
-   group.querySelectorAll('.nv30-service-card>img,.nv30-cards>li>img').forEach((art,i)=>{
+   group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img').forEach((art,i)=>{
     register(art,'choice-'+g+'-'+i,()=>{
      const top=art.parentElement.getBoundingClientRect().top;
-     const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
+     const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
      const delay=innerWidth>=768?Math.min(row.indexOf(art),2)*T.stagger:0;
      animate(art,[{opacity:.94,translate:'0 4px'},{opacity:1,translate:'0 0'}],'choice',delay);
     });
@@ -846,5 +846,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   });
   details.addEventListener('keydown',event=>{if(event.key==='Escape'&&details.open){details.open=false;details.querySelector('summary')?.focus();}});
   media.addEventListener('change',stop);document.addEventListener('visibilitychange',stop);window.addEventListener('nove:motion-setting',stop);window.addEventListener('pagehide',stop);
+ });
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
+/* Clip only zooming card media; text, arrows and focus outlines remain outside. */
+(()=>{'use strict';function init(){
+ document.querySelectorAll('#main .nv-photo-link>img,#main .nv30-service-card>img').forEach(image=>{
+  const frame=document.createElement('span');frame.className='nv-card-image-frame';
+  image.before(frame);frame.append(image);
  });
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
