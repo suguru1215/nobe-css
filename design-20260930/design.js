@@ -1,9 +1,9 @@
 window.NoveMotionTokens=Object.freeze({
-  duration:Object.freeze({micro:160,copy:280,choice:360,heading:420,media:560,element:360,scene:640}),
+  duration:Object.freeze({micro:180,copy:380,choice:600,heading:620,media:760,element:480,scene:800}),
   ease:Object.freeze({enter:'cubic-bezier(.22,1,.36,1)',state:'cubic-bezier(.2,0,.2,1)',exit:'cubic-bezier(.4,0,1,1)'}),
   ambient:Object.freeze({period:18000,stepMs:1000/30,distance:12}),
   sequence:Object.freeze({title:0,line:45,chapter:0,media:40,cta:80}),
-  stagger:45,distance:8
+  stagger:90,distance:20
 });
 (function(){
   'use strict';
@@ -426,15 +426,15 @@ window.NoveMotionTokens=Object.freeze({
   const title=hero?.querySelector('h1');
   register(title,'hero',()=>{
    main.dataset.nvHeroIntro='played';const lines=title.querySelectorAll('.nv30-hero-line');
-   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 8px',opacity:.92},{translate:'0 0',opacity:1}],'heading',T.sequence.title+i*T.sequence.line));
+   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 20px',opacity:.65},{translate:'0 0',opacity:1}],'heading',T.sequence.title+i*T.sequence.line));
    // Auxiliary English labels stay still so they do not compete with Japanese.
   });
   const heroArt=hero?.querySelector('.nv30-hero-art');
-  register(heroArt,'hero-art',()=>animate(heroArt,[{opacity:.94,transform:'scale(1.012)'},{opacity:1,transform:'scale(1)'}],'media'));
+  register(heroArt,'hero-art',()=>animate(heroArt,[{opacity:.65,translate:'0 24px'},{opacity:1,translate:'0 0'}],'media'));
   // A lower-page introduction is one reading sequence, using the shared tokens.
   // Animate emphasis only: every paragraph and CTA stays readable and clickable.
   const lower=!main.classList.contains('nv23-home');
-  const intro=lower?main.querySelector('.nv47-intro,:scope>.nv-cmo-intro,:scope>.section_pagehero'):null;
+  const intro=lower?main.querySelector('.nv47-intro,.nv44-cmo-hero .nv-cmo-intro,:scope>.nv-cmo-intro,:scope>.section_pagehero'):null;
   const introCopy=intro?.querySelector('.nv47-copy,.nv42-intro-copy,.nv-utility-intro,.container_large')||intro;
   const promise=lower?introCopy:main.querySelector('.nv42-intro-copy>p');
   register(promise,'detail-promise',()=>{
@@ -454,7 +454,7 @@ window.NoveMotionTokens=Object.freeze({
   headings.forEach((h,i)=>register(h,'chapter-'+i,()=>{
    const en=h.previousElementSibling;
    // Chapter labels are static anchors.
-   animate(h,[{translate:`${T.distance/2}px 0`,opacity:.92},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+   animate(h,[{translate:'0 18px',opacity:.62},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
    // Pair only the immediate editorial explanation with its chapter heading.
    // Tables, cards and long prose retain their own existing visual behavior.
    if(lower){
@@ -467,8 +467,8 @@ window.NoveMotionTokens=Object.freeze({
    }
   }));
   // English chapter labels remain static across the entire site.
-  main.querySelectorAll('.nv30-mast-photo,.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo').forEach((photo,i)=>{
-   register(photo,'photo-'+i,()=>animate(photo,[{opacity:.94,transform:'scale(1.012)'},{opacity:1,transform:'scale(1)'}],'media',T.sequence.media));
+  main.querySelectorAll('.nv30-mast-photo,.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo,.nv50-production-photo').forEach((photo,i)=>{
+   register(photo,'photo-'+i,()=>animate(photo,[{opacity:.65,translate:'0 24px'},{opacity:1,translate:'0 0'}],'media',T.sequence.media));
    listen(photo,'load',flush);
   });
   // Give a row of service choices a short left-to-right rhythm. Japanese copy
@@ -479,7 +479,7 @@ window.NoveMotionTokens=Object.freeze({
      const top=art.parentElement.getBoundingClientRect().top;
      const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
      const delay=innerWidth>=768?Math.min(row.indexOf(art),2)*T.stagger:0;
-     animate(art,[{opacity:.94,translate:'0 4px'},{opacity:1,translate:'0 0'}],'choice',delay);
+     animate(art,[{opacity:.55,translate:'0 24px'},{opacity:1,translate:'0 0'}],'choice',delay);
     });
     listen(art,'load',flush);
    });
@@ -500,13 +500,17 @@ window.NoveMotionTokens=Object.freeze({
     });
    });layout();document.fonts.ready.then(()=>{if(alive)layout();});
   });
+  // Each reporting stage is observed separately, including a slow mobile scroll.
+  main.querySelectorAll('.nv50-report-flow li').forEach((item,i)=>register(item,'report-stage-'+i,()=>{
+   animate(item,[{translate:'20px 0',opacity:.55},{translate:'0 0',opacity:1}],'choice',0);
+  }));
   // Scene 5: the section's blue rule completes before the contact arrow settles.
   // The marker is decorative and absolutely positioned: no layout shift or new copy.
   main.querySelectorAll('.nv-cta').forEach((section,i)=>{
    const rule=document.createElement('span');rule.className='nv-cta-motion-rule';rule.setAttribute('aria-hidden','true');section.prepend(rule);decorations.push(rule);
    register(section.querySelector('h2'),'cta-'+i,()=>{
     animate(rule,[{scale:'0 1'},{scale:'1 1'}],'scene');
-    animate(section.querySelector('h2'),[{translate:'0 6px',opacity:.92},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+    animate(section.querySelector('h2'),[{translate:'0 18px',opacity:.65},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
     if(lower)animate(section.querySelector('p'),[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
    });
    const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:`-${lower?T.distance/2:8}px 0`},{translate:'0 0'}],'micro',T.sequence.cta+(lower?T.stagger*2:0)));
@@ -519,7 +523,7 @@ window.NoveMotionTokens=Object.freeze({
   state();
  }
  // Register after the existing lower-page link grouping has settled in this task.
- const start=()=>queueMicrotask(init);
+ const start=()=>requestAnimationFrame(init);
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
  window.addEventListener('pagehide',()=>teardown());window.addEventListener('pageshow',e=>{if(e.persisted)start();});
 })();
@@ -856,3 +860,43 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   image.before(frame);frame.append(image);
  });
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
+
+/* Content-led presentation. Existing copy, links, forms and metadata remain authoritative. */
+(()=>{'use strict';
+ const script=document.currentScript,assets=new URL('./assets/',script.src).href;
+ const reportTerms={
+  ads:['実施した内容','配信結果','次に試す内容'],
+  construction:['相談内容','見学・現地調査','次に変える点'],
+  realestate:['問い合わせ件数','来店・内見','訴求・配信先・ページ'],
+  'hr-recruiting':['登録・面談','問い合わせ・商談','次に変える点'],
+  finance:['広告・検索からの流入','フォーム到達','相談・申し込み件数'],
+  medical:['広告・検索からの流入','診療案内の閲覧','予約ページへの移動'],
+  professional:['相談の集計情報','相談内容','改善']
+ };
+ function init(){
+  const main=document.querySelector('main');if(!main||main.dataset.nv50Ready)return;
+  main.dataset.nv50Ready='true';const key=location.pathname.replace(/\/$/,'').split('/').pop();
+  main.querySelectorAll('.nv30-services').forEach(section=>{
+   const label=section.querySelector('.nv30-en')?.textContent.trim();
+   if(label==='EXECUTION')section.classList.add('nv50-execution');
+   if(label==='BUSINESS')section.classList.add('nv50-business');
+  });
+  if(main.dataset.nv35Kind==='industry-detail')main.querySelectorAll('.nv30-support').forEach(section=>{
+   if(section.querySelector('.nv-scope-grid,.nv33-support-grid'))section.classList.add('nv50-scope');
+  });
+  main.querySelectorAll('.nv30-support').forEach(section=>{
+   const label=section.querySelector('.nv30-en')?.textContent.trim(),copy=section.querySelector('.nv30-support-copy'),wrap=section.querySelector(':scope>.nv-split');
+   if(!copy||!wrap)return;
+   const terms=reportTerms[key];
+   if(label==='REPORTING'&&terms&&terms.every(word=>copy.textContent.includes(word))){
+    section.classList.add('nv50-report');const figure=document.createElement('figure');figure.className='nv50-report-flow';figure.setAttribute('aria-hidden','true');
+    const list=document.createElement('ol');terms.forEach((term,i)=>{const item=document.createElement('li'),num=document.createElement('b'),text=document.createElement('span');num.textContent=String(i+1).padStart(2,'0');text.textContent=term;item.append(num,text);list.append(item);});figure.append(list);wrap.append(figure);
+   }
+   if(key==='ads'&&label==='PRODUCTION'){
+    section.classList.add('nv50-production');const photo=document.createElement('img');photo.className='nv50-production-photo';photo.src=assets+'figma-3358-26/3d81b.webp';photo.alt='';photo.setAttribute('aria-hidden','true');photo.loading='lazy';photo.decoding='async';photo.width=1080;photo.height=720;wrap.append(photo);
+   }
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

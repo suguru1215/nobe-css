@@ -22,6 +22,15 @@
       if(!contactPrepared&&form?.querySelector('[type="submit"]')&&typeof reviseNoveContact==='function'){
         contactPrepared=true;reviseNoveContact(document);
       }
+      // Reserve the already-approved final hero before first paint. Only the
+      // completed hero section moves; the native form and its field nodes stay put.
+      const mast=contact.querySelector(':scope>.section_pagehero');
+      if(contactPrepared&&mast&&!contact.querySelector('.nv47-contact')){
+        const hero=document.createElement('div');hero.className='nv47-lower-hero nv47-contact';
+        mast.before(hero);hero.append(mast);mast.classList.add('nv47-mast');
+        const logo=document.createElement('img');logo.className='nv47-mark';logo.alt='';logo.setAttribute('aria-hidden','true');
+        logo.src='https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@87f91353dfa508d8ae03f3f506ec7a876850c93d/design-20260930/assets/figma-3358-28/01779.png';hero.append(logo);
+      }
       return contactPrepared;
     }
     const main=document.querySelector('main.nv23');
