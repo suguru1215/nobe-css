@@ -1,0 +1,94 @@
+<style>.contactform_container>.w-embed.w-script{display:none}</style>
+<script id="nove-preserved-contact-validation-20260917">
+/* Form interactions only. No input generation, text replacement, action override or spam changes. */
+(function () {
+  'use strict';
+  function init() {
+    const fieldsRoot = document.querySelector('[data-word-form-fields="20260917"]');
+    const form = fieldsRoot && fieldsRoot.closest('form');
+    if (!form || form.dataset.wordValidationReady) return;
+    const wrapper = form.closest('.w-form');
+    const success = wrapper && wrapper.querySelector('.w-form-done');
+    const failure = wrapper && wrapper.querySelector('.w-form-fail');
+    const status = form.querySelector('#contact-validation-status');
+    const ids = ['company_name', 'full_name', 'email', 'consultation_topic', 'consultation_details', 'website_url', 'privacy_consent'];
+    const labels = {company_name: '会社名', full_name: 'お名前', email: 'メールアドレス', consultation_details: 'ご相談内容'};
+    let started = false, inFlight = false, completed = false;
+    const controls = ids.map(id => form.querySelector('#' + id));
+    if (controls.some(el => !el) || !status || !success || !failure) return;
+    form.dataset.wordValidationReady = 'true';
+    form.noValidate = true;
+    function track(event, extra) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event, page_path: location.pathname, ...extra});
+    }
+    function message(el) {
+      if (el.type === 'checkbox') return el.checked ? '' : '個人情報の取り扱いへの同意が必要です。';
+      const value = el.value.trim();
+      if (el.required && !value) return labels[el.id] + 'を入力してください。';
+      if (el.maxLength > 0 && el.value.length > el.maxLength) return el.maxLength + '文字以内で入力してください。';
+      if (el.type === 'email' && value && (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || el.validity.typeMismatch)) return '正しいメールアドレスを入力してください。';
+      if (el.type === 'url' && value) {
+        try { const url = new URL(value); if (!['http:', 'https:'].includes(url.protocol) || !url.hostname) throw new Error(); }
+        catch (_) { return 'http:// または https:// から始まるURLを入力してください。'; }
+      }
+      return '';
+    }
+    function show(el, msg) {
+      const error = form.querySelector('#' + el.id + '-error');
+      error.textContent = msg;
+      error.hidden = !msg;
+      if (msg) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+    }
+    function refreshSummary() {
+      const count = controls.filter(el => el.getAttribute('aria-invalid') === 'true').length;
+      status.hidden = count === 0;
+      status.textContent = count ? '入力内容をご確認ください。修正が必要な項目は' + count + '件です。' : '';
+    }
+    function start() { if (!started) { started = true; track('contact_form_start', {}); } }
+    form.addEventListener('input', start);
+    form.addEventListener('change', start);
+    controls.forEach(el => ['input', 'change'].forEach(type => el.addEventListener(type, () => {
+      if (el.hasAttribute('aria-invalid')) { show(el, message(el)); refreshSummary(); }
+    })));
+    form.addEventListener('submit', event => {
+      if (inFlight || completed) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+      const invalid = [];
+      controls.forEach(el => { const msg = message(el); show(el, msg); if (msg) invalid.push(el); });
+      if (invalid.length) {
+        event.preventDefault(); event.stopImmediatePropagation();
+        status.hidden = false;
+        status.textContent = '入力内容をご確認ください。修正が必要な項目は' + invalid.length + '件です。';
+        track('contact_form_validation_error', {error_count: invalid.length});
+        invalid[0].focus();
+        return;
+      }
+      status.hidden = true;
+      inFlight = true;
+      // The unmodified native Webflow handler owns network, storage, spam and submit locking.
+    }, true);
+    success.setAttribute('aria-live', 'polite');
+    failure.setAttribute('aria-live', 'assertive');
+    const visible = el => getComputedStyle(el).display !== 'none';
+    // Webflow resets state.success while restoring the submit button, before MutationObserver runs.
+    // Observe the existing jQuery request completion without replacing the native submit handler.
+    if (window.jQuery) window.jQuery(document).on('ajaxSuccess.noveContact', function (_event, xhr, settings, response) {
+      if (!inFlight || completed || xhr.status !== 200 || !response || response.code !== 200) return;
+      let url, payload;
+      try { url = new URL(settings.url, location.href); payload = new URLSearchParams(settings.data || ''); }
+      catch (_) { return; }
+      if (url.origin !== 'https://webflow.com' || url.pathname !== '/api/v1/form/' + document.documentElement.dataset.wfSite) return;
+      if (payload.get('name') !== form.getAttribute('data-name') || payload.get('pageId') !== document.documentElement.dataset.wfPage) return;
+      inFlight = false; completed = true; track('generate_lead', {});
+    });
+    new MutationObserver(() => {
+      if (!inFlight) return;
+      if (visible(failure)) {
+        inFlight = false;
+      }
+    }).observe(wrapper, {subtree: true, attributes: true, attributeFilter: ['class', 'style', 'disabled']});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+</script>
