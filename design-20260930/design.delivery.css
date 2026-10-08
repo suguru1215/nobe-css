@@ -1598,7 +1598,7 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
  body.nv30 #main .nv42-intro-copy>.nv-button {margin-top:24px!important}
  body.nv30 #main .nv42-intro-copy>p:has(+.nv-button) {margin-bottom:0!important}
  body.nv30 #main .nv42-intro-copy .nv-button {width:fit-content!important;min-width:320px!important;max-width:440px!important}
- .nv-auth-status {margin:16px 0 0!important;padding:12px 0;font-size:14px!important;line-height:1.8!important;color:var(--nv-component-copy)!important;min-height:50px}
+ .nv-auth-status {display:grid;margin:16px 0 0!important;padding:12px 0;font-size:14px!important;line-height:1.8!important;color:var(--nv-component-copy)!important;min-height:50px}
  .nv-auth-status a {color:var(--nv-component-blue);text-decoration:underline;text-underline-offset:3px}
  .nv-auth-status[data-auth-state=failed] {color:#b42318!important}
  @media(min-width:768px) and (max-width:1099px) {:root {--nv-component-en:32px;--nv-component-heading:28px;--nv-component-page:32px;--nv-component-section:64px}}
@@ -2033,3 +2033,6 @@ html body.nv30 #main#main#main#main#main :is(.nv30-support>.nv-split>.nv30-suppo
 }
 
 @layer noveComponents {@media(max-width:359px){html body.nv30 header details>summary{white-space:nowrap!important;font-size:12px!important}}}
+
+/* Reserve both authentication messages without changing the native submit lock. */
+.nv-auth-status>span {grid-area:1/1;min-width:0}

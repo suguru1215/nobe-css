@@ -659,6 +659,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const status=document.createElement('p');status.id='nove-auth-status';status.className='nv-auth-status';
  status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.setAttribute('aria-atomic','true');button.before(status);
  button.setAttribute('aria-describedby',[button.getAttribute('aria-describedby'),status.id].filter(Boolean).join(' '));
+ const waitingText=document.createElement('span');waitingText.textContent='認証を確認しています。完了までお待ちください。';
+ const failedText=document.createElement('span');failedText.append('認証を完了できませんでした。ページを再読み込みしてお試しください。解決しない場合は ');
+ const mail=document.createElement('a');mail.href='mailto:info@no-ve.co.jp';mail.textContent='info@no-ve.co.jp';failedText.append(mail,' へご連絡ください。');
+ status.append(waitingText,failedText);
  let state='';
  function sync(){
   const response=form.querySelector('[name="cf-turnstile-response"]');
@@ -667,12 +671,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   const next=waiting?'waiting':sending?'sending':button.disabled&&response?'failed':response?'ready':'waiting';
   if(next===state)return;state=next;status.dataset.authState=next;
   status.style.visibility=['ready','sending'].includes(next)?'hidden':'visible';
-  status.replaceChildren();
-  if(next==='waiting')status.textContent='認証を確認しています。完了までお待ちください。';
-  if(next==='failed'){
-   status.append('認証を完了できませんでした。ページを再読み込みしてお試しください。解決しない場合は ');
-   const mail=document.createElement('a');mail.href='mailto:info@no-ve.co.jp';mail.textContent='info@no-ve.co.jp';status.append(mail,' へご連絡ください。');
-  }
+  waitingText.style.visibility=next==='waiting'?'visible':'hidden';
+  failedText.style.visibility=next==='failed'?'visible':'hidden';
+  waitingText.setAttribute('aria-hidden',String(next!=='waiting'));
+  failedText.setAttribute('aria-hidden',String(next!=='failed'));
  }
  const observer=new MutationObserver(sync);observer.observe(wrapper,{subtree:true,childList:true,attributes:true,attributeFilter:['class','disabled','value']});sync();
  window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
