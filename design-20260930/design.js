@@ -1,9 +1,9 @@
 window.NoveMotionTokens=Object.freeze({
-  duration:Object.freeze({micro:180,copy:420,choice:520,heading:650,media:900,element:650,scene:1200}),
+  duration:Object.freeze({micro:160,copy:280,choice:360,heading:420,media:560,element:360,scene:640}),
   ease:Object.freeze({enter:'cubic-bezier(.22,1,.36,1)',state:'cubic-bezier(.2,0,.2,1)',exit:'cubic-bezier(.4,0,1,1)'}),
   ambient:Object.freeze({period:18000,stepMs:1000/30,distance:12}),
-  sequence:Object.freeze({title:80,line:100,chapter:80,media:120,cta:240}),
-  stagger:80,distance:12
+  sequence:Object.freeze({title:0,line:45,chapter:0,media:40,cta:80}),
+  stagger:45,distance:8
 });
 (function(){
   'use strict';
@@ -73,7 +73,7 @@ window.NoveMotionTokens=Object.freeze({
     const ctx=canvas.getContext('2d');if(!ctx)return;
     hero.prepend(layer);hero.classList.add('nv34-geometry-ready');
     let width=0,height=0,points=[],edges=[],phase=0,last=0,request=0,inView=true,pageActive=true,lastDiagnostic=0;
-    const period=window.NoveMotionTokens.ambient.period,frameInterval=1000/60-.5;
+    const period=window.NoveMotionTokens.ambient.period,frameInterval=window.NoveMotionTokens.ambient.stepMs-.5;
     const random=(n)=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
     const draw=()=>{
       const t=phase/period*Math.PI*2;
@@ -371,6 +371,7 @@ window.NoveMotionTokens=Object.freeze({
   // A previous tab visit must not consume the next page visit's visual sequence.
   let alive=true,observer,activeObserver,resizeFrame=0,startedCount=0;
   const seen=new Set();
+  if(!('IntersectionObserver' in window)||!Element.prototype.animate)return;
   const listen=(el,type,fn)=>{el.addEventListener(type,fn);listeners.push(()=>el.removeEventListener(type,fn));};
   const reason=()=>media.matches?'reduced':window.NoveMotionPaused===true?'user':document.hidden?'hidden':!window.NoveMotionReady?'loading':'';
   const stopped=()=>Boolean(reason());
@@ -396,13 +397,14 @@ window.NoveMotionTokens=Object.freeze({
   }}
   function state(){
    const why=reason();main.dataset.nvMotionReason=why||'active';
+   if(why==='reduced'||why==='user'){pending.forEach((job,el)=>{el.dataset.nvEntrance='skipped';observer.unobserve(el);});pending.clear();visible.clear();}
    if(media.matches){finish();rails.forEach(({rail})=>rail.style.transform='none');main.dataset.nvMotionState='reduced';}
-   else if(why){if(why==='user')finish();else for(const a of active.keys())a.pause();main.dataset.nvMotionState=why==='loading'?'waiting':'paused';}
+   else if(why){if(why!=='loading')finish();else for(const a of active.keys())a.pause();main.dataset.nvMotionState=why==='loading'?'waiting':'paused';}
    else{for(const [a,el] of [...active]){if(!inView(el))finish(el);else if(a.playState==='paused')a.play();}rails.forEach(({rail,progress})=>{rail.style.transform=`scale${rail.dataset.axis==='y'?'Y':'X'}(${progress})`;});main.dataset.nvMotionState='active';flush();}
   }
   activeObserver=new IntersectionObserver(entries=>{for(const e of entries)if(!e.isIntersecting)finish(e.target);},{threshold:0,rootMargin:'-64px 0px 0px'});
   observer=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting)visible.add(e.target);else visible.delete(e.target);}flush();},{threshold:.12,rootMargin:'-64px 0px -8% 0px'});
-  const hero=main.querySelector('.nv-hero,.nv-cmo-mast,.nv-lower-mast,.section_pagehero');
+  const hero=main.querySelector('.nv-hero,.nv47-mast,.nv-cmo-mast,.nv-lower-mast,.section_pagehero');
   // Industry process: a choice of measures, then a repeatable report/improvement cycle.
   // The existing two paragraphs remain unchanged and retain their reading order.
   if(main.dataset.nv35Kind==='industry-detail'){
@@ -420,20 +422,20 @@ window.NoveMotionTokens=Object.freeze({
     });
    });
   }
-  // Scene 1: reveal the existing folded video, then articulate the title lines.
+  // Reading comes first: the title remains legible throughout its short entrance.
   const title=hero?.querySelector('h1');
   register(title,'hero',()=>{
    main.dataset.nvHeroIntro='played';const lines=title.querySelectorAll('.nv30-hero-line');
-   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 8px',opacity:.72},{translate:'0 0',opacity:1}],'heading',T.sequence.title+i*T.sequence.line));
-   const en=title.previousElementSibling;if(en?.matches('.nv-en,.nv30-en'))animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element');
+   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 8px',opacity:.92},{translate:'0 0',opacity:1}],'heading',T.sequence.title+i*T.sequence.line));
+   // Auxiliary English labels stay still so they do not compete with Japanese.
   });
   const heroArt=hero?.querySelector('.nv30-hero-art');
-  register(heroArt,'hero-art',()=>animate(heroArt,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'media'));
+  register(heroArt,'hero-art',()=>animate(heroArt,[{opacity:.94,transform:'scale(1.012)'},{opacity:1,transform:'scale(1)'}],'media'));
   // A lower-page introduction is one reading sequence, using the shared tokens.
   // Animate emphasis only: every paragraph and CTA stays readable and clickable.
   const lower=!main.classList.contains('nv23-home');
-  const intro=lower?main.querySelector(':scope>.nv-cmo-intro,:scope>.section_pagehero'):null;
-  const introCopy=intro?.querySelector('.nv42-intro-copy,.nv-utility-intro,.container_large')||intro;
+  const intro=lower?main.querySelector('.nv47-intro,:scope>.nv-cmo-intro,:scope>.section_pagehero'):null;
+  const introCopy=intro?.querySelector('.nv47-copy,.nv42-intro-copy,.nv-utility-intro,.container_large')||intro;
   const promise=lower?introCopy:main.querySelector('.nv42-intro-copy>p');
   register(promise,'detail-promise',()=>{
    if(!lower){animate(promise,[{opacity:.82},{opacity:1}],'copy',T.sequence.chapter);return;}
@@ -448,11 +450,11 @@ window.NoveMotionTokens=Object.freeze({
   });
   // Scene 2: one chapter transition per editorial block, followed by its photograph.
   // Select key sections; do not stagger every paragraph or every element on the page.
-  const headings=[...main.querySelectorAll('h2')].filter(h=>!h.closest('.nv-cmo-intro,.nv-cta,.nv-prose,.nv-catalog,.word-article-body')&&!['privacy','insights'].includes(main.dataset.nv35Kind));
+  const headings=[...main.querySelectorAll('h2')].filter(h=>!h.closest('.nv47-intro,.nv-cmo-intro,.nv-cta,.nv-prose,.nv-catalog,.word-article-body')&&!['privacy','insights'].includes(main.dataset.nv35Kind));
   headings.forEach((h,i)=>register(h,'chapter-'+i,()=>{
    const en=h.previousElementSibling;
-   if(en?.matches('.nv-en,.nv30-en'))animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element');
-   animate(h,[{translate:`${T.distance/2}px 0`,opacity:.78},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+   // Chapter labels are static anchors.
+   animate(h,[{translate:`${T.distance/2}px 0`,opacity:.92},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
    // Pair only the immediate editorial explanation with its chapter heading.
    // Tables, cards and long prose retain their own existing visual behavior.
    if(lower){
@@ -464,9 +466,9 @@ window.NoveMotionTokens=Object.freeze({
      animate(copy,[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
    }
   }));
-  main.querySelectorAll('.nv-business .nv-en,.nv-industries .nv-en,.nv-company .nv-en').forEach((en,i)=>register(en,'chapter-link-'+i,()=>animate(en,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'element')));
+  // English chapter labels remain static across the entire site.
   main.querySelectorAll('.nv30-mast-photo,.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo').forEach((photo,i)=>{
-   register(photo,'photo-'+i,()=>animate(photo,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],'media',T.sequence.media));
+   register(photo,'photo-'+i,()=>animate(photo,[{opacity:.94,transform:'scale(1.012)'},{opacity:1,transform:'scale(1)'}],'media',T.sequence.media));
    listen(photo,'load',flush);
   });
   // Give a row of service choices a short left-to-right rhythm. Japanese copy
@@ -477,7 +479,7 @@ window.NoveMotionTokens=Object.freeze({
      const top=art.parentElement.getBoundingClientRect().top;
      const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
      const delay=innerWidth>=768?Math.min(row.indexOf(art),2)*T.stagger:0;
-     animate(art,[{clipPath:'inset(0 15% 0 0)',opacity:.94},{clipPath:'inset(0 0 0 0)',opacity:1}],'choice',delay);
+     animate(art,[{opacity:.94,translate:'0 4px'},{opacity:1,translate:'0 0'}],'choice',delay);
     });
     listen(art,'load',flush);
    });
@@ -494,7 +496,7 @@ window.NoveMotionTokens=Object.freeze({
    items.forEach((step,i)=>{const id=`step-${group}-${i}`;if(seen.has(id))entry.progress=Math.max(entry.progress,(i+1)/items.length);
     register(step,id,()=>{const from=entry.progress;entry.progress=Math.max(from,(i+1)/items.length);layout();const axis=rail.dataset.axis==='y'?'Y':'X';
      finish(rail);animate(rail,[{transform:`scale${axis}(${from})`},{transform:`scale${axis}(${entry.progress})`}],'scene',0,'state');
-     animate(step.querySelector('b'),[{scale:'.7',color:'#8098b6'},{scale:'1.12',color:'#214d89',offset:.65},{scale:'1',color:'#214d89'}],'element',innerWidth>=768?i*T.stagger:0,'state');
+     animate(step.querySelector('b'),[{opacity:.8},{opacity:1}],'element',innerWidth>=768?i*T.stagger:0,'state');
     });
    });layout();document.fonts.ready.then(()=>{if(alive)layout();});
   });
@@ -504,7 +506,7 @@ window.NoveMotionTokens=Object.freeze({
    const rule=document.createElement('span');rule.className='nv-cta-motion-rule';rule.setAttribute('aria-hidden','true');section.prepend(rule);decorations.push(rule);
    register(section.querySelector('h2'),'cta-'+i,()=>{
     animate(rule,[{scale:'0 1'},{scale:'1 1'}],'scene');
-    animate(section.querySelector('h2'),[{translate:'0 6px',opacity:.8},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
+    animate(section.querySelector('h2'),[{translate:'0 6px',opacity:.92},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
     if(lower)animate(section.querySelector('p'),[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
    });
    const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:`-${lower?T.distance/2:8}px 0`},{translate:'0 0'}],'micro',T.sequence.cta+(lower?T.stagger*2:0)));
@@ -830,3 +832,19 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
 })();
+
+/* Shared navigation response: native details retains touch/keyboard semantics. */
+(()=>{'use strict';function init(){
+ const media=matchMedia('(prefers-reduced-motion: reduce)');
+ document.querySelectorAll('header .nv-mobile-nav').forEach(details=>{
+  const panel=details.querySelector('.nv-mobile-panel');if(!panel)return;
+  let animation=null;
+  const stop=()=>{animation?.cancel();animation=null;};
+  details.addEventListener('toggle',()=>{stop();if(!details.open||media.matches||window.NoveMotionPaused||document.hidden||typeof panel.animate!=='function')return;
+   animation=panel.animate([{opacity:.92,transform:'translateY(-6px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,easing:window.NoveMotionTokens.ease.enter});
+   panel.dataset.nvMenuDuration='220';
+  });
+  details.addEventListener('keydown',event=>{if(event.key==='Escape'&&details.open){details.open=false;details.querySelector('summary')?.focus();}});
+  media.addEventListener('change',stop);document.addEventListener('visibilitychange',stop);window.addEventListener('nove:motion-setting',stop);window.addEventListener('pagehide',stop);
+ });
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
