@@ -777,3 +777,18 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+// One generated illustrative photo replaces only the SEO research image.
+(function(){
+ var script=document.currentScript, base=script&&script.src?new URL('./assets/seo-research-office-v1.webp',script.src).href:'./assets/seo-research-office-v1.webp';
+ function apply(){
+  if(location.pathname.replace(/\/$/,'')!=='/service/seo')return;
+  var img=document.querySelector('#main .nv30-research-grid>.nv30-research-photo');
+  if(!img)return;
+  img.removeAttribute('srcset');img.removeAttribute('sizes');img.removeAttribute('data-nv38-theme');
+  img.setAttribute('data-nv48-photo','generated');img.src=base;img.width=1200;img.height=900;
+  img.style.setProperty('object-fit','cover','important');
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
+ window.addEventListener('load',apply,{once:true});
+})();

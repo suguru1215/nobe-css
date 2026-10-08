@@ -1965,3 +1965,57 @@ html body.nv30 #main#main#main#main.nv33-cmo .nv-channel-band{display:grid!impor
 html body.nv30 #main#main#main#main.nv33-cmo .nv-channel-band>[role="listitem"]{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;gap:12px!important;border:1px solid #d5e6f6!important;border-radius:8px!important;padding:24px 16px!important;min-height:140px!important;height:100%!important;background:#fff!important;min-width:0!important;text-align:center!important;white-space:normal!important;line-height:1.6!important}
 @media(max-width:767px){html body.nv30 #main#main#main#main.nv33-cmo .nv-channel-band{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}html body.nv30 #main#main#main#main.nv33-cmo .nv-channel-band>[role="listitem"]{padding:20px 12px!important;min-height:132px!important;font-size:16px!important}}
 }
+
+/* Shared lower-page layout refinement; content and functional controls retained. */
+@layer noveComponents {
+@media(min-width:768px){
+html body.nv30 #main#main#main#main#main .nv47-lower-hero .nv-button{width:fit-content!important;min-width:320px!important;max-width:100%!important;flex:0 0 auto!important;align-self:flex-start!important;justify-self:start!important;padding-inline:28px!important;gap:28px!important}
+}
+html body.nv30 #main#main#main#main#main .nv30-service-card{display:grid!important;grid-template-columns:140px minmax(0,1fr)!important;gap:18px 40px!important;padding:40px 0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;align-items:start!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>img{grid-column:1!important;grid-row:1/4!important;width:140px!important;height:140px!important;object-fit:contain!important;margin:0!important;align-self:start!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>h3{grid-column:2!important;grid-row:1!important;margin:0!important;font-size:26px!important;line-height:1.6!important;min-block-size:0!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>dl{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:104px minmax(0,1fr)!important;gap:10px 24px!important;margin:0!important;max-width:800px!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>dl :is(dt,dd){margin:0!important;padding:0!important;min-block-size:0!important;font-size:16px!important;line-height:1.9!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>dl dt{font-weight:700!important;color:#024991!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>.nv-link{grid-column:2!important;grid-row:3!important;display:inline-flex!important;align-self:start!important;justify-self:start!important;width:fit-content!important;max-width:100%!important;gap:16px!important;font-size:16px!important;line-height:1.7!important;white-space:normal!important;word-break:normal!important;margin:2px 0 0!important;padding:0!important;min-block-size:0!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>.nv-link .nv-arrow{flex-shrink:0!important}
+html body.nv30 #main#main#main#main#main .nv30-process .nv-copy p:has(>.nv-process-visual){padding:0!important;border:0!important}
+html body.nv30 #main#main#main#main#main .nv30-process .nv-copy p:has(>.nv-process-visual):after{content:none!important;display:none!important}
+html body.nv30 #main#main#main#main#main .nv30-support:has(>.nv-split>.nv30-support-copy){padding-block:72px!important;background:#f2f8ff!important}
+html body.nv30 #main#main#main#main#main .nv30-support:has(>.nv-split>.nv30-support-copy)+.nv30-support:has(>.nv-split>.nv30-support-copy){padding-top:0!important}
+html body.nv30 #main#main#main#main#main .nv30-support>.nv-split:has(>.nv30-support-copy){width:calc(100% - 80px)!important;max-width:1140px!important;margin-inline:auto!important;grid-template-columns:minmax(0, .9fr) minmax(0,1.1fr)!important;gap:64px!important;align-items:start!important}
+html body.nv30 #main#main#main#main#main .nv30-support>.nv-split:has(>.nv30-support-copy) .nv30-heading{margin:0!important;padding:0!important;border:0!important;max-width:none!important}
+html body.nv30 #main#main#main#main#main .nv30-support>.nv-split:has(>.nv30-support-copy) h2{font-size:28px!important;line-height:1.65!important;max-width:19em!important;margin:0!important}
+html body.nv30 #main#main#main#main#main .nv30-support-copy,html body.nv30 #main#main#main#main#main .nv30-support-copy p{background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important;font-size:17px!important;line-height:1.9!important;color:#263d50!important}
+html body.nv30 #main#main#main#main#main .nv30-support-copy p+p{margin-top:20px!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile){padding-block:80px!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile)>.nv-split{width:calc(100% - 80px)!important;max-width:1140px!important;margin-inline:auto!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:64px!important;align-items:start!important}
+html body.nv30 #main#main#main#main#main .nv30-policy .nv-copy{margin:0!important;padding:0!important;border:0!important;max-width:none!important;background:transparent!important}
+html body.nv30 #main#main#main#main#main .nv30-policy .nv-copy p{margin:0!important;font-size:17px!important;line-height:1.9!important}
+html body.nv30 #main#main#main#main#main :is(.nv35-policy-heading,.nv30-profile .nv30-heading){margin:0!important;max-width:none!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile) h2{font-size:28px!important;line-height:1.65!important;margin:0!important}
+html body.nv30 #main#main#main#main#main .nv30-profile{background:#f2f8ff!important}
+html body.nv30 #main#main#main#main#main .nv-company-facts{padding:0!important;margin:0!important;max-width:none!important;background:transparent!important;border:0!important;border-radius:0!important}
+html body.nv30 #main#main#main#main#main .nv-company-facts>div{display:grid!important;grid-template-columns:116px minmax(0,1fr)!important;gap:24px!important;padding:22px 0!important;border:0!important;border-bottom:1px solid #d5e6f6!important}
+html body.nv30 #main#main#main#main#main .nv-company-facts>div:first-child{padding-top:0!important}
+html body.nv30 #main#main#main#main#main .nv-company-facts :is(dt,dd){margin:0!important;font-size:16px!important;line-height:1.85!important;overflow-wrap:anywhere!important}
+html body.nv30 #main#main#main#main#main .nv-company-facts dt{color:#024991!important;font-weight:700!important}
+html body.nv30 #main#main#main#main#main .nv30-research-photo[data-nv48-photo]{object-fit:cover!important;aspect-ratio:4/3!important;height:auto!important;box-shadow:none!important;background:transparent!important;border-radius:8px!important}
+html body.nv30 #main#main#main#main#main .nv30-support>.nv-split:has(>.nv30-support-copy) .nv30-en{font-size:clamp(32px,4.4vw,56px)!important}
+@media(max-width:767px){
+html body.nv30 #main#main#main#main#main .nv30-service-card{grid-template-columns:88px minmax(0,1fr)!important;gap:20px!important;padding:32px 0!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>img{grid-row:1!important;width:88px!important;height:88px!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>h3{font-size:22px!important;align-self:center!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>dl{grid-column:1/3!important;display:block!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>dl dt{font-size:14px!important;margin-bottom:4px!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>dl dd+dt{margin-top:16px!important}
+html body.nv30 #main#main#main#main#main .nv30-service-card>.nv-link{grid-column:1/3!important;gap:12px!important;font-size:15px!important}
+html body.nv30 #main#main#main#main#main .nv30-support:has(>.nv-split>.nv30-support-copy){padding-block:48px!important}
+html body.nv30 #main#main#main#main#main .nv30-support:has(>.nv-split>.nv30-support-copy)+.nv30-support:has(>.nv-split>.nv30-support-copy){padding-top:0!important}
+html body.nv30 #main#main#main#main#main .nv30-support>.nv-split:has(>.nv30-support-copy),html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile)>.nv-split{width:calc(100% - 40px)!important;grid-template-columns:1fr!important;gap:28px!important}
+html body.nv30 #main#main#main#main#main .nv30-support>.nv-split:has(>.nv30-support-copy) h2,html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile) h2{font-size:24px!important}
+html body.nv30 #main#main#main#main#main .nv30-support-copy p,html body.nv30 #main#main#main#main#main .nv30-policy .nv-copy p{font-size:16px!important;line-height:1.9!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile){padding-block:56px!important}
+html body.nv30 #main#main#main#main#main .nv-company-facts>div{grid-template-columns:1fr!important;gap:6px!important;padding:20px 0!important}
+}
+}
