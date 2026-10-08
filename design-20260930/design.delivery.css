@@ -1863,6 +1863,62 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
 
 /* CMO only: crop the existing official logo to its mark, preserving other pages. */
 @layer noveComponents {
- html body.nv30 #main.nv33-cmo .nv46-logo-watermark {top:56px!important;width:375px!important;height:300px!important;max-width:none!important;object-fit:cover!important;object-position:left center!important}
- @media(max-width:767px){html body.nv30 #main.nv33-cmo .nv46-logo-watermark {top:72px!important;width:200px!important;height:160px!important}}
+ html body.nv30 #main.nv33-cmo .nv46-logo-watermark {top:-20px!important;right:-180px!important;width:900px!important;height:720px!important;max-width:none!important;object-fit:cover!important;object-position:left center!important}
+ @media(max-width:767px){html body.nv30 #main.nv33-cmo .nv46-logo-watermark {top:24px!important;right:-120px!important;width:480px!important;height:384px!important}}
+}
+
+/* Paired English/Japanese section headings only. */
+@layer noveComponents {
+ html body.nv30 #main#main#main .nv30-en:has(+h2) {font-size:56px!important;line-height:1.15!important}
+ html body.nv30 #main#main#main .nv30-en+h2 {font-size:28px!important;line-height:1.6!important}
+ @media(min-width:768px) and (max-width:1099px) {
+  html body.nv30 #main#main#main .nv30-en:has(+h2) {font-size:44px!important}
+  html body.nv30 #main#main#main .nv30-en+h2 {font-size:26px!important}
+ }
+ @media(max-width:767px) {
+  html body.nv30 #main#main#main .nv30-en:has(+h2) {font-size:36px!important}
+  html body.nv30 #main#main#main .nv30-en+h2 {font-size:22px!important}
+ }
+}
+
+/* Confirmed PROCESS medallions and decorative separators: home and CMO only. */
+@layer noveComponents {
+ html body.nv30 #main#main#main.nv23-home .nv-process .nv-step>b {
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box!important;width:40px!important;height:40px!important;
+  min-width:40px!important;max-width:40px!important;min-height:40px!important;max-height:40px!important;
+  aspect-ratio:1!important;flex:0 0 40px!important;border-radius:50%!important;
+  padding:0!important;margin:0!important;border:0!important;line-height:1!important;letter-spacing:0!important;
+ }
+ html body.nv30 #main#main#main.nv23-home .nv-process .nv-step>b>.nv34-step-medallion {display:none!important}
+ html body.nv30 #main#main#main.nv23-home :is(.nv-step,.nv-issue-list>li,.nv-business,.nv-directory,.nv-directory>a,.nv-industry-grid,.nv-industry-grid>a,.nv-company-panel,.nv30-company-detail,.nv-cta) {border:0!important}
+ html body.nv30 #main#main#main.nv33-cmo :is(.nv44-cmo-hero>.nv-cmo-intro,.nv-cmo-challenges .nv30-cards>li,.nv-scope-card,.nv33-support-card,.nv-section.nv30-support,.nv-channel-band,.nv-channel-band>span,.nv-cta) {border:0!important}
+}
+
+/* Site-wide shared components, retaining form/FAQ/table boundaries. */
+@layer noveComponents {
+ html body.nv30 #main#main#main#main :is(.nv-process,.nv30-process) .nv-step>b {
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box!important;width:40px!important;height:40px!important;
+  min-width:40px!important;max-width:40px!important;min-height:40px!important;max-height:40px!important;
+  aspect-ratio:1!important;flex:0 0 40px!important;border-radius:50%!important;
+  padding:0!important;margin:0!important;border:0!important;line-height:1!important;letter-spacing:0!important;
+ }
+ html body.nv30 #main#main#main#main :is(.nv-process,.nv30-process) .nv-step>b>.nv34-step-medallion {display:none!important}
+ html body.nv30 #main#main#main#main :is(.nv-section,.nv-process,.nv-cta,.nv-step,.nv30-service-card,.nv-catalog-row,.nv-scope-card,.nv33-support-card,.nv-utility-intro) {border-block:0!important}
+ html body.nv30 #main#main#main#main :is(.nv30-service-card>.nv-link,.nv-prose h2,.nove-final-prose h2) {border-top:0!important}
+}
+
+@layer noveComponents {
+ html body.nv30 #main#main#main#main .nv-issue-list.nv30-cards>li {border:0!important;padding-bottom:24px!important}
+ html body.nv30 #main#main#main#main .nv-issue-list.nv30-cards>li:after {display:none!important;content:none!important}
+ html body.nv30 #main#main#main#main :is(.nv-scope-card,.nv33-support-card,.nv-catalog-row) {border:0!important}
+ html body.nv30 #main#main#main#main .nv-company-facts {border-top:0!important}
+}
+
+@layer noveComponents {
+ html body.nv30 #main#main#main#main :is(.nv-scope-card,.nv33-support-card) h3 {border-bottom:0!important}
+ html body.nv30 #main#main#main#main[data-nv35-kind=industry-detail] :is(.nv-scope-grid,.nv33-support-grid) {grid-template-columns:minmax(0,1fr)!important}
+ html body.nv30 #main#main#main#main[data-nv35-kind=industry-detail] :is(.nv-scope-card,.nv33-support-card) [data-nv39-size] {min-block-size:0!important}
+ html body.nv30 #main#main#main#main[data-nv35-kind=industry-detail] .nv30-process .nv-copy p {border:0!important}
 }
