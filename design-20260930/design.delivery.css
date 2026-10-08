@@ -2020,12 +2020,16 @@ html body.nv30 #main#main#main#main#main .nv-company-facts>div{grid-template-col
 }
 }
 
-/* SEO explanation pair: heading and copy form one vertical reading group. */
+/* Shared explanatory groups: one heading-to-copy reading axis. */
 @layer noveComponents {
-html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"])>.nv-split{grid-template-columns:minmax(0,1fr)!important;gap:24px!important;max-width:900px!important}
-html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"]) .nv30-heading h2{max-width:none!important}
-html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"]) .nv30-support-copy{display:block!important;max-width:760px!important}
-@media(max-width:767px){
-html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"])>.nv-split{gap:24px!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-support>.nv-split:has(>.nv30-support-copy),.nv30-policy>.nv-split,.nv30-profile>.nv-split){grid-template-columns:minmax(0,1fr)!important;gap:24px!important;max-width:900px!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-support>.nv-split:has(>.nv30-support-copy),.nv30-policy>.nv-split,.nv30-profile>.nv-split) h2{max-width:none!important}
+html body.nv30 #main#main#main#main#main :is(.nv30-support>.nv-split>.nv30-support-copy,.nv30-policy .nv-copy,.nv30-profile>.nv-split>div:last-child){display:block!important;max-width:760px!important}
 }
+
+/* Keep long English masthead words intact on small screens. */
+@layer noveComponents {
+@media(max-width:767px){html body.nv30 #main#main#main#main#main:is([data-nv33-page="/industry/manufacturing"],[data-nv33-page="/industry/construction"],[data-nv33-page="/industry/professional"]) :is(.nv-cmo-title,.nv-lower-title)>.nv-en{font-size:clamp(26px,8vw,38px)!important;white-space:nowrap!important}}
 }
+
+@layer noveComponents {@media(max-width:359px){html body.nv30 header details>summary{white-space:nowrap!important;font-size:12px!important}}}
