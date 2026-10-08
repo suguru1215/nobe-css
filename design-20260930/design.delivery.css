@@ -2041,3 +2041,37 @@ html body.nv30 #main#main#main#main#main :is(.nv30-support>.nv-split>.nv30-suppo
 @layer noveComponents {
 html body.nv30 #main#main#main[data-nv33-page="/service/marketing-support"] .nv47-lower-hero :is(.nv47-copy,.nv47-copy>p) {max-width:none!important}
 }
+
+/* Scoped mobile corrections for recruiting title and column article spacing. */
+@layer noveComponents {
+@media(max-width:767px) {
+html body.nv30 #main#main#main[data-nv33-page="/column"] .nv-research h2 {margin-bottom:0!important}
+html body.nv30 #main#main#main[data-nv33-page="/column"] .nv-research>.nv-lower-photo {margin-top:0!important}
+}
+}
+
+/* Japanese-first headings and compact, text-led challenge/research sections. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main:is([data-nv35-kind="service-detail"],[data-nv35-kind="industry-detail"],[data-nv33-page="/service"],[data-nv33-page="/company"],[data-nv33-page="/contact"],.nv33-cmo) :is(.nv47-lower-hero,.nv44-cmo-hero) :is(.nv-en,.nv33-native-label) {font:700 18px/1.5 Montserrat,sans-serif!important;letter-spacing:.04em!important;margin:0 0 12px!important;white-space:normal!important;overflow-wrap:normal!important}
+html body.nv30 #main#main#main#main#main:is([data-nv35-kind="service-detail"],[data-nv35-kind="industry-detail"],[data-nv33-page="/service"],[data-nv33-page="/company"],[data-nv33-page="/contact"],.nv33-cmo) :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font:700 40px/1.5 'Noto Sans JP',sans-serif!important;color:#172531!important;max-width:24em!important}
+html body.nv30 #main#main#main#main#main:is([data-nv35-kind="service-detail"],[data-nv35-kind="industry-detail"]) .nv47-lower-hero>.nv47-mast {padding-bottom:0!important}
+html body.nv30 #main#main#main#main#main:is([data-nv35-kind="service-detail"],[data-nv35-kind="industry-detail"]) .nv47-lower-hero>.nv47-intro {padding-top:24px!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) .nv30-issue-image {display:none!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) .nv30-cards>li {display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;height:auto!important;min-height:0!important;padding:24px!important;gap:16px!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) .nv30-cards>li>span {min-block-size:0!important;max-width:none!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) :is(.nv-challenge-wrap,.nv-cmo-challenges) {padding-top:56px!important;padding-bottom:56px!important;min-height:0!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) :is(.nv-challenges,.nv-cmo-challenges .nv-wrap) {gap:24px!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) :is(.nv-challenges,.nv-cmo-challenges) h2 {margin-bottom:0!important}
+html body.nv30 #main#main#main#main#main .nv30-research-grid:has(>.nv30-research-photo[src*="/alpha/"],>.nv30-research-photo[src*="/8378d.webp"]) {grid-template-columns:minmax(0,1fr)!important;gap:0!important;max-width:900px!important}
+html body.nv30 #main#main#main#main#main .nv30-research-photo:is([src*="/alpha/"],[src*="/8378d.webp"]) {display:none!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) .nv30-cards {margin-top:0!important;margin-bottom:0!important}
+@media(max-width:767px) {
+html body.nv30 #main#main#main#main#main:is([data-nv35-kind="service-detail"],[data-nv35-kind="industry-detail"],[data-nv33-page="/service"],[data-nv33-page="/company"],[data-nv33-page="/contact"],.nv33-cmo) :is(.nv47-lower-hero,.nv44-cmo-hero) :is(.nv-en,.nv33-native-label) {font-size:14px!important}
+html body.nv30 #main#main#main#main#main:is([data-nv35-kind="service-detail"],[data-nv35-kind="industry-detail"],[data-nv33-page="/service"],[data-nv33-page="/company"],[data-nv33-page="/contact"],.nv33-cmo) :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:28px!important;line-height:1.6!important}
+html body.nv30 #main#main#main#main#main:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv33-page="/industry/construction"]) :is(.nv-challenge-wrap,.nv-cmo-challenges) {padding-top:40px!important;padding-bottom:40px!important}
+}
+}
+
+@layer noveComponents {
+html body.nv30 #main#main#main[data-nv33-page="/service/seo"] .nv49-ai-search-terms {white-space:nowrap!important}
+}

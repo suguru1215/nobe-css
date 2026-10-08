@@ -794,3 +794,39 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
  window.addEventListener('load',apply,{once:true});
 })();
+
+/* Approved visible service labels and four advertising copy corrections. */
+(function(){
+ 'use strict';
+ function apply(){
+  const main=document.querySelector('#main');
+  const route=main?.dataset.nv33Page||location.pathname.replace(/\/$/,'');
+  const replacements=[
+   ['広告をクリックした先のページ','Webサイト・LP'],
+   ['共有が難しい場合は、公開情報から市場・競合やクリックした先のページを調べます。','共有が難しい場合は、公開情報をもとに、市場・競合やWebサイト・LPを調査します。'],
+   ['検索語句、広告文、クリックした先のページを確認し、問い合わせや購入につながる改善点を探ります。','検索語句、広告文、Webサイト・LPを確認し、問い合わせや購入につながる改善点を探ります。'],
+   ['誰に何を伝えるかを考え、広告とクリックした先のページの内容を揃えます。','誰に何を伝えるかを考え、広告とWebサイト・LPの内容を揃えます。']
+  ];
+  if(route==='/service/ads')main.querySelectorAll('th,td,p').forEach(el=>{
+   const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
+   while((node=walker.nextNode()))for(const [before,after] of replacements)if(node.nodeValue.includes(before))node.nodeValue=node.nodeValue.replace(before,after);
+  });
+  // Only service navigation labels, not explanatory copy, metadata or URLs.
+  document.querySelectorAll('a[href="/service/seo"],#main[data-nv33-page="/service/seo"] h1,#main h2,#main h3,.nv-crumb [aria-current="page"]').forEach(el=>{
+   const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
+   while((node=walker.nextNode()))node.nodeValue=node.nodeValue.replace(/SEO・AI検索対策|SEO・GEO対策/g,'SEO・AI検索最適化');
+  });
+  if(route==='/service/seo'){
+   main.querySelectorAll('a[href="/contact"] span,a[href="/contact"]:not(:has(span))').forEach(el=>{if(['SEO・AI検索について相談する','SEO・GEO対策について相談する'].includes(el.textContent.trim()))el.textContent='SEO・AI検索最適化について相談する';});
+   const en=main.querySelector('.nv47-mast .nv-en');if(en&&en.textContent.trim()==='SEO / GEO')en.textContent='SEO / AI SEARCH';
+   const lead=main.querySelector('.nv47-copy>p');
+   if(lead&&!lead.querySelector('.nv49-ai-search-intro')){
+    const intro=document.createElement('span');intro.className='nv49-ai-search-intro';
+    intro.append('従来のSEOに加え、AI検索最適化');
+    const terms=document.createElement('span');terms.className='nv49-ai-search-terms';terms.textContent='（GEO/LLMO/AIO/AEO）';
+    intro.append(terms,'にも対応します。');lead.prepend(intro);
+   }
+  }
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
+})();
