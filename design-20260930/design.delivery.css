@@ -1863,6 +1863,6 @@ body.nv38-parity #main .nv40-mast-net .nv-mast-points{fill:#779ab6}
 
 /* CMO only: crop the existing official logo to its mark, preserving other pages. */
 @layer noveComponents {
- html body.nv30 #main.nv33-cmo .nv46-logo-watermark {width:225px!important;height:180px!important;object-fit:cover!important;object-position:left center!important}
- @media(max-width:767px){html body.nv30 #main.nv33-cmo .nv46-logo-watermark {width:125px!important;height:100px!important}}
+ html body.nv30 #main.nv33-cmo .nv46-logo-watermark {top:56px!important;width:375px!important;height:300px!important;max-width:none!important;object-fit:cover!important;object-position:left center!important}
+ @media(max-width:767px){html body.nv30 #main.nv33-cmo .nv46-logo-watermark {top:72px!important;width:200px!important;height:160px!important}}
 }
