@@ -758,3 +758,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   mast.append(logo);
  });
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+
+/* Shared lower-page hero, preserving existing content and form/article boundaries. */
+(function(){
+ function init(){
+  if(location.pathname.replace(/\/$/,'')==='' || location.pathname.replace(/\/$/,'')==='/service/cmo')return;
+  const main=document.querySelector('#main'); if(!main||main.querySelector('.nv47-lower-hero'))return;
+  const mast=main.querySelector(':scope > .nv-cmo-mast, :scope > .nv-lower-mast, :scope > .section_pagehero, :scope > .l-container');
+  if(!mast)return;
+  const hero=document.createElement('div');hero.className='nv47-lower-hero';
+  const next=mast.nextElementSibling; mast.before(hero);hero.append(mast);mast.classList.add('nv47-mast');
+  if(next?.classList.contains('nv-cmo-intro')){hero.append(next);next.classList.add('nv47-intro');const copy=next.querySelector('.nv-copy')||next.firstElementChild;copy?.classList.add('nv47-copy');if(copy?.querySelector('h2'))copy.classList.add('nv47-copy-heading');}
+  if(mast.classList.contains('l-container'))hero.classList.add('nv47-article');
+  if(mast.classList.contains('section_pagehero'))hero.classList.add('nv47-contact');
+  hero.querySelectorAll('.nv46-logo-watermark').forEach(e=>e.remove());
+  const logo=document.createElement('img');logo.className='nv47-mark';logo.alt='';logo.setAttribute('aria-hidden','true');
+  logo.src='https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@87f91353dfa508d8ae03f3f506ec7a876850c93d/design-20260930/assets/figma-3358-28/01779.png';hero.append(logo);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
