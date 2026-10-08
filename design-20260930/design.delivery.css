@@ -2019,3 +2019,13 @@ html body.nv30 #main#main#main#main#main :is(.nv30-policy,.nv30-profile){padding
 html body.nv30 #main#main#main#main#main .nv-company-facts>div{grid-template-columns:1fr!important;gap:6px!important;padding:20px 0!important}
 }
 }
+
+/* SEO explanation pair: heading and copy form one vertical reading group. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"])>.nv-split{grid-template-columns:minmax(0,1fr)!important;gap:24px!important;max-width:900px!important}
+html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"]) .nv30-heading h2{max-width:none!important}
+html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"]) .nv30-support-copy{display:block!important;max-width:760px!important}
+@media(max-width:767px){
+html body.nv30 #main#main#main#main#main[data-nv33-page="/service/seo"] .nv30-support:is([data-nv30-word="OPTIMIZATION"],[data-nv30-word="REVIEW"])>.nv-split{gap:24px!important}
+}
+}
