@@ -2036,3 +2036,8 @@ html body.nv30 #main#main#main#main#main :is(.nv30-support>.nv-split>.nv30-suppo
 
 /* Reserve both authentication messages without changing the native submit lock. */
 .nv-auth-status>span {grid-area:1/1;min-width:0}
+
+/* Marketing support hero copy uses its existing content container. */
+@layer noveComponents {
+html body.nv30 #main#main#main[data-nv33-page="/service/marketing-support"] .nv47-lower-hero :is(.nv47-copy,.nv47-copy>p) {max-width:none!important}
+}
