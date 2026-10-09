@@ -944,3 +944,32 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
   else apply();
 })();
+
+/* Service directory: reuse the corresponding home service photographs. */
+(() => {
+  'use strict';
+  const assets = new URL('./assets/figma-3358-26/', document.currentScript.src).href;
+  const photos = {
+    '/service/ads': '3d81b.webp',
+    '/service/seo': '7f9fd.webp',
+    '/service/sns': 'd817c.webp',
+    '/service/web': 'cf26b.webp'
+  };
+  function apply() {
+    if (location.pathname.replace(/\/$/, '') !== '/service') return;
+    document.querySelectorAll('#main .nv50-execution .nv30-service-card').forEach(card => {
+      const link = card.querySelector('a.nv-link');
+      const file = photos[link?.getAttribute('href')];
+      const image = card.querySelector('.nv-card-image-frame > img');
+      if (!file || !image) return;
+      image.src = assets + file;
+      image.removeAttribute('srcset');
+      image.width = 1080;
+      image.height = 720;
+      image.style.setProperty('object-fit', 'cover', 'important');
+      card.dataset.nv53Photo = 'home-service';
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
+  else apply();
+})();

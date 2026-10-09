@@ -2259,3 +2259,12 @@ html body.nv30 #main#main#main#main#main#main[id="main"] [data-nv52-layout="stat
  html body.nv30 #main#main#main#main#main#main[id="main"] [data-nv52-layout="statement"] .nv-copy {padding-left:20px!important}
 }
 }
+
+/* The four directory photos share the home cards' crop, corners and clipped zoom. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main[id="main"] .nv50-execution .nv30-service-card[data-nv53-photo="home-service"]>.nv-card-image-frame {height:auto!important;aspect-ratio:1.8!important;border-radius:8px!important;background:transparent!important}
+html body.nv30 #main#main#main#main#main[id="main"] .nv50-execution .nv30-service-card[data-nv53-photo="home-service"]>.nv-card-image-frame>img {padding:0!important;object-fit:cover!important;object-position:50% 50%!important}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ html body.nv30:not([data-nv-motion-paused="true"]) #main#main#main#main#main[id="main"] .nv50-execution .nv30-service-card[data-nv53-photo="home-service"]:hover>.nv-card-image-frame>img {transform:scale(1.018)!important}
+}
+}
