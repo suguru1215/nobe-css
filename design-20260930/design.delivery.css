@@ -2286,3 +2286,42 @@ html body.nv30 #main#main#main#main#main[id="main"] .nv-cmo-challenges .nv30-car
  html body.nv30:not([data-nv-motion-paused="true"]) #main#main#main#main#main[id="main"] .nv-cmo-challenges .nv30-cards>li[data-nv55-photo="challenge"]:hover>.nv55-photo-frame>img {transform:scale(1.018)!important}
 }
 }
+
+/* Proactive audit: reconcile shared chrome and compact action/link sizing. */
+html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) .nv23-footer {
+  background:#024991!important;
+  padding:64px 0!important;
+}
+@media(min-width:768px) {
+  html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) .nv23-header {
+    height:auto!important;
+    min-height:112px!important;
+  }
+  html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) .nv23-header .nv-head-inner {
+    height:auto!important;
+    min-height:112px!important;
+    padding-block:28px!important;
+  }
+  html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) .nv23-header .nv-head-inner .nv-button {
+    height:56px!important;
+    min-height:56px!important;
+    border-radius:999px!important;
+    padding:6px 14px!important;
+  }
+  html[data-wf-page="6a7ecf997369e3f19408d6de"] body #main#main#main#main#main #contact-form .formsubmit {
+    width:min(100%,320px)!important;
+    margin-inline:auto!important;
+  }
+  body.nv30 #main#main#main .nv-lower-related:has(>.nv-link:only-child) {
+    grid-template-columns:minmax(0,420px)!important;
+  }
+}
+html body.nv30 #main#main#main .nv-related-panel .nv-link,
+html[data-wf-page="6a873d1afa7c3ee3a663af5c"] body.nv30 #main#main#main a.nv-link {
+  text-decoration:none!important;
+}
+@layer noveAlignment {
+  body.nv30 #main#main#main .nv-lower-related>.nv-link>span {
+    align-self:center!important;
+  }
+}
