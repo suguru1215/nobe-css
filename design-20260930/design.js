@@ -540,6 +540,24 @@ const labels={
 };
 const themes={ads:['advertising','report','decision'],seo:['journey','information','report'],sns:['target','journey','decision'],web:['journey','information','decision'],cmo:['decision','team','report'],dx:['team','report','information'],crm:['information','journey','report'],global:['target','information','decision'],saas:['target','information','decision'],manufacturing:['target','information','advertising'],ec:['advertising','journey','information'],construction:['target','journey','information'],realestate:['journey','advertising','report'],'hr-recruiting':['target','information','journey'],finance:['journey','information','team'],medical:['information','journey','team'],professional:['target','information','decision']};
 const originals={advertising:'19a08.webp',report:'8378d.webp',decision:'844f8.webp'};
+// Project-generated editorial photos, scoped to the matching two-column research layouts.
+const researchPhotos={
+ "/service/marketing-support": "service-marketing-support-v2.jpg",
+ "/service/sns": "service-sns-v2.jpg",
+ "/service/web": "service-web-v2.jpg",
+ "/service/global": "service-global-v2.jpg",
+ "/service/dx": "service-dx-v2.jpg",
+ "/service/crm": "service-crm-v2.jpg",
+ "/industry/saas": "industry-saas-v2.jpg",
+ "/industry/manufacturing": "industry-manufacturing-v2.jpg",
+ "/industry/ec": "industry-ec-v2.jpg",
+ "/industry/construction": "industry-construction-v2.jpg",
+ "/industry/realestate": "industry-realestate-v2.jpg",
+ "/industry/hr-recruiting": "industry-hr-recruiting-v2.jpg",
+ "/industry/finance": "industry-finance-v2.jpg",
+ "/industry/medical": "industry-medical-v2.jpg",
+ "/industry/professional": "industry-professional-v2.jpg"
+};
 function init(){const main=document.querySelector('main');if(!main||main.dataset.nv38Ready)return;main.dataset.nv38Ready='true';document.body.classList.add('nv38-parity');const route=location.pathname.replace(/\/$/,'')||'/',key=route.split('/').pop();const map=[];
  let nodes=route==='/service'?[...main.querySelectorAll(':scope>.nv30-services .nv30-en')]:[...main.querySelectorAll(':scope>.nv30-support .nv30-en')];
  let words=labels[route];if(route.startsWith('/industry/')&&nodes.length>1)words=['SUPPORT','REPORTING'];
@@ -548,7 +566,7 @@ function init(){const main=document.querySelector('main');if(!main||main.dataset
  main.querySelectorAll(':scope>section').forEach(s=>{s.dataset.nv38Role=s.matches('.nv-hero,.nv-cmo-mast,.section_pagehero')?'mast':s.matches('.nv-cta')?'cta':s.matches('.nv-cmo-intro')?'intro':s.matches('.nv-cmo-challenges,.nv-challenge-wrap')?'challenge':s.matches('.nv30-faq')?'faq':s.matches('.nv30-related')?'related':'content';});
  if(route==='/service')main.querySelectorAll('.nv30-service-card>img').forEach((im,i)=>{const t=['advertising','information','target','journey','decision','target','team','information'][i];if(!t)return;im.src=originals[t]?top+originals[t]:asset+t+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=t;});
  const researchTheme={'marketing-support':'report',seo:'information',sns:'journey',web:'journey',global:'target',dx:'information',crm:'information',saas:'target',manufacturing:'information',ec:'journey',construction:'target',realestate:'target','hr-recruiting':'journey',finance:'journey',medical:'information',professional:'target'}[key];
- if(researchTheme)main.querySelectorAll('.nv30-research-photo').forEach(im=>{im.src=originals[researchTheme]?top+originals[researchTheme]:asset+researchTheme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=researchTheme;im.width=600;im.height=400;});
+ if(researchTheme)main.querySelectorAll('.nv30-research-grid>.nv30-research-photo').forEach(im=>{const photo=researchPhotos[route];im.src=photo?new URL('./assets/'+photo,script.src).href:originals[researchTheme]?top+originals[researchTheme]:asset+researchTheme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=researchTheme;im.width=photo?1440:600;im.height=photo?960:400;if(photo){im.dataset.nv51Photo='generated';im.style.setProperty('object-fit','cover','important');}});
  const set=themes[key];if(set)main.querySelectorAll('.nv-cmo-challenges .nv30-issue-image').forEach((im,i)=>{const theme=set[i];if(!theme)return;im.src=originals[theme]?top+originals[theme]:asset+theme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=theme;im.width=600;im.height=400;});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
