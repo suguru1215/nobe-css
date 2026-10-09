@@ -2278,15 +2278,6 @@ html body.nv30 #main#main#main#main#main[id="main"] .nv50-business .nv30-service
 }
 }
 
-/* Match the service photos while keeping the existing text, numbers and card structure. */
-@layer noveComponents {
-html body.nv30 #main#main#main#main#main[id="main"] .nv-cmo-challenges .nv30-cards>li[data-nv55-photo="challenge"]>.nv55-photo-frame {position:relative!important;display:block!important;order:2!important;flex:0 0 auto!important;align-self:center!important;width:300px!important;max-width:100%!important;height:auto!important;aspect-ratio:1.8!important;overflow:hidden!important;border-radius:8px!important;background:transparent!important}
-html body.nv30 #main#main#main#main#main[id="main"] .nv-cmo-challenges .nv30-cards>li[data-nv55-photo="challenge"]>.nv55-photo-frame>img {position:absolute!important;inset:0!important;display:block!important;width:100%!important;max-width:100%!important;height:100%!important;margin:0!important;padding:0!important;object-fit:cover!important;object-position:50% 50%!important;border-radius:0!important;filter:none!important;transform:none!important;transition:transform .36s cubic-bezier(.22,1,.36,1)!important}
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
- html body.nv30:not([data-nv-motion-paused="true"]) #main#main#main#main#main[id="main"] .nv-cmo-challenges .nv30-cards>li[data-nv55-photo="challenge"]:hover>.nv55-photo-frame>img {transform:scale(1.018)!important}
-}
-}
-
 /* Proactive audit: reconcile shared chrome and compact action/link sizing. */
 html body:is(#nv30-design,body).nv34-home:not(#nv34-unused) .nv23-footer {
   background:#024991!important;
@@ -2324,4 +2315,40 @@ html[data-wf-page="6a873d1afa7c3ee3a663af5c"] body.nv30 #main#main#main a.nv-lin
   body.nv30 #main#main#main .nv-lower-related>.nv-link>span {
     align-self:center!important;
   }
+}
+
+/* Lower-page main visuals: larger titles, a single compact gap and full-width copy. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {
+  font-size:64px!important;line-height:1.35!important;max-width:100%!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero>.nv47-mast,.nv44-cmo-hero>.nv-cmo-mast) {
+  padding-bottom:24px!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero>.nv47-intro,.nv44-cmo-hero>.nv-cmo-intro) {
+  padding-top:0!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-copy,.nv44-cmo-hero .nv42-intro-copy),
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-copy,.nv44-cmo-hero .nv42-intro-copy)>p,
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-contact .pagehero_lead,.nv47-article .hero-split-2>p) {
+  width:100%!important;max-width:none!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-contact .pagehero_lead,.nv47-article .hero-split-2>p) {
+  margin-top:24px!important;
+}
+@media(max-width:767px) {
+  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {
+    font-size:36px!important;line-height:1.5!important;text-wrap:balance!important;
+  }
+  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 .nv43-phrase {display:inline-block;max-width:100%;vertical-align:baseline;letter-spacing:inherit!important}
+  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero>.nv47-mast,.nv44-cmo-hero>.nv-cmo-mast) {
+    padding-bottom:20px!important;
+  }
+  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-contact .pagehero_lead,.nv47-article .hero-split-2>p) {
+    margin-top:20px!important;
+  }
+}
+@media(max-width:359px) {
+  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:31px!important}
+}
 }
