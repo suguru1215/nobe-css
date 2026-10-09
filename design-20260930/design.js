@@ -318,10 +318,13 @@ window.NoveMotionTokens=Object.freeze({
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 
+// Reuse the first pass's page identity when Preview renders every page at /.
+function noveResolvedPathname(){return location.hostname.endsWith('.canvas.webflow.com')?(document.querySelector('main')?.dataset.nv33Page||location.pathname):location.pathname;}
+
 /* Lower-page design, additive to release 979440. No content, URL or form mutations. */
 (()=>{'use strict';
  function init(){
-  const main=document.querySelector('main'),route=(location.pathname.replace(/\/$/,'')||'/');
+  const main=document.querySelector('main'),route=(noveResolvedPathname().replace(/\/$/,'')||'/');
   if(!main||route==='/'||main.classList.contains('nv23-home')||main.dataset.nv35Ready)return;main.dataset.nv35Ready='true';
   const kinds={'/service':'service-index','/industry':'industry-index','/company':'company','/column':'insights','/contact':'contact','/privacy':'privacy','/sitemap':'sitemap'};
   const kind=kinds[route]||(route.startsWith('/columns/')?'article':route==='/service/cmo'?'cmo':route.startsWith('/service/')?'service-detail':route.startsWith('/industry/')?'industry-detail':null);
@@ -344,7 +347,7 @@ window.NoveMotionTokens=Object.freeze({
 })();
 
 /* Static type/spacing refinement explicitly scoped to the known 27 site routes. */
-(()=>{'use strict';const routes=new Set(['','service','industry','company','contact','privacy','column','columns/marketing-review','sitemap',...['cmo','marketing-support','ads','seo','sns','web','global','dx','crm'].map(p=>'service/'+p),...['saas','manufacturing','ec','construction','realestate','hr-recruiting','finance','medical','professional'].map(p=>'industry/'+p)]);function init(){if(routes.has(location.pathname.replace(/^\/|\/$/g,''))&&document.querySelector('main'))document.body.classList.add('nv36-polish');}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
+(()=>{'use strict';const routes=new Set(['','service','industry','company','contact','privacy','column','columns/marketing-review','sitemap',...['cmo','marketing-support','ads','seo','sns','web','global','dx','crm'].map(p=>'service/'+p),...['saas','manufacturing','ec','construction','realestate','hr-recruiting','finance','medical','professional'].map(p=>'industry/'+p)]);function init(){if(routes.has(noveResolvedPathname().replace(/^\/|\/$/g,''))&&document.querySelector('main'))document.body.classList.add('nv36-polish');}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
 
 /* Trust: deliberate deceleration. Partnership: ordered handoff. Growth: connection. */
 
@@ -560,7 +563,7 @@ const researchPhotos={
  "/industry/medical": "industry-medical-v2.jpg",
  "/industry/professional": "industry-professional-v2.jpg"
 };
-function init(){const main=document.querySelector('main');if(!main||main.dataset.nv38Ready)return;main.dataset.nv38Ready='true';document.body.classList.add('nv38-parity');const route=location.pathname.replace(/\/$/,'')||'/',key=route.split('/').pop();const map=[];
+function init(){const main=document.querySelector('main');if(!main||main.dataset.nv38Ready)return;main.dataset.nv38Ready='true';document.body.classList.add('nv38-parity');const route=noveResolvedPathname().replace(/\/$/,'')||'/',key=route.split('/').pop();const map=[];
  let nodes=route==='/service'?[...main.querySelectorAll(':scope>.nv30-services .nv30-en')]:[...main.querySelectorAll(':scope>.nv30-support .nv30-en')];
  let words=labels[route];if(route.startsWith('/industry/')&&nodes.length>1)words=['SUPPORT','REPORTING'];
  if(words)nodes.forEach((n,i)=>{if(words[i]&&n.textContent.trim()!==words[i]){map.push({old:n.textContent.trim(),new:words[i],heading:n.parentElement.querySelector('h2')?.textContent.trim()});n.textContent=words[i];const section=n.closest('section');if(section?.hasAttribute('data-nv30-word'))section.dataset.nv30Word=words[i];}});
@@ -607,7 +610,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     '/industry/construction': ['対応エリアで、対応エリアで、', '対応エリアで、']
   };
   function correctDuplicate() {
-    const fix = fixes[location.pathname.replace(/\/$/, '')];
+    const fix = fixes[noveResolvedPathname().replace(/\/$/, '')];
     const main = document.querySelector('main');
     if (!fix || !main) return;
     for (const paragraph of main.querySelectorAll('p')) {
@@ -640,7 +643,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   // a synchronous layout immediately after all lower-page DOM construction.
   edgePath.classList.add('nv-mast-edges');nodePath.classList.add('nv-mast-points');
   const radius=+circles[0].getAttribute('r')||2;svg.replaceChildren(edgePath,nodePath);
-  const media=matchMedia('(prefers-reduced-motion: reduce)'),key='nove:mast-phase:v1:'+location.pathname;
+  const media=matchMedia('(prefers-reduced-motion: reduce)'),key='nove:mast-phase:v1:'+noveResolvedPathname();
   let phase=0,last=0,frame=0,resizeFrame=0,inView=false,pageActive=true,lastDiagnostic=-Infinity;
   try{const saved=Number(sessionStorage.getItem(key));if(Number.isFinite(saved))phase=((saved%T.period)+T.period)%T.period;}catch{}
   const save=()=>{try{sessionStorage.setItem(key,String(phase));}catch{}};
@@ -754,7 +757,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (() => {
  'use strict';
  function init() {
-  if(location.pathname.replace(/\/$/,'')!=='/service/cmo')return;
+  if(noveResolvedPathname().replace(/\/$/,'')!=='/service/cmo')return;
   const main=document.querySelector('main.nv33-cmo');
   if(!main||main.querySelector('.nv44-cmo-hero'))return;
   const mast=main.querySelector(':scope>.nv-cmo-mast');
@@ -792,7 +795,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Shared lower-page hero, preserving existing content and form/article boundaries. */
 (function(){
  function init(){
-  if(location.pathname.replace(/\/$/,'')==='' || location.pathname.replace(/\/$/,'')==='/service/cmo')return;
+  if(noveResolvedPathname().replace(/\/$/,'')==='' || noveResolvedPathname().replace(/\/$/,'')==='/service/cmo')return;
   const main=document.querySelector('#main'); if(!main||main.querySelector('.nv47-lower-hero'))return;
   const mast=main.querySelector(':scope > .nv-cmo-mast, :scope > .nv-lower-mast, :scope > .section_pagehero, :scope > .l-container');
   if(!mast)return;
@@ -812,7 +815,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (function(){
  var script=document.currentScript, base=script&&script.src?noveAssetURL('./assets/seo-research-office-v1.webp', script.src):'./assets/seo-research-office-v1.webp';
  function apply(){
-  if(location.pathname.replace(/\/$/,'')!=='/service/seo')return;
+  if(noveResolvedPathname().replace(/\/$/,'')!=='/service/seo')return;
   var img=document.querySelector('#main .nv30-research-grid>.nv30-research-photo');
   if(!img)return;
   img.removeAttribute('srcset');img.removeAttribute('sizes');img.removeAttribute('data-nv38-theme');
@@ -828,7 +831,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  'use strict';
  function apply(){
   const main=document.querySelector('#main');
-  const route=main?.dataset.nv33Page||location.pathname.replace(/\/$/,'');
+  const route=main?.dataset.nv33Page||noveResolvedPathname().replace(/\/$/,'');
   const replacements=[
    ['広告をクリックした先のページ','Webサイト・LP'],
    ['共有が難しい場合は、公開情報から市場・競合やクリックした先のページを調べます。','共有が難しい場合は、公開情報をもとに、市場・競合やWebサイト・LPを調査します。'],
@@ -898,7 +901,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  };
  function init(){
   const main=document.querySelector('main');if(!main||main.dataset.nv50Ready)return;
-  main.dataset.nv50Ready='true';const key=location.pathname.replace(/\/$/,'').split('/').pop();
+  main.dataset.nv50Ready='true';const key=noveResolvedPathname().replace(/\/$/,'').split('/').pop();
   main.querySelectorAll('.nv30-services').forEach(section=>{
    const label=section.querySelector('.nv30-en')?.textContent.trim();
    if(label==='EXECUTION')section.classList.add('nv50-execution');
@@ -929,7 +932,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   'use strict';
   function apply() {
     const main = document.querySelector('main');
-    const route = location.pathname.replace(/\/$/, '');
+    const route = noveResolvedPathname().replace(/\/$/, '');
     if (!main) return;
     const paired = ['/service/seo', '/service/web', '/service/crm'];
     if (route === '/service/dx') {
@@ -960,7 +963,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     '/service/web': 'cf26b.webp'
   };
   function apply() {
-    if (location.pathname.replace(/\/$/, '') !== '/service') return;
+    if (noveResolvedPathname().replace(/\/$/, '') !== '/service') return;
     document.querySelectorAll('#main .nv50-execution .nv30-service-card').forEach(card => {
       const link = card.querySelector('a.nv-link');
       const file = photos[link?.getAttribute('href')];
@@ -989,7 +992,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     '/service/crm': 'service-crm-v2.jpg'
   };
   function apply() {
-    if (location.pathname.replace(/\/$/, '') !== '/service') return;
+    if (noveResolvedPathname().replace(/\/$/, '') !== '/service') return;
     document.querySelectorAll('#main .nv50-business .nv30-service-card').forEach(card => {
       const link = card.querySelector('a.nv-link');
       const file = photos[link?.getAttribute('href')];
