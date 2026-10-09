@@ -918,3 +918,29 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+/* Content-led variation for consecutive lower-page explanation sections.
+   Mark existing nodes only: copy, images, reading order and motion stay intact. */
+(() => {
+  'use strict';
+  function apply() {
+    const main = document.querySelector('main');
+    const route = location.pathname.replace(/\/$/, '');
+    if (!main) return;
+    const paired = ['/service/seo', '/service/web', '/service/crm'];
+    if (route === '/service/dx') {
+      main.querySelector(':scope > .nv30-process')?.setAttribute('data-nv52-layout', 'proposal');
+      main.querySelector(':scope > .nv30-support')?.setAttribute('data-nv52-layout', 'closing');
+    } else if (paired.includes(route)) {
+      const sections = main.querySelectorAll(':scope > .nv30-support');
+      if (sections.length === 2) {
+        sections[0].setAttribute('data-nv52-layout', 'proposal');
+        sections[1].setAttribute('data-nv52-layout', 'closing');
+      }
+    } else if (['/industry/saas', '/industry/manufacturing', '/industry/ec'].includes(route)) {
+      main.querySelector(':scope > .nv30-support')?.setAttribute('data-nv52-layout', 'statement');
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
+  else apply();
+})();
