@@ -474,10 +474,10 @@ window.NoveMotionTokens=Object.freeze({
   // Give a row of service choices a short left-to-right rhythm. Japanese copy
   // remains static; each existing illustration enters only once, after loading.
   main.querySelectorAll('.nv30-services,.nv-cmo-challenges,.nv-challenges').forEach((group,g)=>{
-   group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img').forEach((art,i)=>{
+   group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img,.nv30-cards>li>.nv55-photo-frame>img').forEach((art,i)=>{
     register(art,'choice-'+g+'-'+i,()=>{
      const top=art.parentElement.getBoundingClientRect().top;
-     const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
+     const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img,.nv30-cards>li>.nv55-photo-frame>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
      const delay=innerWidth>=768?Math.min(row.indexOf(art),2)*T.stagger:0;
      animate(art,[{opacity:.55,translate:'0 24px'},{opacity:1,translate:'0 0'}],'choice',delay);
     });
@@ -968,6 +968,208 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       image.height = 720;
       image.style.setProperty('object-fit', 'cover', 'important');
       card.dataset.nv53Photo = 'home-service';
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
+  else apply();
+})();
+
+/* Service directory: reuse existing strategy and corresponding service photographs. */
+(() => {
+  'use strict';
+  const assets = new URL('./assets/', document.currentScript.src).href;
+  const photos = {
+    '/service/cmo': 'service-marketing-support-v2.jpg',
+    '/service/global': 'service-global-v2.jpg',
+    '/service/dx': 'service-dx-v2.jpg',
+    '/service/crm': 'service-crm-v2.jpg'
+  };
+  function apply() {
+    if (location.pathname.replace(/\/$/, '') !== '/service') return;
+    document.querySelectorAll('#main .nv50-business .nv30-service-card').forEach(card => {
+      const link = card.querySelector('a.nv-link');
+      const file = photos[link?.getAttribute('href')];
+      const image = card.querySelector('.nv-card-image-frame > img');
+      if (!file || !image) return;
+      image.src = assets + file;
+      image.removeAttribute('srcset');
+      image.width = 1440;
+      image.height = 960;
+      image.style.setProperty('object-fit', 'cover', 'important');
+      card.dataset.nv54Photo = 'business-service';
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
+  else apply();
+})();
+
+/* Lower-page challenge photos: seven explicit routes, three content-matched cards each. */
+(() => {
+  'use strict';
+  const assets = new URL('./assets/', document.currentScript.src).href;
+  const photos = {
+  "/service/cmo": [
+    {
+      "file": "service-cmo-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "経営者がマーケティングの判断まで担っており、検討する時間が足りない。"
+    },
+    {
+      "file": "top-process.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "社内や外部パートナーが個別に動き、施策全体の優先順位が定まらない。"
+    },
+    {
+      "file": "service-marketing-support-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "マーケティングの計画と、営業・販売の状況を合わせて見直したい。"
+    }
+  ],
+  "/service/crm": [
+    {
+      "file": "analytics-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "顧客情報が複数のツールや担当者に分かれ、全体を把握しにくい。"
+    },
+    {
+      "file": "service-crm-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "獲得した問い合わせや購入者の情報を、その後の働きかけに生かせていない。"
+    },
+    {
+      "file": "service-marketing-support-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "顧客への施策と、営業・販売の状況を合わせて見直したい。"
+    }
+  ],
+  "/service/dx": [
+    {
+      "file": "service-dx-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "デジタル技術やAIを活用したいが、どの業務から取り組むか決まっていない。"
+    },
+    {
+      "file": "analytics-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "使用中のツールやデータを、日々の判断や改善に十分に生かせていない。"
+    },
+    {
+      "file": "top-process.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "新しい仕組みを検討するうえで、業務の流れと必要な対応を整理したい。"
+    }
+  ],
+  "/service/global": [
+    {
+      "file": "service-global-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "進出先の市場で、誰に何を訴求すべきか整理したい。"
+    },
+    {
+      "file": "website-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "現在の広告やWebサイトが、現地の顧客に合っているか見直したい。"
+    },
+    {
+      "file": "service-cmo-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "新しい市場に向けて、優先するマーケティング施策を決めたい。"
+    }
+  ],
+  "/service/seo": [
+    {
+      "file": "analytics-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "記事やページを増やしているが、問い合わせや購入につながりにくい。"
+    },
+    {
+      "file": "figma-3358-26/7f9fd.webp",
+      "width": 1080,
+      "height": 720,
+      "copy": "競合と比べて不足している情報や、優先すべき改善が分からない。"
+    },
+    {
+      "file": "service-seo-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "AI検索への対応も含めて、今のSEO施策を見直したい。"
+    }
+  ],
+  "/service/sns": [
+    {
+      "file": "service-sns-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "投稿を続けているが、内容や方向性に手応えを感じられない。"
+    },
+    {
+      "file": "analytics-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "投稿への反応はあるが、サイト訪問や問い合わせにつながっているか分からない。"
+    },
+    {
+      "file": "figma-3358-26/d817c.webp",
+      "width": 1080,
+      "height": 720,
+      "copy": "運用中のSNSを見直すか、新しい媒体を始めるか迷っている。"
+    }
+  ],
+  "/service/web": [
+    {
+      "file": "analytics-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "サイトへの流入はあるが、問い合わせや購入が十分に増えていない。"
+    },
+    {
+      "file": "service-web-v2.jpg",
+      "width": 1440,
+      "height": 960,
+      "copy": "サービスが増え、何をどのページで伝えるべきか整理できていない。"
+    },
+    {
+      "file": "website-v1.jpg",
+      "width": 1440,
+      "height": 810,
+      "copy": "全体を作り直す必要があるのか、部分的な改修でよいのか判断したい。"
+    }
+  ]
+};
+  function apply() {
+    const entries = photos[location.pathname.replace(/\/$/, '')];
+    if (!entries) return;
+    const cards = [...document.querySelectorAll('#main .nv-cmo-challenges .nv30-cards > li')];
+    if (cards.length !== entries.length) return;
+    cards.forEach((card, index) => {
+      const entry = entries[index];
+      const image = card.querySelector(':scope > .nv30-issue-image');
+      const copy = card.querySelector(':scope > span')?.textContent.replace(/\s+/g, ' ').trim();
+      if (!image || copy !== entry.copy) return;
+      const frame = document.createElement('div');
+      frame.className = 'nv55-photo-frame';
+      image.before(frame);
+      frame.append(image);
+      image.src = assets + entry.file;
+      image.removeAttribute('srcset');
+      image.removeAttribute('sizes');
+      image.width = entry.width;
+      image.height = entry.height;
+      image.style.setProperty('object-fit', 'cover', 'important');
+      card.dataset.nv55Photo = 'challenge';
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
