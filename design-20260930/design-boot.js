@@ -1,7 +1,8 @@
 /* Apply the existing above-the-fold design while HTML is parsed, before deferred Webflow scripts. */
 (function(){
   'use strict';
-  const assetBase=new URL('./assets/',document.currentScript.src);
+  // Preview may inline this script; retain the existing published asset directory.
+  const assetBase=new URL('https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@6f3e4b394587ce92e1a2b9b5b5d45f49a3abc214/design-20260930/assets/');
   let posterPreloaded=false;
   let contactPrepared=false;
   function prepare(){
