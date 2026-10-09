@@ -1,3 +1,5 @@
+// Keep unchanged images on the verified asset revision; new GitHub CDN packages exceed 50 MB.
+const noveAssetURL = (path, source) => new URL(path, source.replace(/\/gh\/suguru1215\/nobe-css@[^/]+\//, '/gh/suguru1215/nobe-css@46d837944ebe7fe00be0d0695f6b74f11368056b/')).href;
 window.NoveMotionTokens=Object.freeze({
   duration:Object.freeze({micro:180,copy:380,choice:600,heading:620,media:760,element:480,scene:800}),
   ease:Object.freeze({enter:'cubic-bezier(.22,1,.36,1)',state:'cubic-bezier(.2,0,.2,1)',exit:'cubic-bezier(.4,0,1,1)'}),
@@ -10,8 +12,8 @@ window.NoveMotionTokens=Object.freeze({
   let pagePath=location.pathname;
   function resolvePagePath(){if(!location.hostname.endsWith('.canvas.webflow.com'))return location.pathname;const ids={"6a7457c9cb165a65da84d65d":"/","6a7ec9847fd26295d1895430":"/service","6a7eccdca16dd0fbd7a5cf25":"/industry","6a7bda6866c2836329b779e3":"/service/cmo","6aa2a8b1f2145364c37fc566":"/service/marketing-support","6a7dda84aaf4495eb6d35f59":"/service/ads","6a7dc128859cb15f3a8e74c6":"/service/seo","6aa2aad30774b33dbe0efe73":"/service/sns","6a7dd6d1eb088ed19d7b179a":"/service/web","6aa2ab45a30f142219ce3262":"/service/global","6a7f55938c00c761cbac2fa2":"/service/dx","6a7f4f786fc87c8384f9e8d2":"/service/crm","6a873d1afa7c3ee3a663af5c":"/company","6a7ecf997369e3f19408d6de":"/contact","6a8b2db45bd9598dd0c7f6b2":"/privacy","6a8b33b82a5b93fc571741df":"/column","6a75cc0f966fdcd06a8e2886":"/columns/marketing-review","6a8b2fa74d5c11cb3a12ba91":"/sitemap"};const titles={"マーケティングの戦略づくりから施策の実行まで":"/","サービス":"/service","業界別のマーケティング支援":"/industry","CMO代行":"/service/cmo","マーケティングの改善を、分析から実行まで。":"/service/marketing-support","Web広告運用":"/service/ads","SEO・AI検索対策":"/service/seo","SNS運用の分析・改善支援":"/service/sns","Webサイト改善":"/service/web","海外進出・日本進出支援":"/service/global","DX・AX支援":"/service/dx","CRM支援":"/service/crm","IT・SaaSのマーケティング支援":"/industry/saas","製造業のマーケティング支援":"/industry/manufacturing","EC・D2Cのマーケティング支援":"/industry/ec","建設・住宅・リフォームのマーケティング支援":"/industry/construction","不動産・住宅仲介・管理のマーケティング支援":"/industry/realestate","人材業界のマーケティング支援":"/industry/hr-recruiting","金融業界のマーケティング支援":"/industry/finance","医療・クリニックのマーケティング支援":"/industry/medical","士業のマーケティング支援":"/industry/professional","会社情報":"/company","ご相談・お問い合わせ":"/contact","プライバシーポリシー":"/privacy","マーケティングの考え方":"/column","発信者：株式会社ノーブ公開日：09/14/2026":"/columns/marketing-review","サイトマップ":"/sitemap"};return ids[document.documentElement.dataset.wfPage]||titles[(document.querySelector('main h1')?.textContent||'').replace(/\s/g,'')]||location.pathname;}
   const script=document.currentScript;
-  const base=script ? new URL('./assets/',script.src).href : './assets/';
-  const legacyBase=script?new URL('../img/',script.src).href:'../img/';
+  const base=script ? noveAssetURL('./assets/', script.src) : './assets/';
+  const legacyBase=script?noveAssetURL('../img/', script.src):'../img/';
   const serviceArt={cmo:['cmowd',0,'jpg'],ads:['adwd',0,'jpg'],seo:['seowd',0,'jpg'],web:['webwd',0,'png'],dx:['dxwd',0,'jpg'],crm:['crmwd',0,'jpg'],sns:['datawd',0,'jpg'],global:['growthwd',0,'jpg'],'marketing-support':['growthwd',6,'jpg']};
   const industryConcernArt=[...Array.from({length:6},(_,i)=>'adwd-'+(i+7)+'.jpg'),...Array.from({length:6},(_,i)=>'crmwd-'+(i+7)+'.jpg'),...Array.from({length:6},(_,i)=>'datawd-'+(i+7)+'.jpg'),...Array.from({length:6},(_,i)=>'webwd-'+(i+7)+'.png'),'cmowd-7.jpg','cmowd-8.jpg','seowd-7.jpg'];
   function distinctPageArt(root){const key=pagePath.split('/').filter(Boolean).pop(),set=serviceArt[key];if(set){let i=0;root.querySelectorAll('.nv30-issue-image,.nv30-research-photo,.nv30-execution-photo,.nv30-related-photo').forEach(n=>{i++;n.src=legacyBase+set[0]+'-'+(set[1]+i)+'.'+set[2];n.removeAttribute('srcset');n.style.setProperty('object-fit','contain','important');});}else{const keys=['saas','manufacturing','ec','construction','realestate','hr-recruiting','finance','medical','professional'],i=keys.indexOf(key);if(i>=0){root.querySelectorAll('.nv30-issue-image').forEach((n,j)=>{n.src=legacyBase+industryConcernArt[i*3+j];n.style.setProperty('object-fit','contain','important');});const research=root.querySelector('.nv30-research-photo'),related=root.querySelector('.nv30-related-photo');if(research)research.src=legacyBase+(i<8?'indsvc-'+(i+1)+'.jpg':'inddoc-9.jpg');if(related)related.src=legacyBase+(i<8?'inddoc-'+(i+1)+'.jpg':'indov-3.jpg');}}root.querySelectorAll('.nv30-service-card>img').forEach((n,i)=>{n.src=legacyBase+(i<8?'svcidx-'+(i+1)+'.jpg':'svc-8.jpg');n.removeAttribute('srcset');n.style.setProperty('object-fit','contain','important');});}
@@ -531,7 +533,7 @@ window.NoveMotionTokens=Object.freeze({
 
 /* Local parity correction. Wording changes are explicit, content-matched English labels only. */
 (()=>{'use strict';
-const script=document.currentScript,asset=new URL('./assets/alpha/',script.src).href,top=new URL('./assets/figma-3358-26/',script.src).href;
+const script=document.currentScript,asset=noveAssetURL('./assets/alpha/', script.src),top=noveAssetURL('./assets/figma-3358-26/', script.src);
 const labels={
  '/service':['STRATEGY','EXECUTION','BUSINESS'],
  '/service/ads':['ANALYSIS','MEDIA','PRODUCTION','REPORTING'],
@@ -566,7 +568,7 @@ function init(){const main=document.querySelector('main');if(!main||main.dataset
  main.querySelectorAll(':scope>section').forEach(s=>{s.dataset.nv38Role=s.matches('.nv-hero,.nv-cmo-mast,.section_pagehero')?'mast':s.matches('.nv-cta')?'cta':s.matches('.nv-cmo-intro')?'intro':s.matches('.nv-cmo-challenges,.nv-challenge-wrap')?'challenge':s.matches('.nv30-faq')?'faq':s.matches('.nv30-related')?'related':'content';});
  if(route==='/service')main.querySelectorAll('.nv30-service-card>img').forEach((im,i)=>{const t=['advertising','information','target','journey','decision','target','team','information'][i];if(!t)return;im.src=originals[t]?top+originals[t]:asset+t+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=t;});
  const researchTheme={'marketing-support':'report',seo:'information',sns:'journey',web:'journey',global:'target',dx:'information',crm:'information',saas:'target',manufacturing:'information',ec:'journey',construction:'target',realestate:'target','hr-recruiting':'journey',finance:'journey',medical:'information',professional:'target'}[key];
- if(researchTheme)main.querySelectorAll('.nv30-research-grid>.nv30-research-photo').forEach(im=>{const photo=researchPhotos[route];im.src=photo?new URL('./assets/'+photo,script.src).href:originals[researchTheme]?top+originals[researchTheme]:asset+researchTheme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=researchTheme;im.width=photo?1440:600;im.height=photo?960:400;if(photo){im.dataset.nv51Photo='generated';im.style.setProperty('object-fit','cover','important');}});
+ if(researchTheme)main.querySelectorAll('.nv30-research-grid>.nv30-research-photo').forEach(im=>{const photo=researchPhotos[route];im.src=photo?noveAssetURL('./assets/'+photo, script.src):originals[researchTheme]?top+originals[researchTheme]:asset+researchTheme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=researchTheme;im.width=photo?1440:600;im.height=photo?960:400;if(photo){im.dataset.nv51Photo='generated';im.style.setProperty('object-fit','cover','important');}});
  const set=themes[key];if(set)main.querySelectorAll('.nv-cmo-challenges .nv30-issue-image').forEach((im,i)=>{const theme=set[i];if(!theme)return;im.src=originals[theme]?top+originals[theme]:asset+theme+'-alpha.webp';im.removeAttribute('srcset');im.dataset.nv38Theme=theme;im.width=600;im.height=400;});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
@@ -806,7 +808,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 // One generated illustrative photo replaces only the SEO research image.
 (function(){
- var script=document.currentScript, base=script&&script.src?new URL('./assets/seo-research-office-v1.webp',script.src).href:'./assets/seo-research-office-v1.webp';
+ var script=document.currentScript, base=script&&script.src?noveAssetURL('./assets/seo-research-office-v1.webp', script.src):'./assets/seo-research-office-v1.webp';
  function apply(){
   if(location.pathname.replace(/\/$/,'')!=='/service/seo')return;
   var img=document.querySelector('#main .nv30-research-grid>.nv30-research-photo');
@@ -882,7 +884,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 /* Content-led presentation. Existing copy, links, forms and metadata remain authoritative. */
 (()=>{'use strict';
- const script=document.currentScript,assets=new URL('./assets/',script.src).href;
+ const script=document.currentScript,assets=noveAssetURL('./assets/', script.src);
  const reportTerms={
   ads:['実施した内容','配信結果','次に試す内容'],
   construction:['相談内容','見学・現地調査','次に変える点'],
@@ -948,7 +950,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Service directory: reuse the corresponding home service photographs. */
 (() => {
   'use strict';
-  const assets = new URL('./assets/figma-3358-26/', document.currentScript.src).href;
+  const assets = noveAssetURL('./assets/figma-3358-26/', document.currentScript.src);
   const photos = {
     '/service/ads': '3d81b.webp',
     '/service/seo': '7f9fd.webp',
@@ -977,7 +979,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Service directory: reuse existing strategy and corresponding service photographs. */
 (() => {
   'use strict';
-  const assets = new URL('./assets/', document.currentScript.src).href;
+  const assets = noveAssetURL('./assets/', document.currentScript.src);
   const photos = {
     '/service/cmo': 'service-marketing-support-v2.jpg',
     '/service/global': 'service-global-v2.jpg',
@@ -1006,7 +1008,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Lower-page challenge photos: seven explicit routes, three content-matched cards each. */
 (() => {
   'use strict';
-  const assets = new URL('./assets/', document.currentScript.src).href;
+  const assets = noveAssetURL('./assets/', document.currentScript.src);
   const photos = {
   "/service/cmo": [
     {
