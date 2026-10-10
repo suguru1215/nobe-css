@@ -2486,3 +2486,30 @@ html body:is(#nv30-design,body) .nv23-header .nv-head-inner .nv-button>.nv-arrow
   translate:0 -50%!important;
 }
 }
+
+/* Give editorial industry research photos a full column, replacing the old illustration slot. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main#main[id="main"][data-nv35-kind="industry-detail"] .nv30-research-grid:has(>.nv-editorial-photo-frame.nv30-research-photo) {
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;
+  column-gap:56px!important;
+  align-items:center!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"][data-nv35-kind="industry-detail"] .nv30-research-grid>.nv-editorial-photo-frame.nv30-research-photo {
+  width:100%!important;max-width:none!important;
+  height:auto!important;max-height:none!important;aspect-ratio:3/2!important;
+  justify-self:stretch!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"][data-nv35-kind="industry-detail"] .nv30-research-grid>.nv-editorial-photo-frame.nv30-research-photo>img {
+  max-height:none!important;aspect-ratio:auto!important;box-shadow:none!important;
+}
+@media(max-width:991px) {
+  html body.nv30 #main#main#main#main#main#main[id="main"][data-nv35-kind="industry-detail"] .nv30-research-grid:has(>.nv-editorial-photo-frame.nv30-research-photo) {
+    grid-template-columns:minmax(0,1fr)!important;gap:32px!important;
+  }
+}
+@media(max-width:767px) {
+  html body.nv30 #main#main#main#main#main#main[id="main"][data-nv35-kind="industry-detail"] .nv30-research-grid:has(>.nv-editorial-photo-frame.nv30-research-photo) {
+    gap:24px!important;
+  }
+}
+}
