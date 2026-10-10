@@ -2368,3 +2368,121 @@ html body.nv30 #main#main#main#main#main#main[id="main"]:is(.nv23-home,[data-nv3
   html body.nv30 #main#main#main#main#main#main[id="main"]:is(.nv23-home,[data-nv33-page="/service/ads"],[data-nv35-kind="industry-detail"]) :is(.nv-challenge-wrap,.nv-cmo-challenges) .nv30-cards>li>.nv30-issue-image {height:160px!important}
 }
 }
+
+/* Shared editorial components: one type scale and reading rhythm per role.
+   Hero titles, article prose, catalogue labels and form controls retain their own roles. */
+@layer noveComponents {
+html body.nv30 {
+  --nv-editorial-heading-size:30px;
+  --nv-editorial-heading-leading:1.6;
+  --nv-editorial-heading-gap:32px;
+  --nv-editorial-body-size:17px;
+  --nv-editorial-body-leading:1.9;
+  --nv-editorial-paragraph-gap:20px;
+  --nv-support-heading-size:22px;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-heading>h2,.nv30-research .nv-copy>h2,.nv30-execution .nv-copy>h2,.nv30-overview-copy>h2,.nv-challenges>h2,.nv-business .nv-copy>h2,.nv30-company-heading>h2,.nv35-policy-heading>h2,.nv30-related>.nv-wrap>h2,.nv30-process>.nv-wrap>h2,.nv-process>.nv-wrap>h2,.r24-consultation-guide>.nv-wrap>h2):not([data-nv52-layout="closing"] h2) {
+  font-size:var(--nv-editorial-heading-size)!important;
+  line-height:var(--nv-editorial-heading-leading)!important;
+  letter-spacing:normal!important;
+}
+/* These copies are block flow, so a declared gap alone produces no spacing. */
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-research,.nv30-execution) .nv-copy>h2 {
+  margin:0 0 var(--nv-editorial-heading-gap)!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-research,.nv30-execution) .nv-copy>h2+p {
+  margin-top:0!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-research,.nv30-execution) .nv-copy>p {
+  font-size:var(--nv-editorial-body-size)!important;
+  line-height:var(--nv-editorial-body-leading)!important;
+  margin:0 0 var(--nv-editorial-paragraph-gap)!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-research,.nv30-execution) .nv-copy>p:last-child {
+  margin-bottom:0!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv30-overview-copy>h2,
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv-business .nv-copy>h2 {
+  margin-bottom:var(--nv-editorial-heading-gap)!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-heading,.nv35-policy-heading):not([data-nv52-layout="closing"] .nv30-heading) {
+  margin-bottom:var(--nv-editorial-heading-gap)!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-support-copy,.nv33-support-card) h3 {
+  font-size:var(--nv-support-heading-size)!important;
+  line-height:1.6!important;
+  margin:0 0 16px!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv30-support-copy,.nv33-support-card) h3+p {
+  margin-top:0!important;
+}
+@media(min-width:768px) and (max-width:1023px) {
+  html body.nv30 {--nv-editorial-heading-gap:28px;}
+}
+@media(max-width:767px) {
+  html body.nv30 {
+    --nv-editorial-heading-size:24px;
+    --nv-editorial-heading-leading:1.65;
+    --nv-editorial-heading-gap:24px;
+    --nv-editorial-body-size:16px;
+    --nv-support-heading-size:20px;
+  }
+}
+}
+
+/* Photo disclosures live inside each existing image footprint. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-frame {position:relative!important;display:block!important;overflow:hidden!important;min-width:0!important}
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-note {position:absolute!important;inset:auto 8px 8px auto!important;z-index:2!important;display:block!important;width:auto!important;height:auto!important;margin:0!important;padding:3px 7px!important;border:0!important;border-radius:3px!important;background:rgba(255,255,255,.94)!important;color:#394b5d!important;font:400 11px/1.5 'Noto Sans JP',sans-serif!important;letter-spacing:0!important;pointer-events:none!important;white-space:nowrap!important;transform:none!important;translate:none!important;opacity:1!important}
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv30-process-grid>.nv-editorial-process-photo {width:100%!important;height:440px!important;border-radius:12px!important}
+@media(max-width:767px){html body.nv30 #main#main#main#main#main#main[id="main"] .nv30-process-grid>.nv-editorial-process-photo {height:280px!important}}
+}
+
+/* Shared role spacing: verified with the integrated local preview.
+   Keeps existing editorial tokens, card hierarchy and breakpoint layouts. */
+@layer noveComponents {
+  /* Industry support cards: the inner copy block has no flex gap of its own. */
+  html body.nv30 #main#main#main#main#main#main[id="main"] .nv50-scope .nv-scope-card h3 {
+    margin-bottom: 16px !important;
+  }
+
+  /* Consultation guide headings already use the editorial type scale. */
+  html body.nv30 #main#main#main#main#main#main[id="main"] .r24-consultation-guide > .nv-wrap > h2 {
+    margin-bottom: var(--nv-editorial-heading-gap) !important;
+  }
+  html body.nv30 #main#main#main#main#main#main[id="main"] .r24-consultation-guide > .nv-wrap > h2 + p {
+    margin-top: 0 !important;
+  }
+
+  /* The outer CTA wrapper already owns the 28px copy-to-action spacing. */
+  html body.nv30 #main#main#main#main#main#main[id="main"] .nv-cta > .nv35-cta-primary > .nv-button {
+    margin: 0 !important;
+  }
+
+  /* Shared process copy rhythm: 8px row gap + existing 8px H3 bottom margin.
+     Does not change display, columns, number positioning or step padding. */
+  html body.nv30 #main#main#main#main#main#main[id="main"] .nv-process .nv-step {
+    row-gap: 8px !important;
+  }
+}
+
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main#main[id="main"].nv23-home .nv-process>.nv-wrap>h2 {
+  margin-bottom:var(--nv-editorial-heading-gap)!important;
+}
+}
+
+/* Keep the header label at the button center, independently of its arrow. */
+@layer noveComponents {
+html body:is(#nv30-design,body) .nv23-header .nv-head-inner .nv-button {
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+}
+html body:is(#nv30-design,body) .nv23-header .nv-head-inner .nv-button>.nv-arrow {
+  position:absolute!important;
+  right:14px!important;
+  top:50%!important;
+  translate:0 -50%!important;
+}
+}

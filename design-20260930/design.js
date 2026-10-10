@@ -1009,3 +1009,138 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, {once:true});
   else apply();
 })();
+
+/* Content-matched editorial images. Route-scoped mappings leave logos, illustrations,
+   diagrams, the brand video and its reduced-motion poster on their verified revisions. */
+(()=>{
+ 'use strict';
+ const assetBase=new URL('./assets/editorial-photos-20261010/',document.currentScript.src).href;
+ const photos={
+  "/column": {
+    "analysis.jpg": "research-general"
+  },
+  "/": {
+    "0667e.webp": "research-general",
+    "20c23.webp": "process-consultation",
+    "3d81b.webp": "execution-ads",
+    "7f9fd.webp": "research-seo",
+    "d817c.webp": "execution-sns",
+    "cf26b.webp": "execution-web"
+  },
+  "/service/ads": {
+    "3d81b.webp": "execution-ads"
+  },
+  "/service": {
+    "3d81b.webp": "execution-ads",
+    "7f9fd.webp": "research-seo",
+    "d817c.webp": "execution-sns",
+    "cf26b.webp": "execution-web",
+    "service-crm-v2.jpg": "research-crm",
+    "service-dx-v2.jpg": "research-dx",
+    "service-global-v2.jpg": "research-global",
+    "service-marketing-support-v2.jpg": "research-cmo",
+    "advertising-v1.jpg": "process-consultation"
+  },
+  "/industry/construction": {
+    "industry-construction-v2.jpg": "research-industry-construction"
+  },
+  "/industry/ec": {
+    "industry-ec-v2.jpg": "research-industry-ec"
+  },
+  "/industry/finance": {
+    "industry-finance-v2.jpg": "research-industry-finance"
+  },
+  "/industry/hr-recruiting": {
+    "industry-hr-recruiting-v2.jpg": "research-industry-hr"
+  },
+  "/industry/manufacturing": {
+    "industry-manufacturing-v2.jpg": "research-industry-manufacturing"
+  },
+  "/industry/medical": {
+    "industry-medical-v2.jpg": "research-industry-medical"
+  },
+  "/industry/professional": {
+    "industry-professional-v2.jpg": "research-industry-professional"
+  },
+  "/industry/realestate": {
+    "industry-realestate-v2.jpg": "research-industry-realestate"
+  },
+  "/industry/saas": {
+    "industry-saas-v2.jpg": "research-industry-saas"
+  },
+  "/service/cmo": {
+    "3404e.png": "research-cmo",
+    "62e36.png": "execution-cmo",
+    "ac444.png": "research-general"
+  },
+  "/service/crm": {
+    "service-crm-v2.jpg": "research-crm"
+  },
+  "/service/dx": {
+    "service-dx-v2.jpg": "research-dx"
+  },
+  "/service/global": {
+    "service-global-v2.jpg": "research-global"
+  },
+  "/service/marketing-support": {
+    "service-marketing-support-v2.jpg": "research-general"
+  },
+  "/service/seo": {
+    "seo-research-office-v1.webp": "research-seo"
+  },
+  "/service/sns": {
+    "service-sns-v2.jpg": "research-sns"
+  },
+  "/service/web": {
+    "service-web-v2.jpg": "research-web"
+  }
+};
+ const descriptions={
+  "research-general": "支援内容を説明するAI生成イメージ：2人の担当者が、ノートPCの公開競合ページと、机上の集客施策比較表・注記入りサイト印刷物を照らし合わせ、改善優先順位をメモしている。",
+  "process-consultation": "支援内容を説明するAI生成イメージ：相談者と担当者が、現在の取り組み一覧と短い調査計画を挟んで、課題・対応範囲・次の確認事項を指差しながらすり合わせる。",
+  "execution-ads": "支援内容を説明するAI生成イメージ：広告の訴求案とLPの画面を横に並べ、担当者が配信結果の簡潔な比較レポートと照らして、次に出すクリエイティブを選んでいる。",
+  "research-seo": "支援内容を説明するAI生成イメージ：担当者がノートPCの検索結果と競合ページ、紙の検索意図別一覧を比較し、自社ページで説明を補う箇所に印を付けている。",
+  "execution-sns": "支援内容を説明するAI生成イメージ：スマートフォンの投稿プレビューと3枚程度の写真候補、短い投稿計画を見比べ、担当者が目的に合う画像と導線を選ぶ。",
+  "execution-web": "支援内容を説明するAI生成イメージ：デザイナーと実装担当が、同じページのPC版とスマートフォン版を見比べ、情報の順序と問い合わせボタンの位置を確認している。",
+  "research-industry-construction": "支援内容を説明するAI生成イメージ：住宅・工事サービスの競合サイトをPCで比較し、手元の対象エリア地図と検索語句の分類メモ、問い合わせ内容の集計を指差して商圏別の課題を確認する担当者。",
+  "research-industry-ec": "支援内容を説明するAI生成イメージ：担当者がPCの商品比較ページとスマートフォンの購入手順をたどり、送料・配送案内のチェックリストと匿名の流入/購入レポートを照合している。",
+  "research-industry-finance": "支援内容を説明するAI生成イメージ：金融サービスの説明ページとスマートフォンの相談予約画面を比較し、対象条件・費用・注意事項の確認表に担当者が注記する。",
+  "research-industry-hr": "支援内容を説明するAI生成イメージ：求人検索と登録画面をスマートフォンで確認しながら、PC上の企業向け採用支援ページと2列の導線整理表を比較する調査担当者。",
+  "research-industry-manufacturing": "支援内容を説明するAI生成イメージ：マーケティング担当者が、PCに開いた製造業の製品ページ・用途別検索結果と、机上の仕様/対応範囲チェックシートを比較し、もう一方の担当者がタブレットで技術相談フォームまでの導線を確認している。小さな金属サンプルは机の端に一つだけ。",
+  "research-industry-medical": "支援内容を説明するAI生成イメージ：地域検索の結果とクリニックの診療案内をPCで確認し、担当者がスマートフォンで初診案内から予約先へ進み、診療時間・アクセス・予約方法の確認表に記録している。",
+  "research-industry-professional": "支援内容を説明するAI生成イメージ：士業の業務分野別ページと地域検索の結果を比較し、担当者が個人相談/法人顧問に分けた確認メモと問い合わせ画面を照らし合わせる。",
+  "research-industry-realestate": "支援内容を説明するAI生成イメージ：PCに地域の物件/相談ページ、スマートフォンに売却相談・内見予約の画面を開き、担当者が売主/買主/入居者/オーナー別の接点表と匿名の反響集計を確認する。",
+  "research-industry-saas": "支援内容を説明するAI生成イメージ：SaaSの競合機能比較表・サービスページ・デモ申込画面を照らし合わせ、担当者が顧客の課題別メモと匿名の流入/申込集計に印を付けている。",
+  "research-cmo": "支援内容を説明するAI生成イメージ：事業責任者とマーケティング担当者が、事業目標・現在の施策・営業状況を並べた資料を見ながら、事実と確認待ちを分け、課題と優先順位を整理する。",
+  "execution-cmo": "支援内容を説明するAI生成イメージ：担当者2人が広告案・検索ページ・SNS投稿・LPの作業中画面を2台の端末と小さな資料で見比べ、合意した改善を実装/制作する箇所を確認する。",
+  "research-crm": "支援内容を説明するAI生成イメージ：担当者が、問い合わせ・商談・受注/継続利用の接点図と匿名の項目一覧を見ながら、PCの顧客管理画面で情報の取得元と受け渡しを確認する。",
+  "research-dx": "支援内容を説明するAI生成イメージ：現場担当者が作業手順を説明し、調査担当者が既存ツールの画面と業務フローを照合して、重複入力や情報の分断箇所に付箋を貼る。",
+  "research-global": "支援内容を説明するAI生成イメージ：担当者2人が進出先の現地語の競合ページ、地域別市場の簡潔な比較表と自社訴求をPC/紙で見比べ、顧客との接点をメモしている。",
+  "research-sns": "支援内容を説明するAI生成イメージ：担当者が既存アカウントの投稿一覧と反応集計、競合の公開投稿をPCで比較し、スマートフォンでプロフィールからサイトへ進む導線を確認する。",
+  "research-web": "支援内容を説明するAI生成イメージ：担当者が実際のページをPCとスマートフォンでたどり、サービス説明・比較情報・問い合わせフォームの間で迷う箇所を、印刷したページ一覧に注記している。"
+};
+ function apply(){
+  const main=document.querySelector('main'),route=noveResolvedPathname().replace(/\/$/,'')||'/';
+  const mapping=photos[route];if(!main||!mapping)return;
+  main.querySelectorAll('img').forEach(image=>{
+   if(image.dataset.nvEditorialPhoto)return;
+   const filename=(image.getAttribute('src')||'').split('/').pop().split('?')[0],id=mapping[filename];
+   if(!id)return;
+   image.src=assetBase+id+'.webp';image.removeAttribute('srcset');image.removeAttribute('sizes');
+   image.width=1536;image.height=1024;image.alt=descriptions[id];image.removeAttribute('aria-hidden');
+   image.dataset.nvEditorialPhoto=id;
+   let frame=image.parentElement;
+   if(!frame.classList.contains('nv-card-image-frame')){
+    frame=document.createElement('span');frame.className=image.className+' nv-editorial-photo-frame';
+    if(image.parentElement.classList.contains('nv30-process-grid'))frame.classList.add('nv-editorial-process-photo');
+    image.before(frame);frame.append(image);
+    for(const [property,value] of Object.entries({display:'block',position:'static',width:'100%',height:'100%','max-width':'100%',margin:'0',padding:'0',border:'0','border-radius':'inherit','object-fit':'cover','object-position':'50% 50%'}))image.style.setProperty(property,value,'important');
+   }
+   frame.classList.add('nv-editorial-photo-frame');
+   const note=document.createElement('span');note.className='nv-editorial-photo-note';note.textContent='AI生成イメージ';
+   note.title='支援内容を説明するイメージです。実在のスタッフ・顧客・支援実績を示すものではありません。';
+   frame.append(note);
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
+})();
