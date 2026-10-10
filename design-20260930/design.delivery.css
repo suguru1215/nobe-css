@@ -2320,7 +2320,7 @@ html[data-wf-page="6a873d1afa7c3ee3a663af5c"] body.nv30 #main#main#main a.nv-lin
 /* Lower-page main visuals: larger titles, a single compact gap and full-width copy. */
 @layer noveComponents {
 html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {
-  font-size:56px!important;line-height:1.35!important;max-width:100%!important;
+  font-size:48px!important;line-height:1.35!important;max-width:100%!important;
 }
 html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero>.nv47-mast,.nv44-cmo-hero>.nv-cmo-mast) {
   padding-bottom:24px!important;
@@ -2338,7 +2338,7 @@ html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-contact .page
 }
 @media(max-width:767px) {
   html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {
-    font-size:32px!important;line-height:1.5!important;text-wrap:balance!important;
+    font-size:28px!important;line-height:1.5!important;text-wrap:balance!important;
   }
   html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 .nv43-phrase {display:inline-block;max-width:100%;vertical-align:baseline;letter-spacing:inherit!important}
   html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero>.nv47-mast,.nv44-cmo-hero>.nv-cmo-mast) {
@@ -2349,7 +2349,7 @@ html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-contact .page
   }
 }
 @media(max-width:359px) {
-  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:28px!important}
+  html body.nv30 #main#main#main#main#main#main[id="main"] :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:26px!important}
 }
 }
 
