@@ -166,7 +166,7 @@ window.NoveMotionTokens=Object.freeze({
       if(hero&&!hero.querySelector('.nv30-hero-art')){
         hero.querySelector('h1').innerHTML='<span class="nv30-hero-line">マーケティングの</span><span class="nv30-hero-line">戦略づくりから</span><span class="nv30-hero-line">施策の実行まで</span>';
         const art=document.createElement('div');art.className='nv30-hero-art';art.setAttribute('aria-hidden','true');
-        const video=document.createElement('video');if(!reduceMotion.matches)video.src=base+'hero-marketing-analytics.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload=reduceMotion.matches?'none':'auto';video.poster=base+'hero-marketing-analytics-poster.webp';const still=document.createElement('img');still.className='nv40-video-still';still.src=video.poster;still.alt='';still.width=850;still.height=709;art.append(still,video);hero.insertBefore(art,hero.querySelector('h1'));
+        const video=document.createElement('video');if(!reduceMotion.matches)video.src=base+'hero-marketing-analytics.mp4';video.muted=true;video.autoplay=!motionDisabled();video.loop=true;video.playsInline=true;video.preload=reduceMotion.matches?'none':'auto';video.poster=base+'hero-marketing-analytics-poster.webp';const still=document.createElement('img');still.className='nv40-video-still';still.loading='eager';still.fetchPriority='high';still.src=video.poster;still.alt='';still.width=850;still.height=709;art.append(still,video);hero.insertBefore(art,hero.querySelector('h1'));
         let visible=true,pageActive=true;const motion=()=>{if(motionDisabled()||document.hidden||!visible||!pageActive)video.pause();else{if(!video.getAttribute('src'))video.src=base+'hero-marketing-analytics.mp4';video.play().catch(()=>{});}};motion();motionSubscribers.add(motion);document.addEventListener('visibilitychange',motion);
         if('IntersectionObserver' in window){const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;motion();});visibility.observe(art);window.addEventListener('pagehide',()=>{pageActive=false;visible=false;visibility.disconnect();video.pause();});window.addEventListener('pageshow',()=>{pageActive=true;visibility.observe(art);motion();});}
       }
@@ -365,173 +365,146 @@ function noveResolvedPathname(){return location.hostname.endsWith('.canvas.webfl
  grid.querySelectorAll('.nv33-intro-message').forEach(n=>{if(!n.children.length)n.remove();});
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();})();
 
-/* NOVE editorial motion. Text stays available; visual cues explain the next step. */
+/* NOVE editorial motion: one owner, readable type, framed photographs. */
 (()=>{'use strict';
  const T=window.NoveMotionTokens;if(!T)return;
- let teardown=()=>{};
- function init(){
-  teardown();const main=document.querySelector('main');if(!main)return;
-  const media=matchMedia('(prefers-reduced-motion: reduce)'),active=new Map(),pending=new Map(),visible=new Set(),listeners=[],rails=[],decorations=[];
-  // Entrances belong to this visit. Persist only the user's explicit stop preference.
-  // A previous tab visit must not consume the next page visit's visual sequence.
-  let alive=true,observer,activeObserver,resizeFrame=0,startedCount=0;
-  const seen=new Set();
-  if(!('IntersectionObserver' in window)||!Element.prototype.animate)return;
-  const listen=(el,type,fn)=>{el.addEventListener(type,fn);listeners.push(()=>el.removeEventListener(type,fn));};
-  const reason=()=>media.matches?'reduced':window.NoveMotionPaused===true?'user':document.hidden?'hidden':!window.NoveMotionReady?'loading':'';
-  const stopped=()=>Boolean(reason());
-  const inView=el=>{let r=el.getBoundingClientRect();if(el.ownerSVGElement&&(r.width===0||r.height===0))r=el.ownerSVGElement.getBoundingClientRect();return r.bottom>64&&r.top<innerHeight&&r.width>0&&r.height>0;};
-  function release(a,el){active.delete(a);if(![...active.values()].includes(el))activeObserver.unobserve(el);}
-  function finish(el){for(const [a,target] of [...active])if(!el||target===el||el.contains(target)){try{a.finish();}catch{a.cancel();}release(a,target);}}
-  function animate(el,frames,role='element',delay=0,ease='enter'){
-   if(!el||!alive||stopped()||!inView(el)||typeof el.animate!=='function')return;
-   el.dataset.nvMotionRole=role;el.dataset.nvMotionDuration=String(T.duration[role]);el.dataset.nvMotionDelay=String(delay);
-   const a=el.animate(frames,{duration:T.duration[role],delay,easing:T.ease[ease],fill:'backwards'});active.set(a,el);activeObserver.observe(el);startedCount++;
-   a.finished.then(()=>release(a,el),()=>release(a,el));return a;
+ const start=()=>{
+  const main=document.querySelector('main');if(!main||!('IntersectionObserver' in window)||!Element.prototype.animate)return;
+  window.NoveMotionDirector?.destroy();
+  const media=matchMedia('(prefers-reduced-motion: reduce)'),small=()=>innerWidth<768;
+  const active=new Map(),jobs=new Map(),pending=new Set(),visible=new Set(),listeners=new Set(),rails=[];
+  let alive=true,suspended=false,resizeFrame=0,started=0,conflicts=0,previewRate=1,restoreTicket=0;
+  const savedScroll=history.state?.noveEditorialScroll;
+  let restoring=performance.getEntriesByType('navigation')[0]?.type==='back_forward'&&savedScroll?.path===location.pathname+location.search&&Number.isFinite(savedScroll.y);
+  const listen=(el,type,fn,options)=>{el.addEventListener(type,fn,options);const off=()=>{el.removeEventListener(type,fn,options);listeners.delete(off);};listeners.add(off);return off;};
+  const reason=()=>media.matches?'reduced':window.NoveMotionPaused===true?'user':suspended||document.hidden?'hidden':restoring?'restoring':'';
+  const inView=el=>{let r=el.getBoundingClientRect();if(el.ownerSVGElement&&(!r.width||!r.height))r=el.ownerSVGElement.getBoundingClientRect();return r.bottom>64&&r.top<innerHeight&&r.width>0&&r.height>0;};
+  const status=()=>{main.dataset.nvMotionActive=String(active.size);main.dataset.nvMotionStarted=String(started);main.dataset.nvMotionConflicts=String(conflicts);main.dataset.nvMotionListeners=String(listeners.size);main.dataset.nvMotionJobs=String(jobs.size);main.dataset.nvMotionPending=String(pending.size);};
+  function release(a){const el=active.get(a);active.delete(a);if(el&&![...active.values()].includes(el))activeObserver.unobserve(el);status();}
+  function finish(el){for(const [a,target] of [...active])if(!el||target===el||el.contains(target)){try{a.finish();}catch{a.cancel();}release(a);}}
+  function animate(el,frames,role='element',delay=0){
+   if(!el||!alive||reason()||!inView(el))return;
+   // Do not claim an element already animated by another system or interaction.
+   const foreign=el.getAnimations().some(a=>!active.has(a)&&(a.playState==='running'||a.pending));
+   if(foreign){conflicts++;el.dataset.nvMotionConflict='external';status();return;}
+   finish(el);
+   const durations={heading:640,chapter:500,media:860,choice:540,scene:680,element:360,micro:180};
+   const duration=Math.min(durations[role]||480,small()?480:Infinity),wait=small()?0:Math.min(delay,120);
+   el.dataset.nvMotionOwner='editorial-v2';el.dataset.nvMotionRole=role;el.dataset.nvMotionDuration=String(duration);el.dataset.nvMotionDelay=String(wait);
+   const a=el.animate(frames,{duration:duration/previewRate,delay:wait/previewRate,easing:role==='scene'?'cubic-bezier(.25,.1,.25,1)':'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+   active.set(a,el);activeObserver.observe(el);started++;status();a.finished.then(()=>release(a),()=>release(a));return a;
   }
-  function register(el,id,run){if(!el)return;pending.set(el,{id,run});el.dataset.nvEntrance='pending';observer.observe(el);}
-  function flush(){if(!alive||stopped())return;for(const el of [...visible]){const job=pending.get(el);if(!job||!inView(el))continue;
-   // Do not spend an entrance on an unloaded image or an invisible child.
-   if(el.tagName==='IMG'&&(!el.complete||!el.naturalWidth))continue;
-   const before=startedCount,existing=new Set(active.keys());job.run();
-   if(startedCount===before){el.dataset.nvEntrance='pending-target';continue;}
-   seen.add(job.id);el.dataset.nvEntrance='playing';el.dataset.nvEntranceCount=String((Number(el.dataset.nvEntranceCount)||0)+1);
-   const batch=[...active.keys()].filter(a=>!existing.has(a));
-   Promise.allSettled(batch.map(a=>a.finished)).then(()=>{if(alive)el.dataset.nvEntrance='complete';});
+  function register(el,id,run){if(!el||jobs.has(el))return;const job={id,run};jobs.set(el,job);pending.add(el);el.dataset.nvEntrance='pending';el.dataset.nvEntranceId=id;observer.observe(el);}
+  function run(el){const job=jobs.get(el);if(!job||!inView(el)||reason())return;
+   if(el.tagName==='IMG'&&(!el.complete||!el.naturalWidth))return;
+   const before=started,existing=new Set(active.keys());job.run();
+   el.dataset.nvEntrance=started>before?'playing':'static';
+   if(started>before)el.dataset.nvEntranceCount=String((Number(el.dataset.nvEntranceCount)||0)+1);
    pending.delete(el);visible.delete(el);observer.unobserve(el);
-  }}
-  function state(){
-   const why=reason();main.dataset.nvMotionReason=why||'active';
-   if(why==='reduced'||why==='user'){pending.forEach((job,el)=>{el.dataset.nvEntrance='skipped';observer.unobserve(el);});pending.clear();visible.clear();}
-   if(media.matches){finish();rails.forEach(({rail})=>rail.style.transform='none');main.dataset.nvMotionState='reduced';}
-   else if(why){if(why!=='loading')finish();else for(const a of active.keys())a.pause();main.dataset.nvMotionState=why==='loading'?'waiting':'paused';}
-   else{for(const [a,el] of [...active]){if(!inView(el))finish(el);else if(a.playState==='paused')a.play();}rails.forEach(({rail,progress})=>{rail.style.transform=`scale${rail.dataset.axis==='y'?'Y':'X'}(${progress})`;});main.dataset.nvMotionState='active';flush();}
+   const batch=[...active.keys()].filter(a=>!existing.has(a));
+   if(batch.length)Promise.allSettled(batch.map(a=>a.finished)).then(()=>{if(alive)el.dataset.nvEntrance='complete';});
   }
-  activeObserver=new IntersectionObserver(entries=>{for(const e of entries)if(!e.isIntersecting)finish(e.target);},{threshold:0,rootMargin:'-64px 0px 0px'});
-  observer=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting)visible.add(e.target);else visible.delete(e.target);}flush();},{threshold:.12,rootMargin:'-64px 0px -8% 0px'});
+  function flush(){if(!alive||reason())return;[...visible].forEach(el=>{if(pending.has(el))run(el);});}
+  function state(){const why=reason();main.dataset.nvMotionReason=why||'active';main.dataset.nvMotionState=why==='reduced'?'reduced':why?'paused':'active';
+   if(why){finish();if(why==='reduced'||why==='user'){pending.forEach(el=>{el.dataset.nvEntrance='skipped';observer.unobserve(el);});pending.clear();visible.clear();}}
+   else flush();
+   status();
+  }
+  const activeObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)finish(e.target);}),{rootMargin:'-64px 0px 0px'});
+  const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)visible.add(e.target);else visible.delete(e.target);});flush();},{threshold:.1,rootMargin:'-64px 0px -5% 0px'});
   const hero=main.querySelector('.nv-hero,.nv47-mast,.nv-cmo-mast,.nv-lower-mast,.section_pagehero');
-  // Industry process: a choice of measures, then a repeatable report/improvement cycle.
-  // The existing two paragraphs remain unchanged and retain their reading order.
+  // Copy has full contrast in every frame. Only the title sets a directional cadence.
+  const title=hero?.querySelector('h1');
+  register(title,'hero',()=>{main.dataset.nvHeroIntro='played';const lines=[...title.querySelectorAll('.nv30-hero-line')];(lines.length?lines:[title]).forEach((line,i)=>animate(line,[{translate:`${small()?8:16}px 0`},{translate:'0 0'}],'heading',i*55));});
+  const heroArt=hero?.querySelector('.nv30-hero-art');
+  register(heroArt,'hero-art',()=>animate(heroArt,[{scale:'.975',translate:'0 8px'},{scale:'1',translate:'0 0'}],'media',40));
+  // Section headings settle vertically; paragraphs, labels and controls stay still.
+  [...main.querySelectorAll('h2')].filter(h=>!h.closest('.nv47-intro,.nv-cmo-intro,.nv-cta,.nv-prose,.nv-catalog,.word-article-body')&&!['privacy','insights'].includes(main.dataset.nv35Kind)).forEach((h,i)=>register(h,'chapter-'+i,()=>animate(h,[{translate:`0 ${small()?5:8}px`},{translate:'0 0'}],'chapter')));
+  // Animate only the bitmap inside its stable clipping frame. Never frame + image.
+  main.querySelectorAll('.nv-editorial-photo-frame>img,.nv-card-image-frame>img').forEach((photo,i)=>{
+   register(photo,'photo-'+i,()=>animate(photo,[{scale:small()?'1.025':'1.055'},{scale:'1'}],'media',40));listen(photo,'load',flush);
+  });
+  main.querySelectorAll('.nv30-cards>li>img').forEach((art,i)=>{
+   if(art.closest('.nv-editorial-photo-frame,.nv-card-image-frame'))return;
+   register(art,'choice-'+i,()=>animate(art,[{scale:'.975',translate:'0 6px'},{scale:'1',translate:'0 0'}],'choice',small()?0:(i%3)*40));listen(art,'load',flush);
+  });
+  // Existing process drawings keep their dimensions and reading order.
   if(main.dataset.nv35Kind==='industry-detail'){
    const ns='http://www.w3.org/2000/svg';
    const drawings=[
     '<text x="0" y="78">01</text><g class="nv-process-lines"><path pathLength="1" d="M116 22H165V54H231M116 54H231M116 86H165V54"/><path pathLength="1" d="M275 54H408M394 47L408 54 394 61"/></g><g class="nv-process-points"><circle cx="116" cy="22" r="5"/><circle cx="116" cy="54" r="5"/><circle cx="116" cy="86" r="5"/></g><circle class="nv-process-target" cx="253" cy="54" r="22"/><circle class="nv-process-core" cx="253" cy="54" r="5"/>',
     '<text x="0" y="78">02</text><g class="nv-process-lines"><path pathLength="1" d="M116 78H203M129 78V60H145V78M158 78V46H174V78M187 78V27H203V78"/><path pathLength="1" d="M229 54H269M278 35A39 39 0 1 1 279 77M276 22L278 35 292 33"/><path pathLength="1" d="M369 54H414"/></g><circle class="nv-process-target" cx="315" cy="54" r="20"/><circle class="nv-process-core" cx="315" cy="54" r="5"/><circle class="nv-process-points" cx="414" cy="54" r="5"/>'
    ];
-   main.querySelectorAll('.nv30-process .nv-copy>p').forEach((p,i)=>{
-    if(i>1)return;const visual=document.createElementNS(ns,'svg');visual.classList.add('nv-process-visual');visual.setAttribute('viewBox','0 0 460 108');visual.setAttribute('aria-hidden','true');visual.setAttribute('focusable','false');visual.innerHTML=drawings[i];p.prepend(visual);decorations.push(visual);
+   main.querySelectorAll('.nv30-process .nv-copy>p').forEach((p,i)=>{if(i>1)return;
+    let visual=p.querySelector(':scope>.nv-process-visual');if(!visual){visual=document.createElementNS(ns,'svg');visual.classList.add('nv-process-visual');visual.setAttribute('viewBox','0 0 460 108');visual.setAttribute('aria-hidden','true');visual.setAttribute('focusable','false');visual.innerHTML=drawings[i];p.prepend(visual);}
     register(visual,'process-meaning-'+i,()=>{
-     visual.querySelectorAll('path').forEach((path,j)=>animate(path,[{strokeDashoffset:1},{strokeDashoffset:0}],'scene',j*140,'state'));
-     animate(visual.querySelector('.nv-process-target'),[{scale:'.65',opacity:.2},{scale:'1',opacity:1}],'scene',300);
-     animate(visual.querySelector('.nv-process-core'),[{scale:'.45'},{scale:'1.35',offset:.6},{scale:'1'}],'element',440);
+     visual.querySelectorAll('path').forEach((path,j)=>animate(path,[{strokeDashoffset:1},{strokeDashoffset:0}],'scene',j*40));
+     animate(visual.querySelector('.nv-process-target'),[{scale:'.86'},{scale:'1'}],'choice',80);
+     animate(visual.querySelector('.nv-process-core'),[{scale:'.8'},{scale:'1.15',offset:.6},{scale:'1'}],'element',120);
     });
    });
   }
-  // Reading comes first: the title remains legible throughout its short entrance.
-  const title=hero?.querySelector('h1');
-  register(title,'hero',()=>{
-   main.dataset.nvHeroIntro='played';const lines=title.querySelectorAll('.nv30-hero-line');
-   const nodes=lines.length?[...lines]:[title];nodes.forEach((line,i)=>animate(line,[{translate:'0 20px',opacity:.65},{translate:'0 0',opacity:1}],'heading',T.sequence.title+i*T.sequence.line));
-   // Auxiliary English labels stay still so they do not compete with Japanese.
-  });
-  const heroArt=hero?.querySelector('.nv30-hero-art');
-  register(heroArt,'hero-art',()=>animate(heroArt,[{opacity:.65,translate:'0 24px'},{opacity:1,translate:'0 0'}],'media'));
-  // A lower-page introduction is one reading sequence, using the shared tokens.
-  // Animate emphasis only: every paragraph and CTA stays readable and clickable.
-  const lower=!main.classList.contains('nv23-home');
-  const intro=lower?main.querySelector('.nv47-intro,.nv44-cmo-hero .nv-cmo-intro,:scope>.nv-cmo-intro,:scope>.section_pagehero'):null;
-  const introCopy=intro?.querySelector('.nv47-copy,.nv42-intro-copy,.nv-utility-intro,.container_large')||intro;
-  const promise=lower?introCopy:main.querySelector('.nv42-intro-copy>p');
-  register(promise,'detail-promise',()=>{
-   if(!lower){animate(promise,[{opacity:.82},{opacity:1}],'copy',T.sequence.chapter);return;}
-   animate(introCopy.querySelector('h2'),[{opacity:.84},{opacity:1}],'copy',T.sequence.title+T.stagger);
-   introCopy.querySelectorAll(':scope>p:not(.nv33-native-label)').forEach(p=>animate(p,[{opacity:.86},{opacity:1}],'copy',T.sequence.cta));
-   introCopy.querySelectorAll('.nv43-actions .nv-arrow').forEach(arrow=>animate(arrow,[{translate:`-${T.distance/2}px 0`},{translate:'0 0'}],'micro',T.sequence.cta+T.stagger*2));
-  });
-  // The CTA remains fully readable and clickable during the title sequence.
-  register(hero?.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions'),'hero-actions',()=>{
-   const actions=hero.querySelector('.nv-hero-actions,.nv-cmo-actions,.nv-lower-actions');
-   actions.querySelectorAll('.nv-arrow').forEach(arrow=>animate(arrow,[{translate:'-8px 0'},{translate:'0 0'}],'micro',T.sequence.cta));
-  });
-  // Scene 2: one chapter transition per editorial block, followed by its photograph.
-  // Select key sections; do not stagger every paragraph or every element on the page.
-  const headings=[...main.querySelectorAll('h2')].filter(h=>!h.closest('.nv47-intro,.nv-cmo-intro,.nv-cta,.nv-prose,.nv-catalog,.word-article-body')&&!['privacy','insights'].includes(main.dataset.nv35Kind));
-  headings.forEach((h,i)=>register(h,'chapter-'+i,()=>{
-   const en=h.previousElementSibling;
-   // Chapter labels are static anchors.
-   animate(h,[{translate:'0 18px',opacity:.62},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
-   // Pair only the immediate editorial explanation with its chapter heading.
-   // Tables, cards and long prose retain their own existing visual behavior.
-   if(lower){
-    const copy=h.closest('.nv-copy')?.querySelector(':scope>p')||
-      (h.nextElementSibling?.matches('p')?h.nextElementSibling:null)||
-      (h.parentElement.nextElementSibling?.matches('p')?h.parentElement.nextElementSibling:null)||
-      (h.parentElement.nextElementSibling?.matches('.nv-copy,.nv-lower-copy')?h.parentElement.nextElementSibling.querySelector(':scope>p'):null);
-    if(copy&&copy.getBoundingClientRect().top-h.getBoundingClientRect().bottom<120)
-     animate(copy,[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
-   }
-  }));
-  // English chapter labels remain static across the entire site.
-  main.querySelectorAll('.nv30-mast-photo,.nv30-overview-photo,.nv30-research-photo,.nv30-execution-photo,.nv50-production-photo').forEach((photo,i)=>{
-   register(photo,'photo-'+i,()=>animate(photo,[{opacity:.65,translate:'0 24px'},{opacity:1,translate:'0 0'}],'media',T.sequence.media));
-   listen(photo,'load',flush);
-  });
-  // Give a row of service choices a short left-to-right rhythm. Japanese copy
-  // remains static; each existing illustration enters only once, after loading.
-  main.querySelectorAll('.nv30-services,.nv-cmo-challenges,.nv-challenges').forEach((group,g)=>{
-   group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img').forEach((art,i)=>{
-    register(art,'choice-'+g+'-'+i,()=>{
-     const top=art.parentElement.getBoundingClientRect().top;
-     const row=[...group.querySelectorAll('.nv30-service-card>img,.nv30-service-card>.nv-card-image-frame>img,.nv30-cards>li>img')].filter(n=>Math.abs(n.parentElement.getBoundingClientRect().top-top)<2);
-     const delay=innerWidth>=768?Math.min(row.indexOf(art),2)*T.stagger:0;
-     animate(art,[{opacity:.55,translate:'0 24px'},{opacity:1,translate:'0 0'}],'choice',delay);
-    });
-    listen(art,'load',flush);
-   });
-  });
-  main.querySelectorAll('.nv-steps').forEach((steps,group)=>{
+  main.querySelectorAll('.nv-steps').forEach((steps,g)=>{
    const items=[...steps.querySelectorAll(':scope>.nv-step')];if(!items.length)return;
-   const rail=document.createElement('li');rail.className='nv-motion-rail';rail.setAttribute('role','presentation');rail.setAttribute('aria-hidden','true');steps.append(rail);steps.classList.add('nv-motion-process');
-   const entry={rail,steps,items,progress:0};rails.push(entry);
-   function layout(){const vertical=main.classList.contains('nv23-home')||innerWidth<768;rail.dataset.axis=vertical?'y':'x';
+   let rail=steps.querySelector(':scope>.nv-motion-rail');if(!rail){rail=document.createElement('li');rail.className='nv-motion-rail';rail.setAttribute('role','presentation');rail.setAttribute('aria-hidden','true');steps.append(rail);}steps.classList.add('nv-motion-process');
+   function layout(){const vertical=main.classList.contains('nv23-home')||small();rail.dataset.axis=vertical?'y':'x';
     const box=steps.getBoundingClientRect(),first=items[0].querySelector('b')?.getBoundingClientRect(),last=items.at(-1).querySelector('b')?.getBoundingClientRect();
-    if(first&&last){Object.assign(rail.style,{left:`${first.left-box.left+first.width/2}px`,top:`${first.top-box.top+first.height/2}px`,right:'auto',bottom:'auto',width:vertical?'1px':`${last.left-first.left}px`,height:vertical?`${last.top-first.top}px`:'1px'});}
-    rail.style.transform=`scale${vertical?'Y':'X'}(${entry.progress})`;}
-   entry.layout=layout;layout();
-   items.forEach((step,i)=>{const id=`step-${group}-${i}`;if(seen.has(id))entry.progress=Math.max(entry.progress,(i+1)/items.length);
-    register(step,id,()=>{const from=entry.progress;entry.progress=Math.max(from,(i+1)/items.length);layout();const axis=rail.dataset.axis==='y'?'Y':'X';
-     finish(rail);animate(rail,[{transform:`scale${axis}(${from})`},{transform:`scale${axis}(${entry.progress})`}],'scene',0,'state');
-     animate(step.querySelector('b'),[{opacity:.8},{opacity:1}],'element',innerWidth>=768?i*T.stagger:0,'state');
-    });
-   });layout();document.fonts.ready.then(()=>{if(alive)layout();});
+    if(first&&last)Object.assign(rail.style,{left:`${first.left-box.left+first.width/2}px`,top:`${first.top-box.top+first.height/2}px`,right:'auto',bottom:'auto',width:vertical?'1px':`${last.left-first.left}px`,height:vertical?`${last.top-first.top}px`:'1px',transform:'none'});
+   }
+   rails.push({layout});layout();document.fonts.ready.then(()=>{if(alive)layout();});
+   register(rail,'process-rail-'+g,()=>animate(rail,[{scale:rail.dataset.axis==='y'?'1 0':'0 1'},{scale:'1 1'}],'scene'));
+   items.forEach((step,i)=>register(step,'step-'+g+'-'+i,()=>animate(step.querySelector('b'),[{scale:'.94'},{scale:'1'}],'element',i*35)));
   });
-  // Each reporting stage is observed separately, including a slow mobile scroll.
-  main.querySelectorAll('.nv50-report-flow li').forEach((item,i)=>register(item,'report-stage-'+i,()=>{
-   animate(item,[{translate:'20px 0',opacity:.55},{translate:'0 0',opacity:1}],'choice',0);
-  }));
-  // Scene 5: the section's blue rule completes before the contact arrow settles.
-  // The marker is decorative and absolutely positioned: no layout shift or new copy.
+  main.querySelectorAll('.nv50-report-flow li').forEach((item,i)=>register(item,'report-stage-'+i,()=>animate(item,[{translate:`${small()?6:10}px 0`},{translate:'0 0'}],'choice')));
   main.querySelectorAll('.nv-cta').forEach((section,i)=>{
-   const rule=document.createElement('span');rule.className='nv-cta-motion-rule';rule.setAttribute('aria-hidden','true');section.prepend(rule);decorations.push(rule);
-   register(section.querySelector('h2'),'cta-'+i,()=>{
-    animate(rule,[{scale:'0 1'},{scale:'1 1'}],'scene');
-    animate(section.querySelector('h2'),[{translate:'0 18px',opacity:.65},{translate:'0 0',opacity:1}],'heading',T.sequence.chapter);
-    if(lower)animate(section.querySelector('p'),[{opacity:.86},{opacity:1}],'copy',T.sequence.cta);
-   });
-   const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:`-${lower?T.distance/2:8}px 0`},{translate:'0 0'}],'micro',T.sequence.cta+(lower?T.stagger*2:0)));
+   let rule=section.querySelector(':scope>.nv-cta-motion-rule');if(!rule){rule=document.createElement('span');rule.className='nv-cta-motion-rule';rule.setAttribute('aria-hidden','true');section.prepend(rule);}
+   register(rule,'cta-rule-'+i,()=>animate(rule,[{scale:'0 1'},{scale:'1 1'}],'scene'));
+   const arrow=section.querySelector('.nv-button .nv-arrow');register(arrow,'cta-arrow-'+i,()=>animate(arrow,[{translate:'-5px 0'},{translate:'0 0'}],'micro',100));
   });
-  listen(window,'nove:motion-ready',state);listen(document,'visibilitychange',state);listen(media,'change',state);
-  listen(window,'nove:motion-setting',state);
-  listen(window,'resize',()=>{if(resizeFrame)return;resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;finish();rails.forEach(r=>r.layout());state();});});
+  // Native disclosure semantics remain intact; an answer receives one brief response.
+  main.querySelectorAll('details.nv-faq-item').forEach(detail=>listen(detail,'toggle',()=>{finish(detail);if(detail.open)animate(detail.querySelector('p'),[{translate:'0 -3px'},{translate:'0 0'}],'micro');}));
   listen(main,'focusin',()=>finish());
-  teardown=()=>{alive=false;cancelAnimationFrame(resizeFrame);observer.disconnect();finish();activeObserver.disconnect();listeners.forEach(off=>off());decorations.forEach(e=>e.remove());rails.forEach(({rail,steps})=>{rail.remove();steps.classList.remove('nv-motion-process');});};
-  state();
- }
- // Register after the existing lower-page link grouping has settled in this task.
- const start=()=>requestAnimationFrame(init);
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
- window.addEventListener('pagehide',()=>teardown());window.addEventListener('pageshow',e=>{if(e.persisted)start();});
+  listen(main,'pointerover',e=>{const control=e.target.closest('a,button,summary');if(control)finish(control);});
+  listen(document,'visibilitychange',state);listen(media,'change',state);listen(window,'nove:motion-setting',state);
+  listen(window,'resize',()=>{if(resizeFrame)return;resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;finish();rails.forEach(r=>r.layout());state();});});
+  // Save while this entry is still active: a non-bfcache history traversal may
+  // reject replaceState during pagehide. Native scrollend runs only at rest.
+  function savePosition(){
+   if(!alive||restoring||suspended)return;
+   try{const previous=history.state;if(previous===null||(typeof previous==='object'&&!Array.isArray(previous)))history.replaceState({...previous,noveEditorialScroll:{path:location.pathname+location.search,x:scrollX,y:scrollY}},'');}catch{}
+  }
+  listen(window,'scrollend',savePosition,{passive:true});savePosition();
+  // A bfcache return preserves the DOM and final frames; no teardown/reinsert shift.
+  listen(window,'pagehide',()=>{
+   savePosition();
+   suspended=true;restoreTicket++;finish();observer.disconnect();activeObserver.disconnect();state();
+  });
+  listen(window,'pageshow',e=>{if(e.persisted){suspended=false;pending.forEach(el=>observer.observe(el));restorePosition(history.state?.noveEditorialScroll,false);}});
+  window.NoveMotionDirector={version:'2.0.0-local',
+   // Used only by the visible localhost review toolbar, never by the published site.
+   preview(rate=1){if(!['127.0.0.1','localhost'].includes(location.hostname)||reason())return;previewRate=rate===.25?.25:1;finish();for(const [el] of jobs)if(inView(el)){pending.add(el);run(el);}},
+   destroy(){alive=false;finish();cancelAnimationFrame(resizeFrame);observer.disconnect();activeObserver.disconnect();listeners.forEach(off=>off());}
+  };
+  main.dataset.nvMotionVersion='2.0.0';state();
+  function restorePosition(saved,skipEntrances){
+   if(saved?.path!==location.pathname+location.search||!Number.isFinite(saved?.y)){restoring=false;state();return;}
+   const ticket=++restoreTicket;restoring=true;state();
+   // Native restoration/focus may run before replacement content settles.
+   // Correct once after layout, with no persistent scroll handler.
+   if(skipEntrances){pending.forEach(el=>{el.dataset.nvEntrance='restored';observer.unobserve(el);});pending.clear();visible.clear();}
+   let cancelled=false;
+   const off=['wheel','touchstart','pointerdown','keydown'].map(type=>listen(window,type,()=>{cancelled=true;},{passive:true,once:true}));
+   document.fonts.ready.then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    off.forEach(remove=>remove());
+    if(alive&&!suspended&&ticket===restoreTicket&&!cancelled){window.scrollTo({left:saved.x||0,top:Math.min(saved.y,document.documentElement.scrollHeight-innerHeight),behavior:'instant'});main.dataset.nvScrollRestored='true';main.dataset.nvScrollTarget=String(saved.y);}
+    if(ticket===restoreTicket){restoring=false;state();}
+   })));
+  }
+  if(restoring)restorePosition(savedScroll,true);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(start),{once:true});else requestAnimationFrame(start);
 })();
+
 
 
 /* Local parity correction. Wording changes are explicit, content-matched English labels only. */
@@ -1014,7 +987,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    diagrams, the brand video and its reduced-motion poster on their verified revisions. */
 (()=>{
  'use strict';
- const assetBase=new URL('./assets/editorial-photos-20261010/',document.currentScript.src).href;
+ const assetBase='https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@17b23ce7dcc647f5ff48a00459f21a203886121a/design-20260930/assets/editorial-photos-20261010/';
  const photos={
   "/column": {
     "analysis.jpg": "research-general"

@@ -2513,3 +2513,18 @@ html body.nv30 #main#main#main#main#main#main[id="main"][data-nv35-kind="industr
   }
 }
 }
+
+/* Editorial v2: interaction feedback shares timing; resting layout is unchanged. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main :is(.nv30-service-card,.nv-photo-link,.nv-industry-grid>a,.nv-directory>a):active {transform:translateY(0)!important}
+@media(prefers-reduced-motion:no-preference){
+ html body.nv30 #main#main#main#main#main :is(.nv-button,.nv-link):focus-visible .nv-arrow {translate:3px 0!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html body.nv30 #main#main#main#main#main [data-nv-motion-owner="editorial-v2"] {scale:none!important;translate:none!important;animation:none!important}
+}
+html body.nv30[data-nv-motion-paused=true] #main#main#main#main#main [data-nv-motion-owner="editorial-v2"] {scale:none!important;translate:none!important}
+}
+
+/* Insights: keep the authored photo in its final auto-flow position before the deferred frame exists. */
+html body.nv30 #main#main#main#main#main#main[id="main"][data-nv33-page="/column"] .nv-research>img.nv-lower-photo {grid-row:auto!important}
