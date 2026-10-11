@@ -3,6 +3,7 @@
   'use strict';
   // Preview may inline this script; retain the existing published asset directory.
   const assetBase=new URL('https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@6f3e4b394587ce92e1a2b9b5b5d45f49a3abc214/design-20260930/assets/');
+  const bootSource=document.currentScript?.src;
   let posterPreloaded=false;
   let contactPrepared=false;
   function prepare(){
@@ -39,7 +40,13 @@
     document.body.classList.add('nv30','nv36-polish');
     if(main.classList.contains('nv23-home')){
       document.body.classList.add('nv34-home');
-      if(!posterPreloaded){const link=document.createElement('link');link.rel='preload';link.as='image';link.href=new URL('hero-poster.webp',assetBase).href;link.fetchPriority='high';document.head.append(link);posterPreloaded=true;}
+      if(!posterPreloaded){
+        // Match the poster that design.js actually paints, retaining its verified
+        // revision. The old hero-poster.webp preload was a different unused file.
+        const source=bootSource||'https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@46d837944ebe7fe00be0d0695f6b74f11368056b/design-20260930/design-boot.js';
+        const poster=new URL('./assets/hero-marketing-analytics-poster.webp',source.replace(/\/gh\/suguru1215\/nobe-css@[^/]+\//,'/gh/suguru1215/nobe-css@46d837944ebe7fe00be0d0695f6b74f11368056b/')).href;
+        const link=document.createElement('link');link.rel='preload';link.as='image';link.href=poster;link.fetchPriority='high';document.head.append(link);posterPreloaded=true;
+      }
       const heading=main.querySelector('.nv-hero h1');
       if(!heading||!heading.textContent.trim())return false;
       if(heading.textContent.replace(/\s/g,'')==='マーケティングの戦略づくりから、施策の実行まで。'){
@@ -67,6 +74,24 @@
       const mast=main.querySelector('.nv-cmo-title'),heading=mast?.querySelector('h1');
       if(!heading||!heading.textContent.trim())return false;
       if(titles[key]&&!mast.querySelector('.nv-en')){const en=document.createElement('p');en.className='nv-en';en.textContent=titles[key];en.setAttribute('aria-hidden','true');if(en.textContent.length>12)en.classList.add('nv30-long-title');heading.before(en);}
+      // The Insights hero is already combined by the deferred design pass.
+      // Build that same final structure while parsing, before its first paint.
+      // Reuse the authored nodes; the image already has reserved dimensions.
+      if(route==='/column'){
+        main.dataset.nv33Page=route;
+        const columnMast=main.querySelector(':scope>.nv-cmo-mast');
+        const columnTitle=main.querySelector('.nv-cmo-title'),columnEn=columnTitle?.querySelector('.nv-en'),columnHeading=columnTitle?.querySelector('h1');
+        if(columnEn&&columnHeading&&columnEn.nextElementSibling!==columnHeading)columnHeading.before(columnEn);
+        const columnIntro=main.querySelector(':scope>.nv-cmo-intro');
+        const columnCopy=columnIntro?.querySelector('.nv-utility-intro');
+        if(columnMast&&columnCopy?.querySelector('p')?.textContent.trim()&&!main.querySelector('.nv47-lower-hero')){
+          const hero=document.createElement('div');hero.className='nv47-lower-hero';
+          columnMast.before(hero);hero.append(columnMast,columnIntro);
+          columnMast.classList.add('nv47-mast');columnIntro.classList.add('nv47-intro');columnCopy.classList.add('nv47-copy');
+          const logo=document.createElement('img');logo.className='nv47-mark';logo.alt='';logo.setAttribute('aria-hidden','true');
+          logo.src='https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@87f91353dfa508d8ae03f3f506ec7a876850c93d/design-20260930/assets/figma-3358-28/01779.png';hero.append(logo);
+        }
+      }
       if(route==='/industry'){
         const catalog=main.querySelector('.nv-catalog');if(!catalog?.querySelector('h2'))return false;
         if(!catalog.querySelector('.nv30-en')){const en=document.createElement('span');en.className='nv30-en';en.textContent='INDUSTRIES';en.setAttribute('aria-hidden','true');en.dataset.nvBootHeading='true';catalog.prepend(en);}
