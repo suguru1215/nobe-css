@@ -1094,7 +1094,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 };
  function apply(){
   const main=document.querySelector('main'),route=noveResolvedPathname().replace(/\/$/,'')||'/';
-  const mapping=photos[route];if(!main||!mapping)return;
+  if(!main)return;
+  // Remove any caption already authored in HTML; photo frames keep their dimensions.
+  main.querySelectorAll('.nv-editorial-photo-note').forEach(note=>note.remove());
+  const mapping=photos[route];if(!mapping)return;
   main.querySelectorAll('img').forEach(image=>{
    if(image.dataset.nvEditorialPhoto)return;
    const filename=(image.getAttribute('src')||'').split('/').pop().split('?')[0],id=mapping[filename];
@@ -1110,9 +1113,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     for(const [property,value] of Object.entries({display:'block',position:'static',width:'100%',height:'100%','max-width':'100%',margin:'0',padding:'0',border:'0','border-radius':'inherit','object-fit':'cover','object-position':'50% 50%'}))image.style.setProperty(property,value,'important');
    }
    frame.classList.add('nv-editorial-photo-frame');
-   const note=document.createElement('span');note.className='nv-editorial-photo-note';note.textContent='AI生成イメージ';
-   note.title='支援内容を説明するイメージです。実在のスタッフ・顧客・支援実績を示すものではありません。';
-   frame.append(note);
   });
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
