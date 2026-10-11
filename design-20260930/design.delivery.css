@@ -2530,3 +2530,20 @@ html body.nv30[data-nv-motion-paused=true] #main#main#main#main#main [data-nv-mo
 
 /* Insights: keep the authored photo in its final auto-flow position before the deferred frame exists. */
 html body.nv30 #main#main#main#main#main#main[id="main"][data-nv33-page="/column"] .nv-research>img.nv-lower-photo {grid-row:auto!important}
+
+/* Large editorial section photos share the source image's landscape ratio.
+   Card thumbnails retain their existing proportions and interaction styles. */
+@layer noveComponents {
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-frame:not(.nv-card-image-frame) {
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:3/2!important;
+  align-self:center!important;
+}
+html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-frame:not(.nv-card-image-frame)>img {
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+}
+}
