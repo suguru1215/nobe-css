@@ -2837,6 +2837,10 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
 
 /* Section rhythm: consistent outer space, compact lead-to-content spacing. */
 @layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"][data-nv-centered-button] {font-size:18px!important;font-weight:700!important;line-height:1.4!important}
+ html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"] .nv-centered-label {font-size:inherit!important;line-height:inherit!important}
+}
+@layer noveEditorialReview {
  html body.nv30[data-nv-editorial-review] #main {--nv-component-section:88px;--nv36-section:88px}
  html body.nv30[data-nv-editorial-review] #main#main>section:not(.nv-hero):not(.nv-cmo-mast):not(.nv-lower-mast):not(.section_pagehero) {padding-block:88px!important}
  html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) .nv-copy {min-height:0!important;height:auto!important;margin-bottom:24px!important;padding-bottom:0!important}
