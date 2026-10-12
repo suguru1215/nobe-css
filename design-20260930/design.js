@@ -271,7 +271,8 @@ window.NoveMotionTokens=Object.freeze({
   function composeTopFigma(root){
     if(!root.classList.contains('nv23-home'))return;
     document.body.classList.add('nv34-home');
-    const hero=root.querySelector('.nv-hero');if(hero)continuousHeroGeometry(hero);
+    // The ornamental mesh is omitted; the existing brand-shaped video remains.
+    const hero=root.querySelector('.nv-hero');
     const topBase=base+'figma-3358-26/';
     const deliveryFile=file=>/^(19a08|8378d|844f8|0667e|20c23|3d81b|7f9fd|d817c|cf26b)\.png$/.test(file)?file.replace('.png','.webp'):file;
     const asset=(file,cls,w,h)=>{const n=img('figma-3358-26/'+deliveryFile(file),cls);if(w)n.width=w;if(h)n.height=h;return n;};
@@ -987,7 +988,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    diagrams, the brand video and its reduced-motion poster on their verified revisions. */
 (()=>{
  'use strict';
- const assetBase='https://cdn.jsdelivr.net/gh/suguru1215/nobe-css@17b23ce7dcc647f5ff48a00459f21a203886121a/design-20260930/assets/editorial-photos-20261010/';
+ const editorialScript=document.currentScript||document.querySelector('#nove-design-runtime-20260930');
+ const assetBase=editorialScript?.src?new URL('./assets/editorial-photos-20261012/',editorialScript.src).href:'./assets/editorial-photos-20261012/';
  const photos={
   "/column": {
     "analysis.jpg": "research-general"
@@ -1069,28 +1071,28 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   }
 };
  const descriptions={
-  "research-general": "支援内容を説明するAI生成イメージ：2人の担当者が、ノートPCの公開競合ページと、机上の集客施策比較表・注記入りサイト印刷物を照らし合わせ、改善優先順位をメモしている。",
-  "process-consultation": "支援内容を説明するAI生成イメージ：相談者と担当者が、現在の取り組み一覧と短い調査計画を挟んで、課題・対応範囲・次の確認事項を指差しながらすり合わせる。",
-  "execution-ads": "支援内容を説明するAI生成イメージ：広告の訴求案とLPの画面を横に並べ、担当者が配信結果の簡潔な比較レポートと照らして、次に出すクリエイティブを選んでいる。",
-  "research-seo": "支援内容を説明するAI生成イメージ：担当者がノートPCの検索結果と競合ページ、紙の検索意図別一覧を比較し、自社ページで説明を補う箇所に印を付けている。",
-  "execution-sns": "支援内容を説明するAI生成イメージ：スマートフォンの投稿プレビューと3枚程度の写真候補、短い投稿計画を見比べ、担当者が目的に合う画像と導線を選ぶ。",
-  "execution-web": "支援内容を説明するAI生成イメージ：デザイナーと実装担当が、同じページのPC版とスマートフォン版を見比べ、情報の順序と問い合わせボタンの位置を確認している。",
-  "research-industry-construction": "支援内容を説明するAI生成イメージ：住宅・工事サービスの競合サイトをPCで比較し、手元の対象エリア地図と検索語句の分類メモ、問い合わせ内容の集計を指差して商圏別の課題を確認する担当者。",
-  "research-industry-ec": "支援内容を説明するAI生成イメージ：担当者がPCの商品比較ページとスマートフォンの購入手順をたどり、送料・配送案内のチェックリストと匿名の流入/購入レポートを照合している。",
-  "research-industry-finance": "支援内容を説明するAI生成イメージ：金融サービスの説明ページとスマートフォンの相談予約画面を比較し、対象条件・費用・注意事項の確認表に担当者が注記する。",
-  "research-industry-hr": "支援内容を説明するAI生成イメージ：求人検索と登録画面をスマートフォンで確認しながら、PC上の企業向け採用支援ページと2列の導線整理表を比較する調査担当者。",
-  "research-industry-manufacturing": "支援内容を説明するAI生成イメージ：マーケティング担当者が、PCに開いた製造業の製品ページ・用途別検索結果と、机上の仕様/対応範囲チェックシートを比較し、もう一方の担当者がタブレットで技術相談フォームまでの導線を確認している。小さな金属サンプルは机の端に一つだけ。",
-  "research-industry-medical": "支援内容を説明するAI生成イメージ：地域検索の結果とクリニックの診療案内をPCで確認し、担当者がスマートフォンで初診案内から予約先へ進み、診療時間・アクセス・予約方法の確認表に記録している。",
-  "research-industry-professional": "支援内容を説明するAI生成イメージ：士業の業務分野別ページと地域検索の結果を比較し、担当者が個人相談/法人顧問に分けた確認メモと問い合わせ画面を照らし合わせる。",
-  "research-industry-realestate": "支援内容を説明するAI生成イメージ：PCに地域の物件/相談ページ、スマートフォンに売却相談・内見予約の画面を開き、担当者が売主/買主/入居者/オーナー別の接点表と匿名の反響集計を確認する。",
-  "research-industry-saas": "支援内容を説明するAI生成イメージ：SaaSの競合機能比較表・サービスページ・デモ申込画面を照らし合わせ、担当者が顧客の課題別メモと匿名の流入/申込集計に印を付けている。",
-  "research-cmo": "支援内容を説明するAI生成イメージ：事業責任者とマーケティング担当者が、事業目標・現在の施策・営業状況を並べた資料を見ながら、事実と確認待ちを分け、課題と優先順位を整理する。",
-  "execution-cmo": "支援内容を説明するAI生成イメージ：担当者2人が広告案・検索ページ・SNS投稿・LPの作業中画面を2台の端末と小さな資料で見比べ、合意した改善を実装/制作する箇所を確認する。",
-  "research-crm": "支援内容を説明するAI生成イメージ：担当者が、問い合わせ・商談・受注/継続利用の接点図と匿名の項目一覧を見ながら、PCの顧客管理画面で情報の取得元と受け渡しを確認する。",
-  "research-dx": "支援内容を説明するAI生成イメージ：現場担当者が作業手順を説明し、調査担当者が既存ツールの画面と業務フローを照合して、重複入力や情報の分断箇所に付箋を貼る。",
-  "research-global": "支援内容を説明するAI生成イメージ：担当者2人が進出先の現地語の競合ページ、地域別市場の簡潔な比較表と自社訴求をPC/紙で見比べ、顧客との接点をメモしている。",
-  "research-sns": "支援内容を説明するAI生成イメージ：担当者が既存アカウントの投稿一覧と反応集計、競合の公開投稿をPCで比較し、スマートフォンでプロフィールからサイトへ進む導線を確認する。",
-  "research-web": "支援内容を説明するAI生成イメージ：担当者が実際のページをPCとスマートフォンでたどり、サービス説明・比較情報・問い合わせフォームの間で迷う箇所を、印刷したページ一覧に注記している。"
+  "research-general": "支援内容を説明するAI生成イメージ：市場・競合と顧客の検討過程の資料を作業台に広げ、確認できた情報と仮説、改善の優先順位を整理している。",
+  "process-consultation": "支援内容を説明するAI生成イメージ：相談者と担当者が短い調査計画と対応範囲の確認表を使い、課題と次の確認事項をすり合わせている。",
+  "execution-ads": "支援内容を説明するAI生成イメージ：広告用の製品写真を撮影し、写真候補と配信結果の比較表を使って次のクリエイティブを検討している。",
+  "research-seo": "支援内容を説明するAI生成イメージ：検索意図ごとの記事構成カードと検索結果を見比べ、自社ページで説明を補う箇所を整理している。",
+  "execution-sns": "支援内容を説明するAI生成イメージ：スマートフォンで投稿用の写真を撮影し、短い投稿計画に合わせて画像と見せ方を確認している。",
+  "execution-web": "支援内容を説明するAI生成イメージ：実装担当者が同じ架空サイトのPC版とスマートフォン版を見比べ、情報の順序と問い合わせ導線を確認している。",
+  "research-industry-construction": "支援内容を説明するAI生成イメージ：住宅・工事の現場で担当者が商圏地図と対応範囲を照合し、地域ごとの顧客接点を確認している。",
+  "research-industry-ec": "支援内容を説明するAI生成イメージ：発送スペースで商品・送料と配送の案内を照合し、スマートフォンで購入手順を確認している。",
+  "research-industry-finance": "支援内容を説明するAI生成イメージ：金融相談の窓口で、対象条件・費用・注意事項の確認表と相談予約の手順を確認している。",
+  "research-industry-hr": "支援内容を説明するAI生成イメージ：採用担当者と応募者が仕事内容の資料と求人情報を確認し、応募・登録までの接点をすり合わせている。",
+  "research-industry-manufacturing": "支援内容を説明するAI生成イメージ：製造現場で担当者が加工部品と仕様書、用途別の製品情報を照合し、対応範囲と技術相談に必要な情報を確認している。",
+  "research-industry-medical": "支援内容を説明するAI生成イメージ：クリニックの受付で診療時間・初診案内・予約方法を整理し、予約先への手順を確認している。",
+  "research-industry-professional": "支援内容を説明するAI生成イメージ：複数の担当者が書類の比較表とノートを使い、相談に必要な確認事項を整理している。",
+  "research-industry-realestate": "支援内容を説明するAI生成イメージ：物件の案内現場で担当者と内見者が間取りと相談内容を確認し、内見予約や顧客ごとの接点を見直している。",
+  "research-industry-saas": "支援内容を説明するAI生成イメージ：SaaSの機能比較とサービスの説明をデモで確認し、顧客の課題と申込までの接点を整理している。",
+  "research-cmo": "支援内容を説明するAI生成イメージ：事業責任者と担当者が目標・施策・営業状況の付箋を整理し、事実と確認待ち、優先順位を分けている。",
+  "execution-cmo": "支援内容を説明するAI生成イメージ：広告・検索・SNS・LPの制作資料を並べた作業フロアで、担当者が合意した改善と実装範囲を確認している。",
+  "research-crm": "支援内容を説明するAI生成イメージ：顧客対応担当者が匿名の顧客管理情報と接点カードを使い、問い合わせから商談・受注・継続利用までの情報の受け渡しを確認している。",
+  "research-dx": "支援内容を説明するAI生成イメージ：物流現場で作業担当者が既存の作業手順と在庫管理端末を照合し、重複入力や情報の分断を確認している。",
+  "research-global": "支援内容を説明するAI生成イメージ：海外の展示会で担当者が現地の製品・訴求と地域別の比較メモを照合し、顧客との接点を確認している。",
+  "research-sns": "支援内容を説明するAI生成イメージ：投稿一覧と反応集計、スマートフォンのプロフィールからサイトへの導線を比較している。",
+  "research-web": "支援内容を説明するAI生成イメージ：利用者がスマートフォンの試作ページを操作し、紙のページ構成図と照らし合わせている。"
 };
  function apply(){
   const main=document.querySelector('main'),route=noveResolvedPathname().replace(/\/$/,'')||'/';
@@ -1116,4 +1118,71 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   });
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
+})();
+
+/* 2026-10-12: center functional labels independently of decorative/action icons.
+   Existing elements, listeners, link targets, names and form configuration stay in place. */
+(() => {
+  'use strict';
+  const buttonSelector='a.nv-button,a.nv-link,button,.header_button,.hero_button-primary,.svcdetailhero_button-orange,.cta_button-primary,.button-primary-4,input[type="submit"],input[type="button"]';
+  const iconSelector='.nv-arrow,.nv-circle,img,svg,.header_button-icon,.hero_button-icon';
+  function centerButton(button) {
+    if(button.tagName==='INPUT') {button.dataset.nvCenteredInput='true';return;}
+    let label=button.querySelector(':scope>.nv-centered-label');
+    // Promote the outer icon wrapper, keeping a nested SVG/image and its listeners together.
+    const icons=[...button.querySelectorAll(iconSelector)].filter(node=>{
+      for(let parent=node.parentElement;parent&&parent!==button;parent=parent.parentElement) {
+        if(parent.matches(iconSelector))return false;
+      }
+      return true;
+    });
+    if(!label) {
+      const textOnly=button.cloneNode(true);
+      textOnly.querySelectorAll(iconSelector).forEach(node=>node.remove());
+      if(!textOnly.textContent?.trim())return;
+    }
+    icons.forEach(node=>{if(node.parentElement!==button)button.append(node);});
+    const content=[...button.childNodes].filter(node=>!icons.includes(node)&&node.nodeType!==8);
+    if(!content.some(node=>node.textContent?.trim()))return;
+    if(!label) {
+      label=document.createElement('span');label.className='nv-centered-label';
+      button.insertBefore(label,content[0]);
+    }
+    content.filter(node=>node!==label).forEach(node=>label.append(node));
+    button.dataset.nvCenteredButton='true';
+    button.toggleAttribute('data-nv-centered-icon',icons.length>0);
+    if(icons.length) {
+      icons.forEach((node,i)=>{
+        node.dataset.nvCenteredIconNode='true';
+        node.dataset.nvCenteredIconSide=icons.length>1&&i===0?'start':'end';
+      });
+    }
+  }
+  function apply(root=document) {
+    document.body.dataset.nvEditorialReview='20261012';
+    root.querySelectorAll(buttonSelector).forEach(centerButton);
+    const main=document.querySelector('main');if(!main)return;
+    main.querySelectorAll('.nv-scope-grid,.nv33-support-grid').forEach(grid=>{
+      const section=grid.closest('section');if(section)section.dataset.nvEditorialLayout='scope-list';
+      grid.querySelectorAll('.nv-scope-card>div').forEach(copy=>{
+        if(copy.querySelector(':scope>h3')&&copy.querySelector(':scope>p'))copy.dataset.nvScopeCopy='true';
+      });
+    });
+    main.querySelectorAll('.nv-cta').forEach(section=>section.style.removeProperty('background'));
+  }
+  function init() {
+    apply();
+    // A rebuilt CMS/action element receives the same treatment without replacing its listener.
+    let queued=false;
+    const observer=new MutationObserver(records=>{
+      if(queued||!records.some(record=>
+        [...record.addedNodes].some(node=>node.nodeType===1)||
+        (record.target.nodeType===1&&record.target.matches(buttonSelector)&&record.type==='childList')
+      ))return;
+      queued=true;queueMicrotask(()=>{queued=false;apply();});
+    });
+    observer.observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('pageshow',()=>apply());
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

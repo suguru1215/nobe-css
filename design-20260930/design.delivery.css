@@ -1,4 +1,4 @@
-@layer noveComponents,noveAlignment,noveParity,novePolish,noveMotion;
+@layer noveEditorialReview,noveComponents,noveAlignment,noveParity,novePolish,noveMotion;
 html body:is(#nv30-design,body){--nv-blue:#024991 !important;--nv-cyan:#024991 !important;--nv-mist:#f2f8ff !important;--nv-line:#d5e6f6 !important;--nv-muted:#394b5d !important;color:#172531 !important;background:#fff !important}
 html body:is(#nv30-design,body) .nv23{font-family:'Noto Sans JP',sans-serif !important;color:#172531 !important;line-height:1.8 !important}
 html body:is(#nv30-design,body) .nv23 :is(p,li){line-height:1.8 !important}
@@ -2546,4 +2546,193 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
   max-height:none!important;
   aspect-ratio:auto!important;
 }
+}
+
+/* 2026-10-12: content-led review. The first layer owns these intentional overrides. */
+@layer noveEditorialReview {
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-button] {
+    --nv-centered-icon-size:16px;
+    display:grid!important;
+    grid-template-columns:0 minmax(0,1fr) 0!important;
+    column-gap:0!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    padding-inline:20px!important;
+    box-sizing:border-box!important;
+    white-space:normal!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    position:relative!important;
+    height:auto!important;
+    min-height:44px!important;
+  }
+  html body.nv30[data-nv-editorial-review] .nv-button[data-nv-centered-button] {min-height:64px!important}
+  html body.nv30[data-nv-editorial-review] .nv-link[data-nv-centered-button] {padding-block:12px!important}
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-button][data-nv-centered-icon] {
+    grid-template-columns:var(--nv-centered-icon-size) minmax(0,1fr) var(--nv-centered-icon-size)!important;
+    column-gap:8px!important;
+  }
+  html body.nv30[data-nv-editorial-review] .nv23-header [data-nv-centered-button] {
+    --nv-centered-icon-size:16px;
+    padding-inline:14px!important;
+    column-gap:8px!important;
+    min-height:56px!important;
+  }
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-button]>.nv-centered-label {
+    grid-column:2!important;
+    grid-row:1!important;
+    min-width:0!important;
+    max-width:100%!important;
+    width:auto!important;
+    text-align:center!important;
+    justify-self:stretch!important;
+    align-self:center!important;
+    font-size:inherit!important;
+    line-height:inherit!important;
+    white-space:normal!important;
+    text-wrap:balance!important;
+  }
+  html body.nv30[data-nv-editorial-review] .nv-centered-label,
+  html body.nv30[data-nv-editorial-review] .nv-centered-label :is(span,strong) {text-align:center!important;color:inherit!important}
+  html body.nv30[data-nv-editorial-review] .nv-cta [data-nv-centered-icon-node] img {filter:brightness(0) saturate(100%) invert(22%) sepia(67%) saturate(1993%) hue-rotate(186deg) brightness(94%) contrast(101%)!important}
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-button]>[data-nv-centered-icon-node] {
+    grid-column:3!important;
+    grid-row:1!important;
+    position:static!important;
+    inset:auto!important;
+    width:var(--nv-centered-icon-size)!important;
+    min-width:var(--nv-centered-icon-size)!important;
+    max-width:var(--nv-centered-icon-size)!important;
+    height:var(--nv-centered-icon-size)!important;
+    margin:0!important;
+    align-self:center!important;
+    justify-self:center!important;
+    translate:0 0!important;
+    text-decoration:none!important;
+  }
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-icon-node]>img {
+    width:100%!important;height:100%!important;
+  }
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-button]>[data-nv-centered-icon-side=start] {grid-column:1!important}
+  html body.nv30[data-nv-editorial-review] :is(input[type=submit],input[type=button],.formsubmit) {
+    text-align:center!important;
+    padding-inline:20px!important;
+    box-sizing:border-box!important;
+  }
+  @media(prefers-reduced-motion:no-preference) {
+    html body.nv30[data-nv-editorial-review]:not([data-nv-motion-paused=true]) [data-nv-centered-button]:is(:hover,:focus-visible)>[data-nv-centered-icon-node] {translate:3px 0!important}
+  }
+  html body.nv30[data-nv-editorial-review] [data-nv-centered-button]:not(:focus-visible) {box-shadow:none!important}
+
+  /* Decorative English duplicates and ornamental rules do not carry the copy. */
+  html body.nv30[data-nv-editorial-review] #main :is(.nv-en,.nv30-en,.nv33-native-label)[aria-hidden=true] {display:none!important}
+  html body.nv30[data-nv-editorial-review] #main :is(.nv34-geometry,.nv-cta-motion-rule) {display:none!important}
+  html body.nv30[data-nv-editorial-review] #main .nv-hero::before,
+  html body.nv30[data-nv-editorial-review] #main .nv-overview h2::before,
+  html body.nv30[data-nv-editorial-review] #main .nv30-overview-copy>h2::before,
+  html body.nv30[data-nv-editorial-review] #main .nv30-heading::before,
+  html body.nv30[data-nv-editorial-review] #main .nv33-intro-message::before,
+  html body.nv30[data-nv-editorial-review] #main .nv-cta::before,
+  html body.nv30[data-nv-editorial-review] #main section[data-nv30-word]::after,
+  html body.nv30[data-nv-editorial-review] #main .nv44-cmo-hero::after {
+    display:none!important;content:none!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main :is(.nv-copy,.nv-prose,.nove-final-prose,.nv42-intro-copy,.nv47-copy) {
+    text-align:left!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main :is(p,dt,dd):not(.nv-centered-label *) {text-align:left!important}
+  html body.nv30[data-nv-editorial-review] #main :is(h1,h2,h3) {
+    text-wrap:pretty!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    line-break:strict!important;
+    text-shadow:none!important;
+    -webkit-text-stroke:0!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main :is(.nv-editorial-photo-frame,.nv-editorial-photo-frame>img) {box-shadow:none!important}
+  html body.nv30[data-nv-editorial-review] #main .nv47-lower-hero {background:#f2f6fa!important}
+  html body.nv30[data-nv-editorial-review] #main .nv47-lower-hero>.nv47-mast {padding-bottom:20px!important}
+  html body.nv30[data-nv-editorial-review] #main .nv47-lower-hero>.nv47-intro {padding-top:0!important}
+
+  /* A scope is a list of responsibilities, rather than equal decorative boxes. */
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-grid,.nv33-support-grid) {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:36px!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-card,.nv33-support-card) {
+    display:grid!important;
+    grid-template-columns:48px minmax(0,.85fr) minmax(0,1.15fr)!important;
+    column-gap:24px!important;
+    row-gap:12px!important;
+    align-items:start!important;
+    padding:0!important;
+    background:transparent!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-card>b,.nv33-medallion) {
+    grid-column:1!important;grid-row:1!important;position:static!important;margin:0!important;
+    display:block!important;width:auto!important;min-width:0!important;height:auto!important;
+    min-height:0!important;background:transparent!important;border:0!important;border-radius:0!important;
+    color:#024991!important;font:600 18px/1.6 Montserrat,sans-serif!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] .nv33-number-art {display:none!important}
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] .nv33-medallion>span {position:static!important;inset:auto!important;transform:none!important;color:inherit!important}
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-card,.nv33-support-card)>h3 {
+    grid-column:2!important;grid-row:1!important;min-block-size:0!important;margin:0!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-card,.nv33-support-card)>:is(p,dl,.nv-copy) {
+    grid-column:3!important;min-block-size:0!important;margin:0!important;text-align:left!important;
+  }
+  /* Industry templates group the heading and paragraph in a real copy wrapper. */
+  html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] [data-nv-scope-copy] {
+    grid-column:2/-1!important;grid-row:1!important;
+    display:grid!important;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)!important;
+    gap:16px 24px!important;align-items:start!important;min-width:0!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main [data-nv-scope-copy]>:is(h3,p) {margin:0!important;min-block-size:0!important;text-align:left!important}
+  html body.nv30[data-nv-editorial-review] #main [data-nv-scope-copy]>h3 {grid-column:1!important;grid-row:1!important}
+  html body.nv30[data-nv-editorial-review] #main [data-nv-scope-copy]>p {grid-column:2!important;grid-row:auto!important}
+  html body.nv30[data-nv-editorial-review] #main :is(.nv-faq-item,.nv-catalog-row,.nv30-service-card,.nv-related-panel,.nv-step) {
+    box-shadow:none!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main :is(.nv-industry-grid>a,.nv-directory>a,.nv-photo-link):not(:focus-visible) {box-shadow:none!important}
+  html body.nv30[data-nv-editorial-review] #main :is(.nv-issue-list.nv30-cards>li,.nv-cmo-scope-copy,.contactform_card) {
+    box-shadow:none!important;border:0!important;border-radius:0!important;
+  }
+  /* Channel labels are peer responsibilities, with their useful identifying icons. */
+  html body.nv30[data-nv-editorial-review] #main .nv-channel-band {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px 40px!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main .nv-channel-band>* {
+    display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+    min-height:0!important;height:auto!important;padding:0!important;
+    border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;text-align:left!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main .nv-cta {
+    background:#024991!important;
+    background-image:none!important;
+  }
+  html body.nv30[data-nv-editorial-review] #main .nv-cta :is(h2,p) {color:#fff!important;text-align:left!important}
+
+  @media(max-width:991px) {
+    html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-card,.nv33-support-card) {
+      grid-template-columns:40px minmax(0,1fr)!important;
+      column-gap:20px!important;
+    }
+    html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-card,.nv33-support-card)>:is(p,dl,.nv-copy) {
+      grid-column:2!important;grid-row:auto!important;
+    }
+    html body.nv30[data-nv-editorial-review] #main [data-nv-scope-copy] {grid-template-columns:minmax(0,1fr)!important}
+    html body.nv30[data-nv-editorial-review] #main [data-nv-scope-copy]>p {grid-column:1!important}
+  }
+  @media(max-width:767px) {
+    html body.nv30[data-nv-editorial-review] [data-nv-centered-button] {padding-inline:20px!important;min-width:0!important}
+    html body.nv30[data-nv-editorial-review] .nv23-header [data-nv-centered-button] {padding-inline:14px!important}
+    html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-grid,.nv33-support-grid) {gap:28px!important}
+    html body.nv30[data-nv-editorial-review] #main .nv-channel-band {grid-template-columns:minmax(0,1fr)!important}
+  }
 }
