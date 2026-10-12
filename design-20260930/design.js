@@ -271,8 +271,7 @@ window.NoveMotionTokens=Object.freeze({
   function composeTopFigma(root){
     if(!root.classList.contains('nv23-home'))return;
     document.body.classList.add('nv34-home');
-    // The ornamental mesh is omitted; the existing brand-shaped video remains.
-    const hero=root.querySelector('.nv-hero');
+    const hero=root.querySelector('.nv-hero');if(hero)continuousHeroGeometry(hero);
     const topBase=base+'figma-3358-26/';
     const deliveryFile=file=>/^(19a08|8378d|844f8|0667e|20c23|3d81b|7f9fd|d817c|cf26b)\.png$/.test(file)?file.replace('.png','.webp'):file;
     const asset=(file,cls,w,h)=>{const n=img('figma-3358-26/'+deliveryFile(file),cls);if(w)n.width=w;if(h)n.height=h;return n;};
@@ -1162,6 +1161,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     document.body.dataset.nvEditorialReview='20261012';
     root.querySelectorAll(buttonSelector).forEach(centerButton);
     const main=document.querySelector('main');if(!main)return;
+    if(main.classList.contains('nv23-home'))main.querySelectorAll('.nv-business,.nv-industries').forEach(section=>{
+      const action=section.querySelector('.nv-copy>.nv-link');
+      if(!action||section.querySelector('.nv-section-action'))return;
+      const row=document.createElement('div');row.className='nv-wrap nv-section-action';
+      row.append(action);section.append(row);
+    });
     main.querySelectorAll('.nv-scope-grid,.nv33-support-grid').forEach(grid=>{
       const section=grid.closest('section');if(section)section.dataset.nvEditorialLayout='scope-list';
       grid.querySelectorAll('.nv-scope-card>div').forEach(copy=>{

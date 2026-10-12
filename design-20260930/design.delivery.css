@@ -2627,7 +2627,7 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
 
   /* Decorative English duplicates and ornamental rules do not carry the copy. */
   html body.nv30[data-nv-editorial-review] #main :is(.nv-en,.nv30-en,.nv33-native-label)[aria-hidden=true] {display:none!important}
-  html body.nv30[data-nv-editorial-review] #main :is(.nv34-geometry,.nv-cta-motion-rule) {display:none!important}
+  html body.nv30[data-nv-editorial-review] #main .nv-cta-motion-rule {display:none!important}
   html body.nv30[data-nv-editorial-review] #main .nv-hero::before,
   html body.nv30[data-nv-editorial-review] #main .nv-overview h2::before,
   html body.nv30[data-nv-editorial-review] #main .nv30-overview-copy>h2::before,
@@ -2735,4 +2735,61 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
     html body.nv30[data-nv-editorial-review] #main [data-nv-editorial-layout=scope-list] :is(.nv-scope-grid,.nv33-support-grid) {gap:28px!important}
     html body.nv30[data-nv-editorial-review] #main .nv-channel-band {grid-template-columns:minmax(0,1fr)!important}
   }
+}
+
+/* 2026-10-12: keep home section actions compact and arrows fully visible. */
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) .nv-link[data-nv-centered-button] {
+  --nv-centered-icon-size:24px;
+  width:360px!important;max-width:100%!important;min-width:0!important;
+  min-height:60px!important;padding:14px 24px!important;
+  background:#fff!important;color:#024991!important;
+  border:1px solid #024991!important;border-radius:999px!important;
+  margin-top:24px!important;position:static!important;align-self:flex-start!important;
+  font-size:16px!important;line-height:1.5!important;text-decoration:none!important;
+ }
+ html body.nv30[data-nv-editorial-review] [data-nv-centered-button]>.nv-circle[data-nv-centered-icon-node] {
+  background:transparent!important;color:inherit!important;border:0!important;
+  border-radius:0!important;display:grid!important;place-items:center!important;
+  overflow:visible!important;font-size:16px!important;line-height:1!important;
+  flex-shrink:0!important;
+ }
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) .nv-link>[data-nv-centered-icon-node] {
+  background:transparent!important;color:inherit!important;border:0!important;
+  border-radius:0!important;display:grid!important;place-items:center!important;
+  overflow:visible!important;font-size:20px!important;line-height:1!important;
+ }
+}
+
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-section-action {
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  margin-top:40px!important;clear:both!important;
+ }
+ html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-section-action>.nv-link[data-nv-centered-button] {
+  margin:0!important;align-self:center!important;
+ }
+ @media(max-width:767px) {
+  html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-section-action {margin-top:28px!important}
+ }
+}
+
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] #main .nv-link[data-nv-centered-button] {
+  --nv-centered-icon-size:24px;
+  width:360px!important;max-width:100%!important;min-width:0!important;
+  min-height:56px!important;padding:14px 24px!important;
+  background:#fff!important;color:#024991!important;
+  border:1px solid #024991!important;border-radius:999px!important;
+  position:static!important;align-self:start!important;justify-self:start!important;
+  font-size:16px!important;line-height:1.5!important;text-decoration:none!important;
+ }
+ html body.nv30[data-nv-editorial-review] #main .nv-link>[data-nv-centered-icon-node] {
+  background:transparent!important;color:inherit!important;border:0!important;
+  border-radius:0!important;display:grid!important;place-items:center!important;
+  overflow:visible!important;font-size:20px!important;line-height:1!important;
+ }
+ html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-section-action>.nv-link[data-nv-centered-button] {
+  align-self:center!important;justify-self:center!important;
+ }
 }
