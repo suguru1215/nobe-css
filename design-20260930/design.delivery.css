@@ -2834,3 +2834,16 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
   html body.nv30[data-nv-editorial-review] #main.nv23-home .nv30-company-detail .nv-link[data-nv-centered-button] {width:100%!important}
  }
 }
+
+/* Section rhythm: consistent outer space, compact lead-to-content spacing. */
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] #main {--nv-component-section:88px;--nv36-section:88px}
+ html body.nv30[data-nv-editorial-review] #main#main>section:not(.nv-hero):not(.nv-cmo-mast):not(.nv-lower-mast):not(.section_pagehero) {padding-block:88px!important}
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) .nv-copy {min-height:0!important;height:auto!important;margin-bottom:24px!important;padding-bottom:0!important}
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) .nv-copy>p {margin-bottom:0!important}
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business .nv-directory,.nv-industries .nv-industry-grid) {margin-top:0!important;padding-top:0!important}
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) .nv-directory-layout {gap:0!important}
+ @media(max-width:767px) {
+  html body.nv30[data-nv-editorial-review] #main#main>section:not(.nv-hero):not(.nv-cmo-mast):not(.nv-lower-mast):not(.section_pagehero) {padding-block:80px!important}
+ }
+}
