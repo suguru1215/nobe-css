@@ -1148,6 +1148,15 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       button.insertBefore(label,content[0]);
     }
     content.filter(node=>node!==label).forEach(node=>label.append(node));
+    if(button.matches('a.nv-link')&&!label.querySelector('.nv-action-topic')) {
+      const text=label.textContent.trim(),suffix='の支援内容を見る';
+      if(text.endsWith(suffix)) {
+        const topic=document.createElement('span'),tail=document.createElement('span');
+        topic.className='nv-action-topic';topic.textContent=text.slice(0,-suffix.length);
+        tail.className='nv-action-tail';tail.textContent=suffix;
+        label.replaceChildren(topic,document.createElement('wbr'),tail);
+      }
+    }
     button.dataset.nvCenteredButton='true';
     button.toggleAttribute('data-nv-centered-icon',icons.length>0);
     if(icons.length) {

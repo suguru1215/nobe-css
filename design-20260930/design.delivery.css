@@ -2793,3 +2793,8 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
   align-self:center!important;justify-self:center!important;
  }
 }
+
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] .nv-catalog-row .nv-centered-label :is(.nv-action-topic,.nv-action-tail) {white-space:nowrap!important}
+ @media(max-width:767px) {html body.nv30[data-nv-editorial-review] .nv-catalog-row .nv-centered-label .nv-action-topic {white-space:normal!important}}
+}
