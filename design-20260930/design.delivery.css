@@ -2801,6 +2801,8 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
 
 /* Compact supporting actions and echo the home hero's blue, angular language. */
 @layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) {padding-block:48px!important}
+ html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-section-action {margin-top:24px!important}
  html body.nv30[data-nv-editorial-review] #main .nv-catalog-row {padding-block:24px!important;row-gap:12px!important;min-height:0!important}
  html body.nv30[data-nv-editorial-review] #main .nv-catalog-row p {margin:0!important}
  html body.nv30[data-nv-editorial-review] #main .nv-catalog-row .nv-link[data-nv-centered-button] {margin-top:16px!important}
@@ -2810,10 +2812,10 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
   background:linear-gradient(110deg,#eef5fc 0%,#f8fbfe 58%,#fff 100%)!important;border-radius:16px!important;
  }
  html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-company-panel::before {
-  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  content:''!important;display:block!important;position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(24deg,transparent 48.9%,#02499112 49%,#02499112 49.2%,transparent 49.3%),linear-gradient(145deg,transparent 63%,#0249910a 63.1%,#0249910a 76%,transparent 76.1%);
  }
- html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-company-copy {gap:32px!important;align-items:center!important}
+ html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-company-copy {position:relative!important;z-index:1;gap:32px!important;align-items:center!important}
  html body.nv30[data-nv-editorial-review] #main.nv23-home .nv30-company-heading {margin:0!important}
  html body.nv30[data-nv-editorial-review] #main.nv23-home .nv30-company-heading h2 {color:#024991!important;font-size:28px!important;line-height:1.5!important;margin:0!important}
  html body.nv30[data-nv-editorial-review] #main.nv23-home .nv30-company-detail {gap:18px!important;padding:0!important}
@@ -2823,6 +2825,7 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
  }
  html body.nv30[data-nv-editorial-review] #main.nv23-home .nv30-company-detail .nv-link .nv-centered-label {color:inherit!important}
  @media(max-width:767px) {
+  html body.nv30[data-nv-editorial-review] #main.nv23-home :is(.nv-business,.nv-industries) {padding-block:36px!important}
   html body.nv30[data-nv-editorial-review] #main .nv-catalog-row {padding-block:20px!important;row-gap:12px!important}
   html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-company {padding-block:32px!important}
   html body.nv30[data-nv-editorial-review] #main.nv23-home .nv-company-panel {padding:28px 24px!important}
