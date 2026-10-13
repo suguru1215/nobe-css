@@ -2836,6 +2836,16 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
 }
 
 /* Section rhythm: consistent outer space, compact lead-to-content spacing. */
+/* Local review: lower-page titles only; the home hero retains its authored scale. */
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] #main:not(.nv23-home) :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:38px!important;line-height:1.5!important;max-width:100%!important}
+ @media(max-width:767px) {
+  html body.nv30[data-nv-editorial-review] #main:not(.nv23-home) :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:24px!important}
+ }
+ @media(max-width:359px) {
+  html body.nv30[data-nv-editorial-review] #main:not(.nv23-home) :is(.nv47-lower-hero,.nv44-cmo-hero) h1 {font-size:23px!important}
+ }
+}
 @layer noveEditorialReview {
  html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"][data-nv-centered-button] {font-size:14px!important;font-weight:700!important;line-height:1.4!important}
  html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"] .nv-centered-label {font-size:inherit!important;line-height:inherit!important}
