@@ -2837,7 +2837,7 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
 
 /* Section rhythm: consistent outer space, compact lead-to-content spacing. */
 @layer noveEditorialReview {
- html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"][data-nv-centered-button] {font-size:18px!important;font-weight:700!important;line-height:1.4!important}
+ html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"][data-nv-centered-button] {font-size:14px!important;font-weight:700!important;line-height:1.4!important}
  html body.nv30[data-nv-editorial-review] .nv23-header a[href="/contact"] .nv-centered-label {font-size:inherit!important;line-height:inherit!important}
 }
 @layer noveEditorialReview {
