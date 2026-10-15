@@ -2861,3 +2861,10 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
   html body.nv30[data-nv-editorial-review] #main#main>section:not(.nv-hero):not(.nv-cmo-mast):not(.nv-lower-mast):not(.section_pagehero) {padding-block:80px!important}
  }
 }
+
+/* Separate the shared footer from the blue consultation CTA. */
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] footer.nv23-footer {background:#141b24!important;color:#f1f5f9!important;border-top:1px solid #ffffff26!important}
+ html body.nv30[data-nv-editorial-review] footer.nv23-footer :is(a,p,.nv-copyright) {color:#f1f5f9!important}
+ html body.nv30[data-nv-editorial-review] footer.nv23-footer .nv-copyright {border-top-color:#ffffff26!important}
+}
