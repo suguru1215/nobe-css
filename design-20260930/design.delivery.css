@@ -2868,3 +2868,55 @@ html body.nv30 #main#main#main#main#main#main[id="main"] .nv-editorial-photo-fra
  html body.nv30[data-nv-editorial-review] footer.nv23-footer :is(a,p,.nv-copyright) {color:#f1f5f9!important}
  html body.nv30[data-nv-editorial-review] footer.nv23-footer .nv-copyright {border-top-color:#ffffff26!important}
 }
+
+/* 2026-10-16: shared pill actions with a centered label and a solid end dot. */
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button] {
+  --nv-action-dot:12px;
+  display:grid!important;grid-template-columns:16px minmax(0,1fr) 16px!important;
+  gap:12px!important;align-items:center!important;justify-content:center!important;
+  position:relative!important;box-sizing:border-box!important;max-width:100%!important;
+  min-height:64px!important;height:auto!important;padding:16px 24px!important;
+  border:1px solid #024991!important;border-radius:999px!important;
+  background:#024991!important;color:#fff!important;
+  font-weight:700!important;line-height:1.6!important;text-align:center!important;
+  text-decoration:none!important;white-space:normal!important;
+  transition:background-color .18s ease,color .18s ease,box-shadow .18s ease!important;
+ }
+ html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button]>.nv-centered-label {grid-column:2!important;grid-row:1!important;overflow-wrap:anywhere!important}
+ html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button]>[data-nv-centered-icon-node] {display:none!important}
+ html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button]::after {
+  content:''!important;display:block!important;grid-column:3!important;grid-row:1!important;
+  position:static!important;inset:auto!important;margin:0!important;
+  width:var(--nv-action-dot)!important;height:var(--nv-action-dot)!important;
+  min-width:0!important;border:0!important;border-radius:50%!important;
+  background:currentColor!important;opacity:1!important;transform:none!important;translate:none!important;
+  align-self:center!important;justify-self:center!important;pointer-events:none!important;
+ }
+ html body.nv30[data-nv-editorial-review] #main :is(a.nv-link,.nv-cta a.nv-button)[data-nv-centered-button][data-nv-centered-button] {background:#fff!important;color:#024991!important}
+ html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button]:hover {background:#00396f!important;color:#fff!important}
+ html body.nv30[data-nv-editorial-review] #main :is(a.nv-link,.nv-cta a.nv-button)[data-nv-centered-button][data-nv-centered-button]:hover {background:#edf5ff!important;color:#024991!important}
+ html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button]:focus-visible {outline:3px solid #448ce4!important;outline-offset:4px!important;box-shadow:0 0 0 2px #fff!important}
+ html body.nv30[data-nv-editorial-review] .nv23-header a.nv-button[data-nv-centered-button][data-nv-centered-button] {min-height:56px!important;padding:12px 16px!important;gap:8px!important;--nv-action-dot:10px}
+ /* Native submit inputs retain their value, disabled state and existing form handlers. */
+ html body.nv30[data-nv-editorial-review] #main input:is([type=submit],[type=button]).w-button {
+  box-sizing:border-box!important;max-width:100%!important;min-height:64px!important;height:auto!important;
+  padding:16px 52px!important;border:1px solid #024991!important;border-radius:999px!important;
+  background-color:#024991!important;color:#fff!important;
+  background-image:radial-gradient(circle,#fff 0 5.5px,transparent 6px)!important;
+  background-size:12px 12px!important;background-position:right 26px center!important;background-repeat:no-repeat!important;
+  font-weight:700!important;line-height:1.6!important;text-align:center!important;white-space:normal!important;
+ }
+ html body.nv30[data-nv-editorial-review] #main input:is([type=submit],[type=button]).w-button:hover:not(:disabled) {background-color:#00396f!important}
+ html body.nv30[data-nv-editorial-review] #main input:is([type=submit],[type=button]).w-button:focus-visible {outline:3px solid #448ce4!important;outline-offset:4px!important;box-shadow:0 0 0 2px #fff!important}
+ @media(max-width:767px) {
+  html body.nv30[data-nv-editorial-review] #main :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button] {min-width:0!important;padding:14px 20px!important;gap:10px!important;min-height:56px!important;--nv-action-dot:10px}
+ }
+ @media(prefers-reduced-motion:reduce) {
+  html body.nv30[data-nv-editorial-review] :is(#main,.nv23-header) :is(a.nv-button,a.nv-link)[data-nv-centered-button][data-nv-centered-button] {transition:none!important}
+ }
+}
+@layer noveEditorialReview {
+ html body.nv30[data-nv-editorial-review] :is(.nv23-header,#nv-dot-header) a.nv-button[data-nv-centered-button][data-nv-centered-button][data-nv-centered-button] {grid-template-columns:10px minmax(0,1fr) 10px!important;min-height:56px!important;padding:12px 14px!important;gap:8px!important;--nv-action-dot:10px}
+ html body.nv30[data-nv-editorial-review] .nv23-header a.nv-button[data-nv-centered-button]>.nv-centered-label {white-space:nowrap!important}
+}
